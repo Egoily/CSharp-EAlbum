@@ -1,6 +1,5 @@
-using System.Drawing;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -10,10 +9,13 @@ namespace EgoDevil.Utilities.UI.EPanels
     public class ColorTableBlack : EgoDevil.Utilities.UI.EPanels.EColorTable
     {
         #region FieldsPrivate
+
         private PanelColors m_panelColorTable;
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the associated ColorTable for the XPanderControls
         /// </summary>
@@ -28,9 +30,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 return this.m_panelColorTable;
             }
         }
+
         #endregion
-        
+
         #region MethodsProtected
+
         /// <summary>
         /// Initializes a color dictionary with defined colors
         /// </summary>
@@ -45,7 +49,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.ButtonSelectedGradientBegin] = Color.FromArgb(106, 109, 228);
             rgbTable[KnownColors.ButtonSelectedGradientEnd] = Color.FromArgb(88, 111, 226);
             rgbTable[KnownColors.ButtonSelectedGradientMiddle] = Color.FromArgb(39, 39, 217);
-			rgbTable[KnownColors.ButtonSelectedHighlightBorder] = Color.FromArgb(145, 153, 164);
+            rgbTable[KnownColors.ButtonSelectedHighlightBorder] = Color.FromArgb(145, 153, 164);
             rgbTable[KnownColors.GripDark] = Color.FromArgb(102, 102, 102);
             rgbTable[KnownColors.GripLight] = Color.FromArgb(182, 182, 182);
             rgbTable[KnownColors.ImageMarginGradientBegin] = Color.FromArgb(239, 239, 239);
@@ -66,7 +70,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.SeparatorLight] = Color.FromArgb(182, 182, 182);
             rgbTable[KnownColors.StatusStripGradientBegin] = Color.FromArgb(100, 100, 100);
             rgbTable[KnownColors.StatusStripGradientEnd] = Color.FromArgb(0, 0, 0);
-			rgbTable[KnownColors.StatusStripText] = Color.FromArgb(255, 255, 255);
+            rgbTable[KnownColors.StatusStripText] = Color.FromArgb(255, 255, 255);
             rgbTable[KnownColors.ToolStripBorder] = Color.FromArgb(102, 102, 102);
             rgbTable[KnownColors.ToolStripContentPanelGradientBegin] = Color.FromArgb(42, 42, 42);
             rgbTable[KnownColors.ToolStripContentPanelGradientEnd] = Color.FromArgb(10, 10, 10);

@@ -10,57 +10,65 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
-
-using EgoDevil.Utilities.UI.IndustrialCtrls.Utils;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 {
-	/// <summary>
-	/// Description of LB7SegmentDisplayRenderer.
-	/// </summary>
-	public class LB7SegmentDisplayRenderer : LBRendererBase
+    /// <summary>
+    /// Description of LB7SegmentDisplayRenderer.
+    /// </summary>
+    public class LB7SegmentDisplayRenderer : LBRendererBase
     {
         #region (* Constants *)
-        public const int WIDTH_PIXEL     = 11;
-        public const int HEIGHT_PIXELS   = 18;
+
+        public const int WIDTH_PIXEL = 11;
+        public const int HEIGHT_PIXELS = 18;
+
         #endregion
 
         #region (* Variables *)
+
         /// <summary>
         /// Segments data array
         /// </summary>
         protected SegmentDictionary segments = new SegmentDictionary();
+
         /// <summary>
         /// Defaults points coordinates
         /// </summary>
         protected PointsList defPoints = new PointsList();
+
         /// <summary>
         /// List of the points coordinates
         /// </summary>
         protected PointsList points = new PointsList();
+
         /// <summary>
         /// Segments list of a value
         /// </summary>
         protected SegmentsValueDictionary valuesSegments = new SegmentsValueDictionary();
+
         /// <summary>
         /// Rectangle of the dp
         /// </summary>
         protected RectangleF rectDP = new RectangleF();
+
         #endregion
 
         #region (* Contructor *)
+
         public LB7SegmentDisplayRenderer()
-		{
+        {
             this.CreateSegmetsData();
             this.CreateDefPointsCoordinates();
             this.CreateSegmentsValuesList();
             this.UpdatePointsCoordinates();
         }
+
         #endregion
 
         #region (* Overrided methods *)
+
         public override bool Update()
         {
             this.UpdatePointsCoordinates();
@@ -77,33 +85,36 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
                 throw new NullReferenceException("Associated control is not valid");
 
             RectangleF _rc = new RectangleF(0, 0, ctrl.Width, ctrl.Height);
-			Gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-		
+            Gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
             this.DrawBackground(Gr, _rc);
             this.DrawOffSegments(Gr, _rc);
             this.DrawValue(Gr, _rc);
         }
+
         #endregion
 
         #region (* Properies *)
+
         [Browsable(false)]
         public LB7SegmentDisplay Display
-		{
-			set { this.Control = value; }
+        {
+            set { this.Control = value; }
             get { return this.Control as LB7SegmentDisplay; }
-		}
+        }
 
         [Browsable(false)]
         public SegmentDictionary Segments
         {
             get { return this.segments; }
         }
+
         #endregion
 
         #region (* Virtual methods *)
+
         /// <summary>
-        /// Creation of the default points list of the
-        /// all segments
+        /// Creation of the default points list of the all segments
         /// </summary>
         protected virtual void CreateDefPointsCoordinates()
         {
@@ -162,8 +173,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
         }
 
         /// <summary>
-        /// Create the dictionary of the
-        /// segment coordinates
+        /// Create the dictionary of the segment coordinates
         /// </summary>
         protected virtual void CreateSegmetsData()
         {
@@ -234,8 +244,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
         }
 
         /// <summary>
-        /// Create the dictionary of the segments
-        /// for the number values
+        /// Create the dictionary of the segments for the number values
         /// </summary>
         protected virtual void CreateSegmentsValuesList()
         {
@@ -332,8 +341,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
         }
 
         /// <summary>
-        /// Calculate the points coordinates for drawing
-        /// with the ratio of the control
+        /// Calculate the points coordinates for drawing with the ratio of the control
         /// </summary>
         protected virtual void UpdatePointsCoordinates()
         {
@@ -352,13 +360,13 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
             {
                 PointF ptDef = this.defPoints[idx];
                 PointF pt = new PointF((float)((double)ptDef.X * rappW), (float)((double)ptDef.Y * rappH));
-                this.points.Add ( pt );
+                this.points.Add(pt);
             }
 
             this.rectDP.X = this.points[7].X - (float)(0.5 * rappW);
             this.rectDP.Y = this.points[8].Y;
             this.rectDP.Width = (float)rappW;
-            this.rectDP.Height = (float)rappH;                 
+            this.rectDP.Height = (float)rappH;
         }
 
         /// <summary>
@@ -397,7 +405,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
             if (this.Display == null)
                 return false;
 
-//            SolidBrush br = new SolidBrush(LBColorManager.StepColor(this.Display.ForeColor, 30));
+            // SolidBrush br = new SolidBrush(LBColorManager.StepColor(this.Display.ForeColor, 30));
             Color clr = Color.FromArgb(70, this.Display.ForeColor);
             SolidBrush br = new SolidBrush(clr);
 
@@ -472,12 +480,12 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 
             return true;
         }
+
         #endregion
     }
 
     /// <summary>
-    /// Dictionary for the segment associated
-    /// to the number
+    /// Dictionary for the segment associated to the number
     /// </summary>
     public class SegmentDictionary : DictionaryBase
     {
@@ -529,6 +537,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
     public class Segment
     {
         private int[] points = new int[6];
+
         public Segment()
         {
         }

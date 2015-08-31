@@ -1,8 +1,7 @@
+using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -12,17 +11,20 @@ namespace EgoDevil.Utilities.UI.EPanels
     public class ERenderer : ToolStripProfessionalRenderer
     {
         #region FieldsPrivate
+
         private static Rectangle[] baseSizeGripRectangles;
         private static int MarginInset;
         private static Blend MenuItemBlend;
         private static Blend ButtonBlend;
+
         #endregion
 
-		#region MethodsPublic
-		static ERenderer()
+        #region MethodsPublic
+
+        static ERenderer()
         {
             MarginInset = 2;
-            
+
             // One time creation of the blend for the button gradient brush
             ButtonBlend = new Blend();
             ButtonBlend.Positions = new float[] { 0.0F, 0.1F, 0.2F, 0.5F, 1.0F };
@@ -34,29 +36,38 @@ namespace EgoDevil.Utilities.UI.EPanels
 
             baseSizeGripRectangles = new Rectangle[] { new Rectangle(8, 0, 2, 2), new Rectangle(8, 4, 2, 2), new Rectangle(8, 8, 2, 2), new Rectangle(4, 4, 2, 2), new Rectangle(4, 8, 2, 2), new Rectangle(0, 8, 2, 2) };
         }
+
         /// <summary>
         /// Initialize a new instance of the ERenderer class.
         /// </summary>
         public ERenderer()
             : base(new EgoDevil.Utilities.UI.EPanels.ColorTableBlack())
         {
-			this.ColorTable.UseSystemColors = false;
-		}
+            this.ColorTable.UseSystemColors = false;
+        }
+
         /// <summary>
         /// Initializes a new instance of the ERenderer class.
         /// </summary>
-        /// <param name="professionalColorTable">A <see cref="EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable"/> to be used for painting.</param>
+        /// <param name="professionalColorTable">
+        /// A <see cref="EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable"/> to be used for painting.
+        /// </param>
         public ERenderer(ProfessionalColorTable professionalColorTable)
             : base(professionalColorTable)
         {
         }
+
         #endregion
 
-		#region MethodsProtected
+        #region MethodsProtected
+
         /// <summary>
         /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderArrow"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripArrowRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripArrowRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
             if (ColorTable.UseSystemColors == true)
@@ -87,10 +98,14 @@ namespace EgoDevil.Utilities.UI.EPanels
                 base.OnRenderArrow(e);
             }
         }
+
         /// <summary>
         /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderButtonBackground"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (ColorTable.UseSystemColors == true)
@@ -143,10 +158,15 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderDropDownButtonBackground"/> event.
+        /// Raises the <see
+        /// cref="System.Windows.Forms.ToolStripRenderer.RenderDropDownButtonBackground"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderDropDownButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (ColorTable.UseSystemColors == true)
@@ -193,10 +213,15 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground"/> event.
+        /// Raises the <see
+        /// cref="System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderSplitButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (ColorTable.UseSystemColors == true)
@@ -278,10 +303,14 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderMenuItemBackground"/> event. 
+        /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderMenuItemBackground"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
         {
             ToolStripMenuItem item = e.Item as ToolStripMenuItem;
@@ -323,17 +352,18 @@ namespace EgoDevil.Utilities.UI.EPanels
                 base.OnRenderMenuItemBackground(e);
             }
         }
+
         /// <summary>
         /// Raises the RenderItemText event.
         /// </summary>
         /// <param name="e">A ToolStripItemTextRenderEventArgs that contains the event data.</param>
         protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
         {
-			if (ColorTable.UseSystemColors == false)
-			{
-				ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
-				if (colorTable != null)
-				{
+            if (ColorTable.UseSystemColors == false)
+            {
+                ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+                if (colorTable != null)
+                {
                     if ((e.ToolStrip is MenuStrip))// && (e.Item.Selected == false) && e.Item.Pressed == false)
                     {
                         if (colorTable.MenuItemText != Color.Empty)
@@ -359,38 +389,44 @@ namespace EgoDevil.Utilities.UI.EPanels
                             e.TextColor = colorTable.ToolStripText;
                         }
                     }
-				}
-			}
+                }
+            }
             base.OnRenderItemText(e);
         }
+
         /// <summary>
-        /// Raises the RenderToolStripContentPanelBackground event. 
+        /// Raises the RenderToolStripContentPanelBackground event.
         /// </summary>
         /// <param name="e">An ToolStripContentPanelRenderEventArgs containing the event data.</param>
         protected override void OnRenderToolStripContentPanelBackground(ToolStripContentPanelRenderEventArgs e)
         {
             // Must call base class, otherwise the subsequent drawing does not appear!
             base.OnRenderToolStripContentPanelBackground(e);
-			if (ColorTable.UseSystemColors == false)
-			{
-				// Cannot paint a zero sized area
-				if ((e.ToolStripContentPanel.Width > 0) &&
-					(e.ToolStripContentPanel.Height > 0))
-				{
-					using (LinearGradientBrush backBrush = new LinearGradientBrush(e.ToolStripContentPanel.ClientRectangle,
-																				   ColorTable.ToolStripContentPanelGradientBegin,
-																				   ColorTable.ToolStripContentPanelGradientEnd,
-																				   LinearGradientMode.Vertical))
-					{
-						e.Graphics.FillRectangle(backBrush, e.ToolStripContentPanel.ClientRectangle);
-					}
-				}
-			}
+            if (ColorTable.UseSystemColors == false)
+            {
+                // Cannot paint a zero sized area
+                if ((e.ToolStripContentPanel.Width > 0) &&
+                    (e.ToolStripContentPanel.Height > 0))
+                {
+                    using (LinearGradientBrush backBrush = new LinearGradientBrush(e.ToolStripContentPanel.ClientRectangle,
+                                                                                   ColorTable.ToolStripContentPanelGradientBegin,
+                                                                                   ColorTable.ToolStripContentPanelGradientEnd,
+                                                                                   LinearGradientMode.Vertical))
+                    {
+                        e.Graphics.FillRectangle(backBrush, e.ToolStripContentPanel.ClientRectangle);
+                    }
+                }
+            }
         }
+
         /// <summary>
-        /// Raises the <see cref="System.Windows.Forms.ToolStripRenderer.RenderOverflowButtonBackground"/> event.
+        /// Raises the <see
+        /// cref="System.Windows.Forms.ToolStripRenderer.RenderOverflowButtonBackground"/> event.
         /// </summary>
-        /// <param name="e">A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="System.Windows.Forms.ToolStripItemRenderEventArgs"/> that contains the
+        /// event data.
+        /// </param>
         protected override void OnRenderOverflowButtonBackground(ToolStripItemRenderEventArgs e)
         {
             base.OnRenderOverflowButtonBackground(e);
@@ -434,18 +470,20 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the RenderSeparator event. 
+        /// Raises the RenderSeparator event.
         /// </summary>
         /// <param name="e">An ToolStripSeparatorRenderEventArgs containing the event data.</param>
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
         {
-			if (ColorTable.UseSystemColors == false)
-			{
-				e.Item.ForeColor = ColorTable.RaftingContainerGradientBegin;
-			}
+            if (ColorTable.UseSystemColors == false)
+            {
+                e.Item.ForeColor = ColorTable.RaftingContainerGradientBegin;
+            }
             base.OnRenderSeparator(e);
         }
+
         /// <summary>
         /// Raises the RenderStatusStripSizingGrip event.
         /// </summary>
@@ -489,8 +527,9 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the RenderToolStripBackground event. 
+        /// Raises the RenderToolStripBackground event.
         /// </summary>
         /// <param name="e">An ToolStripRenderEventArgs containing the event data.</param>
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
@@ -521,7 +560,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                         using (LinearGradientBrush innerRectangleBrush = new LinearGradientBrush(
                             upperRectangle,
                             ColorTable.StatusStripGradientBegin,
-                            Color.FromArgb(128,ColorTable.StatusStripGradientBegin),
+                            Color.FromArgb(128, ColorTable.StatusStripGradientBegin),
                             LinearGradientMode.Vertical))
                         {
                             e.Graphics.FillRectangle(innerRectangleBrush, upperRectangle); //draw top bubble
@@ -533,7 +572,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                         using (LinearGradientBrush innerRectangleBrush = new LinearGradientBrush(
                             lowerRectangle,
                             ColorTable.StatusStripGradientEnd,
-                            Color.FromArgb(128,ColorTable.StatusStripGradientBegin),
+                            Color.FromArgb(128, ColorTable.StatusStripGradientBegin),
                             LinearGradientMode.Vertical))
                         {
                             e.Graphics.FillRectangle(innerRectangleBrush, lowerRectangle); //draw top bubble
@@ -581,7 +620,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                             e.Graphics.FillRectangle(innerRectangleBrush, upperRectangle); //draw top bubble
                         }
 
-                        y2 = backgroundRectangle.Height / 4; 
+                        y2 = backgroundRectangle.Height / 4;
                         Rectangle lowerRectangle = new Rectangle(backgroundRectangle.X, backgroundRectangle.Height - y2, backgroundRectangle.Width, y2);
 
                         using (LinearGradientBrush innerRectangleBrush = new LinearGradientBrush(
@@ -596,55 +635,57 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
-        /// Raises the RenderImageMargin event. 
+        /// Raises the RenderImageMargin event.
         /// </summary>
         /// <param name="e">An ToolStripRenderEventArgs containing the event data.</param>
         protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
         {
-			if (ColorTable.UseSystemColors == true)
-			{
-				base.OnRenderToolStripBackground(e);
-			}
-			else
-			{
-				if ((e.ToolStrip is ContextMenuStrip) ||
-					(e.ToolStrip is ToolStripDropDownMenu))
-				{
-					// Start with the total margin area
-					Rectangle marginRectangle = e.AffectedBounds;
+            if (ColorTable.UseSystemColors == true)
+            {
+                base.OnRenderToolStripBackground(e);
+            }
+            else
+            {
+                if ((e.ToolStrip is ContextMenuStrip) ||
+                    (e.ToolStrip is ToolStripDropDownMenu))
+                {
+                    // Start with the total margin area
+                    Rectangle marginRectangle = e.AffectedBounds;
 
-					// Do we need to draw with separator on the opposite edge?
-					bool bIsRightToLeft = (e.ToolStrip.RightToLeft == RightToLeft.Yes);
+                    // Do we need to draw with separator on the opposite edge?
+                    bool bIsRightToLeft = (e.ToolStrip.RightToLeft == RightToLeft.Yes);
 
-					marginRectangle.Y += MarginInset;
-					marginRectangle.Height -= MarginInset * 2;
+                    marginRectangle.Y += MarginInset;
+                    marginRectangle.Height -= MarginInset * 2;
 
-					// Reduce so it is inside the border
-					if (bIsRightToLeft == false)
-					{
-						marginRectangle.X += MarginInset;
-					}
-					else
-					{
-						marginRectangle.X += MarginInset / 2;
-					}
+                    // Reduce so it is inside the border
+                    if (bIsRightToLeft == false)
+                    {
+                        marginRectangle.X += MarginInset;
+                    }
+                    else
+                    {
+                        marginRectangle.X += MarginInset / 2;
+                    }
 
-					// Draw the entire margine area in a solid color
-					using (SolidBrush backBrush = new SolidBrush(
-						ColorTable.ImageMarginGradientBegin))
-						e.Graphics.FillRectangle(backBrush, marginRectangle);
-				}
-				else
-				{
-					base.OnRenderImageMargin(e);
-				}
-			}
+                    // Draw the entire margine area in a solid color
+                    using (SolidBrush backBrush = new SolidBrush(
+                        ColorTable.ImageMarginGradientBegin))
+                        e.Graphics.FillRectangle(backBrush, marginRectangle);
+                }
+                else
+                {
+                    base.OnRenderImageMargin(e);
+                }
+            }
         }
 
-		#endregion
+        #endregion
 
-		#region MethodsPrivate
+        #region MethodsPrivate
+
         private static GraphicsPath GetBackgroundPath(Rectangle bounds, int radius)
         {
             int x = bounds.X;
@@ -721,6 +762,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             buttonRectangle.Inflate(0, -1);
             return buttonRectangle;
         }
+
         /// <summary>
         /// Renders the arrows in the OverflowButton.
         /// </summary>
@@ -756,6 +798,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 graphics.FillPolygon(backBrush, points);
             }
         }
+
         /// <summary>
         /// Renders the lines in the OverflowButton.
         /// </summary>
@@ -765,13 +808,14 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <param name="y1">The y-coordinate of the first point.</param>
         /// <param name="x2">The x-coordinate of the second point.</param>
         /// <param name="y2">The y-coordinate of the second point.</param>
-        private static void RenderOverflowButtonLine(Graphics graphics,Color color, int x1, int y1, int x2, int y2)
+        private static void RenderOverflowButtonLine(Graphics graphics, Color color, int x1, int y1, int x2, int y2)
         {
             using (Pen pen = new Pen(color))
             {
                 graphics.DrawLine(pen, x1, y1, x2, y2);
             }
         }
+
         /// <summary>
         /// Checks if the rectangle width or height is equal to 0.
         /// </summary>
@@ -785,6 +829,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
             return true;
         }
+
         #endregion
     }
 }

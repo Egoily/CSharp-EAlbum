@@ -7,10 +7,8 @@ namespace EgoDevil.Utilities.Serializer
 {
     public class Serializer
     {
-
-        static public void Serialize(string FileName,object obj)
+        static public void Serialize(string FileName, object obj)
         {
-
             FileStream fs = new FileStream(FileName, FileMode.Create);
 
             BinaryFormatter formatter = new BinaryFormatter();
@@ -29,7 +27,6 @@ namespace EgoDevil.Utilities.Serializer
             }
         }
 
-
         static public object Deserialize(string FileName)
         {
             if (!File.Exists(FileName))
@@ -37,7 +34,6 @@ namespace EgoDevil.Utilities.Serializer
                 return null;
             }
             object obj = null;
-
 
             FileStream fs = new FileStream(FileName, FileMode.Open);
             try
@@ -47,7 +43,7 @@ namespace EgoDevil.Utilities.Serializer
             }
             catch (SerializationException e)
             {
-              MessageBox.Show("Failed to deserialize. Reason: " + e.Message);
+                MessageBox.Show("Failed to deserialize. Reason: " + e.Message);
                 throw;
             }
             finally
@@ -55,12 +51,6 @@ namespace EgoDevil.Utilities.Serializer
                 fs.Close();
             }
             return obj;
-
         }
-
-
-       
-
-
     }
 }

@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Drawing.Imaging;
 
 namespace EgoDevil.Utilities.UI.EForm
 {
     public class ETitleBarIconHolder
     {
-
-
-
         private EForm m_owner;
         private List<EHolderButton> m_ehButtons = new List<EHolderButton>();
 
@@ -30,6 +22,7 @@ namespace EgoDevil.Utilities.UI.EForm
         {
             m_owner = eform;
         }
+
         public ETitleBarIconHolder()
         {
         }
@@ -43,7 +36,6 @@ namespace EgoDevil.Utilities.UI.EForm
 
             foreach (EHolderButton xbtn in m_ehButtons)
             {
-
                 if (xbtn.ButtonImage != null)
                 {
                     xbtn.Left = lX;
@@ -57,7 +49,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         {
                             using (GraphicsPath XHolderBtnPath = BuildHolderButtonFrame(rcIcon, 100, 40))
                             {
-
                                 using (LinearGradientBrush lgb = new LinearGradientBrush(XHolderBtnPath.GetBounds(),
                                                                                          Color.FromArgb(xbtn.FrameAlpha, xbtn.FrameStartColor),
                                                                                          Color.FromArgb(xbtn.FrameAlpha, xbtn.FrameEndColor),
@@ -69,7 +60,6 @@ namespace EgoDevil.Utilities.UI.EForm
                                 }
 
                                 rcFrame = XHolderBtnPath.GetBounds();
-
                             }
                             int lFrameImageWidth = 0;
                             if (xbtn.FrameBackImage != null)
@@ -111,10 +101,7 @@ namespace EgoDevil.Utilities.UI.EForm
                                          rcDescription,
                                          sf
                                         );
-
                         }
-
-
                     }
 
                     // draw button:
@@ -125,10 +112,8 @@ namespace EgoDevil.Utilities.UI.EForm
                     // update position:
                     lX += rcIcon.Width + 2;
                 }
-
             }
         }
-
 
         private GraphicsPath BuildHolderButtonFrame(Rectangle rcBtn, int lFrameWidth, int lFrameHeight)
         {
@@ -194,7 +179,6 @@ namespace EgoDevil.Utilities.UI.EForm
             );
 
             return XHolderBtnPath;
-
         }
 
         public int HitTestHolderButton(int x, int y, Rectangle rcHolder)
@@ -220,12 +204,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 }
             }
             return lBtnIndex;
-
         }
-
-
-
-
 
         public class EHolderButton
         {
@@ -242,11 +221,9 @@ namespace EgoDevil.Utilities.UI.EForm
             private Color m_clrDescriptionColor = Color.White;
             private Image m_FrameBackImage;
 
-            private Color m_clrFrameStartColor = Color.FromArgb(118,151,202);
-            private Color m_clrFrameEndColor = Color.FromArgb(169,203,248);
+            private Color m_clrFrameStartColor = Color.FromArgb(118, 151, 202);
+            private Color m_clrFrameEndColor = Color.FromArgb(169, 203, 248);
             private int m_lFrameAlpha = 255;
-
-
 
             #region (* Properties *)
 
@@ -261,6 +238,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_rcBtn = value;
                 }
             }
+
             public Image ButtonImage
             {
                 get
@@ -272,6 +250,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_btnIcon = value;
                 }
             }
+
             public bool Hot
             {
                 get
@@ -283,6 +262,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_bHot = value;
                 }
             }
+
             public int Top
             {
                 get
@@ -294,6 +274,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_lTop = value;
                 }
             }
+
             public int Left
             {
                 get
@@ -305,6 +286,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_lLeft = value;
                 }
             }
+
             public string HolderButtonCaption
             {
                 get
@@ -315,11 +297,10 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     this.m_sCaption = value;
                 }
-
             }
+
             public Color HolderButtonCaptionColor
             {
-
                 get
                 {
                     return this.m_clrCaptionColor;
@@ -329,6 +310,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrCaptionColor = value;
                 }
             }
+
             public Font HolderButtonCaptionFont
             {
                 get
@@ -340,6 +322,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_fntBtnFnt = value;
                 }
             }
+
             public string HolderButtonDescription
             {
                 get
@@ -350,11 +333,10 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     this.m_sDescription = value;
                 }
-
             }
+
             public Color HolderButtonDescriptionColor
             {
-
                 get
                 {
                     return this.m_clrDescriptionColor;
@@ -364,6 +346,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrDescriptionColor = value;
                 }
             }
+
             public Font HolderButtonDescriptionFont
             {
                 get
@@ -375,6 +358,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_fntDescription = value;
                 }
             }
+
             public Image FrameBackImage
             {
                 get
@@ -386,6 +370,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     m_FrameBackImage = value;
                 }
             }
+
             public Color FrameStartColor
             {
                 get
@@ -397,6 +382,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrFrameStartColor = value;
                 }
             }
+
             public Color FrameEndColor
             {
                 get
@@ -408,6 +394,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrFrameEndColor = value;
                 }
             }
+
             public int FrameAlpha
             {
                 get
@@ -421,24 +408,19 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_lFrameAlpha = value;
                 }
             }
+
             #endregion
 
             public EHolderButton(Image btn)
             {
                 this.m_btnIcon = btn;
             }
+
             public EHolderButton(Image btn, string sCaption)
             {
                 this.m_btnIcon = btn;
                 this.m_sCaption = sCaption;
             }
         }
-
-
-
-
-
-
-
     }
 }

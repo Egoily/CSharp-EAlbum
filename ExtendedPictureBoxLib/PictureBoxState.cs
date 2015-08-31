@@ -17,81 +17,100 @@ namespace ExtendedPictureBoxLib
         /// No property.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.Alpha"/> property.
         /// </summary>
         Alpha = 1,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.RotationAngle"/> property.
         /// </summary>
         RotationAngle = 2,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.Zoom"/> property.
         /// </summary>
         Zoom = 4,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.Zoom"/> property.
         /// </summary>
         ExtraImageRotationAngle = 8,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.BackColorGradientRotationAngle"/> property.
         /// </summary>
         BackColorGradientRotationAngle = 16,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.BackColor"/> property.
         /// </summary>
         BackColor = 32,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.BackColor2"/> property.
         /// </summary>
         BackColor2 = 64,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.ForeColor"/> property.
         /// </summary>
         ForeColor = 128,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.TextHaloColor"/> property.
         /// </summary>
         TextHaloColor = 256,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.TextHaloWidth"/> property.
         /// </summary>
         TextHaloWidth = 512,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.TextRotationAngle"/> property.
         /// </summary>
         TextRotationAngle = 1024,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.TextZoom"/> property.
         /// </summary>
         TextZoom = 2048,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.ShadowOffset"/> property.
         /// </summary>
         ShadowOffset = 4096,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.ImageOffset"/> property.
         /// </summary>
         ImageOffset = 8192,
+
         /// <summary>
         /// Represents the <see cref="PictureBoxState.TextOffset"/> property.
         /// </summary>
         TextOffset = 16384,
+
         /// <summary>
-        /// Combines <see cref="Alpha"/>, <see cref="RotationAngle"/>, <see cref="Zoom"/>, 
-        /// <see cref="ExtraImageRotationAngle"/>, <see cref="ShadowOffset"/> and <see cref="ImageOffset"/>.
+        /// Combines <see cref="Alpha"/>, <see cref="RotationAngle"/>, <see cref="Zoom"/>, <see
+        /// cref="ExtraImageRotationAngle"/>, <see cref="ShadowOffset"/> and <see cref="ImageOffset"/>.
         /// </summary>
         ImageProperties = Alpha | RotationAngle | Zoom | ExtraImageRotationAngle | ShadowOffset | ImageOffset,
+
         /// <summary>
-        /// Combines <see cref="TextHaloWidth"/>, <see cref="TextRotationAngle"/>, <see cref="TextZoom"/> 
-        /// and <see cref="TextOffset"/>.
+        /// Combines <see cref="TextHaloWidth"/>, <see cref="TextRotationAngle"/>, <see
+        /// cref="TextZoom"/> and <see cref="TextOffset"/>.
         /// </summary>
         TextProperties = TextHaloWidth | TextRotationAngle | TextZoom | TextOffset,
+
         /// <summary>
-        /// Combines <see cref="BackColorGradientRotationAngle"/>, <see cref="BackColor"/>, 
-        /// <see cref="BackColor2"/>, <see cref="ForeColor"/> and <see cref="TextHaloColor"/>.
+        /// Combines <see cref="BackColorGradientRotationAngle"/>, <see cref="BackColor"/>, <see
+        /// cref="BackColor2"/>, <see cref="ForeColor"/> and <see cref="TextHaloColor"/>.
         /// </summary>
         ColorProperties = BackColorGradientRotationAngle | BackColor | BackColor2 | ForeColor | TextHaloColor,
+
         /// <summary>
         /// All properties.
         /// </summary>
@@ -99,10 +118,9 @@ namespace ExtendedPictureBoxLib
     }
 
     /// <summary>
-    /// Structure holding all properties of an <see cref="ExtendedPictureBox"/>
-    /// except the two images, the <see cref="ExtendedPictureBox.ExtraImageAlignment"/>,
-    /// <see cref="ExtendedPictureBox.BaseSizeMode"/> and 
-    /// <see cref="ExtendedPictureBox.BorderStyle"/>.
+    /// Structure holding all properties of an <see cref="ExtendedPictureBox"/> except the two
+    /// images, the <see cref="ExtendedPictureBox.ExtraImageAlignment"/>, <see
+    /// cref="ExtendedPictureBox.BaseSizeMode"/> and <see cref="ExtendedPictureBox.BorderStyle"/>.
     /// The class encapsualtes all properties which can be animated.
     /// </summary>
     [TypeConverter(typeof(PictureBoxStateConverter))]
@@ -138,17 +156,20 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Creates a new instance and initializes it with
-        /// the specified values.
+        /// Creates a new instance and initializes it with the specified values.
         /// </summary>
         /// <param name="alpha">The initial <see cref="Alpha"/> value.</param>
         /// <param name="rotationAngle">The initial <see cref="RotationAngle"/> value.</param>
         /// <param name="zoom">The initial <see cref="Zoom"/> value.</param>
-        /// <param name="extraImageRotationAngle">The initial <see cref="ExtraImageRotationAngle"/> value.</param>
-        /// <param name="backColorGradientRotationAngle">The initial <see cref="BackColorGradientRotationAngle"/> value.</param>
+        /// <param name="extraImageRotationAngle">
+        /// The initial <see cref="ExtraImageRotationAngle"/> value.
+        /// </param>
+        /// <param name="backColorGradientRotationAngle">
+        /// The initial <see cref="BackColorGradientRotationAngle"/> value.
+        /// </param>
         /// <param name="backColor">The initial <see cref="BackColor"/> value.</param>
         /// <param name="backColor2">The initial <see cref="BackColor2"/> value.</param>
-        public PictureBoxState(byte alpha, float rotationAngle, float zoom, float extraImageRotationAngle, 
+        public PictureBoxState(byte alpha, float rotationAngle, float zoom, float extraImageRotationAngle,
                                float backColorGradientRotationAngle, Color backColor, Color backColor2)
             : this(alpha, rotationAngle, zoom, extraImageRotationAngle, backColorGradientRotationAngle,
                    backColor, backColor2, SystemColors.ControlText, SystemColors.ControlText, 0, 0f, 100f,
@@ -156,14 +177,17 @@ namespace ExtendedPictureBoxLib
         { }
 
         /// <summary>
-        /// Creates a new instance and initializes it with
-        /// the specified values.
+        /// Creates a new instance and initializes it with the specified values.
         /// </summary>
         /// <param name="alpha">The initial <see cref="Alpha"/> value.</param>
         /// <param name="rotationAngle">The initial <see cref="RotationAngle"/> value.</param>
         /// <param name="zoom">The initial <see cref="Zoom"/> value.</param>
-        /// <param name="extraImageRotationAngle">The initial <see cref="ExtraImageRotationAngle"/> value.</param>
-        /// <param name="backColorGradientRotationAngle">The initial <see cref="BackColorGradientRotationAngle"/> value.</param>
+        /// <param name="extraImageRotationAngle">
+        /// The initial <see cref="ExtraImageRotationAngle"/> value.
+        /// </param>
+        /// <param name="backColorGradientRotationAngle">
+        /// The initial <see cref="BackColorGradientRotationAngle"/> value.
+        /// </param>
         /// <param name="backColor">The initial <see cref="BackColor"/> value.</param>
         /// <param name="backColor2">The initial <see cref="BackColor2"/> value.</param>
         /// <param name="foreColor">The initial <see cref="ForeColor"/> value.</param>
@@ -180,14 +204,17 @@ namespace ExtendedPictureBoxLib
         { }
 
         /// <summary>
-        /// Creates a new instance and initializes it with
-        /// the specified values.
+        /// Creates a new instance and initializes it with the specified values.
         /// </summary>
         /// <param name="alpha">The initial <see cref="Alpha"/> value.</param>
         /// <param name="rotationAngle">The initial <see cref="RotationAngle"/> value.</param>
         /// <param name="zoom">The initial <see cref="Zoom"/> value.</param>
-        /// <param name="extraImageRotationAngle">The initial <see cref="ExtraImageRotationAngle"/> value.</param>
-        /// <param name="backColorGradientRotationAngle">The initial <see cref="BackColorGradientRotationAngle"/> value.</param>
+        /// <param name="extraImageRotationAngle">
+        /// The initial <see cref="ExtraImageRotationAngle"/> value.
+        /// </param>
+        /// <param name="backColorGradientRotationAngle">
+        /// The initial <see cref="BackColorGradientRotationAngle"/> value.
+        /// </param>
         /// <param name="backColor">The initial <see cref="BackColor"/> value.</param>
         /// <param name="backColor2">The initial <see cref="BackColor2"/> value.</param>
         /// <param name="foreColor">The initial <see cref="ForeColor"/> value.</param>
@@ -225,8 +252,7 @@ namespace ExtendedPictureBoxLib
         #region Public interface
 
         /// <summary>
-        /// Applies the a defined set of properties from a given state to
-        /// the current instance.
+        /// Applies the a defined set of properties from a given state to the current instance.
         /// </summary>
         /// <param name="state">State from which to transfer the properties.</param>
         /// <param name="properties">Definition of which properties to transfer.</param>
@@ -265,8 +291,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.Alpha"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.Alpha"/> property.
         /// </summary>
         public byte Alpha
         {
@@ -275,8 +300,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.RotationAngle"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.RotationAngle"/> property.
         /// </summary>
         public float RotationAngle
         {
@@ -285,8 +309,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.Zoom"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.Zoom"/> property.
         /// </summary>
         public float Zoom
         {
@@ -295,8 +318,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.ExtraImageRotationAngle"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.ExtraImageRotationAngle"/> property.
         /// </summary>
         public float ExtraImageRotationAngle
         {
@@ -305,8 +327,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.BackColorGradientRotationAngle"/> property.
+        /// Gets or sets the value for the <see
+        /// cref="ExtendedPictureBox.BackColorGradientRotationAngle"/> property.
         /// </summary>
         public float BackColorGradientRotationAngle
         {
@@ -315,8 +337,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.BackColor"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.BackColor"/> property.
         /// </summary>
         [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
         public Color BackColor
@@ -326,8 +347,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.BackColor2"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.BackColor2"/> property.
         /// </summary>
         [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
         public Color BackColor2
@@ -337,8 +357,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="System.Windows.Forms.Control.ForeColor"/> property.
+        /// Gets or sets the value for the <see cref="System.Windows.Forms.Control.ForeColor"/> property.
         /// </summary>
         [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
         public Color ForeColor
@@ -348,8 +367,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.TextHaloColor"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextHaloColor"/> property.
         /// </summary>
         [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
         public Color TextHaloColor
@@ -359,8 +377,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.TextHaloWidth"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextHaloWidth"/> property.
         /// </summary>
         public float TextHaloWidth
         {
@@ -369,8 +386,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.TextRotationAngle"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextRotationAngle"/> property.
         /// </summary>
         public float TextRotationAngle
         {
@@ -379,8 +395,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.TextZoom"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextZoom"/> property.
         /// </summary>
         public float TextZoom
         {
@@ -389,8 +404,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.ShadowOffset"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.ShadowOffset"/> property.
         /// </summary>
         public Point ShadowOffset
         {
@@ -399,8 +413,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.ImageOffset"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.ImageOffset"/> property.
         /// </summary>
         public Point ImageOffset
         {
@@ -409,8 +422,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the value for the
-        /// <see cref="ExtendedPictureBox.TextOffset"/> property.
+        /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextOffset"/> property.
         /// </summary>
         public Point TextOffset
         {
@@ -423,8 +435,7 @@ namespace ExtendedPictureBoxLib
         #region Public static interface
 
         /// <summary>
-        /// Checks whether one <see cref="PictureBoxStateProperties"/> is part of
-        /// another one.
+        /// Checks whether one <see cref="PictureBoxStateProperties"/> is part of another one.
         /// </summary>
         /// <param name="allProperties"></param>
         /// <param name="testProperty"></param>
@@ -457,8 +468,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Creates a new random <see cref="Single"/> which can be used in
-        /// any of the angle properties of an <see cref="ExtendedPictureBox"/>.
+        /// Creates a new random <see cref="Single"/> which can be used in any of the angle
+        /// properties of an <see cref="ExtendedPictureBox"/>.
         /// </summary>
         /// <returns>A random angle between 0 and 359.</returns>
         public static float GetRandomAngle()
@@ -535,11 +546,12 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Determines whether this instance and another value
-        /// are equal.
+        /// Determines whether this instance and another value are equal.
         /// </summary>
         /// <param name="obj">Another object.</param>
-        /// <returns>True if obj is of type <see cref="PictureBoxState"/> and all properties are equal.</returns>
+        /// <returns>
+        /// True if obj is of type <see cref="PictureBoxState"/> and all properties are equal.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (!(obj is PictureBoxState))

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Animations;
 using ExtendedPictureBoxLib.Animators;
-using System.Windows.Forms;
 
 namespace ExtendedPictureBoxLib
 {
     /// <summary>
-    /// Helper class for the <see cref="AnimatedPicturesProgressBar"/> managing the
-    /// animations while a step is in progress.
-    /// This is done by removing some of the animation capabilities of the underlying
-    /// <see cref="AnimatedPictureBox"/> and instead adding some repeating animations.
+    /// Helper class for the <see cref="AnimatedPicturesProgressBar"/> managing the animations while
+    /// a step is in progress. This is done by removing some of the animation capabilities of the
+    /// underlying <see cref="AnimatedPictureBox"/> and instead adding some repeating animations.
     /// </summary>
     internal class StepAnimators
     {
@@ -29,7 +27,9 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Creates a new instance.
         /// </summary>
-        /// <param name="animateExtraImageRotationAngle">Indicates whether the the extra image should be rotated.</param>
+        /// <param name="animateExtraImageRotationAngle">
+        /// Indicates whether the the extra image should be rotated.
+        /// </param>
         /// <param name="animateColor">Indicates whether the colors should be animated.</param>
         /// <param name="color1">First color of the animation.</param>
         /// <param name="color2">Second color of the animation.</param>
@@ -39,7 +39,7 @@ namespace ExtendedPictureBoxLib
             _pictureBox = pictureBox;
 
             _extraImageRotationAngleAnimator = new ExtendedPictureBoxExtraImageRotationAngleAnimator();
-            _extraImageRotationAngleAnimator.ExtendedPictureBox =(ExtendedPictureBox)pictureBox;
+            _extraImageRotationAngleAnimator.ExtendedPictureBox = (ExtendedPictureBox)pictureBox;
             _extraImageRotationAngleAnimator.StartRotationAngle = 0f;
             _extraImageRotationAngleAnimator.EndRotationAngle = 360f;
             _extraImageRotationAngleAnimator.LoopMode = LoopMode.Repeat;
@@ -51,7 +51,7 @@ namespace ExtendedPictureBoxLib
             _backColorAnimator.LoopMode = LoopMode.Bidirectional;
 
             _backColor2Animator = new ExtendedPictureBoxBackColor2Animator();
-            _backColor2Animator.ExtendedPictureBox =(ExtendedPictureBox) pictureBox;
+            _backColor2Animator.ExtendedPictureBox = (ExtendedPictureBox)pictureBox;
             _backColor2Animator.StartColor = color2;
             _backColor2Animator.EndColor = color1;
             _backColor2Animator.ParentAnimator = _backColorAnimator;
@@ -72,7 +72,9 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Starts the animation.
         /// </summary>
-        /// <param name="animateExtraImageRotationAngle">Indicates whether the the extra image should be rotated.</param>
+        /// <param name="animateExtraImageRotationAngle">
+        /// Indicates whether the the extra image should be rotated.
+        /// </param>
         /// <param name="animateColor">Indicates whether the colors should be animated.</param>
         internal void Start(bool animateExtraImageRotationAngle, bool animateColor)
         {

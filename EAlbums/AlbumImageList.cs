@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace EAlbums
 {
     public partial class AlbumImageList : UserControl
     {
-
-
         public class ImagesLoadedEventArgs : EventArgs
         {
             public string Name;
             public List<string> ImagePaths = new List<string>();
-            public ImagesLoadedEventArgs(string name,List<string> list)
+
+            public ImagesLoadedEventArgs(string name, List<string> list)
             {
                 Name = name;
                 ImagePaths = list;
             }
-
         }
+
         public delegate void ImagesLoadedEventHandler(Object sender, ImagesLoadedEventArgs e);
 
         public event ImagesLoadedEventHandler ImagesLoaded;
+
         private void OnImagesLoaded(ImagesLoadedEventArgs e)
         {
             if (ImagesLoaded != null)
@@ -36,11 +33,7 @@ namespace EAlbums
             }
         }
 
-
-
-        string CurrentAlbumName;
-
-
+        private string CurrentAlbumName;
 
         private void AddImages(string[] paths)
         {
@@ -55,31 +48,24 @@ namespace EAlbums
                 {
                     continue;
                 }
-
-
             }
             dataGridView.Refresh();
         }
 
-
-        public void LoadImages(string name,List<string> imagePaths)
+        public void LoadImages(string name, List<string> imagePaths)
         {
             CurrentAlbumName = name;
             dataGridView.Rows.Clear();
             AddImages(imagePaths.ToArray());
         }
-      
-
 
         public AlbumImageList()
         {
             InitializeComponent();
         }
 
-
         private void AlbumImageList_Load(object sender, EventArgs e)
         {
-           
         }
 
         private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -88,7 +74,6 @@ namespace EAlbums
             //标识行号
             try
             {
-
                 DataGridView dgv = sender as DataGridView;
                 Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
                                                     Convert.ToInt32(e.RowBounds.Location.Y + (e.RowBounds.Height - dgv.RowHeadersDefaultCellStyle.Font.Size) / 2),
@@ -112,14 +97,13 @@ namespace EAlbums
             OpenFileDialog ofd = sender as OpenFileDialog;
 
             AddImages(ofd.FileNames);
-         
         }
 
         private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem==tsbInsertImage)
+            if (e.ClickedItem == tsbInsertImage)
             {
-                if (openFileDialog.ShowDialog()==DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     List<string> imagePaths = new List<string>();
 
@@ -128,9 +112,8 @@ namespace EAlbums
                         imagePaths.Add(dataGridView[2, i].Value.ToString());
                     }
 
-                    OnImagesLoaded(new ImagesLoadedEventArgs(CurrentAlbumName,imagePaths));
+                    OnImagesLoaded(new ImagesLoadedEventArgs(CurrentAlbumName, imagePaths));
                 }
-                                             
             }
         }
 
@@ -138,6 +121,5 @@ namespace EAlbums
         {
             this.Visible = false;
         }
-
     }
 }

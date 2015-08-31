@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Drawing;
@@ -8,70 +7,83 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
     /// <summary>
     /// Class for the meter threshold
     /// </summary>
-	public class LBMeterThreshold
-	{
-		#region (* Properties variables *)
-		private	Color	color = Color.Empty;
-		private double	startValue = 0.0;
-		private double	endValue = 1.0;
-		#endregion
-		
-		#region (* Constructor *)
-		public LBMeterThreshold()
-		{			
-		}
-		#endregion
-		
-		#region (* Properties *)
-		public Color Color
-		{
-			set { this.color = value; }
-			get { return this.color; }
-		}
-		
-		public double StartValue
-		{
-			set { this.startValue = value; }
-			get { return this.startValue; }
-		}
-		
-		public double EndValue
-		{
-			set { this.endValue = value; }
-			get { return this.endValue; }
-		}
-		#endregion
-		
-		#region (* Public methods *)
-		public bool IsInRange ( double val )
-		{
-			if ( val > this.EndValue )
-				return false;
-			
-			if ( val < this.StartValue )
-				return false;
-			
-			return true;
-		}
-		#endregion
-	}
-		
-	/// <summary>
-	/// Collection of the meter thresolds
-	/// </summary>
-	public class LBMeterThresholdCollection : CollectionBase
+    public class LBMeterThreshold
     {
         #region (* Properties variables *)
-		private bool _IsReadOnly = false;
-		#endregion
-		
-		#region (* Constructor *)
+
+        private Color color = Color.Empty;
+        private double startValue = 0.0;
+        private double endValue = 1.0;
+
+        #endregion
+
+        #region (* Constructor *)
+
+        public LBMeterThreshold()
+        {
+        }
+
+        #endregion
+
+        #region (* Properties *)
+
+        public Color Color
+        {
+            set { this.color = value; }
+            get { return this.color; }
+        }
+
+        public double StartValue
+        {
+            set { this.startValue = value; }
+            get { return this.startValue; }
+        }
+
+        public double EndValue
+        {
+            set { this.endValue = value; }
+            get { return this.endValue; }
+        }
+
+        #endregion
+
+        #region (* Public methods *)
+
+        public bool IsInRange(double val)
+        {
+            if (val > this.EndValue)
+                return false;
+
+            if (val < this.StartValue)
+                return false;
+
+            return true;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Collection of the meter thresolds
+    /// </summary>
+    public class LBMeterThresholdCollection : CollectionBase
+    {
+        #region (* Properties variables *)
+
+        private bool _IsReadOnly = false;
+
+        #endregion
+
+        #region (* Constructor *)
+
         public LBMeterThresholdCollection()
         {
         }
-		#endregion
-		
+
+        #endregion
+
         #region (* Properties *)
+
         public virtual LBMeterThreshold this[int index]
         {
             get { return (LBMeterThreshold)InnerList[index]; }
@@ -82,24 +94,26 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         {
             get { return _IsReadOnly; }
         }
-		#endregion
-		
-		#region (* Public methods *)
-		/// <summary>
-		/// Add an object to the collection
-		/// </summary>
-		/// <param name="sector"></param>
-		public virtual void Add(LBMeterThreshold sector)
+
+        #endregion
+
+        #region (* Public methods *)
+
+        /// <summary>
+        /// Add an object to the collection
+        /// </summary>
+        /// <param name="sector"></param>
+        public virtual void Add(LBMeterThreshold sector)
         {
             InnerList.Add(sector);
         }
 
-		/// <summary>
-		/// Remove an object from the collection
-		/// </summary>
-		/// <param name="sector"></param>
-		/// <returns></returns>
-        public virtual bool Remove(LBMeterThreshold sector) 
+        /// <summary>
+        /// Remove an object from the collection
+        /// </summary>
+        /// <param name="sector"></param>
+        /// <returns></returns>
+        public virtual bool Remove(LBMeterThreshold sector)
         {
             bool result = false;
 
@@ -110,8 +124,8 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
                 LBMeterThreshold obj = (LBMeterThreshold)InnerList[i];
 
                 //compare the values of the objects
-                if ( ( obj.StartValue == sector.StartValue ) && 
-                    ( obj.EndValue == sector.EndValue ) )
+                if ((obj.StartValue == sector.StartValue) &&
+                    (obj.EndValue == sector.EndValue))
                 {
                     //remove item from inner ArrayList at index i
                     InnerList.RemoveAt(i);
@@ -133,19 +147,19 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
             //loop through the inner ArrayList
             foreach (LBMeterThreshold obj in InnerList)
             {
-               //compare the values of the objects
-                if ( ( obj.StartValue == sector.StartValue ) && 
-                    ( obj.EndValue == sector.EndValue ) )
+                //compare the values of the objects
+                if ((obj.StartValue == sector.StartValue) &&
+                    (obj.EndValue == sector.EndValue))
                 {
                     //if it matches return true
                     return true;
                 }
             }
-            
+
             //no match
             return false;
         }
- 
+
         /// <summary>
         /// Copy the collection
         /// </summary>
@@ -155,6 +169,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         {
             throw new Exception("This Method is not valid for this implementation.");
         }
-		#endregion
-	}
+
+        #endregion
+    }
 }

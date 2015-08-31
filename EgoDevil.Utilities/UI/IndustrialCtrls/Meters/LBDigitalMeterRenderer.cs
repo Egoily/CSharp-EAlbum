@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Text;
+﻿using System.Drawing;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
@@ -10,12 +6,15 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
     public class LBDigitalMeterRenderer : LBRendererBase
     {
         #region (* Constructor *)
+
         public LBDigitalMeterRenderer()
         {
         }
+
         #endregion
 
         #region (* Overrided methods *)
+
         public override void Draw(Graphics Gr)
         {
             if (this.Meter == null)
@@ -27,16 +26,20 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
             this.DrawBackground(Gr, _rc);
             this.DrawBorder(Gr, _rc);
         }
+
         #endregion
 
         #region (* Properties *)
+
         public LBDigitalMeter Meter
         {
             get { return this.Control as LBDigitalMeter; }
         }
+
         #endregion
 
         #region (* Virtual methods *)
+
         public virtual bool DrawBackground(Graphics gr, RectangleF rc)
         {
             if (this.Meter == null)
@@ -63,6 +66,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 
             return true;
         }
+
         #endregion
     }
 }

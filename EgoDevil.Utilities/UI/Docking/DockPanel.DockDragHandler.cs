@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.Docking
 {
@@ -15,14 +12,18 @@ namespace EgoDevil.Utilities.UI.Docking
             private class DockIndicator : DragForm
             {
                 #region IHitTest
+
                 private interface IHitTest
                 {
                     DockStyle HitTest(Point pt);
-                    DockStyle Status { get;	set;	}
+
+                    DockStyle Status { get; set; }
                 }
+
                 #endregion
 
                 #region PanelIndicator
+
                 private class PanelIndicator : PictureBox, IHitTest
                 {
                     private static Image _imagePanelLeft = Resources.DockIndicator_PanelLeft;
@@ -44,12 +45,14 @@ namespace EgoDevil.Utilities.UI.Docking
                     }
 
                     private DockStyle m_dockStyle;
+
                     private DockStyle DockStyle
                     {
                         get { return m_dockStyle; }
                     }
 
                     private DockStyle m_status;
+
                     public DockStyle Status
                     {
                         get { return m_status; }
@@ -105,6 +108,7 @@ namespace EgoDevil.Utilities.UI.Docking
                     }
 
                     private bool m_isActivated = false;
+
                     private bool IsActivated
                     {
                         get { return m_isActivated; }
@@ -120,9 +124,11 @@ namespace EgoDevil.Utilities.UI.Docking
                         return this.Visible && ClientRectangle.Contains(PointToClient(pt)) ? DockStyle : DockStyle.None;
                     }
                 }
+
                 #endregion PanelIndicator
 
                 #region PaneIndicator
+
                 private class PaneIndicator : PictureBox, IHitTest
                 {
                     private struct HotSpotIndex
@@ -135,18 +141,21 @@ namespace EgoDevil.Utilities.UI.Docking
                         }
 
                         private int m_x;
+
                         public int X
                         {
                             get { return m_x; }
                         }
 
                         private int m_y;
+
                         public int Y
                         {
                             get { return m_y; }
                         }
 
                         private DockStyle m_dockStyle;
+
                         public DockStyle DockStyle
                         {
                             get { return m_dockStyle; }
@@ -161,6 +170,7 @@ namespace EgoDevil.Utilities.UI.Docking
                     private static Bitmap _bitmapPaneDiamondFill = Resources.DockIndicator_PaneDiamond_Fill;
                     private static Bitmap _bitmapPaneDiamondHotSpot = Resources.DockIndicator_PaneDiamond_HotSpot;
                     private static Bitmap _bitmapPaneDiamondHotSpotIndex = Resources.DockIndicator_PaneDiamond_HotSpotIndex;
+
                     private static HotSpotIndex[] _hotSpots = new HotSpotIndex[]
 			{
 				new HotSpotIndex(1, 0, DockStyle.Top),
@@ -169,6 +179,7 @@ namespace EgoDevil.Utilities.UI.Docking
 				new HotSpotIndex(2, 1, DockStyle.Right),
 				new HotSpotIndex(1, 2, DockStyle.Bottom)
 			};
+
                     private static GraphicsPath _displayingGraphicsPath = DrawHelper.CalculateGraphicsPathFromBitmap(_bitmapPaneDiamond);
 
                     public PaneIndicator()
@@ -202,6 +213,7 @@ namespace EgoDevil.Utilities.UI.Docking
                     }
 
                     private DockStyle m_status = DockStyle.None;
+
                     public DockStyle Status
                     {
                         get { return m_status; }
@@ -223,10 +235,13 @@ namespace EgoDevil.Utilities.UI.Docking
                         }
                     }
                 }
+
                 #endregion PaneIndicator
 
                 #region consts
+
                 private int _PanelIndicatorMargin = 10;
+
                 #endregion
 
                 private DockDragHandler m_dragHandler;
@@ -246,6 +261,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PaneIndicator m_paneDiamond = null;
+
                 private PaneIndicator PaneDiamond
                 {
                     get
@@ -258,6 +274,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PanelIndicator m_panelLeft = null;
+
                 private PanelIndicator PanelLeft
                 {
                     get
@@ -270,6 +287,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PanelIndicator m_panelRight = null;
+
                 private PanelIndicator PanelRight
                 {
                     get
@@ -282,6 +300,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PanelIndicator m_panelTop = null;
+
                 private PanelIndicator PanelTop
                 {
                     get
@@ -294,6 +313,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PanelIndicator m_panelBottom = null;
+
                 private PanelIndicator PanelBottom
                 {
                     get
@@ -306,6 +326,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private PanelIndicator m_panelFill = null;
+
                 private PanelIndicator PanelFill
                 {
                     get
@@ -318,6 +339,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private bool m_fullPanelEdge = false;
+
                 public bool FullPanelEdge
                 {
                     get { return m_fullPanelEdge; }
@@ -342,6 +364,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private DockPane m_dockPane = null;
+
                 public DockPane DockPane
                 {
                     get { return m_dockPane; }
@@ -358,6 +381,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 }
 
                 private IHitTest m_hitTest = null;
+
                 private IHitTest HitTestResult
                 {
                     get { return m_hitTest; }
@@ -531,7 +555,8 @@ namespace EgoDevil.Utilities.UI.Docking
                     DragForm.Show(false);
                 }
 
-                DragForm m_dragForm;
+                private DragForm m_dragForm;
+
                 private DragForm DragForm
                 {
                     get { return m_dragForm; }
@@ -672,6 +697,7 @@ namespace EgoDevil.Utilities.UI.Docking
             }
 
             private DockOutlineBase m_outline;
+
             public DockOutlineBase Outline
             {
                 get { return m_outline; }
@@ -679,6 +705,7 @@ namespace EgoDevil.Utilities.UI.Docking
             }
 
             private DockIndicator m_indicator;
+
             private DockIndicator Indicator
             {
                 get { return m_indicator; }
@@ -686,6 +713,7 @@ namespace EgoDevil.Utilities.UI.Docking
             }
 
             private Rectangle m_floatOutlineBounds;
+
             private Rectangle FloatOutlineBounds
             {
                 get { return m_floatOutlineBounds; }
@@ -799,6 +827,7 @@ namespace EgoDevil.Utilities.UI.Docking
         }
 
         private DockDragHandler m_dockDragHandler = null;
+
         private DockDragHandler GetDockDragHandler()
         {
             if (m_dockDragHandler == null)

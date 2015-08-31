@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Windows.Forms;
-using System.Collections;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace EAlbums
 {
-    class ThumbElement
+    internal class ThumbElement
     {
         static public int ThumbSize = 64;
-
 
         public Bitmap MainBitmap = null;
         public Bitmap ShadowBitmap = null;
@@ -58,6 +49,7 @@ namespace EAlbums
             ShadowBitmap = new Bitmap(MainBitmap);
 
             #region (* 阴影部分 *)
+
             //阴影部分
             unsafe
             {
@@ -87,28 +79,22 @@ namespace EAlbums
                     row += bmd.Stride;
                 }
 
-
                 ShadowBitmap.UnlockBits(bmd);
             }
+
             #endregion
 
-
             this.OriginalAngle = angle;
-
         }
 
         public ThumbElement(String strFileName)
         {
-            Setting(strFileName,0d);
-
+            Setting(strFileName, 0d);
         }
-        public ThumbElement(String strFileName,double angle)
+
+        public ThumbElement(String strFileName, double angle)
         {
-            Setting(strFileName,angle);
-          
+            Setting(strFileName, angle);
         }
-
-
     }
-
 }

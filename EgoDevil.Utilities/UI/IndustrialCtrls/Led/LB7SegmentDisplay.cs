@@ -4,29 +4,29 @@
  * Date: 05/04/2009
  *-------------------------------------------------------------------------*/
 
-using System;
-using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 {
-	/// <summary>
-	/// Description of LB7SegmentDisplay.
-	/// </summary>
-	public partial class LB7SegmentDisplay : LBIndustrialCtrlBase
-	{
-		#region (* Constructor *)
-		public LB7SegmentDisplay()
-		{
-			InitializeComponent();
-		}
-		#endregion
+    /// <summary>
+    /// Description of LB7SegmentDisplay.
+    /// </summary>
+    public partial class LB7SegmentDisplay : LBIndustrialCtrlBase
+    {
+        #region (* Constructor *)
 
-		#region (* Properties *)
+        public LB7SegmentDisplay()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region (* Properties *)
+
         public int val = 0;
+
         [
             Category("Display"),
             Description("Value of the display")
@@ -38,6 +38,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
         }
 
         private bool showDp = false;
+
         [
             Category("Display"),
             Description("Show the point of the display")
@@ -47,13 +48,16 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
             set { this.showDp = value; this.Invalidate(); }
             get { return this.showDp; }
         }
-		#endregion
+
+        #endregion
 
         #region (* Overrided methods *)
+
         protected override ILBRenderer CreateDefaultRenderer()
         {
             return new LB7SegmentDisplayRenderer();
         }
+
         #endregion
     }
 }

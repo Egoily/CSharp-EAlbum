@@ -4,9 +4,8 @@ using System.ComponentModel;
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
-    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the
-    /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextRotationAngle"/> of a 
-    /// <see cref="ExtendedPictureBox"/>.
+    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
+    /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextRotationAngle"/> of a <see cref="ExtendedPictureBox"/>.
     /// </summary>
     public partial class ExtendedPictureBoxTextRotationAngleAnimator : ExtendedPictureBoxRotationAngleAnimator
     {
@@ -16,20 +15,26 @@ namespace ExtendedPictureBoxLib.Animators
         /// Creates a new instance.
         /// </summary>
         /// <param name="container">Container the new instance should be added to.</param>
-        public ExtendedPictureBoxTextRotationAngleAnimator(IContainer container) : base(container) { }
+        public ExtendedPictureBoxTextRotationAngleAnimator(IContainer container)
+            : base(container)
+        {
+        }
 
         /// <summary>
         /// Creates a new instance.
         /// </summary>
-        public ExtendedPictureBoxTextRotationAngleAnimator() : base() { }
+        public ExtendedPictureBoxTextRotationAngleAnimator()
+            : base()
+        {
+        }
 
         #endregion
 
         #region Overridden from ExtendedPictureBoxRotationAngleAnimator
 
         /// <summary>
-        /// Gets or sets the <see cref="ExtendedPictureBox"/> which 
-        /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextRotationAngle"/> should be animated.
+        /// Gets or sets the <see cref="ExtendedPictureBox"/> which <see
+        /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextRotationAngle"/> should be animated.
         /// </summary>
         [Browsable(true), DefaultValue(null), Category("Behavior")]
         [RefreshProperties(RefreshProperties.Repaint)]

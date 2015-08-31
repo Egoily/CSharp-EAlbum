@@ -1,19 +1,15 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
-    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the
-    /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.State"/> of a 
-    /// <see cref="ExtendedPictureBox"/>.
-    /// It can be altered by setting which parts of the state should be animated.
+    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
+    /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.State"/> of a <see
+    /// cref="ExtendedPictureBox"/>. It can be altered by setting which parts of the state should be animated.
     /// </summary>
     public partial class ExtendedPictureBoxStateAnimator : Animations.DummyAnimator
     {
         #region Fields
-
 
         private ExtendedPictureBoxAlphaAnimator _alphaAnimator;
         private Animations.ControlBackColorAnimator _backColorAnimator;
@@ -72,7 +68,6 @@ namespace ExtendedPictureBoxLib.Animators
             _imageOffsetAnimator = new ExtendedPictureBoxImageOffsetAnimator(components);
             _textOffsetAnimator = new ExtendedPictureBoxTextOffsetAnimator(components);
         }
-
 
         #endregion
 
@@ -159,8 +154,8 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ExtendedPictureBox"/> which 
-        /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.State"/> should be animated.
+        /// Gets or sets the <see cref="ExtendedPictureBox"/> which <see
+        /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.State"/> should be animated.
         /// </summary>
         [Browsable(true), DefaultValue(null), Category("Behavior")]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -189,8 +184,7 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Sets or gets which properties of a given <see cref="ExtendedPictureBox"/>
-        /// should be animated.
+        /// Sets or gets which properties of a given <see cref="ExtendedPictureBox"/> should be animated.
         /// </summary>
         public PictureBoxStateProperties AnimatedProperties
         {
@@ -250,8 +244,7 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Gets or sets whether a given <see cref="PictureBoxStateProperties"/> is set
-        /// in <see cref="AnimatedProperties"/>.
+        /// Gets or sets whether a given <see cref="PictureBoxStateProperties"/> is set in <see cref="AnimatedProperties"/>.
         /// </summary>
         public bool this[PictureBoxStateProperties property]
         {

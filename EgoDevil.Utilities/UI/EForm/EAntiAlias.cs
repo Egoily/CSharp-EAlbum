@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -9,7 +6,6 @@ namespace EgoDevil.Utilities.UI.EForm
 {
     internal class EAntiAlias : IDisposable
     {
-
         private Graphics m_g;
         private SmoothingMode m_eMode;
 
@@ -24,7 +20,5 @@ namespace EgoDevil.Utilities.UI.EForm
         {
             m_g.SmoothingMode = m_eMode;
         }
-
-
     }
 }

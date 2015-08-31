@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Drawing.Text;
-
 
 namespace EgoDevil.Utilities.UI.EForm
 {
     public class ETitleBar
     {
-
         public enum ETitleBarType
         {
             Rounded,
@@ -26,10 +20,12 @@ namespace EgoDevil.Utilities.UI.EForm
             /// Left aligned image.
             /// </summary>
             Left,
+
             /// <summary>
             /// Middle aligned image.
             /// </summary>
             Center,
+
             /// <summary>
             /// Rigth aligned image.
             /// </summary>
@@ -42,22 +38,27 @@ namespace EgoDevil.Utilities.UI.EForm
             /// Just renders titlebar shape, without fill.
             /// </summary>
             None,
+
             /// <summary>
             /// Titlebar is rendering using linear gradient.
             /// </summary>
             LinearRendering,
+
             /// <summary>
             /// Titlebar is rendered using gradient mix and glow.
             /// </summary>
             AdvancedRendering,
+
             /// <summary>
             /// Titlebar is rendered with upper glow.
             /// </summary>
             UpperGlow,
+
             /// <summary>
             /// Titlebar is filled using two gradient rectangles.
             /// </summary>
             RectangleRendering,
+
             /// <summary>
             /// Titlebar is rendered using custom texture.
             /// </summary>
@@ -70,6 +71,7 @@ namespace EgoDevil.Utilities.UI.EForm
             /// Rendered using color mix.
             /// </summary>
             ColorMix,
+
             /// <summary>
             /// Rendered using titlebar start / end rectangle colors.
             /// </summary>
@@ -103,7 +105,6 @@ namespace EgoDevil.Utilities.UI.EForm
         private bool m_bMaximizeBox = true;
         private bool m_bMinimizeBox = true;
 
-
         private ETitleBarType m_eTitleBarType = ETitleBarType.Rounded;
         private ETitleBarBackImageAlign m_eTitleBarImageAlign = ETitleBarBackImageAlign.Right;
         public ETitleBarFill m_eTitleBarFill = ETitleBarFill.AdvancedRendering;
@@ -124,12 +125,11 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_bMaximizeBox = value;
                 foreach (EFormCtrlButtons ebtn in CtrlButtons)
                 {
-                   if (ebtn.ButtonType==EFormCtrlButtons.ECtrlType.Maximize)
-                   {
-                       ebtn.Visible=value;
-                       break;
-                   }
-
+                    if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Maximize)
+                    {
+                        ebtn.Visible = value;
+                        break;
+                    }
                 }
             }
         }
@@ -150,7 +150,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         ebtn.Visible = value;
                         break;
                     }
-
                 }
             }
         }
@@ -174,6 +173,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eButtonBoxFill = value;
             }
         }
+
         public ETitleBarBackImageAlign TitleBarImageAlign
         {
             get
@@ -185,6 +185,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eTitleBarImageAlign = value;
             }
         }
+
         public ETitleBarFill TitleBarFill
         {
             get
@@ -196,6 +197,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eTitleBarFill = value;
             }
         }
+
         public List<Color> TitleBarMixColors
         {
             get
@@ -218,8 +220,8 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 this.m_clrButtonBoxInner = value;
             }
-
         }
+
         public Color ButtonBoxOuterBorder
         {
             get
@@ -230,8 +232,8 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 this.m_clrButtonBoxOuter = value;
             }
-
         }
+
         public List<Color> ButtonBoxMixColors
         {
             get
@@ -251,6 +253,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.m_eCtrlButtons;
             }
         }
+
         public ETitleBarType TitleBarType
         {
             get
@@ -260,9 +263,9 @@ namespace EgoDevil.Utilities.UI.EForm
             set
             {
                 this.m_eTitleBarType = value;
-
             }
         }
+
         public Color LinearGradientStart
         {
             get
@@ -274,6 +277,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrFillStart = value;
             }
         }
+
         public Color LinearGradientEnd
         {
             get
@@ -285,6 +289,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrFillEnd = value;
             }
         }
+
         public Color GlowFillStart
         {
             get
@@ -296,6 +301,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrUpperFillStart = value;
             }
         }
+
         public Color GlowFillEnd
         {
             get
@@ -307,6 +313,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrUpperFillEnd = value;
             }
         }
+
         public string TitleBarCaption
         {
             get
@@ -318,6 +325,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_sCaption = value;
             }
         }
+
         public Font TitleBarCaptionFont
         {
             get
@@ -329,6 +337,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_fntCaption = value;
             }
         }
+
         public Color TitleBarCaptionColor
         {
             get
@@ -340,6 +349,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrCaptionFont = value;
             }
         }
+
         public Color OuterTitleBarColor
         {
             get
@@ -351,6 +361,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrOuterTitleBarColor = value;
             }
         }
+
         public Color InnerTitleBarColor
         {
             get
@@ -362,6 +373,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrInnerTitleBarColor = value;
             }
         }
+
         public Image TitleBarBackImage
         {
             get
@@ -373,6 +385,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_TitleBarBackImage = value;
             }
         }
+
         public Image TitleBarTexture
         {
             get
@@ -402,19 +415,14 @@ namespace EgoDevil.Utilities.UI.EForm
                 foreach (EFormCtrlButtons ebtn in CtrlButtons)
                 {
                     ebtn.ButtonStyle = value;
-
                 }
             }
         }
 
         #endregion
 
-
         public ETitleBar()
         {
-
-
-
             // initialize button box mix colors:
             m_ButtonBoxColors.Add(Color.FromArgb(227, 235, 247));
             m_ButtonBoxColors.Add(Color.FromArgb(221, 234, 251));
@@ -428,18 +436,13 @@ namespace EgoDevil.Utilities.UI.EForm
             m_TitleBarMix.Add(Color.FromArgb(205, 224, 248));
             m_TitleBarMix.Add(Color.FromArgb(217, 232, 250));
             m_TitleBarMix.Add(Color.FromArgb(223, 236, 252));
-        
-
         }
 
         public void RenderTitleBar(Graphics g, Rectangle rcTb)
         {
-
-
             FillTitleBar(g, rcTb);
             DrawTitleBarText(g, m_clrCaptionFont, m_sCaption, rcTb);
         }
-
 
         /// <summary>
         /// Draws titlebar caption.
@@ -461,9 +464,8 @@ namespace EgoDevil.Utilities.UI.EForm
 
             sb.Dispose();
             sf.Dispose();
-
-
         }
+
         /// <summary>
         /// Draws outer border for titlebar area.
         /// </summary>
@@ -480,6 +482,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 }
             }
         }
+
         /// <summary>
         /// Draws inner border for titlebar area.
         /// </summary>
@@ -488,7 +491,6 @@ namespace EgoDevil.Utilities.UI.EForm
         /// <param name="clrInnerBorder"></param>
         private void DrawInnerTitleBarBorder(Graphics g, Rectangle rcTitleBar, Color clrInnerBorder)
         {
-
             if (m_eTitleBarType == ETitleBarType.Rectangular)
                 rcTitleBar.Inflate(-1, -1);
             else
@@ -500,7 +502,7 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 using (Pen pInner = new Pen(clrInnerBorder))
                 {
-                    g.DrawPath(                      pInner,                      XTitleBarPath                    );
+                    g.DrawPath(pInner, XTitleBarPath);
                 }
             }
         }
@@ -511,22 +513,20 @@ namespace EgoDevil.Utilities.UI.EForm
             XTitleBarPath = BuildTitleBarShape(rcTitleBar);
             using (EAntiAlias xaa = new EAntiAlias(g))
             {
-
                 #region Fill titlebar
+
                 switch (m_eTitleBarFill)
                 {
                     case ETitleBarFill.AdvancedRendering:
                         using (LinearGradientBrush lgb = new LinearGradientBrush(rcTitleBar, m_TitleBarMix[0], m_TitleBarMix[4], LinearGradientMode.Vertical))
                         {
-
-
                             lgb.InterpolationColors = EFormHelper.ColorMix(m_TitleBarMix, true);
 
                             g.FillPath(lgb, XTitleBarPath);
                         }
 
-
                         #region Draw titlebar glow
+
                         using (GraphicsPath XGlow = new GraphicsPath())
                         {
                             XGlow.AddEllipse(rcTitleBar.Left, rcTitleBar.Bottom / 2 + 4, rcTitleBar.Width, rcTitleBar.Height);
@@ -539,45 +539,46 @@ namespace EgoDevil.Utilities.UI.EForm
                                 g.SetClip(XTitleBarPath);
                                 g.FillPath(pgb, XGlow);
                                 g.ResetClip();
-
                             }
                         }
+
                         #endregion
 
                         break;
+
                     case ETitleBarFill.Texture:
                         if (m_TitleBarTexture != null)
                         {
                             using (TextureBrush tb = new TextureBrush(m_TitleBarTexture))
                             {
-
                                 g.FillPath(tb, XTitleBarPath);
                             }
                         }
                         break;
+
                     case ETitleBarFill.LinearRendering:
                         RectangleF rcLinearFill = XTitleBarPath.GetBounds();
                         g.SetClip(XTitleBarPath);
                         using (LinearGradientBrush lgbLinearFill = new LinearGradientBrush(rcLinearFill, m_clrFillStart, m_clrFillEnd, LinearGradientMode.Vertical))
                         {
-
                             g.FillRectangle(lgbLinearFill, rcLinearFill);
                         }
 
                         g.ResetClip();
                         break;
+
                     case ETitleBarFill.UpperGlow:
                         RectangleF rcGlow = XTitleBarPath.GetBounds();
                         g.SetClip(XTitleBarPath);
                         rcGlow.Height /= 2;
                         using (LinearGradientBrush lgbUpperGlow = new LinearGradientBrush(rcGlow, m_clrUpperFillStart, m_clrUpperFillEnd, LinearGradientMode.Vertical))
                         {
-
                             g.FillRectangle(lgbUpperGlow, rcGlow);
                         }
 
                         g.ResetClip();
                         break;
+
                     case ETitleBarFill.RectangleRendering:
                         RectangleF rcDownRect = XTitleBarPath.GetBounds();
                         RectangleF rcUpRect = XTitleBarPath.GetBounds();
@@ -585,7 +586,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         rcUpRect.Height /= 2;
                         using (LinearGradientBrush lgbUpperRect = new LinearGradientBrush(rcUpRect, m_clrUpperFillStart, m_clrUpperFillEnd, LinearGradientMode.Vertical))
                         {
-
                             lgbUpperRect.WrapMode = WrapMode.TileFlipY;
                             g.FillRectangle(lgbUpperRect, rcUpRect);
                         }
@@ -594,33 +594,28 @@ namespace EgoDevil.Utilities.UI.EForm
                         rcDownRect.Y = rcUpRect.Bottom;
                         using (LinearGradientBrush lgbDwnRect = new LinearGradientBrush(rcDownRect, m_clrFillStart, m_clrFillEnd, LinearGradientMode.Vertical))
                         {
-
                             g.FillRectangle(lgbDwnRect, rcDownRect);
                         }
 
                         g.ResetClip();
                         break;
-
-
                 }
-
-
 
                 #endregion
 
-
                 #region Draw back image
+
                 DrawTitleBarBackImage(g, rcTitleBar, XTitleBarPath);
+
                 #endregion
 
                 DrawOuterTitleBarBorder(g, rcTitleBar, m_clrOuterTitleBarColor);
                 DrawInnerTitleBarBorder(g, rcTitleBar, m_clrInnerTitleBarColor);
-
             }
             XTitleBarPath.Dispose();
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="rc"></param>
         /// <returns></returns>
@@ -635,19 +630,19 @@ namespace EgoDevil.Utilities.UI.EForm
                     e.AddArc(rc.Right, rc.Top, rc.Height, rc.Height, -90, 180);
                     e.AddLine(rc.Right, rc.Bottom, rc.Left + rc.Height / 2, rc.Bottom);
                     break;
+
                 case ETitleBarType.Angular:
                     e.AddLine(rc.Left, rc.Bottom, rc.Left + 20, rc.Top);
                     e.AddLine(rc.Left + 20, rc.Top, rc.Right, rc.Top);
                     e.AddLine(rc.Right, rc.Top, rc.Right - 20, rc.Bottom);
                     e.AddLine(rc.Right - 20, rc.Bottom, rc.Left, rc.Bottom);
                     break;
+
                 case ETitleBarType.Rectangular:
                     e.AddRectangle(rc);
                     break;
-
             }
             return e;
-
         }
 
         private void DrawTitleBarBackImage(Graphics g, Rectangle rcTitlebar, GraphicsPath clip)
@@ -664,31 +659,27 @@ namespace EgoDevil.Utilities.UI.EForm
                         rcIcon.X = rcTitlebar.Right - lW;
                         rcIcon.Y = rcTitlebar.Bottom / 2 - lH / 2;
                         break;
+
                     case ETitleBarBackImageAlign.Center:
                         rcIcon.X = rcTitlebar.Right / 2 - lW / 2 + rcTitlebar.Height / 2;
                         rcIcon.Y = rcTitlebar.Bottom / 2 - lH / 2;
                         break;
+
                     case ETitleBarBackImageAlign.Left:
                         rcIcon.X = rcTitlebar.Left - rcTitlebar.Height / 2;
                         rcIcon.Y = rcTitlebar.Bottom / 2 - lH / 2;
                         break;
-
                 }
 
                 // draw image:
                 g.SetClip(clip);
                 g.DrawImage(m_TitleBarBackImage, rcIcon);
                 g.ResetClip();
-
             }
-
-
         }
 
         public void RenderCtrlButtonsBox(Rectangle rcBox, Graphics g, int lSinglePosX, int lSinglePosY)
         {
-
-
             using (EAntiAlias xaa = new EAntiAlias(g))
             {
                 int lBtnWidth = 0;
@@ -700,18 +691,14 @@ namespace EgoDevil.Utilities.UI.EForm
                     else
                         m_bShouldRenderButtonBox = true;
 
-
                     lBtnWidth = btn.ButtonWidth;
                     lBtnHeight = btn.ButtonHeight;
                     break;
-
                 }
                 int lX = rcBox.Right - lBtnWidth;
                 int lY = rcBox.Bottom - lBtnHeight;
 
-
                 {
-
                     if (m_bShouldRenderButtonBox)
                     {
                         using (GraphicsPath XButtonBox = BuildCtrlButtonsBox(rcBox))
@@ -726,6 +713,7 @@ namespace EgoDevil.Utilities.UI.EForm
                                         g.FillPath(lgb, XButtonBox);
                                     }
                                     break;
+
                                 case EButtonBoxFill.TitleBarRectangleRendering:
                                     RectangleF rcDownRect = XButtonBox.GetBounds();
                                     RectangleF rcUpRect = XButtonBox.GetBounds();
@@ -733,7 +721,6 @@ namespace EgoDevil.Utilities.UI.EForm
                                     rcUpRect.Height /= 2;
                                     using (LinearGradientBrush lgbUpperRect = new LinearGradientBrush(rcUpRect, m_clrUpperFillStart, m_clrUpperFillEnd, LinearGradientMode.Vertical))
                                     {
-
                                         lgbUpperRect.WrapMode = WrapMode.TileFlipY;
                                         g.FillRectangle(lgbUpperRect, rcUpRect);
                                     }
@@ -742,15 +729,12 @@ namespace EgoDevil.Utilities.UI.EForm
                                     rcDownRect.Y = rcUpRect.Bottom;
                                     using (LinearGradientBrush lgbDwnRect = new LinearGradientBrush(rcDownRect, m_clrFillStart, m_clrFillEnd, LinearGradientMode.Vertical))
                                     {
-
                                         g.FillRectangle(lgbDwnRect, rcDownRect);
                                     }
 
                                     g.ResetClip();
                                     break;
-
                             }
-
 
                             #region Draw button separators
 
@@ -766,26 +750,20 @@ namespace EgoDevil.Utilities.UI.EForm
                             g.SetClip(XButtonBox);
                             foreach (EFormCtrlButtons btn in m_eCtrlButtons)
                             {
-
                                 btn.ButtonLeft = lX;
                                 btn.ButtonTop = lY;
 
                                 btn.RenderCtrlButtons(btn.ButtonLeft, btn.ButtonTop, g, XButtonBox);
                                 lX -= btn.ButtonWidth + 1;
-
                             }
                             g.ResetClip();
 
                             #endregion
 
-
                             g.DrawPath(new Pen(m_clrButtonBoxOuter), XButtonBox);
 
                             DrawInnerCtrlBoxBorder(g, rcBox, m_clrButtonBoxInner);
-
-
                         }
-
                     }
                     else
                     {
@@ -800,16 +778,14 @@ namespace EgoDevil.Utilities.UI.EForm
                             btn.RenderCtrlButtons(btn.ButtonLeft, btn.ButtonTop, g, null);
                             //lSP -= btn.ButtonWidth + 4;
                             lSP -= btn.ButtonWidth / 2 + 4;
-
                         }
                     }
                 }
             }
-
         }
+
         private void DrawInnerCtrlBoxBorder(Graphics g, Rectangle rcBox, Color clrInnerBorder)
         {
-
             rcBox.Inflate(-1, -1);
             using (GraphicsPath XTitleBarBox = BuildCtrlButtonsBox(rcBox))
             {
@@ -819,6 +795,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 }
             }
         }
+
         public GraphicsPath BuildCtrlButtonsBox(Rectangle r)
         {
             GraphicsPath XButtonBox = new GraphicsPath();
@@ -830,19 +807,20 @@ namespace EgoDevil.Utilities.UI.EForm
                     XButtonBox.AddBezier(new Point(r.Right - 5, r.Bottom), new Point(r.Right - 2, r.Bottom - 1), new Point(r.Right - 2, r.Bottom - 1), new Point(r.Right, r.Bottom - 5));
                     XButtonBox.AddLine(r.Right, r.Bottom - 5, r.Right, r.Top + 1);
                     break;
+
                 case ETitleBarType.Angular:
                     XButtonBox.AddLine(r.Left + 18, r.Top, r.Left, r.Bottom);
                     XButtonBox.AddLine(r.Left + 18, r.Top, r.Right - r.Height, r.Top);
                     XButtonBox.AddArc(r.Right - r.Height, r.Top, r.Height, r.Height, -90, 180);
                     XButtonBox.AddLine(r.Right - r.Height, r.Bottom, r.Left, r.Bottom);
                     break;
+
                 case ETitleBarType.Rectangular:
                     XButtonBox.AddLine(r.Left, r.Top, r.Left, r.Bottom);
                     XButtonBox.AddLine(r.Left, r.Top, r.Right - r.Height, r.Top);
                     XButtonBox.AddArc(r.Right - r.Height, r.Top, r.Height, r.Height, -90, 180);
                     XButtonBox.AddLine(r.Right - r.Height, r.Bottom, r.Left, r.Bottom);
                     break;
-
             }
             return XButtonBox;
         }

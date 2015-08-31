@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace EgoDevil.Utilities.UI.Docking
 {
     public partial class DockWindow

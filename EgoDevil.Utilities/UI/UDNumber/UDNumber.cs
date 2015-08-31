@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.UDNumber
 {
     public partial class UDNumber : UserControl
     {
-
         private int _value;
         private int _maximum;
         private int _minimum;
         private int _increment;
-  
-           
+
         [CategoryAttribute("Data"), DescriptionAttribute("Current value")]
         public int Value
         {
@@ -28,13 +22,12 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
             set
             {
-                _value = value; 
-                            
-               OnValueChanged(null);
-                            
+                _value = value;
+
+                OnValueChanged(null);
             }
         }
- 
+
         [CategoryAttribute("Data"), DescriptionAttribute("Maximum value")]
         public int Maximum
         {
@@ -42,14 +35,14 @@ namespace EgoDevil.Utilities.UI.UDNumber
             { return _maximum; }
             set
             {
-                _maximum=value;
-                if (_maximum<_minimum)
+                _maximum = value;
+                if (_maximum < _minimum)
                 {
                     _maximum = _minimum;
                 }
-            }         
+            }
         }
-    
+
         [CategoryAttribute("Data"), DescriptionAttribute("Minimum value ")]
         public int Minimum
         {
@@ -65,7 +58,6 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-   
         [CategoryAttribute("Data"), DescriptionAttribute("Increment")]
         public int Increment
         {
@@ -74,9 +66,9 @@ namespace EgoDevil.Utilities.UI.UDNumber
                 return _increment;
             }
             set
-            {                
-                _increment=value;
-                if (_increment<=0)
+            {
+                _increment = value;
+                if (_increment <= 0)
                 {
                     _increment = 1;
                 }
@@ -84,8 +76,9 @@ namespace EgoDevil.Utilities.UI.UDNumber
         }
 
         private Color _btnColor;
+
         public Color btnColor
-        { 
+        {
             get
             {
                 return _btnColor;
@@ -98,13 +91,11 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-
         [CategoryAttribute("Data"), DescriptionAttribute("The enable of changed event")]
         public bool IsFocused
         {
             get;
             set;
-
         }
 
         public delegate void CurrentValueChanged(object sender, EventArgs e);
@@ -134,7 +125,6 @@ namespace EgoDevil.Utilities.UI.UDNumber
                 this.ValueChanged(this, e);
         }
 
-
         public UDNumber()
         {
             InitializeComponent();
@@ -145,24 +135,22 @@ namespace EgoDevil.Utilities.UI.UDNumber
             _maximum = 10000;
             _minimum = 0;
             _increment = 1;
-
         }
+
         private void btnMinus_Click(object sender, EventArgs e)
         {
             txtNumber.Text = (Math.Max(_minimum, Int32.Parse(txtNumber.Text.Trim()) - Increment)).ToString();
-         
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
             txtNumber.Text = (Math.Min(_maximum, Int32.Parse(txtNumber.Text.Trim()) + Increment)).ToString();
-           
         }
 
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 this.Value = Int32.Parse(txtNumber.Text);
             }
             catch (System.Exception ex)
@@ -170,7 +158,6 @@ namespace EgoDevil.Utilities.UI.UDNumber
                 this.Value = 0;
                 Debug.Write(ex.Message);
             }
-           
         }
 
         //textBox控件的KeyPress事件:只允许接受数字
@@ -202,7 +189,6 @@ namespace EgoDevil.Utilities.UI.UDNumber
                 //}
                 //=====================================================
             }
-
         }
 
         private void UDNumber_Enter(object sender, EventArgs e)
@@ -214,7 +200,5 @@ namespace EgoDevil.Utilities.UI.UDNumber
         {
             IsFocused = false;
         }
-
-      
     }
 }

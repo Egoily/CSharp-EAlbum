@@ -1,31 +1,29 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
     /// <summary>
     /// Provide Office 2007 silver theme colors
     /// </summary>
-    /// <copyright>Copyright ?2006-2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright ?2006-2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     public class PanelColorsOffice2007Silver : PanelColorsOffice
     {
         #region MethodsPublic
+
         /// <summary>
         /// Initialize a new instance of the PanelColorsOffice2007Silver class.
         /// </summary>
         public PanelColorsOffice2007Silver()
-			: base()
-		{
-		}
+            : base()
+        {
+        }
+
         /// <summary>
         /// Initialize a new instance of the PanelColorsOffice2007Silver class.
         /// </summary>
@@ -38,6 +36,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         #endregion
 
         #region MethodsProtected
+
         /// <summary>
         /// Initialize a color Dictionary with defined colors
         /// </summary>
@@ -66,6 +65,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.XPanderPanelFlatCaptionGradientBegin] = Color.FromArgb(213, 219, 231);
             rgbTable[KnownColors.XPanderPanelFlatCaptionGradientEnd] = Color.FromArgb(253, 253, 254);
         }
+
         #endregion
     }
 }

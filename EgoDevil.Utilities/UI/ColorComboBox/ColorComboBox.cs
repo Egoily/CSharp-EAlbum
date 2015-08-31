@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EForm
@@ -12,9 +9,11 @@ namespace EgoDevil.Utilities.UI.EForm
     public partial class ColorComboBox : UserControl
     {
         #region (* Color ComboBox Button *)
+
         private class ColorComboButton : CheckBox
         {
             #region "class ColorRadioButton"
+
             /// <summary>
             /// a button style radio button that shows a color
             /// </summary>
@@ -42,16 +41,19 @@ namespace EgoDevil.Utilities.UI.EForm
                     e.Graphics.DrawRectangle(new Pen(Color.Black), colorRect);
                 }
             }
+
             #endregion
 
             #region "class PopupWindow"
+
             ///<summary>
-            ///this is the popup window.  This window will be the parent of the 
+            ///this is the popup window.  This window will be the parent of the
             ///window with the color controls on it
             ///</summary>
             private class PopupWindow : ToolStripDropDown
             {
                 public event ColorChangedHandler ColorChanged;
+
                 private ToolStripControlHost host;
                 private ColorPopup content;
 
@@ -75,16 +77,16 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.ResizeRedraw = true;
                     //create a host that will host the content
                     host = new ToolStripControlHost(content);
-                    
+
                     this.Padding = Margin = host.Padding = host.Margin = Padding.Empty;
                     this.MinimumSize = content.MinimumSize;
                     content.MinimumSize = content.Size;
                     MaximumSize = new Size(content.Size.Width + 1, content.Size.Height + 1);
                     content.MaximumSize = new Size(content.Size.Width + 1, content.Size.Height + 1);
                     Size = new Size(content.Size.Width + 1, content.Size.Height + 1);
-                    
+
                     content.Location = Point.Empty;
-                    
+
                     //add the host to the list
                     Items.Add(host);
                 }
@@ -98,9 +100,11 @@ namespace EgoDevil.Utilities.UI.EForm
                     }
                 }
             }
+
             #endregion
 
             #region "class ColorPopup"
+
             ///<summary>
             ///this class represends the control that has all the color radio buttons.
             ///this control gets embedded into the PopupWindow class.
@@ -184,7 +188,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         this.ClientSize = new System.Drawing.Size(86, 110);
                     }
 
-
                     for (int i = 0; i < colors.Length; i++)
                     {
                         if (i > 0 && i % breakCount == 0)
@@ -233,20 +236,26 @@ namespace EgoDevil.Utilities.UI.EForm
                     ((ToolStripDropDown)Parent).Close();
                 }
             }
+
             #endregion
 
             #region "member variables"
+
             private PopupWindow popupWnd;
             private ColorPopup colors = new ColorPopup();
             private Color selectedColor = Color.Black;
             private Timer timer = new Timer();
+
             #endregion
 
             #region "Events"
+
             public event ColorChangedHandler ColorChanged;
+
             #endregion
 
             #region "Properties"
+
             /// <summary>
             /// Set or get the selected color
             /// </summary>
@@ -277,9 +286,11 @@ namespace EgoDevil.Utilities.UI.EForm
                     return colors.ExtendedColors;
                 }
             }
+
             #endregion
 
             #region "constructor"
+
             public ColorComboButton()
                 : this(false, Color.Black)
             {
@@ -288,9 +299,7 @@ namespace EgoDevil.Utilities.UI.EForm
             public ColorComboButton(Boolean extended, Color selectedColor)
             {
                 this.SuspendLayout();
-                // 
                 // ColorCombo
-                // 
                 this.Appearance = System.Windows.Forms.Appearance.Button;
                 this.AutoSize = false;
                 this.Size = new Size(103, 23);
@@ -305,14 +314,16 @@ namespace EgoDevil.Utilities.UI.EForm
                 colors.SelectedColor = this.selectedColor = selectedColor;
                 this.ResumeLayout(false);
             }
+
             #endregion
 
             #region "Methods"
+
             private void ColorCombo_Click(object sender, EventArgs e)
             {
                 //if it is already down, don't do anything.
-                //this shouldn't happen anymore since we 
-                //started to disable the button when the 
+                //this shouldn't happen anymore since we
+                //started to disable the button when the
                 //drop down is being displayed
                 if (!this.Checked)
                 {
@@ -329,7 +340,7 @@ namespace EgoDevil.Utilities.UI.EForm
 
                 //tell it that we want the ColorChanged event
                 popupWnd.ColorChanged += new ColorChangedHandler(OnColorChanged);
-                
+
                 //show the popup
                 popupWnd.Show(pt);
                 //disable the button so that the user can't click it
@@ -392,7 +403,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 dc.DrawRectangle(blackPen, rect);
             }
 
-            //This is the timer call back function.  It checks to see 
+            //This is the timer call back function.  It checks to see
             //if the popup went from a visible state to an close state
             //if so then it will uncheck and enable the button
             private void OnCheckStatus(Object myObject, EventArgs myEventArgs)
@@ -403,12 +414,14 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.Enabled = true;
                 }
             }
+
             #endregion
         }
 
         #endregion
 
         #region "Properties"
+
         /// <summary>
         /// Set or get the selected color
         /// </summary>
@@ -438,6 +451,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return button.Extended;
             }
         }
+
         #endregion
 
         /// <summary>
@@ -448,8 +462,8 @@ namespace EgoDevil.Utilities.UI.EForm
         public ColorComboBox()
         {
             InitializeComponent();
-            //setup event handler to catch the ColorChanged message from the 
-            //color popup 
+            //setup event handler to catch the ColorChanged message from the
+            //color popup
             button.ColorChanged += new ColorChangedHandler(button_ColorChanged);
         }
 
@@ -469,6 +483,7 @@ namespace EgoDevil.Utilities.UI.EForm
     }
 
     #region (* EventArgs and delegate *)
+
     //define the color changed event argument
     public class ColorChangeArgs : System.EventArgs
     {
@@ -476,10 +491,13 @@ namespace EgoDevil.Utilities.UI.EForm
         {
             this.color = color;
         }
+
         //the selected color
         public Color color;
     }
+
     //event handler delegate
     public delegate void ColorChangedHandler(object sender, ColorChangeArgs e);
+
     #endregion
 }

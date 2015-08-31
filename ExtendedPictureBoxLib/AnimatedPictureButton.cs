@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,27 +11,26 @@ namespace ExtendedPictureBoxLib
     public enum AnimatedButtonState
     {
         /// <summary>
-        /// <see cref="AnimatedPictureButton.StartState"/> is shown
-        /// (mouse is not hovering the button).
+        /// <see cref="AnimatedPictureButton.StartState"/> is shown (mouse is not hovering the button).
         /// </summary>
         Start,
+
         /// <summary>
-        /// <see cref="AnimatedPictureButton.EndState"/> is shown
-        /// (mouse is hovering the button).
+        /// <see cref="AnimatedPictureButton.EndState"/> is shown (mouse is hovering the button).
         /// </summary>
         End,
+
         /// <summary>
-        /// <see cref="AnimatedPictureButton.PushedState"/> is shown
-        /// (mouse button is currently down on button).
+        /// <see cref="AnimatedPictureButton.PushedState"/> is shown (mouse button is currently down
+        /// on button).
         /// </summary>
         Pushed
     }
 
     /// <summary>
-    /// Control further extending the <see cref="AnimatedPictureBox"/> by
-    /// defining a <see cref="StartState"/> and an <see cref="EndState"/>.
-    /// It animtes itself between those two states when the mouse moves over
-    /// or leaves the control.
+    /// Control further extending the <see cref="AnimatedPictureBox"/> by defining a <see
+    /// cref="StartState"/> and an <see cref="EndState"/>. It animtes itself between those two
+    /// states when the mouse moves over or leaves the control.
     /// </summary>
     public partial class AnimatedPictureButton : ExtendedPictureBoxLib.AnimatedPictureBox
     {
@@ -70,7 +68,6 @@ namespace ExtendedPictureBoxLib
         private const ShadowMode DEFAULT_SHADOW_MODE = ShadowMode.OffsetFromCenter;
         private const PictureBoxStateProperties DEFAULT_PUSH_PROPERTIES = PictureBoxStateProperties.ImageProperties;
 
-
         private PictureBoxState _startState;
         private PictureBoxState _endState;
         private PictureBoxState _pushedState;
@@ -89,7 +86,6 @@ namespace ExtendedPictureBoxLib
         {
             InitializeComponent();
 
-          
             _startState = DefaultStartState;
             _endState = DefaultEndState;
             _pushedState = DefaultPushedState;
@@ -119,12 +115,10 @@ namespace ExtendedPictureBoxLib
         [Browsable(true), Category("Appearance")]
         [Description("Gets or sets the state of the button when the mouse does not over it.")]
         public PictureBoxState StartState
-        { 
-          
+        {
             get { return _startState; }
             set
             {
-                
                 if (_startState == value)
                     return;
 
@@ -133,7 +127,7 @@ namespace ExtendedPictureBoxLib
                 OnStartStateChanged(EventArgs.Empty);
 
                 UpdateSettings();
-            }              
+            }
         }
 
         /// <summary>
@@ -179,8 +173,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets which properties of the <see cref="PushedState"/>
-        /// should be applied when the button is clicked.
+        /// Gets or sets which properties of the <see cref="PushedState"/> should be applied when
+        /// the button is clicked.
         /// </summary>
         [Browsable(true), Category("Appearance")]
         [Description("Gets or sets which properties of the PushedState should be applied when the button is clicked..")]
@@ -292,8 +286,7 @@ namespace ExtendedPictureBoxLib
         #region ShouldSerialize
 
         /// <summary>
-        /// Indicates the designer whether <see cref="StartState"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="StartState"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeStartState()
         {
@@ -301,8 +294,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="EndState"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="EndState"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeEndState()
         {
@@ -310,8 +302,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="PushedState"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="PushedState"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializePushedState()
         {
@@ -407,12 +398,14 @@ namespace ExtendedPictureBoxLib
                     base.UpdateStartValues(_startState);
                     base.UpdateEndValues(_endState);
                     break;
+
                 case AnimatedButtonState.Start:
                     base.State = _startState;
 
                     base.UpdateStartValues(_endState);
                     base.UpdateEndValues(_startState);
                     break;
+
                 case AnimatedButtonState.End:
                     base.State = _endState;
 
@@ -429,11 +422,10 @@ namespace ExtendedPictureBoxLib
         #region Unwanted base properties
 
         /// <summary>
-        /// Gets or sets the alpha value which should be applied to the image.
-        /// The alpha value is calcualted on a per pixel basis and pixels already
-        /// having an alpha value less then 255 will be reduced further. The effect is
-        /// that transparent parts of an image will remain transparent.
-        /// Overridden to disable designer support.
+        /// Gets or sets the alpha value which should be applied to the image. The alpha value is
+        /// calcualted on a per pixel basis and pixels already having an alpha value less then 255
+        /// will be reduced further. The effect is that transparent parts of an image will remain
+        /// transparent. Overridden to disable designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -444,8 +436,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the rotation angle of the main image in degrees.
-        /// Overridden to disable designer support.
+        /// Gets or sets the rotation angle of the main image in degrees. Overridden to disable
+        /// designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -456,8 +448,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the zoom factor with which the main image should be drawn.
-        /// Overridden to disable designer support.
+        /// Gets or sets the zoom factor with which the main image should be drawn. Overridden to
+        /// disable designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -468,8 +460,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Angle of the <see cref="ExtendedPictureBox.ExtraImage"/> in degrees.
-        /// Overridden to disable designer support.
+        /// Angle of the <see cref="ExtendedPictureBox.ExtraImage"/> in degrees. Overridden to
+        /// disable designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -480,8 +472,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Angle of the background gradient in degrees.
-        /// Overridden to disable designer support.
+        /// Angle of the background gradient in degrees. Overridden to disable designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -492,9 +483,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the first background color.
-        /// Readjusts also <see cref="BackColor2"/> if it has the same value currently.
-        /// Overridden to disable designer support.
+        /// Gets or sets the first background color. Readjusts also <see cref="BackColor2"/> if it
+        /// has the same value currently. Overridden to disable designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -505,8 +495,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the second color to draw the background gradient.
-        /// Overridden to disable designer support.
+        /// Gets or sets the second color to draw the background gradient. Overridden to disable
+        /// designer support.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -528,8 +518,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the width of the halo of the text.
-        /// 0 or smaller if now halo should be shown.
+        /// Gets or sets the width of the halo of the text. 0 or smaller if now halo should be shown.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -595,8 +584,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets whether a shadow of the main image should be drawn
-        /// and how the offset is calculated.
+        /// Gets or sets whether a shadow of the main image should be drawn and how the offset is calculated.
         /// </summary>
         [DefaultValue(DEFAULT_SHADOW_MODE)]
         public override ShadowMode ShadowMode
@@ -608,8 +596,7 @@ namespace ExtendedPictureBoxLib
         #endregion
 
         /// <summary>
-        /// Raises the <see cref="Control.MouseEnter"/> event and 
-        /// starts animation to <see cref="EndState"/>.
+        /// Raises the <see cref="Control.MouseEnter"/> event and starts animation to <see cref="EndState"/>.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnMouseEnter(EventArgs e)
@@ -620,8 +607,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Raises the <see cref="Control.MouseLeave"/> event and 
-        /// starts animation to <see cref="StartState"/>.
+        /// Raises the <see cref="Control.MouseLeave"/> event and starts animation to <see cref="StartState"/>.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnMouseLeave(EventArgs e)
@@ -632,8 +618,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Raises the <see cref="Control.MouseDown"/> event and 
-        /// sets the state to <see cref="PushedState"/>.
+        /// Raises the <see cref="Control.MouseDown"/> event and sets the state to <see cref="PushedState"/>.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnMouseDown(MouseEventArgs e)
@@ -643,8 +628,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Raises the <see cref="Control.MouseUp"/> event and 
-        /// sets the state to <see cref="PushedState"/>.
+        /// Raises the <see cref="Control.MouseUp"/> event and sets the state to <see cref="PushedState"/>.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnMouseUp(MouseEventArgs e)
@@ -654,8 +638,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Raises the <see cref="Control.EnabledChanged"/> event and 
-        /// starts animation to <see cref="StartState"/>.
+        /// Raises the <see cref="Control.EnabledChanged"/> event and starts animation to <see cref="StartState"/>.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnEnabledChanged(EventArgs e)

@@ -1,6 +1,5 @@
-using System.Drawing;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -8,12 +7,15 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// Provides colors used for Microsoft Office 2007 blue display elements.
     /// </summary>
     public class Office2007BlueColorTable : EgoDevil.Utilities.UI.EPanels.OfficeColorTable
-	{
-		#region FieldsPrivate
+    {
+        #region FieldsPrivate
+
         private PanelColors m_panelColorTable;
+
         #endregion
 
-		#region Properties
+        #region Properties
+
         /// <summary>
         /// Gets the associated ColorTable for the XPanderControls
         /// </summary>
@@ -28,9 +30,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 return this.m_panelColorTable;
             }
         }
-		#endregion
+
+        #endregion
 
         #region MethodsProtected
+
         /// <summary>
         /// Unitializes a color dictionary with defined colors
         /// </summary>
@@ -45,9 +49,9 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.ButtonSelectedGradientBegin] = Color.FromArgb(255, 245, 204);
             rgbTable[KnownColors.ButtonSelectedGradientEnd] = Color.FromArgb(255, 219, 117);
             rgbTable[KnownColors.ButtonSelectedGradientMiddle] = Color.FromArgb(255, 231, 162);
-			rgbTable[KnownColors.ButtonSelectedHighlightBorder] = Color.FromArgb(255, 189, 105);
+            rgbTable[KnownColors.ButtonSelectedHighlightBorder] = Color.FromArgb(255, 189, 105);
             rgbTable[KnownColors.CheckBackground] = Color.FromArgb(255, 227, 149);
-			rgbTable[KnownColors.CheckSelectedBackground] = Color.FromArgb(254, 128, 62);
+            rgbTable[KnownColors.CheckSelectedBackground] = Color.FromArgb(254, 128, 62);
             rgbTable[KnownColors.GripDark] = Color.FromArgb(111, 157, 217);
             rgbTable[KnownColors.GripLight] = Color.FromArgb(255, 255, 255);
             rgbTable[KnownColors.ImageMarginGradientBegin] = Color.FromArgb(233, 238, 238);
@@ -56,10 +60,10 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.MenuItemPressedGradientBegin] = Color.FromArgb(227, 239, 255);
             rgbTable[KnownColors.MenuItemPressedGradientEnd] = Color.FromArgb(152, 186, 230);
             rgbTable[KnownColors.MenuItemPressedGradientMiddle] = Color.FromArgb(222, 236, 255);
-			rgbTable[KnownColors.MenuItemSelected] = Color.FromArgb(255, 238, 194);
-			rgbTable[KnownColors.MenuItemSelectedGradientBegin] = Color.FromArgb(255, 245, 204);
+            rgbTable[KnownColors.MenuItemSelected] = Color.FromArgb(255, 238, 194);
+            rgbTable[KnownColors.MenuItemSelectedGradientBegin] = Color.FromArgb(255, 245, 204);
             rgbTable[KnownColors.MenuItemSelectedGradientEnd] = Color.FromArgb(255, 223, 132);
-			rgbTable[KnownColors.MenuItemText] = Color.FromArgb(0, 0, 0);
+            rgbTable[KnownColors.MenuItemText] = Color.FromArgb(0, 0, 0);
             rgbTable[KnownColors.MenuStripGradientBegin] = Color.FromArgb(191, 219, 255);
             rgbTable[KnownColors.MenuStripGradientEnd] = Color.FromArgb(191, 219, 255);
             rgbTable[KnownColors.OverflowButtonGradientBegin] = Color.FromArgb(167, 204, 251);
@@ -71,7 +75,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             rgbTable[KnownColors.SeparatorLight] = Color.FromArgb(255, 255, 255);
             rgbTable[KnownColors.StatusStripGradientBegin] = Color.FromArgb(227, 239, 255);
             rgbTable[KnownColors.StatusStripGradientEnd] = Color.FromArgb(173, 209, 255);
-			rgbTable[KnownColors.StatusStripText] = Color.FromArgb(21, 66, 139);
+            rgbTable[KnownColors.StatusStripText] = Color.FromArgb(21, 66, 139);
             rgbTable[KnownColors.ToolStripBorder] = Color.FromArgb(111, 157, 217);
             rgbTable[KnownColors.ToolStripContentPanelGradientBegin] = Color.FromArgb(191, 219, 255);
             rgbTable[KnownColors.ToolStripContentPanelGradientEnd] = Color.FromArgb(101, 145, 205);

@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.ActivityBar
 {
-    
-
     /// <summary>
     /// An XP style Activity Bar.
     /// </summary>
-  public partial class ActivityBar : UserControl
+    public partial class ActivityBar : UserControl
     {
         private ColorBlend colorBlend;
         private Timer timer;
         private int tickCount;
 
         private Color _barColor = Color.Orange;
+
         /// <summary>
         /// Determines the main color for the activity bar
         /// </summary>
@@ -39,6 +33,7 @@ namespace EgoDevil.Utilities.UI.ActivityBar
         }
 
         private Color _borderColor = SystemColors.ActiveBorder;
+
         /// <summary>
         /// Determines the color for the activity bar border
         /// </summary>
@@ -55,6 +50,7 @@ namespace EgoDevil.Utilities.UI.ActivityBar
         }
 
         private Color _highlightColor = Color.White;
+
         /// <summary>
         /// Determines the highlight color for the activity bar
         /// </summary>
@@ -72,14 +68,13 @@ namespace EgoDevil.Utilities.UI.ActivityBar
 
         [Description(" The status of the activity bar."),
         Category("Appearance"),
-        DefaultValue(true)]      
+        DefaultValue(true)]
         public bool Status
         {
             get { return timer.Enabled; }
             set
             {
                 timer.Enabled = value;
-              
             }
         }
 
@@ -114,21 +109,21 @@ namespace EgoDevil.Utilities.UI.ActivityBar
         {
             colorBlend = new ColorBlend(7);
             colorBlend.Colors = new Color[] {
-										 _barColor, 
 										 _barColor,
 										 _barColor,
-										 _highlightColor, 
-										 _highlightColor, 
-										 _barColor, 
+										 _barColor,
+										 _highlightColor,
+										 _highlightColor,
+										 _barColor,
 										 _barColor};
 
             colorBlend.Positions = new float[] {
-										   0.0f, 
+										   0.0f,
 										   0.01f,
-										   0.2f, 
-										   0.4f, 
-										   0.6f, 
-										   0.8f, 
+										   0.2f,
+										   0.4f,
+										   0.6f,
+										   0.8f,
 										   1.0f};
         }
 
@@ -137,7 +132,6 @@ namespace EgoDevil.Utilities.UI.ActivityBar
             BuildColorBlend();
             this.Refresh();
         }
-
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -168,9 +162,8 @@ namespace EgoDevil.Utilities.UI.ActivityBar
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-            // Each color segment gets "scrolled" 20 positions to the right
-            // then the colors get moved to the right in the colorblend array
-            // and the deltas reset
+            // Each color segment gets "scrolled" 20 positions to the right then the colors get
+            // moved to the right in the colorblend array and the deltas reset
             if (++tickCount >= 20)
             {
                 tickCount = 0;
@@ -200,7 +193,4 @@ namespace EgoDevil.Utilities.UI.ActivityBar
             timer.Enabled = this.Enabled;
         }
     }
-
-
-
 }

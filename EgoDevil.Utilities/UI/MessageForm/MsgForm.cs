@@ -1,33 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EgoDevil.Utilities.UI.EForm;
 
 namespace EgoDevil.Utilities.UI.MessageForm
 {
     public partial class MsgForm : EgoDevil.Utilities.UI.EForm.EForm
     {
-
         private bool display = true; //定义窗体是显示(true)还是消失(false)
-        private int S_width = 0; //定义屏幕宽度 
+        private int S_width = 0; //定义屏幕宽度
         private int S_height = 0; //定义屏幕高度
         private double count = 0; //定义一个用于延时的计数器
-
 
         private void Setting()
         {
             //指定窗体显示位置
-            S_width = SystemInformation.WorkingArea.Width;//获取屏幕宽度 
+            S_width = SystemInformation.WorkingArea.Width;//获取屏幕宽度
             S_height = SystemInformation.WorkingArea.Height;//获取屏幕高度
             //控制窗体渐变出现效果
-            this.timer1.Enabled = true;//获取当前运行时间 
-            this.Opacity = 0.0;//获取当前窗体的透明度级别; 
-
+            this.timer1.Enabled = true;//获取当前运行时间
+            this.Opacity = 0.0;//获取当前窗体的透明度级别;
 
             labelTime.Text = DateTime.Now.ToString();
         }
@@ -37,8 +28,8 @@ namespace EgoDevil.Utilities.UI.MessageForm
             InitializeComponent();
 
             Setting();
-
         }
+
         public MsgForm(string message)
         {
             InitializeComponent();
@@ -48,6 +39,7 @@ namespace EgoDevil.Utilities.UI.MessageForm
 
             Setting();
         }
+
         public MsgForm(string message, string title)
         {
             InitializeComponent();
@@ -58,6 +50,7 @@ namespace EgoDevil.Utilities.UI.MessageForm
 
             Setting();
         }
+
         public MsgForm(string message, string title, MessageBoxIcon icon)
         {
             InitializeComponent();
@@ -67,17 +60,19 @@ namespace EgoDevil.Utilities.UI.MessageForm
             switch (icon)
             {
                 case MessageBoxIcon.Information:
-                    this.MenuIcon= SystemIcons.Information.ToBitmap().GetThumbnailImage(28,28,null,IntPtr.Zero);
+                    this.MenuIcon = SystemIcons.Information.ToBitmap().GetThumbnailImage(28, 28, null, IntPtr.Zero);
                     this.pictureBox.Image = SystemIcons.Information.ToBitmap();
                     break;
-                case MessageBoxIcon.Error: 
-                    this.MenuIcon= SystemIcons.Error.ToBitmap().GetThumbnailImage(28,28,null,IntPtr.Zero);
+
+                case MessageBoxIcon.Error:
+                    this.MenuIcon = SystemIcons.Error.ToBitmap().GetThumbnailImage(28, 28, null, IntPtr.Zero);
                     this.pictureBox.Image = SystemIcons.Error.ToBitmap();
                     break;
 
                 case MessageBoxIcon.Question:
                     this.pictureBox.Image = SystemIcons.Question.ToBitmap();
                     break;
+
                 case MessageBoxIcon.Warning:
                     this.pictureBox.Image = SystemIcons.Warning.ToBitmap();
                     break;
@@ -85,7 +80,6 @@ namespace EgoDevil.Utilities.UI.MessageForm
 
             Setting();
         }
-
 
         //窗体渐变出现效果
         private void timer1_Tick(object sender, EventArgs e)
@@ -110,7 +104,7 @@ namespace EgoDevil.Utilities.UI.MessageForm
                 }
                 else
                 {
-                    this.timer1.Enabled = false;//时间为false 
+                    this.timer1.Enabled = false;//时间为false
                     Close();//关闭窗体
                 }
             }
@@ -121,32 +115,26 @@ namespace EgoDevil.Utilities.UI.MessageForm
             }
         }
 
-
-
         #region (* Static Methods *)
 
         public static void Show(string message)
         {
-
             MsgForm frmMsg = new MsgForm(message);
             frmMsg.Show();
         }
 
         public static void Show(string message, string title)
         {
-
             MsgForm frmMsg = new MsgForm(message, title);
             frmMsg.Show();
         }
 
         public static void Show(string message, string title, MessageBoxIcon icon)
         {
-
             MsgForm frmMsg = new MsgForm(message, title, icon);
             frmMsg.Show();
         }
+
         #endregion
-
     }
-
 }

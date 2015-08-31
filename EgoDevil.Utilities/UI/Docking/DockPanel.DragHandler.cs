@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.Docking
 {
@@ -12,10 +7,10 @@ namespace EgoDevil.Utilities.UI.Docking
     {
         /// <summary>
         /// DragHandlerBase is the base class for drag handlers. The derived class should:
-        ///   1. Define its public method BeginDrag. From within this public BeginDrag method,
-        ///      DragHandlerBase.BeginDrag should be called to initialize the mouse capture
-        ///      and message filtering.
-        ///   2. Override the OnDragging and OnEndDrag methods.
+        /// 1. Define its public method BeginDrag. From within this public BeginDrag method,
+        ///    DragHandlerBase.BeginDrag should be called to initialize the mouse capture and
+        ///    message filtering.
+        /// 2. Override the OnDragging and OnEndDrag methods.
         /// </summary>
         private abstract class DragHandlerBase : NativeWindow, IMessageFilter
         {
@@ -29,6 +24,7 @@ namespace EgoDevil.Utilities.UI.Docking
             }
 
             private Point m_startMousePosition = Point.Empty;
+
             protected Point StartMousePosition
             {
                 get { return m_startMousePosition; }
@@ -111,6 +107,7 @@ namespace EgoDevil.Utilities.UI.Docking
             }
 
             private IDragSource m_dragSource;
+
             protected IDragSource DragSource
             {
                 get { return m_dragSource; }

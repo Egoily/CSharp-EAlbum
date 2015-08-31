@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Collections;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace EAlbums
 {
     public partial class AlbumView : UserControl
     {
-
-        const double PI_FACT = Math.PI / 180.0f;//圆周角
-        const int MAXCOUNT = 100;//最大图像数
-
+        private const double PI_FACT = Math.PI / 180.0f;//圆周角
+        private const int MAXCOUNT = 100;//最大图像数
 
         private float _Alfa = 0;
 
@@ -31,30 +22,24 @@ namespace EAlbums
         private List<ThumbElement> _arImages1 = new List<ThumbElement>();
         private List<ThumbElement> _arImages2 = new List<ThumbElement>();
 
-
         public List<string> ImagePaths = new List<string>();
-
 
         private void InitOriginalAngle()
         {
             for (int i = 0; i < _arImages1.Count; i++)
             {
                 _arImages1[i].OriginalAngle = (float)i * (360.0f) / (float)_arImages1.Count;
-
             }
             for (int i = 0; i < _arImages2.Count; i++)
             {
                 _arImages2[i].OriginalAngle = (float)(i) * (360.0f) / ((float)_arImages2.Count);
-
             }
         }
 
         private void RePositionImages(List<ThumbElement> Images, int nRadX, int nRadY, int x0, int y0)
         {
-
             foreach (ThumbElement obj in Images)
             {
-
                 // angle and distance from screen
                 obj.ActualAngle = (obj.OriginalAngle + _Alfa) * PI_FACT;
 
@@ -79,16 +64,13 @@ namespace EAlbums
                 obj.ShadowRect.Height = (int)(obj.MainBitmap.Height * dSize);
             }
 
-
             Images.Sort(delegate(ThumbElement p1, ThumbElement p2) { return p2.DistanceFromScreen.CompareTo(p1.DistanceFromScreen); });
         }
 
         private void DrawImages(Graphics g, Color c, List<ThumbElement> Images)
         {
-
             foreach (ThumbElement obj in Images)
             {
-
                 float dTrasp = (float)(100 + 100 * Math.Cos(obj.ActualAngle));
 
                 g.DrawImage(obj.MainBitmap, obj.MainRect);
@@ -104,10 +86,7 @@ namespace EAlbums
                     g.FillRectangle(sb, obj.MainRect);
                     g.FillRectangle(sb, obj.ShadowRect);
                 }
-
-
             }
-
         }
 
         private void HoverSelecting(Point pt)
@@ -123,7 +102,6 @@ namespace EAlbums
                 else
                 {
                     obj.IsHover = false;
-
                 }
             }
 
@@ -147,7 +125,6 @@ namespace EAlbums
             {
                 apboxShowPicture.Image = Image.FromFile(_SelectedObject.FullPath);
                 apboxShowPicture.Visible = true;
-
             }
             else
             {
@@ -169,7 +146,6 @@ namespace EAlbums
 
                 String[] arStrings = Directory.GetFiles(dir);
 
-
                 _arImages1.Clear();
                 _arImages2.Clear();
                 ImagePaths.Clear();
@@ -182,15 +158,11 @@ namespace EAlbums
                     {
                         _arImages1.Add(new ThumbElement(arStrings[i], (double)(i * (360.0f)) / (double)(count / 2)));
                         ImagePaths.Add(arStrings[i]);
-
-
                     }
                     for (int i = count / 2; i < count; i++)
                     {
-
                         _arImages2.Add(new ThumbElement(arStrings[i], (double)((i - count / 2) * (360.0f)) / (double)((count - count / 2))));
                         ImagePaths.Add(arStrings[i]);
-
                     }
                 }
                 else
@@ -202,40 +174,31 @@ namespace EAlbums
                     }
                 }
 
-
                 //初始化角度
                 //InitOriginalAngle();
-
-
 
                 //Refresh();
 
                 timer.Enabled = true;
             }
-
         }
 
         public void LoadThumbs(List<string> paths)
         {
             timer.Enabled = false;
 
-
-
             _arImages1.Clear();
             _arImages2.Clear();
-
 
             int count = paths.Count;
             if (count > MAXCOUNT / 3)
             {
                 for (int i = 0; i < count / 2; i++)
                 {
-
                     _arImages1.Add(new ThumbElement(paths[i], (double)(i * (360.0f)) / (double)(count / 2)));
                 }
                 for (int i = count / 2; i < count; i++)
                 {
-
                     _arImages2.Add(new ThumbElement(paths[i], (double)((i - count / 2) * (360.0f)) / (double)(count / 2)));
                 }
             }
@@ -243,7 +206,6 @@ namespace EAlbums
             {
                 for (int i = 0; i < count; i++)
                 {
-
                     _arImages1.Add(new ThumbElement(paths[i], (double)(i * (360.0f)) / (double)(count)));
                 }
             }
@@ -255,7 +217,6 @@ namespace EAlbums
 
         private void timer_Tick(object sender, EventArgs e)
         {
-
             _Alfa += _AlfaAccel;
 
             if (_Alfa > 360)
@@ -263,9 +224,6 @@ namespace EAlbums
 
             if (_Alfa < 0)
                 _Alfa += 360;
-
-
-
 
             //半径
             int nRadX = (Width / 2) * 7 / 10;
@@ -293,13 +251,9 @@ namespace EAlbums
             RePositionImages(_arImages1, nRadX, nRadY, x01, y01);
             RePositionImages(_arImages2, nRadX, nRadY, x02, y02);
 
-
             //刷新
             Refresh();
-
         }
-
-
 
         public AlbumView()
         {
@@ -320,27 +274,18 @@ namespace EAlbums
             //bt.Start();
 
             LoadThumbs();
-
-
         }
-
 
         private void AlbumView_Paint(object sender, PaintEventArgs e)
         {
-
-
             Color c = Color.FromArgb(255, 0, 0, 0);
 
             e.Graphics.FillRectangle(new SolidBrush(c), 0, 0, Width, Height);
-
 
             //Drawing Items
             DrawImages(e.Graphics, c, _arImages1);
 
             DrawImages(e.Graphics, c, _arImages2);
-
-
-
         }
 
         private void apboxShowPicture_Paint(object sender, PaintEventArgs e)
@@ -358,12 +303,10 @@ namespace EAlbums
                 //显示选中的图片
                 ShowSelectedImage();
             }
-
         }
 
         private void AlbumView_MouseMove(object sender, MouseEventArgs e)
         {
-
             int x0 = Width / 2;
             int y0 = Height / 2;
 
@@ -372,18 +315,12 @@ namespace EAlbums
             if ((e.Button & MouseButtons.Right) == MouseButtons.Right)
                 _Perspective = 12 - (((float)(-e.Y + y0)) * 10.0f) / ((float)y0);
 
-
-
             HoverSelecting(e.Location);
-
-
-
         }
 
         private void apboxShowPicture_Click(object sender, EventArgs e)
         {
             apboxShowPicture.Visible = false;
         }
-
     }
 }

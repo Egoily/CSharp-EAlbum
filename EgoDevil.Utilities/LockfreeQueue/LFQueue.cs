@@ -1,19 +1,23 @@
 ﻿using System.Threading;
+
 namespace EgoDevil.Utilities.LockfreeQueue
 {
     public class LFQueue<T>
     {
-        class Node
+        private class Node
         {
             public T value;
             public Pointer next;
+
             /// <summary>
             /// default constructor
             /// </summary>
-            public Node() { }
+            public Node()
+            {
+            }
         }
 
-        struct Pointer
+        private struct Pointer
         {
             public long count;
             public Node ptr;
@@ -39,6 +43,7 @@ namespace EgoDevil.Utilities.LockfreeQueue
                 count = c;
             }
         }
+
         private Pointer Head;
         private Pointer Tail;
 
@@ -59,9 +64,7 @@ namespace EgoDevil.Utilities.LockfreeQueue
         }
 
         /// <summary>
-        /// CAS
-        /// stands for Compare And Swap
-        /// Interlocked Compare and Exchange operation
+        /// CAS stands for Compare And Swap Interlocked Compare and Exchange operation
         /// </summary>
         /// <param name="destination"></param>
         /// <param name="compared"></param>
@@ -110,12 +113,11 @@ namespace EgoDevil.Utilities.LockfreeQueue
 
                         // Tail is falling behind. try to advance it
                         CAS(ref Tail, tail, new Pointer(next.ptr, tail.count + 1));
-
                     } // endif
-
                     else // No need to deal with tail
                     {
-                        // read value before CAS otherwise another Dequeue might try to free the next node
+                        // read value before CAS otherwise another Dequeue might try to free the
+                        // next node
                         t = next.ptr.value;
 
                         // try to swing the head to the next node
@@ -124,9 +126,7 @@ namespace EgoDevil.Utilities.LockfreeQueue
                             bDequeNotDone = false;
                         }
                     }
-
                 } // endif
-
             } // endloop
 
             // dispose of head.ptr
@@ -167,13 +167,12 @@ namespace EgoDevil.Utilities.LockfreeQueue
 
                         // Tail is falling behind. try to advance it
                         CAS(ref Tail, tail, new Pointer(next.ptr, tail.count + 1));
-
                     } // endif
-
                     else // No need to deal with tail
                     {
-                        // read value before CAS otherwise another Dequeue might try to free the next node
-                        returnValue= next.ptr.value;
+                        // read value before CAS otherwise another Dequeue might try to free the
+                        // next node
+                        returnValue = next.ptr.value;
 
                         // try to swing the head to the next node
                         if (CAS(ref Head, head, new Pointer(next.ptr, head.count + 1)))
@@ -181,9 +180,7 @@ namespace EgoDevil.Utilities.LockfreeQueue
                             bDequeNotDone = false;
                         }
                     }
-
                 } // endif
-
             } // endloop
 
             // dispose of head.ptr
@@ -220,21 +217,15 @@ namespace EgoDevil.Utilities.LockfreeQueue
                         {
                             bEnqueueNotDone = false;
                         } // endif
-
                     } // endif
-
                     else // tail was not pointing to last node
                     {
                         // try to swing Tail to the next node
                         CAS(ref Tail, tail, new Pointer(next.ptr, tail.count + 1));
                     }
-
                 } // endif
-
             } // endloop
             _count++;
         }
-
     }
-
 }

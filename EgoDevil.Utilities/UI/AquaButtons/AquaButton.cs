@@ -1,4 +1,3 @@
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -6,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-
 
 namespace EgoDevil.Utilities.UI.AquaButtons
 {
@@ -21,14 +19,13 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         // Set this to the height of your source bitmaps
         protected static int ButtonHeight = 30;
 
-        // If your source bitmaps have shadows, set this 
-        // to the shadow size so DrawText can position the 
-        // label appears centered on the label
+        // If your source bitmaps have shadows, set this to the shadow size so DrawText can position
+        // the label appears centered on the label
         protected static int ButtonShadowOffset = 5;
 
-        // These settings approximate the pulse effect
-        // of buttons on Mac OS X
+        // These settings approximate the pulse effect of buttons on Mac OS X
         protected static int PulseInterval = 70;
+
         protected static float PulseGammaMax = 1.8f;
         protected static float PulseGammaMin = 0.7f;
         protected static float PulseGammaShift = 0.2f;
@@ -37,19 +34,21 @@ namespace EgoDevil.Utilities.UI.AquaButtons
 
         #endregion
 
-
         #region Member Variables
 
         // Appearance
         protected bool pulse = false;
+
         protected bool sizeToLabel = true;
 
         // Pulsing
         protected Timer timer;
+
         protected float gamma, gammaShift;
 
         // Mouse tracking
         protected Point ptMousePosition;
+
         protected bool mousePressed;
 
         // Images used to draw the button
@@ -60,10 +59,10 @@ namespace EgoDevil.Utilities.UI.AquaButtons
 
         // Matrices for transparency transformation
         protected ImageAttributes iaDefault, iaNormal;
+
         protected ColorMatrix cmDefault, cmNormal;
 
         #endregion
-
 
         #region Constructors and Initializers
 
@@ -79,7 +78,6 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         }
 
         #endregion
-
 
         #region Properties
 
@@ -107,10 +105,10 @@ namespace EgoDevil.Utilities.UI.AquaButtons
 
         #endregion
 
-
         #region Property overrides
 
         /* AquaButton has a fixed height */
+
         protected override Size DefaultSize
         {
             get
@@ -121,13 +119,14 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         }
 
         /* Shadow Control.Width to make it browsable */
+
         [Description("See also: SizeToLabel")]
         [Category("Layout")]
         [Browsable(true)]
         public new int Width
         {
             get { return base.Width; }
-            set 
+            set
             {
                 base.Width = value;
                 this.Refresh();
@@ -135,6 +134,7 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         }
 
         /* Shadow Control.Height to make it browsable and read only */
+
         [Description("Aqua buttons have a fixed height")]
         [Category("Layout")]
         [Browsable(true)]
@@ -142,7 +142,6 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         public new int Height { get { return base.Height; } }
 
         #endregion
-
 
         #region Method overrides
 
@@ -206,8 +205,7 @@ namespace EgoDevil.Utilities.UI.AquaButtons
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            // Buttons receives MouseMove events when the
-            // mouse enters or leaves the client area.
+            // Buttons receives MouseMove events when the mouse enters or leaves the client area.
 
             base.OnMouseMove(e);
 
@@ -249,7 +247,6 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         }
 
         #endregion
-
 
         #region Implementation
 
@@ -425,5 +422,3 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         #endregion
     }
 }
-
-

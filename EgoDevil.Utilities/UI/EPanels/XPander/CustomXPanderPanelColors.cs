@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 using System.Drawing;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
     /// <summary>
-    /// Class for the custom colors at a XPanderPanel control. 
+    /// Class for the custom colors at a XPanderPanel control.
     /// </summary>
-    /// <copyright>Copyright © 2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright © 2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     public class CustomXPanderPanelColors : CustomColors
     {
         #region FieldsPrivate
+
         private Color m_backColor = SystemColors.Control;
         private Color m_flatCaptionGradientBegin = System.Windows.Forms.ProfessionalColors.ToolStripGradientMiddle;
         private Color m_flatCaptionGradientEnd = System.Windows.Forms.ProfessionalColors.ToolStripGradientBegin;
@@ -32,9 +30,11 @@ namespace EgoDevil.Utilities.UI.EPanels
         private Color m_captionSelectedGradientEnd = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientEnd;
         private Color m_captionSelectedGradientMiddle = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientMiddle;
         private Color m_captionSelectedText = SystemColors.ControlText;
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets or sets the backcolor of a XPanderPanel.
         /// </summary>
@@ -51,6 +51,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the starting color of the gradient on a flat XPanderPanel captionbar.
         /// </summary>
@@ -67,6 +68,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the end color of the gradient on a flat XPanderPanel captionbar.
         /// </summary>
@@ -83,6 +85,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the starting color of the gradient used when the XPanderPanel is pressed down.
         /// </summary>
@@ -99,6 +102,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the end color of the gradient used when the XPanderPanel is pressed down.
         /// </summary>
@@ -115,6 +119,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the middle color of the gradient used when the XPanderPanel is pressed down.
         /// </summary>
@@ -131,6 +136,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the starting color of the gradient used when the XPanderPanel is checked.
         /// </summary>
@@ -147,6 +153,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the end color of the gradient used when the XPanderPanel is checked.
         /// </summary>
@@ -163,6 +170,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the middle color of the gradient used when the XPanderPanel is checked.
         /// </summary>
@@ -179,6 +187,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the starting color of the gradient used when the XPanderPanel is selected.
         /// </summary>
@@ -195,6 +204,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the end color of the gradient used when the XPanderPanel is selected.
         /// </summary>
@@ -211,6 +221,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the middle color of the gradient used when the XPanderPanel is selected.
         /// </summary>
@@ -227,6 +238,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the text color used when the XPanderPanel is selected.
         /// </summary>
@@ -243,6 +255,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         #endregion
     }
 }

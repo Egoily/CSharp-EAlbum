@@ -1,9 +1,6 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
@@ -14,6 +11,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
     public partial class LBIndustrialCtrlBase : UserControl
     {
         #region (* Constructor *)
+
         public LBIndustrialCtrlBase()
         {
             InitializeComponent();
@@ -33,13 +31,16 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
             if (this._defaultRenderer != null)
                 this._defaultRenderer.Control = this;
         }
+
         #endregion
 
         #region (* Properties *)
+
         /// <summary>
         /// Default renderer of the control
         /// </summary>
         private ILBRenderer _defaultRenderer = null;
+
         [Browsable(false)]
         public ILBRenderer DefaultRenderer
         {
@@ -50,10 +51,11 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         /// User defined renderer
         /// </summary>
         private ILBRenderer _renderer = null;
+
         [Browsable(false)]
         public ILBRenderer Renderer
         {
-            set 
+            set
             {
                 // set the renderer
                 this._renderer = value;
@@ -70,9 +72,11 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
             }
             get { return this._renderer; }
         }
+
         #endregion
 
         #region (* Events delegates *)
+
         /// <summary>
         /// Font change event
         /// </summary>
@@ -83,6 +87,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
             // Calculate dimensions
             this.CalculateDimensions();
         }
+
         /// <summary>
         /// SizeChanged event
         /// </summary>
@@ -92,8 +97,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         {
             // Default
             base.OnSizeChanged(e);
-            // Calculate al the data for
-            // drawing the control
+            // Calculate al the data for drawing the control
             this.CalculateDimensions();
             // Redraw
             this.Invalidate();
@@ -106,12 +110,12 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            // Calculate al the data for
-            // drawing the control
+            // Calculate al the data for drawing the control
             this.CalculateDimensions();
             // Redraw
             this.Invalidate();
         }
+
         /// <summary>
         /// Paint event
         /// </summary>
@@ -123,20 +127,21 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
             RectangleF _rc = new RectangleF(0, 0, this.Width, this.Height);
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            // Call the default renderer if the user
-            // rendere is null
+            // Call the default renderer if the user rendere is null
             if (this.Renderer == null)
             {
                 this.DefaultRenderer.Draw(e.Graphics);
                 return;
             }
-            
+
             // Draw with the user renderer
             this.Renderer.Draw(e.Graphics);
         }
+
         #endregion
 
         #region (* Virtual method *)
+
         /// <summary>
         /// Call from the constructor to create the default renderer
         /// </summary>
@@ -159,6 +164,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
 
             this.Invalidate();
         }
+
         #endregion
     }
 
@@ -168,31 +174,39 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
     public class LBRendererBase : ILBRenderer
     {
         #region (* Constructor *)
+
         public LBRendererBase()
         {
         }
+
         #endregion
 
         #region (* IDisposable implementation *)
+
         public void Dispose()
         {
             this.OnDispose();
         }
+
         #endregion
 
         #region (* Properties *)
+
         /// <summary>
         /// Associated control
         /// </summary>
         protected object _control = null;
+
         public object Control
         {
             set { this._control = value; }
             get { return this._control; }
         }
+
         #endregion
 
         #region (* Virtual methods *)
+
         /// <summary>
         /// Dispose the resource of the object
         /// </summary>
@@ -242,6 +256,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
                           ctrl.Left,
                           ctrl.Bottom);
         }
+
         #endregion
     }
 }

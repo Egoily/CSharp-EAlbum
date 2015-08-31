@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.IO.Compression;
-using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Text;
 
 namespace EgoDevil.Utilities.Compress
 {
     public class GZip
     {
-
-    
         public static GZipResult Compress(string lpSourceFolder, string lpDestFileName)
         {
             int split = lpDestFileName.LastIndexOf("\\");
@@ -24,7 +22,10 @@ namespace EgoDevil.Utilities.Compress
         /// <summary>
         /// Compress
         /// </summary>
-        /// <param name="lpSourceFolder">The location of the files to include in the zip file, all files including files in subfolders will be included.</param>
+        /// <param name="lpSourceFolder">
+        /// The location of the files to include in the zip file, all files including files in
+        /// subfolders will be included.
+        /// </param>
         /// <param name="lpDestFolder">Folder to write the zip file into</param>
         /// <param name="zipFileName">Name of the zip file to write</param>
         public static GZipResult Compress(string lpSourceFolder, string lpDestFolder, string zipFileName)
@@ -36,11 +37,19 @@ namespace EgoDevil.Utilities.Compress
         /// Compress
         /// </summary>
         /// <param name="lpSourceFolder">The location of the files to include in the zip file</param>
-        /// <param name="searchPattern">Search pattern (ie "*.*" or "*.txt" or "*.gif") to idendify what files in lpSourceFolder to include in the zip file</param>
-        /// <param name="searchOption">Only files in lpSourceFolder or include files in subfolders also</param>
+        /// <param name="searchPattern">
+        /// Search pattern (ie "*.*" or "*.txt" or "*.gif") to idendify what files in lpSourceFolder
+        /// to include in the zip file
+        /// </param>
+        /// <param name="searchOption">
+        /// Only files in lpSourceFolder or include files in subfolders also
+        /// </param>
         /// <param name="lpDestFolder">Folder to write the zip file into</param>
         /// <param name="zipFileName">Name of the zip file to write</param>
-        /// <param name="deleteTempFile">Boolean, true deleted the intermediate temp file, false leaves the temp file in lpDestFolder (for debugging)</param>
+        /// <param name="deleteTempFile">
+        /// Boolean, true deleted the intermediate temp file, false leaves the temp file in
+        /// lpDestFolder (for debugging)
+        /// </param>
         public static GZipResult Compress(string lpSourceFolder, string searchPattern, SearchOption searchOption, string lpDestFolder, string zipFileName, bool deleteTempFile)
         {
             DirectoryInfo di = new DirectoryInfo(lpSourceFolder);
@@ -53,10 +62,12 @@ namespace EgoDevil.Utilities.Compress
         /// </summary>
         /// <param name="files">Array of FileInfo objects to be included in the zip file</param>
         /// <param name="folders">Array of Folder string</param>
-        /// <param name="lpBaseFolder">Base folder to use when creating relative paths for the files 
-        /// stored in the zip file. For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file 
-        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for sample.txt 
-        /// will be 'folder1/sample.txt'</param>
+        /// <param name="lpBaseFolder">
+        /// Base folder to use when creating relative paths for the files stored in the zip file.
+        /// For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file
+        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for
+        /// sample.txt will be 'folder1/sample.txt'
+        /// </param>
         /// <param name="lpDestFolder">Folder to write the zip file into</param>
         /// <param name="zipFileName">Name of the zip file to write</param>
         public static GZipResult Compress(FileInfo[] files, string[] folders, string lpBaseFolder, string lpDestFolder, string zipFileName)
@@ -82,10 +93,12 @@ namespace EgoDevil.Utilities.Compress
         /// Compress
         /// </summary>
         /// <param name="files">Array of FileInfo objects to be included in the zip file</param>
-        /// <param name="lpBaseFolder">Base folder to use when creating relative paths for the files 
-        /// stored in the zip file. For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file 
-        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for sample.txt 
-        /// will be 'folder1/sample.txt'</param>
+        /// <param name="lpBaseFolder">
+        /// Base folder to use when creating relative paths for the files stored in the zip file.
+        /// For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file
+        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for
+        /// sample.txt will be 'folder1/sample.txt'
+        /// </param>
         /// <param name="lpDestFolder">Folder to write the zip file into</param>
         /// <param name="zipFileName">Name of the zip file to write</param>
         public static GZipResult Compress(FileInfo[] files, string lpBaseFolder, string lpDestFolder, string zipFileName)
@@ -97,13 +110,18 @@ namespace EgoDevil.Utilities.Compress
         /// Compress
         /// </summary>
         /// <param name="files">Array of FileInfo objects to be included in the zip file</param>
-        /// <param name="lpBaseFolder">Base folder to use when creating relative paths for the files 
-        /// stored in the zip file. For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file 
-        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for sample.txt 
-        /// will be 'folder1/sample.txt'</param>
+        /// <param name="lpBaseFolder">
+        /// Base folder to use when creating relative paths for the files stored in the zip file.
+        /// For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file
+        /// 'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for
+        /// sample.txt will be 'folder1/sample.txt'
+        /// </param>
         /// <param name="lpDestFolder">Folder to write the zip file into</param>
         /// <param name="zipFileName">Name of the zip file to write</param>
-        /// <param name="deleteTempFile">Boolean, true deleted the intermediate temp file, false leaves the temp file in lpDestFolder (for debugging)</param>
+        /// <param name="deleteTempFile">
+        /// Boolean, true deleted the intermediate temp file, false leaves the temp file in
+        /// lpDestFolder (for debugging)
+        /// </param>
         public static GZipResult Compress(FileInfo[] files, string lpBaseFolder, string lpDestFolder, string zipFileName, bool deleteTempFile)
         {
             GZipResult result = new GZipResult();
@@ -294,13 +312,12 @@ namespace EgoDevil.Utilities.Compress
             result.FileCount = fileIndex;
         }
 
-
         public static GZipResult Decompress(string SourceFileName, string DestFolder)
         {
             //int split=SourceFileName.LastIndexOf("\\");
             //string SourceFolder = SourceFileName.Substring(0, split);
             //string zipFileName=SourceFileName.Substring(split+1);
-            string SourceFolder =Path.GetDirectoryName(SourceFileName);
+            string SourceFolder = Path.GetDirectoryName(SourceFileName);
             string zipFileName = Path.GetFileName(SourceFileName);
             return Decompress(SourceFolder, DestFolder, zipFileName);
         }
@@ -501,7 +518,6 @@ namespace EgoDevil.Utilities.Compress
 
                     fsFile.Write(buffer, 0, count);
                     fsFile.Flush();
-
                 }
                 fsFile.Flush();
                 fsFile.Close();
@@ -661,6 +677,5 @@ namespace EgoDevil.Utilities.Compress
         public string ZipFile = null;
         public bool TempFileDeleted = false;
         public bool Errors = false;
-
     }
 }

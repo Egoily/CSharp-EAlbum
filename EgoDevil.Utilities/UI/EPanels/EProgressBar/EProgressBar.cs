@@ -1,63 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Globalization;
-
 using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
     /// <summary>
-    /// Represents a Windows progress bar control. 
+    /// Represents a Windows progress bar control.
     /// </summary>
-    /// <copyright>Copyright © 2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright © 2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     [ToolboxBitmap(typeof(System.Windows.Forms.ProgressBar))]
     public partial class EProgressBar : Control
     {
         #region Events
+
         /// <summary>
         /// Occurs when the value of the BorderColor property changes.
         /// </summary>
         [Description("Occurs when the value of the BorderColor property is changed on the control.")]
         public event EventHandler<EventArgs> BorderColorChanged;
+
         /// <summary>
         /// Occurs when the value of the BackgroundColor property changes.
         /// </summary>
         [Description("Occurs when the value of the BackgroundColor property is changed on the control.")]
         public event EventHandler<EventArgs> BackgroundColorChanged;
+
         /// <summary>
         /// Occurs when the value of the ValueColor property changes.
         /// </summary>
         [Description("Occurs when the value of the ValueColor property is changed on the control.")]
         public event EventHandler<EventArgs> ValueColorChanged;
+
         #endregion
 
         #region FieldsPrivate
+
         private Color m_backgroundColor;
         private Color m_valueColor;
         private Color m_borderColor;
         private int m_iMinimum;
         private int m_iMaximum;
         private int m_iValue;
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets or sets the color used for the background rectangle of this control.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Drawing.Color"/>
-        /// A Color used for the background rectangle of this control.
+        /// Type: <see cref="System.Drawing.Color"/> A Color used for the background rectangle of
+        /// this control.
         /// </value>
         [Browsable(true)]
         [Description("The color used for the background rectangle of this control.")]
@@ -73,12 +75,12 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the color used for the value rectangle of this control.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Drawing.Color"/>
-        /// A Color used for the value rectangle of this control.
+        /// Type: <see cref="System.Drawing.Color"/> A Color used for the value rectangle of this control.
         /// </value>
         [Browsable(true)]
         [Description("The color used for the value rectangle of this control.")]
@@ -94,12 +96,13 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the border color for the control.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Drawing.Color "/>
-        /// A Color that represents the border color of the control.
+        /// Type: <see cref="System.Drawing.Color "/> A Color that represents the border color of
+        /// the control.
         /// </value>
         public Color BorderColor
         {
@@ -113,6 +116,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the background color for the control.
         /// </summary>
@@ -123,12 +127,12 @@ namespace EgoDevil.Utilities.UI.EPanels
             get { return base.BackColor; }
             set { base.BackColor = value; }
         }
+
         /// <summary>
         /// Gets or sets the maximum value of the range of the control.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Int32"/>
-        /// The maximum value of the range. The default is 100.
+        /// Type: <see cref="System.Int32"/> The maximum value of the range. The default is 100.
         /// </value>
         [Browsable(true)]
         [Description("The upper bound of range this ProgressBar is working with.")]
@@ -157,12 +161,12 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the minimum value of the range of the control.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Int32"/>
-        /// The minimum value of the range. The default is 0.
+        /// Type: <see cref="System.Int32"/> The minimum value of the range. The default is 0.
         /// </value>
         [Browsable(true)]
         [Description("The lower bound of range this ProgressBar is working with.")]
@@ -191,12 +195,13 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the current position of the progress bar.
         /// </summary>
         /// <value>
-        /// Type: <see cref="System.Int32"/>
-        /// The position within the range of the progress bar. The default is 0.
+        /// Type: <see cref="System.Int32"/> The position within the range of the progress bar. The
+        /// default is 0.
         /// </value>
         [Browsable(true)]
         [Description("The current value for the ProgressBar, in the range specified by the minimum and maximum properties.")]
@@ -216,9 +221,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         #endregion
 
         #region MethodsPublic
+
         /// <summary>
         /// Initializes a new instance of the ProgressBar class.
         /// </summary>
@@ -237,9 +244,11 @@ namespace EgoDevil.Utilities.UI.EPanels
             this.m_borderColor = SystemColors.ActiveBorder;
             this.BackColor = Color.Transparent;
         }
+
         #endregion
 
         #region MethodsProtected
+
         /// <summary>
         /// Raises the Paint event.
         /// </summary>
@@ -249,16 +258,16 @@ namespace EgoDevil.Utilities.UI.EPanels
             using (UseAntiAlias antiAlias = new UseAntiAlias(e.Graphics))
             {
                 Graphics graphics = e.Graphics;
-                        DrawProgressBar(
-                            graphics,
-                            this.ClientRectangle,
-                            this.m_backgroundColor,
-                            this.m_valueColor,
-                            this.m_borderColor,
-                            this.RightToLeft,
-                            this.Minimum,
-                            this.Maximum,
-                            this.Value);
+                DrawProgressBar(
+                    graphics,
+                    this.ClientRectangle,
+                    this.m_backgroundColor,
+                    this.m_valueColor,
+                    this.m_borderColor,
+                    this.RightToLeft,
+                    this.Minimum,
+                    this.Maximum,
+                    this.Value);
 
                 if (string.IsNullOrEmpty(this.Text) == false)
                 {
@@ -285,12 +294,13 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Raises the BorderColor changed event.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A EventArgs that contains the event data.</param>
-		protected virtual void OnBorderColorChanged(object sender, EventArgs e)
+        protected virtual void OnBorderColorChanged(object sender, EventArgs e)
         {
             this.Invalidate(true);
             if (this.BorderColorChanged != null)
@@ -298,6 +308,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 this.BorderColorChanged(sender, e);
             }
         }
+
         /// <summary>
         /// Raises the BackgroundColor changed event.
         /// </summary>
@@ -311,6 +322,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 this.BackgroundColorChanged(sender, e);
             }
         }
+
         /// <summary>
         /// Raises the ValueColor changed event.
         /// </summary>
@@ -324,9 +336,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 this.ValueColorChanged(sender, e);
             }
         }
+
         #endregion
 
         #region MethodsPrivate
+
         private void UpdatePos()
         {
             this.Invalidate(true);
@@ -343,7 +357,6 @@ namespace EgoDevil.Utilities.UI.EPanels
             int iMaximum,
             int iValue)
         {
-
             Rectangle outerRectangle = GetRectangleBackground(clientRectangle);
 
             using (GraphicsPath outerRectangleGraphicsPath = GetBackgroundPath(outerRectangle, 4))
@@ -380,12 +393,14 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         private static Rectangle GetRectangleBackground(Rectangle clientRectangle)
         {
             Rectangle rectangleBackground = clientRectangle;
             rectangleBackground.Inflate(-1, -1);
             return rectangleBackground;
         }
+
         private static Rectangle GetRectangleValue(Rectangle backgroundRectangle, RightToLeft rightToLeft, int iMinimum, int iMaximum, int iValue)
         {
             Rectangle valueRectangle = backgroundRectangle;
@@ -399,6 +414,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
             return valueRectangle;
         }
+
         private static GraphicsPath GetBackgroundPath(Rectangle bounds, int radius)
         {
             int x = bounds.X;
@@ -456,6 +472,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
             return linearGradientBrush;
         }
+
         /// <summary>
         /// Checks if the rectangle width or height is equal to 0.
         /// </summary>
@@ -469,6 +486,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
             return true;
         }
+
         #endregion
     }
 }

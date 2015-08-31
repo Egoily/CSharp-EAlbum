@@ -7,7 +7,9 @@ using System.Windows.Forms;
 namespace EgoDevil.Utilities.UI
 {
     /// <summary>
-    /// Encapsulates control that visualy displays certain integer value and allows user to change it within desired range. It imitates <see cref="System.Windows.Forms.TrackBar"/> as far as mouse usage is concerned.
+    /// Encapsulates control that visualy displays certain integer value and allows user to change
+    /// it within desired range. It imitates <see cref="System.Windows.Forms.TrackBar"/> as far as
+    /// mouse usage is concerned.
     /// </summary>
     [ToolboxBitmap(typeof(TrackBar))]
     [DefaultEvent("Scroll"), DefaultProperty("BarInnerColor")]
@@ -34,6 +36,7 @@ namespace EgoDevil.Utilities.UI
         #region Properties
 
         private Rectangle thumbRect; //bounding rectangle of thumb area
+
         /// <summary>
         /// Gets the thumb rect. Usefull to determine bounding rectangle when creating custom thumb shape.
         /// </summary>
@@ -50,11 +53,14 @@ namespace EgoDevil.Utilities.UI
         private Rectangle elapsedRect; //bounding rectangle of elapsed area
 
         private int thumbSize = 15;
+
         /// <summary>
         /// Gets or sets the size of the thumb.
         /// </summary>
         /// <value>The size of the thumb.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value is lower than zero or grather than half of appropiate dimension</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// exception thrown when value is lower than zero or grather than half of appropiate dimension
+        /// </exception>
         [Description("Set Slider thumb size")]
         [Category("TrackBarEx")]
         [DefaultValue(15)]
@@ -74,6 +80,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private GraphicsPath thumbCustomShape = null;
+
         /// <summary>
         /// Gets or sets the thumb custom shape. Use ThumbRect property to determine bounding rectangle.
         /// </summary>
@@ -88,12 +95,13 @@ namespace EgoDevil.Utilities.UI
             set
             {
                 thumbCustomShape = value;
-                thumbSize = (int) (barOrientation == Orientation.Horizontal ? value.GetBounds().Width : value.GetBounds().Height) + 1;
+                thumbSize = (int)(barOrientation == Orientation.Horizontal ? value.GetBounds().Width : value.GetBounds().Height) + 1;
                 Invalidate();
             }
         }
 
         private Size thumbRoundRectSize = new Size(8, 8);
+
         /// <summary>
         /// Gets or sets the size of the thumb round rectangle edges.
         /// </summary>
@@ -115,6 +123,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private Size borderRoundRectSize = new Size(8, 8);
+
         /// <summary>
         /// Gets or sets the size of the border round rect.
         /// </summary>
@@ -136,6 +145,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private Orientation barOrientation = Orientation.Horizontal;
+
         /// <summary>
         /// Gets or sets the orientation of Slider.
         /// </summary>
@@ -161,13 +171,15 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private int trackerValue = 50;
+
         /// <summary>
         /// Gets or sets the value of Slider.
         /// </summary>
         /// <value>The value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value is outside appropriate range (min, max)</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// exception thrown when value is outside appropriate range (min, max)
+        /// </exception>
         [Description("Set Slider value")]
         [Category("TrackBarEx")]
         [DefaultValue(50)]
@@ -187,13 +199,15 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private int barMinimum = 0;
+
         /// <summary>
         /// Gets or sets the minimum value.
         /// </summary>
         /// <value>The minimum value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when minimal value is greather than maximal one</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// exception thrown when minimal value is greather than maximal one
+        /// </exception>
         [Description("Set Slider minimal point")]
         [Category("TrackBarEx")]
         [DefaultValue(0)]
@@ -216,13 +230,15 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private int barMaximum = 100;
+
         /// <summary>
         /// Gets or sets the maximum value.
         /// </summary>
         /// <value>The maximum value.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when maximal value is lower than minimal one</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// exception thrown when maximal value is lower than minimal one
+        /// </exception>
         [Description("Set Slider maximal point")]
         [Category("TrackBarEx")]
         [DefaultValue(100)]
@@ -246,6 +262,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private uint smallChange = 1;
+
         /// <summary>
         /// Gets or sets trackbar's small change. It affects how to behave when directional keys are pressed
         /// </summary>
@@ -262,7 +279,8 @@ namespace EgoDevil.Utilities.UI
         private uint largeChange = 5;
 
         /// <summary>
-        /// Gets or sets trackbar's large change. It affects how to behave when PageUp/PageDown keys are pressed
+        /// Gets or sets trackbar's large change. It affects how to behave when PageUp/PageDown keys
+        /// are pressed
         /// </summary>
         /// <value>The large change value.</value>
         [Description("Set trackbar's large change")]
@@ -275,6 +293,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private bool drawFocusRectangle = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether to draw focus rectangle.
         /// </summary>
@@ -293,6 +312,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private bool drawSemitransparentThumb = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether to draw semitransparent thumb.
         /// </summary>
@@ -311,10 +331,13 @@ namespace EgoDevil.Utilities.UI
         }
 
         private bool mouseEffects = true;
+
         /// <summary>
         /// Gets or sets whether mouse entry and exit actions have impact on how control look.
         /// </summary>
-        /// <value><c>true</c> if mouse entry and exit actions have impact on how control look; otherwise, <c>false</c>.</value>
+        /// <value>
+        /// <c>true</c> if mouse entry and exit actions have impact on how control look; otherwise, <c>false</c>.
+        /// </value>
         [Description("Set whether mouse entry and exit actions have impact on how control look")]
         [Category("TrackBarEx")]
         [DefaultValue(true)]
@@ -329,11 +352,14 @@ namespace EgoDevil.Utilities.UI
         }
 
         private int mouseWheelBarPartitions = 10;
+
         /// <summary>
         /// Gets or sets the mouse wheel bar partitions.
         /// </summary>
         /// <value>The mouse wheel bar partitions.</value>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">exception thrown when value isn't greather than zero</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// exception thrown when value isn't greather than zero
+        /// </exception>
         [Description("Set to how many parts is bar divided when using mouse wheel")]
         [Category("TrackBarEx")]
         [DefaultValue(10)]
@@ -347,8 +373,9 @@ namespace EgoDevil.Utilities.UI
                 else throw new ArgumentOutOfRangeException("MouseWheelBarPartitions has to be greather than zero");
             }
         }
-        
+
         private Color thumbOuterColor = Color.White;
+
         /// <summary>
         /// Gets or sets the thumb outer color .
         /// </summary>
@@ -366,8 +393,8 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private Color thumbInnerColor = Color.Gainsboro;
+
         /// <summary>
         /// Gets or sets the inner color of the thumb.
         /// </summary>
@@ -385,8 +412,8 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private Color thumbPenColor = Color.Silver;
+
         /// <summary>
         /// Gets or sets the color of the thumb pen.
         /// </summary>
@@ -404,8 +431,8 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private Color barOuterColor = Color.SkyBlue;
+
         /// <summary>
         /// Gets or sets the outer color of the bar.
         /// </summary>
@@ -423,8 +450,8 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private Color barInnerColor = Color.DarkSlateBlue;
+
         /// <summary>
         /// Gets or sets the inner color of the bar.
         /// </summary>
@@ -442,8 +469,8 @@ namespace EgoDevil.Utilities.UI
             }
         }
 
-
         private Color barPenColor = Color.Gainsboro;
+
         /// <summary>
         /// Gets or sets the color of the bar pen.
         /// </summary>
@@ -462,6 +489,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private Color elapsedOuterColor = Color.DarkGreen;
+
         /// <summary>
         /// Gets or sets the outer color of the elapsed.
         /// </summary>
@@ -480,6 +508,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         private Color elapsedInnerColor = Color.Chartreuse;
+
         /// <summary>
         /// Gets or sets the inner color of the elapsed.
         /// </summary>
@@ -531,8 +560,10 @@ namespace EgoDevil.Utilities.UI
         }
 
         private ColorSchemas colorSchema = ColorSchemas.PerlBlueGreen;
+
         /// <summary>
-        /// Sets color schema. Color generalization / fast color changing. Has no effect when slider colors are changed manually after schema was applied. 
+        /// Sets color schema. Color generalization / fast color changing. Has no effect when slider
+        /// colors are changed manually after schema was applied.
         /// </summary>
         /// <value>New color schema value</value>
         [Description("Set Slider color schema. Has no effect when slider colors are changed manually after schema was applied.")]
@@ -559,7 +590,7 @@ namespace EgoDevil.Utilities.UI
         }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>
@@ -585,7 +616,10 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackBarEx"/> class.
         /// </summary>
-        public TrackBarEx() : this(0, 100, 50) { }
+        public TrackBarEx()
+            : this(0, 100, 50)
+        {
+        }
 
         #endregion
 
@@ -594,7 +628,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.Paint"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.PaintEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnPaint(PaintEventArgs e)
         {
             if (!Enabled)
@@ -628,7 +664,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Draws the colorslider control using passed colors.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Forms.PaintEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">
+        /// The <see cref="T:System.Windows.Forms.PaintEventArgs"/> instance containing the event data.
+        /// </param>
         /// <param name="thumbOuterColorPaint">The thumb outer color paint.</param>
         /// <param name="thumbInnerColorPaint">The thumb inner color paint.</param>
         /// <param name="thumbPenColorPaint">The thumb pen color paint.</param>
@@ -679,7 +717,7 @@ namespace EgoDevil.Utilities.UI
                     elapsedRect = barRect;
                     elapsedRect.Height = thumbRect.Top + thumbSize / 2;
                 }
-                //get thumb shape path 
+                //get thumb shape path
                 GraphicsPath thumbPath;
                 if (thumbCustomShape == null)
                     thumbPath = CreateRoundRectPath(thumbRect, thumbRoundRectSize);
@@ -715,7 +753,7 @@ namespace EgoDevil.Utilities.UI
                         else
                             e.Graphics.FillRectangle(lgbElapsed, elapsedRect);
                     }
-                    //draw bar band                    
+                    //draw bar band
                     using (Pen barPen = new Pen(barPenColorPaint, 0.5f))
                     {
                         e.Graphics.DrawRectangle(barPen, barRect);
@@ -745,7 +783,7 @@ namespace EgoDevil.Utilities.UI
                     {
                         e.Graphics.DrawPath(thumbPen, thumbPath);
                     }
-                    //gp.Dispose();                    
+                    //gp.Dispose();
                     /*if (Capture || mouseInThumbRegion)
                         using (LinearGradientBrush lgbThumb2 = new LinearGradientBrush(thumbHalfRect, Color.FromArgb(150, Color.Blue), Color.Transparent, gradientOrientation))
                         {
@@ -763,7 +801,7 @@ namespace EgoDevil.Utilities.UI
                         r.Width -= 2;
                         r.Height--;
                         r.X++;
-                        //ControlPaint.DrawFocusRectangle(e.Graphics, r);                        
+                        //ControlPaint.DrawFocusRectangle(e.Graphics, r);
                         using (GraphicsPath gpBorder = CreateRoundRectPath(r, borderRoundRectSize))
                         {
                             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -785,6 +823,7 @@ namespace EgoDevil.Utilities.UI
         #region Overided events
 
         private bool mouseInRegion = false;
+
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged"></see> event.
         /// </summary>
@@ -821,7 +860,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -839,7 +880,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.MouseMove"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -867,7 +910,6 @@ namespace EgoDevil.Utilities.UI
 
                 if (Scroll != null) Scroll(this, new ScrollEventArgs(set, trackerValue));
                 if (ValueChanged != null) ValueChanged(this, new EventArgs());
-
             }
             Invalidate();
         }
@@ -875,7 +917,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -889,7 +933,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.MouseWheel"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.MouseEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
@@ -920,7 +966,9 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Raises the <see cref="E:System.Windows.Forms.Control.KeyUp"></see> event.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Forms.KeyEventArgs"></see> that contains the event data.</param>
+        /// <param name="e">
+        /// A <see cref="T:System.Windows.Forms.KeyEventArgs"></see> that contains the event data.
+        /// </param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
@@ -931,21 +979,26 @@ namespace EgoDevil.Utilities.UI
                     SetProperValue(Value - (int)smallChange);
                     if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.SmallDecrement, Value));
                     break;
+
                 case Keys.Up:
                 case Keys.Right:
                     SetProperValue(Value + (int)smallChange);
                     if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.SmallIncrement, Value));
                     break;
+
                 case Keys.Home:
                     Value = barMinimum;
                     break;
+
                 case Keys.End:
                     Value = barMaximum;
                     break;
+
                 case Keys.PageDown:
                     SetProperValue(Value - (int)largeChange);
                     if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.LargeDecrement, Value));
                     break;
+
                 case Keys.PageUp:
                     SetProperValue(Value + (int)largeChange);
                     if (Scroll != null) Scroll(this, new ScrollEventArgs(ScrollEventType.LargeIncrement, Value));
@@ -960,10 +1013,11 @@ namespace EgoDevil.Utilities.UI
         /// <summary>
         /// Processes a dialog key.
         /// </summary>
-        /// <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys"></see> values that represents the key to process.</param>
-        /// <returns>
-        /// true if the key was processed by the control; otherwise, false.
-        /// </returns>
+        /// <param name="keyData">
+        /// One of the <see cref="T:System.Windows.Forms.Keys"></see> values that represents the key
+        /// to process.
+        /// </param>
+        /// <returns>true if the key was processed by the control; otherwise, false.</returns>
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (keyData == Keys.Tab | ModifierKeys == Keys.Shift)
@@ -1051,9 +1105,7 @@ namespace EgoDevil.Utilities.UI
         /// </summary>
         /// <param name="pt">The point to test.</param>
         /// <param name="rect">The base rectangle.</param>
-        /// <returns>
-        /// 	<c>true</c> if rectangle contains given point; otherwise, <c>false</c>.
-        /// </returns>
+        /// <returns><c>true</c> if rectangle contains given point; otherwise, <c>false</c>.</returns>
         private static bool IsPointInRect(Point pt, Rectangle rect)
         {
             if (pt.X > rect.Left & pt.X < rect.Right & pt.Y > rect.Top & pt.Y < rect.Bottom)

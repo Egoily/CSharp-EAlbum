@@ -1,31 +1,35 @@
 ﻿#region Directives
+
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Timers;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 #endregion
 
 namespace EgoDevil.Utilities.UI.MediaButtons
 {
     #region Public Enum
+
     public enum BorderStyle : uint
     {
         None,
         Thin,
         Raised
     }
+
     #endregion
 
     [DefaultEvent("MouseClick")]
     public partial class MediaButton : UserControl
     {
         #region Enums
+
         public enum ButtonStyle : uint
         {
             MenuButton = 0,
@@ -81,15 +85,18 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             Depressed,
             Hover
         }
+
         #endregion
 
         #region Structs
+
         private struct SwirlStage
         {
             public uint stage;
             public uint tick;
             public Point linepos;
             public Rectangle mask;
+
             public SwirlStage(uint stg)
             {
                 stage = stg;
@@ -105,6 +112,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             public int pos;
             public uint tick;
             public Rectangle mask;
+
             public SwishStage(bool cyc)
             {
                 cycled = cyc;
@@ -124,14 +132,17 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 this.Right = Width;
                 this.Bottom = Height;
             }
+
             public int Left;
             public int Top;
             public int Right;
             public int Bottom;
         }
+
         #endregion
 
         #region API
+
         [DllImport("user32.dll")]
         private static extern IntPtr GetDC(IntPtr handle);
 
@@ -144,9 +155,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
 
         [DllImport("user32.dll")]
         private static extern bool ValidateRect(IntPtr hWnd, ref RECT lpRect);
+
         #endregion
 
         #region Fields
+
         private bool _bAnimationComplete = false;
         private bool _bHasInitialized = false;
         private bool _bInDesigner = true;
@@ -204,9 +217,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         private cStoreDc _cTempDc;
 
         private delegate void ResetCallback();
+
         #endregion
 
         #region Constructor
+
         public MediaButton()
         {
             LoadDefaults();
@@ -214,7 +229,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             InitializeComponent();
         }
 
-        /// <summary>Create the GraphicsPath and region, load buffers</summary>
+        /// <summary>
+        /// Create the GraphicsPath and region, load buffers
+        /// </summary>
         private void Init()
         {
             DeInit();
@@ -238,7 +255,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             _bHasInitialized = true;
         }
 
-        /// <summary>Design time defaults</summary>
+        /// <summary>
+        /// Design time defaults
+        /// </summary>
         private void LoadDefaults()
         {
             if (this.DesignMode)
@@ -249,16 +268,22 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
             SetButtonStyle(_eButtonStyle);
         }
+
         #endregion
 
         #region Destructor
-        /// <summary>Optional manual dispose method</summary>
+
+        /// <summary>
+        /// Optional manual dispose method
+        /// </summary>
         public new void Dispose()
         {
             DeInit();
         }
 
-        /// <summary>Release resources</summary>
+        /// <summary>
+        /// Release resources
+        /// </summary>
         private void DeInit()
         {
             _bHasInitialized = false;
@@ -297,74 +322,90 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             DestroyResize();
             DestroySwirl();
         }
+
         #endregion
 
         #region Properties
+
         #region Hidden Properties
+
         [Browsable(false)]
         public new bool AllowDrop
         {
             get { return base.AllowDrop; }
             set { base.AllowDrop = value; }
         }
+
         [Browsable(false)]
         public new AnchorStyles Anchor
         {
             get { return base.Anchor; }
             set { base.Anchor = value; }
         }
+
         [Browsable(false)]
         public new bool AutoScroll
         {
             get { return base.AutoScroll; }
             set { base.AutoScroll = value; }
         }
+
         [Browsable(false)]
         public new Size AutoScrollMargin
         {
             get { return base.AutoScrollMargin; }
             set { base.AutoScrollMargin = value; }
         }
+
         [Browsable(false)]
         public new Size AutoScrollMinSize
         {
             get { return base.AutoScrollMinSize; }
             set { base.AutoScrollMinSize = value; }
         }
+
         [Browsable(false)]
         public new AutoSizeMode AutoSizeMode
         {
             get { return base.AutoSizeMode; }
             set { base.AutoSizeMode = value; }
         }
+
         [Browsable(false)]
         public new Image BackgroundImage
         {
             get { return base.BackgroundImage; }
             set { base.BackgroundImage = value; }
         }
+
         [Browsable(false)]
         public new ImageLayout BackgroundImageLayout
         {
             get { return base.BackgroundImageLayout; }
             set { base.BackgroundImageLayout = value; }
         }
+
         [Browsable(false)]
         public new ContextMenu ContextMenuStrip
         {
             get { return base.ContextMenu; }
             set { base.ContextMenu = value; }
         }
+
         [Browsable(false)]
         public new DockStyle Dock
         {
             get { return base.Dock; }
             set { base.Dock = value; }
         }
+
         #endregion
 
         #region Public Properties
-        /// <summary>Get/Set border [not available on Menu style]</summary>
+
+        /// <summary>
+        /// Get/Set border [not available on Menu style]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set border style")]
         public new BorderStyle BorderStyle
@@ -377,7 +418,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set Checkbox state style [Media style only]</summary>
+        /// <summary>
+        /// Get/Set Checkbox state style [Media style only]
+        /// </summary>
         [Browsable(false)]
         public bool CheckStyle
         {
@@ -385,7 +428,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _bUseCheckStyle = value; }
         }
 
-        /// <summary>Get/Set button corner radius [Custom style only]</summary>
+        /// <summary>
+        /// Get/Set button corner radius [Custom style only]
+        /// </summary>
         [Browsable(false), Category("Style"),
         Description("Get/Set button corner radius"),
         DesignOnlyAttribute(true)]
@@ -399,7 +444,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set the disabled ForeColor</summary>
+        /// <summary>
+        /// Get/Set the disabled ForeColor
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set the disabled ForeColor")]
         public Color DisabledForeColor
@@ -408,7 +455,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _clrDisabledForeColor = value; }
         }
 
-        /// <summary>Get/Set the focused ForeColor</summary>
+        /// <summary>
+        /// Get/Set the focused ForeColor
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set the focused ForeColor")]
         public Color FocusedForeColor
@@ -417,7 +466,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _clrFocusedForeColor = value; }
         }
 
-        /// <summary>Get/Set Focus on first click [Menu style only]</summary>
+        /// <summary>
+        /// Get/Set Focus on first click [Menu style only]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set Focus on first click [Menu style only]")]
         public bool FocusOnClick
@@ -426,7 +477,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _bFocusOnClick = value; }
         }
 
-        /// <summary>Get/Set Focus on button hover [Custom style only]</summary>
+        /// <summary>
+        /// Get/Set Focus on button hover [Custom style only]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set Focus on button hover [Custom style only]")]
         public bool FocusOnHover
@@ -435,7 +488,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _bFocusOnHover = value; }
         }
 
-        /// <summary>Get/Set button image</summary>
+        /// <summary>
+        /// Get/Set button image
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button image")]
         public Image Image
@@ -448,7 +503,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button focused image [only available on Menu style]</summary>
+        /// <summary>
+        /// Get/Set button focused image [only available on Menu style]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button focused image")]
         public Image ImageFocused
@@ -461,7 +518,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button image alignment [only middle axis implemented]</summary>
+        /// <summary>
+        /// Get/Set button image alignment [only middle axis implemented]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button image alignment")]
         public Alignment ImageAlign
@@ -474,7 +533,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button image padding</summary>
+        /// <summary>
+        /// Get/Set button image padding
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button image padding")]
         public Padding ImagePadding
@@ -487,7 +548,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button padding</summary>
+        /// <summary>
+        /// Get/Set button padding
+        /// </summary>
         [Browsable(false)]
         public new Padding Padding
         {
@@ -499,7 +562,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set Load focused button with Resize effect [Menu style only]</summary>
+        /// <summary>
+        /// Get/Set Load focused button with Resize effect [Menu style only]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set Load focused button with Resize effect [Menu style only]")]
         public bool ResizeOnLoad
@@ -508,7 +573,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             set { _bResizeOnLoad = value; }
         }
 
-        /// <summary>Get/Set button shadow depth [Menu style only]</summary>
+        /// <summary>
+        /// Get/Set button shadow depth [Menu style only]
+        /// </summary>
         [Browsable(false),
         DesignOnlyAttribute(true)]
         public int ShadowDepth
@@ -521,7 +588,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set the button style</summary>
+        /// <summary>
+        /// Get/Set the button style
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set the button style")]
         public ButtonStyle Style
@@ -535,7 +604,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button text</summary>
+        /// <summary>
+        /// Get/Set button text
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set the button text"),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -549,7 +620,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button text alignment [only middle axis implemented]</summary>
+        /// <summary>
+        /// Get/Set button text alignment [only middle axis implemented]
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button text alignment")]
         public Alignment TextAlign
@@ -562,7 +635,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Get/Set button image padding</summary>
+        /// <summary>
+        /// Get/Set button image padding
+        /// </summary>
         [Browsable(true), Category("Style"),
         Description("Get/Set button image padding")]
         public Padding TextPadding
@@ -574,10 +649,13 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 PropertyChange();
             }
         }
+
         #endregion
+
         #endregion
 
         #region Overrides
+
         protected override void OnHandleCreated(EventArgs e)
         {
             Init();
@@ -720,33 +798,27 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             Repaint();
             base.OnLostFocus(e);
         }
+
         #endregion
 
         #region Methods
+
         #region Global
-        /// <summary>Render hub</summary>
+
+        /// <summary>
+        /// Render hub
+        /// </summary>
         private void DrawButton()
         {
-            // Menu button
-            // normal       -dimmed picture
-            // mouse over   -brighten image
-            // pressed      -size change (w/ image)
-            // focused      -4 stage swirling on border w/ radiance spillover
-            // disabled     -image greyed
+            // Menu button normal -dimmed picture mouse over -brighten image pressed -size change
+            // (w/ image) focused -4 stage swirling on border w/ radiance spillover disabled -image greyed
 
-            // Media button
-            // normal       -round w/ subtle border
-            // mouse over   -brighten
-            // pressed      -darken
-            // focused      -<normal>
-            // disabled     -greyed
+            // Media button normal -round w/ subtle border mouse over -brighten pressed -darken
+            // focused -<normal> disabled -greyed
 
-            // Custom button
-            // normal       -rounded border - except when disabled
-            // mouse over   -raised bubble w/ border and pulse effect
-            // pressed      -swish effect 2 cycles fast/slow-loop
-            // focused      -<mouse over>
-            // disabled     -light blue/enabled white
+            // Custom button normal -rounded border - except when disabled mouse over -raised bubble
+            // w/ border and pulse effect pressed -swish effect 2 cycles fast/slow-loop focused
+            // -<mouse over> disabled -light blue/enabled white
             try
             {
                 Rectangle bounds;
@@ -757,24 +829,28 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                         bounds = Rectangle.Round(_gpButtonPath.GetBounds());
                         DrawMediaButton(bounds);
                         break;
+
                     case ButtonStyle.MenuButton:
                         bounds = new Rectangle(0, 0, this.Width, this.Height);
                         DrawMenuButton(bounds);
                         break;
+
                     case ButtonStyle.CustomButton:
                         bounds = Rectangle.Round(_gpButtonPath.GetBounds());
                         DrawCustomButton(bounds);
                         break;
                 }
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 /*put an error handler here if you want*/
                 Debug.Write(ex.Message);
             }
         }
 
-        /// <summary>Adjust gamma of an image [not used]</summary>
+        /// <summary>
+        /// Adjust gamma of an image [not used]
+        /// </summary>
         private void DrawBrightImage(Graphics g, Image image, Rectangle bounds, float gamma)
         {
             try
@@ -802,14 +878,18 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             catch { }
         }
 
-        /// <summary>Backfill the buffer</summary>
+        /// <summary>
+        /// Backfill the buffer
+        /// </summary>
         private void DrawButtonBackGround(Graphics g, RectangleF bounds)
         {
             using (Brush br = new SolidBrush(this.BackColor))
                 g.FillRectangle(br, bounds);
         }
 
-        /// <summary>Draw the border thick/thin !Menu style</summary>
+        /// <summary>
+        /// Draw the border thick/thin !Menu style
+        /// </summary>
         private void DrawButtonBorder(Graphics g, RectangleF bounds)
         {
             if (this.BorderStyle == BorderStyle.Thin)
@@ -843,7 +923,6 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                         // bright outer border
                         using (Pen borderPen = new Pen(Color.FromArgb(120, Color.White), 2f))
                             g.DrawPath(borderPen, borderPath);
-
                     }
                     bounds.Inflate(-1.5f, -1.5f);
                     using (GraphicsPath borderPath = CreateRoundRectanglePath(
@@ -860,7 +939,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw the 'mask' gradient !Menu style</summary>
+        /// <summary>
+        /// Draw the 'mask' gradient !Menu style
+        /// </summary>
         private void DrawButtonMask(Graphics g, RectangleF bounds, int opacity, float pitch)
         {
             bounds.Inflate(-.5f, -.5f);
@@ -902,19 +983,25 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw a disabled image using the control</summary>
+        /// <summary>
+        /// Draw a disabled image using the control
+        /// </summary>
         private void DrawDisabledImage(Graphics g, Image image, Rectangle bounds)
         {
             ControlPaint.DrawImageDisabled(g, image, bounds.X, bounds.Y, Color.Transparent);
         }
 
-        /// <summary>Draw an unaltered image</summary>
+        /// <summary>
+        /// Draw an unaltered image
+        /// </summary>
         private void DrawImage(Graphics g, Image image, Rectangle bounds)
         {
             g.DrawImage(image, bounds);
         }
 
-        /// <summary>Draw text w/ appropriate color</summary>
+        /// <summary>
+        /// Draw text w/ appropriate color
+        /// </summary>
         private void DrawText(Graphics g, string text, Rectangle bounds)
         {
             using (GraphicsMode mode = new GraphicsMode(g, SmoothingMode.AntiAlias))
@@ -939,7 +1026,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Measure string size in control context</summary>
+        /// <summary>
+        /// Measure string size in control context
+        /// </summary>
         private SizeF MeasureText(string text)
         {
             SizeF sz = new SizeF();
@@ -950,11 +1039,16 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
             return sz;
         }
+
         #endregion
 
         #region Menu Button
+
         #region Drawing
-        /// <summary>Menu style Render hub</summary>
+
+        /// <summary>
+        /// Menu style Render hub
+        /// </summary>
         private void DrawMenuButton(Rectangle bounds)
         {
             if (_cButtonDc != null)
@@ -1005,6 +1099,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 }
                             }
                             break;
+
                         case ButtonSelectedState.Depressed:
                             {
                                 if (_bResizeTimerOn)
@@ -1014,6 +1109,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                     DrawText(g, this.Text, textRect);
                             }
                             break;
+
                         case ButtonSelectedState.Disabled:
                             {
                                 if (_bSwirlTimerOn)
@@ -1026,6 +1122,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                     DrawText(g, this.Text, textRect);
                             }
                             break;
+
                         case ButtonSelectedState.Focused:
                             {
                                 if (!_bSwirlTimerOn)
@@ -1045,6 +1142,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 }
                             }
                             break;
+
                         case ButtonSelectedState.Hover:
                             {
                                 if (!_bSwirlTimerOn)
@@ -1063,6 +1161,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 }
                             }
                             break;
+
                         case ButtonSelectedState.None:
                             {
                                 if (_bSwirlTimerOn)
@@ -1098,7 +1197,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw the Menu style border</summary>
+        /// <summary>
+        /// Draw the Menu style border
+        /// </summary>
         private void DrawMenuButtonBorder(Graphics g, RectangleF bounds)
         {
             using (GraphicsPath borderPath = CreateRoundRectanglePath(
@@ -1124,7 +1225,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw a gradient shadow effect</summary>
+        /// <summary>
+        /// Draw a gradient shadow effect
+        /// </summary>
         private void DrawMenuButtonDropShadow(Graphics g, RectangleF bounds, int depth, int opacity)
         {
             // offset shadow dimensions
@@ -1162,7 +1265,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw the Menu button gradient mask</summary>
+        /// <summary>
+        /// Draw the Menu button gradient mask
+        /// </summary>
         private void DrawMenuButtonMask(Graphics g, RectangleF bounds)
         {
             RectangleF maskRect = bounds;
@@ -1204,7 +1309,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draws the line sprite</summary>
+        /// <summary>
+        /// Draws the line sprite
+        /// </summary>
         private void DrawMenuButtonLine(IntPtr destdc, Bitmap source, Rectangle bounds, float intensity)
         {
             using (Graphics g = Graphics.FromHdc(destdc))
@@ -1214,7 +1321,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draws the mist effect</summary>
+        /// <summary>
+        /// Draws the mist effect
+        /// </summary>
         private void DrawMenuButtonMist(IntPtr destdc, Bitmap source, Rectangle cliprect, Rectangle bounds, float intensity)
         {
             using (ClippingRegion cp = new ClippingRegion(destdc, cliprect, bounds, CornerRadius))
@@ -1223,10 +1332,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     AlphaBlend(g, source, bounds, intensity);
             }
         }
+
         #endregion
 
         #region Resize Effect
-        /// <summary>Called by resize timer, renders image at size/steps</summary>
+
+        /// <summary>
+        /// Called by resize timer, renders image at size/steps
+        /// </summary>
         private void DrawResized()
         {
             Rectangle canvas = new Rectangle(0, 0, this.Width, this.Height);
@@ -1276,7 +1389,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             ValidateRect(this.Handle, ref r);
         }
 
-        /// <summary>create the resize image and store as a bitmap</summary>
+        /// <summary>
+        /// create the resize image and store as a bitmap
+        /// </summary>
         private void CreateResize()
         {
             DestroyResize();
@@ -1300,7 +1415,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Dispose of resize image</summary>
+        /// <summary>
+        /// Dispose of resize image
+        /// </summary>
         private void DestroyResize()
         {
             if (_bmpResize != null)
@@ -1309,10 +1426,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _bmpResize = null;
             }
         }
+
         #endregion
 
         #region Swirl Effect
-        /// <summary>Create the swirl effect bitmaps, glow and lines</summary>
+
+        /// <summary>
+        /// Create the swirl effect bitmaps, glow and lines
+        /// </summary>
         private void CreateSwirl()
         {
             int width = 0;
@@ -1410,7 +1531,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             _bmpSwirlGlowVert.MakeTransparent();
         }
 
-        /// <summary>Dispose of swirl effect images</summary>
+        /// <summary>
+        /// Dispose of swirl effect images
+        /// </summary>
         private void DestroySwirl()
         {
             // bitmaps
@@ -1424,7 +1547,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _bmpSwirlGlowVert.Dispose();
         }
 
-        /// <summary>Draw the multi stage line and glow sprites</summary>
+        /// <summary>
+        /// Draw the multi stage line and glow sprites
+        /// </summary>
         private void DrawSwirl()
         {
             if (_cButtonDc != null)
@@ -1443,6 +1568,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 switch (_tSwirlStage.stage)
                 {
                     #region Stage 1 - Top/Left
+
                     case 0:
                         {
                             endX = _tSwirlStage.mask.Width / 2;
@@ -1464,8 +1590,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 linerect = new Rectangle(_tSwirlStage.linepos.X, _tSwirlStage.linepos.Y, _bmpSwirlLine.Width, _bmpSwirlLine.Height);
                                 // draw first sprite -horz
                                 DrawMenuButtonLine(_cTempDc.Hdc, _bmpSwirlLine, linerect, _ftAlphaLine);
-                                // second sprite -vert
-                                // turn down the alpha to match border color
+                                // second sprite -vert turn down the alpha to match border color
                                 alphaline = _ftAlphaLine - .1f;
                                 // draw second sprite
                                 linerect = new Rectangle(_tSwirlStage.linepos.Y, _tSwirlStage.linepos.X, _bmpSwirlLineVert.Width, _bmpSwirlLineVert.Height);
@@ -1508,9 +1633,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             }
                             break;
                         }
+
                     #endregion
 
                     #region Stage 2 - Bottom
+
                     case 1:
                         {
                             endX = _tSwirlStage.mask.Width / 2;
@@ -1533,8 +1660,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 linerect = new Rectangle(_tSwirlStage.linepos.X, _tSwirlStage.linepos.Y, _bmpSwirlLine.Width, _bmpSwirlLine.Height);
                                 DrawMenuButtonLine(_cTempDc.Hdc, _bmpSwirlLine, linerect, _ftAlphaLine);
 
-                                // draw mist //
-                                // calculate alpha
+                                // draw mist // calculate alpha
                                 if (_tSwirlStage.linepos.X < endX / 3)
                                 {
                                     _ftAlphaGlow += .05f;
@@ -1571,9 +1697,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             }
                             break;
                         }
+
                     #endregion
 
                     #region Stage 3 - Right Side
+
                     case 2:
                         {
                             endY = _tSwirlStage.mask.Top + (int)CornerRadius;
@@ -1600,8 +1728,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 linerect = new Rectangle(_tSwirlStage.linepos.X, _tSwirlStage.linepos.Y, _bmpSwirlLineVert.Width, height);
                                 DrawMenuButtonLine(_cTempDc.Hdc, _bmpSwirlLineVert, linerect, _ftAlphaLine);
 
-                                // draw mist //
-                                // calculate alpha
+                                // draw mist // calculate alpha
                                 if (_tSwirlStage.linepos.Y > _tSwirlStage.mask.Bottom / 4)
                                 {
                                     _ftAlphaGlow += .05f;
@@ -1637,9 +1764,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             }
                             break;
                         }
+
                     #endregion
 
                     #region Stage 4 - Top
+
                     case 3:
                         {
                             endX = (_tSwirlStage.mask.Right / 2);
@@ -1666,8 +1795,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 linerect = new Rectangle(_tSwirlStage.linepos.X, _tSwirlStage.linepos.Y, width, _bmpSwirlLine.Height);
                                 DrawMenuButtonLine(_cTempDc.Hdc, _bmpSwirlLine, linerect, _ftAlphaLine);
 
-                                // draw mist // no mist on last pass (optional)
-                                // calculate alpha
+                                // draw mist // no mist on last pass (optional) calculate alpha
                                 /*if (_tSwirlStage.linepos.X > _tSwirlStage.mask.Right - (endX / 2))
                                 {
                                     _ftAlphaGlow += .05f;
@@ -1704,6 +1832,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             }
                             break;
                         }
+
                     #endregion
                 }
 
@@ -1717,10 +1846,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 ValidateRect(this.Handle, ref r);
             }
         }
+
         #endregion
 
         #region Timers
-        /// <summary>Create the images and initiate Fader class</summary>
+
+        /// <summary>
+        /// Create the images and initiate Fader class
+        /// </summary>
         private void StartResizeTimer(bool sizein)
         {
             if (_cResizeTimer != null)
@@ -1747,7 +1880,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Dispose of Fader class and reset</summary>
+        /// <summary>
+        /// Dispose of Fader class and reset
+        /// </summary>
         private void StopResizeTimer()
         {
             if (_cResizeTimer != null)
@@ -1765,7 +1900,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Setup of buffer dc and Fade timer</summary>
+        /// <summary>
+        /// Setup of buffer dc and Fade timer
+        /// </summary>
         private void StartSwirlTimer()
         {
             if (_cSwirlTimer == null)
@@ -1798,7 +1935,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Dispose Fader and resources</summary>
+        /// <summary>
+        /// Dispose Fader and resources
+        /// </summary>
         private void StopSwirlTimer()
         {
             if (_cSwirlTimer != null)
@@ -1814,9 +1953,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _bSwirlTimerOn = false;
             }
         }
+
         #endregion
 
         #region Callbacks
+
         private void _cResizeTimer_Complete(object sender)
         {
             ResetCallback rs = new ResetCallback(StopResizeTimer);
@@ -1840,12 +1981,18 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         {
             DrawSwirl();
         }
+
         #endregion
+
         #endregion
 
         #region Media Button
+
         #region Drawing
-        /// <summary>Media style Render hub</summary>
+
+        /// <summary>
+        /// Media style Render hub
+        /// </summary>
         private void DrawMediaButton(Rectangle bounds)
         {
             if (_cButtonDc != null)
@@ -1870,6 +2017,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             DrawButtonBorder(g, bounds);
                             DrawButtonMask(g, bounds, 140, 70f);
                             break;
+
                         case ButtonSelectedState.Pressed:
                             if (Image != null)
                             {
@@ -1880,10 +2028,12 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             }
                             DrawButtonMask(g, bounds, 140, 70f);
                             break;
+
                         case ButtonSelectedState.Disabled:
                             if (Image != null)
                                 DrawDisabledImage(g, Image, imageRect);
                             break;
+
                         case ButtonSelectedState.None:
                             // draw image
                             if (Image != null)
@@ -1909,11 +2059,16 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         }
 
         #endregion
+
         #endregion
 
         #region Custom Button
+
         #region Drawing
-        /// <summary>Custom style Render hub</summary>
+
+        /// <summary>
+        /// Custom style Render hub
+        /// </summary>
         private void DrawCustomButton(Rectangle bounds)
         {
             if (_cButtonDc != null)
@@ -1959,6 +2114,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 DrawButtonMask(g, bounds, 100, 80f);
                             }
                             break;
+
                         case ButtonSelectedState.Pressed:
                             if (_bPulseTimerOn)
                                 StopPulseTimer();
@@ -1977,6 +2133,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 StartSwishTimer();
                             }
                             break;
+
                         case ButtonSelectedState.Disabled:
                             if (_bSwishTimerOn)
                                 StopSwishTimer();
@@ -1985,6 +2142,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                             if (Image != null)
                                 DrawDisabledImage(g, Image, imageRect);
                             break;
+
                         case ButtonSelectedState.Focused:
                         case ButtonSelectedState.Hover:
                             if (_bSwishTimerOn)
@@ -2019,6 +2177,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                                 }
                             }
                             break;
+
                         case ButtonSelectedState.None:
                             if (_bSwishTimerOn)
                                 StopSwishTimer();
@@ -2049,10 +2208,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 }
             }
         }
+
         #endregion
 
         #region Pulse Effect
-        /// <summary>Draw the pulse effect, called by PulseTimer</summary>
+
+        /// <summary>
+        /// Draw the pulse effect, called by PulseTimer
+        /// </summary>
         private void DrawPulse()
         {
             int width = (int)(this.Width * .9f);
@@ -2112,10 +2275,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             RECT r = new RECT(0, 0, this.Width, this.Height);
             ValidateRect(this.Handle, ref r);
         }
+
         #endregion
 
         #region Swish Effect
-        /// <summary>Create the swish effect bitmap</summary>
+
+        /// <summary>
+        /// Create the swish effect bitmap
+        /// </summary>
         private void CreateSwish()
         {
             DestroySwish();
@@ -2153,7 +2320,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             _bmpSwish.MakeTransparent();
         }
 
-        /// <summary>Dispose of swish bitmap</summary>
+        /// <summary>
+        /// Dispose of swish bitmap
+        /// </summary>
         private void DestroySwish()
         {
             if (_bmpSwish != null)
@@ -2163,7 +2332,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Draw the swish effect, called by SwishTimer</summary>
+        /// <summary>
+        /// Draw the swish effect, called by SwishTimer
+        /// </summary>
         private void DrawSwish()
         {
             int width = this.Width;
@@ -2217,10 +2388,14 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             RECT r = new RECT(0, 0, this.Width, this.Height);
             ValidateRect(this.Handle, ref r);
         }
+
         #endregion
 
         #region Timers
-        /// <summary>Create dc, and setup Fade Timer</summary>
+
+        /// <summary>
+        /// Create dc, and setup Fade Timer
+        /// </summary>
         private void StartPulseTimer()
         {
             if (_cPulseTimer == null)
@@ -2243,7 +2418,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Dispose of timer and temp dc</summary>
+        /// <summary>
+        /// Dispose of timer and temp dc
+        /// </summary>
         private void StopPulseTimer()
         {
             if (_cPulseTimer != null)
@@ -2260,7 +2437,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Create the bitmaps, temp dc, and Start the Fade Timer</summary>
+        /// <summary>
+        /// Create the bitmaps, temp dc, and Start the Fade Timer
+        /// </summary>
         private void StartSwishTimer()
         {
             if (_cSwishTimer == null)
@@ -2286,7 +2465,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Dispose resources and timer teardown</summary>
+        /// <summary>
+        /// Dispose resources and timer teardown
+        /// </summary>
         private void StopSwishTimer()
         {
             if (_cSwishTimer != null)
@@ -2305,9 +2486,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 DrawButton();
             }
         }
+
         #endregion
 
         #region Callbacks
+
         private void _cPulseTimer_Complete(object sender)
         {
             ResetCallback rs = new ResetCallback(StopPulseTimer);
@@ -2329,11 +2512,16 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         {
             DrawSwish();
         }
+
         #endregion
+
         #endregion
 
         #region Helpers
-        /// <summary>AlphaBlend an image, alpha .1-1</summary>
+
+        /// <summary>
+        /// AlphaBlend an image, alpha .1-1
+        /// </summary>
         private void AlphaBlend(Graphics g, Bitmap bmp, Rectangle bounds, float alpha)
         {
             if (alpha > 1f)
@@ -2353,7 +2541,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Fires click event after animation has concluded</summary>
+        /// <summary>
+        /// Fires click event after animation has concluded
+        /// </summary>
         private void ClickThis()
         {
             if (_cMouseEventArgs != null)
@@ -2365,7 +2555,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
         }
 
-        /// <summary>Create a round GraphicsPath [not used]</summary>
+        /// <summary>
+        /// Create a round GraphicsPath [not used]
+        /// </summary>
         private GraphicsPath CreateRoundPath(Graphics g, Rectangle bounds)
         {
             int size = bounds.Width > bounds.Height ? bounds.Height : bounds.Width;
@@ -2378,7 +2570,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             return circlePath;
         }
 
-        /// <summary>Create a rounded rectangle GraphicsPath</summary>
+        /// <summary>
+        /// Create a rounded rectangle GraphicsPath
+        /// </summary>
         private GraphicsPath CreateRoundRectanglePath(Graphics g, float x, float y, float width, float height, float radius)
         {
             // create a path
@@ -2393,7 +2587,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             return pathBounds;
         }
 
-        /// <summary>Get the size an offsets of an image within container</summary>
+        /// <summary>
+        /// Get the size an offsets of an image within container
+        /// </summary>
         private Rectangle GetImageRectangle(Alignment align, Rectangle containerRect, Rectangle imageRect)
         {
             Rectangle dest = new Rectangle(0, 0, imageRect.Width, imageRect.Height);
@@ -2411,34 +2607,42 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     x = (containerRect.Width - imageRect.Width) / 2;
                     y = containerRect.Height - imageRect.Height;
                     break;
+
                 case Alignment.BottomLeft:
                     x = 0;
                     y = containerRect.Height - imageRect.Height;
                     break;
+
                 case Alignment.BottomRight:
                     x = containerRect.Width - imageRect.Width;
                     y = containerRect.Height - imageRect.Height;
                     break;
+
                 case Alignment.MiddleCenter:
                     x = (containerRect.Width - imageRect.Width) / 2;
                     y = (containerRect.Height - imageRect.Height) / 2;
                     break;
+
                 case Alignment.MiddleLeft:
                     x = 0;
                     y = (containerRect.Height - imageRect.Height) / 2;
                     break;
+
                 case Alignment.MiddleRight:
                     x = containerRect.Width - imageRect.Width;
                     y = containerRect.Height - imageRect.Height;
                     break;
+
                 case Alignment.TopCenter:
                     x = ((containerRect.Width - imageRect.Width) / 2);
                     y = 0;
                     break;
+
                 case Alignment.TopLeft:
                     x = 0;
                     y = 0;
                     break;
+
                 case Alignment.TopRight:
                     x = containerRect.Width - imageRect.Width;
                     y = 0;
@@ -2448,7 +2652,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             return dest;
         }
 
-        /// <summary>Get the size and offsets of text within container</summary>
+        /// <summary>
+        /// Get the size and offsets of text within container
+        /// </summary>
         private Rectangle GetTextRectangle(Alignment align, Rectangle containerRect, Rectangle textRect)
         {
             Rectangle dest = new Rectangle(0, 0, textRect.Width, textRect.Height);
@@ -2463,34 +2669,42 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     x = (containerRect.Width - (Padding.Left + textRect.Width)) / 2;
                     y = containerRect.Height - (textRect.Height + Padding.Bottom);
                     break;
+
                 case Alignment.BottomLeft:
                     x = Padding.Left;
                     y = containerRect.Height - (textRect.Height + Padding.Bottom);
                     break;
+
                 case Alignment.BottomRight:
                     x = containerRect.Width - (Padding.Right + textRect.Width);
                     y = containerRect.Height - (textRect.Height + Padding.Bottom);
                     break;
+
                 case Alignment.MiddleCenter:
                     x = (containerRect.Width - textRect.Width) / 2;
                     y = (containerRect.Height - textRect.Height) / 2;
                     break;
+
                 case Alignment.MiddleLeft:
                     x = Padding.Left;
                     y = (containerRect.Height - textRect.Height) / 2;
                     break;
+
                 case Alignment.MiddleRight:
                     x = containerRect.Width - (Padding.Right + textRect.Width);
                     y = containerRect.Height - textRect.Height;
                     break;
+
                 case Alignment.TopCenter:
                     x = (containerRect.Width - textRect.Width) / 2;
                     y = Padding.Top;
                     break;
+
                 case Alignment.TopLeft:
                     x = Padding.Left;
                     y = Padding.Top;
                     break;
+
                 case Alignment.TopRight:
                     x = containerRect.Width - (Padding.Right + textRect.Width);
                     y = Padding.Top;
@@ -2500,7 +2714,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             return dest;
         }
 
-        /// <summary>Repaint and optionally resize</summary>
+        /// <summary>
+        /// Repaint and optionally resize
+        /// </summary>
         private void PropertyChange()
         {
             if (this.AutoSize)
@@ -2508,14 +2724,18 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             Repaint();
         }
 
-        /// <summary>Repaint the control</summary>
+        /// <summary>
+        /// Repaint the control
+        /// </summary>
         private void Repaint()
         {
             this.Invalidate();
             this.Update();
         }
 
-        /// <summary>Load the primary graphics buffer</summary>
+        /// <summary>
+        /// Load the primary graphics buffer
+        /// </summary>
         private void LoadBuffers()
         {
             // load the buffer
@@ -2528,7 +2748,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 CreateSwirl();
         }
 
-        /// <summary>Resize the control via image and text size and alignments</summary>
+        /// <summary>
+        /// Resize the control via image and text size and alignments
+        /// </summary>
         private void ResizeThis()
         {
             int width = this.Width;
@@ -2564,7 +2786,9 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             this.Refresh();
         }
 
-        /// <summary>Set the style defaults, Custom is the only style without packaged options</summary>
+        /// <summary>
+        /// Set the style defaults, Custom is the only style without packaged options
+        /// </summary>
         private void SetButtonStyle(ButtonStyle style)
         {
             switch (style)
@@ -2579,6 +2803,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     this.ImageAlign = Alignment.MiddleCenter;
                     this.Text = "";
                     break;
+
                 case ButtonStyle.MenuButton:
                     this.Padding = new Padding(8, 8, 8, 8);
                     this.ImagePadding = new Padding(8, 8, 8, 8);
@@ -2589,15 +2814,17 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     this.TextAlign = Alignment.BottomRight;
                     this.ImageAlign = Alignment.MiddleCenter;
                     break;
+
                 case ButtonStyle.CustomButton:
-                    // this.TextAlign = Alignment.MiddleRight;
-                    // this.ImageAlign = Alignment.MiddleLeft;
+                    // this.TextAlign = Alignment.MiddleRight; this.ImageAlign = Alignment.MiddleLeft;
                     break;
             }
         }
 
-        /// <summary>Called if a Menu button is focused when form loads,
-        /// allows button to finish loading before resize effect engages</summary>
+        /// <summary>
+        /// Called if a Menu button is focused when form loads, allows button to finish loading
+        /// before resize effect engages
+        /// </summary>
         private void WaitTimer(int ms)
         {
             int safe = 0;
@@ -2612,14 +2839,20 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 System.Threading.Thread.CurrentThread.Join(1);
             } while (safe < 100);
         }
+
         #endregion
+
         #endregion
 
         #region Clipping Region
-        /// <summary>Clip rectangles or rounded rectangles</summary>
+
+        /// <summary>
+        /// Clip rectangles or rounded rectangles
+        /// </summary>
         internal class ClippingRegion : IDisposable
         {
             #region Enum
+
             private enum CombineRgnStyles : int
             {
                 RGN_AND = 1,
@@ -2630,9 +2863,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 RGN_MIN = RGN_AND,
                 RGN_MAX = RGN_COPY
             }
+
             #endregion
 
             #region API
+
             [DllImport("gdi32.dll")]
             private static extern int SelectClipRgn(IntPtr hdc, IntPtr hrgn);
 
@@ -2657,14 +2892,18 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             [DllImport("gdi32.dll")]
             [return: MarshalAs(UnmanagedType.Bool)]
             private static extern bool DeleteObject(IntPtr hObject);
+
             #endregion
 
             #region Fields
+
             private IntPtr _hClipRegion;
             private IntPtr _hDc;
+
             #endregion
 
             #region Methods
+
             public ClippingRegion(IntPtr hdc, Rectangle cliprect, Rectangle canvasrect)
             {
                 CreateRectangleClip(hdc, cliprect, canvasrect);
@@ -2717,20 +2956,28 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             {
                 Release();
             }
+
             #endregion
         }
+
         #endregion
 
         #region Graphics Mode
-        /// <summary>Maintains graphic object state</summary>
+
+        /// <summary>
+        /// Maintains graphic object state
+        /// </summary>
         internal class GraphicsMode : IDisposable
         {
             #region Fields
+
             private Graphics _gGraphicCopy;
             private SmoothingMode _eOldMode;
+
             #endregion
 
             #region Methods
+
             /// <summary>
             /// Initialize a new instance of the class.
             /// </summary>
@@ -2750,15 +2997,21 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             {
                 _gGraphicCopy.SmoothingMode = _eOldMode;
             }
+
             #endregion
         }
+
         #endregion
 
         #region Effects Timer
-        /// <summary>Effect timer class</summary>
+
+        /// <summary>
+        /// Effect timer class
+        /// </summary>
         internal class FadeTimer : IDisposable
         {
             #region Enum
+
             internal enum FadeType
             {
                 None = 0,
@@ -2767,9 +3020,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 FadeFast,
                 Loop
             }
+
             #endregion
 
             #region Structs
+
             [StructLayout(LayoutKind.Sequential)]
             private struct RECT
             {
@@ -2780,14 +3035,17 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                     this.Right = Width;
                     this.Bottom = Height;
                 }
+
                 public int Left;
                 public int Top;
                 public int Right;
                 public int Bottom;
             }
+
             #endregion
 
             #region API
+
             [DllImport("user32.dll")]
             private static extern IntPtr GetDC(IntPtr handle);
 
@@ -2804,16 +3062,23 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             [DllImport("user32.dll")]
             [return: MarshalAs(UnmanagedType.Bool)]
             private static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+
             #endregion
 
             #region Events
+
             public delegate void CompleteDelegate(object sender);
+
             public delegate void TickDelegate(object sender);
+
             public event CompleteDelegate Complete;
+
             public event TickDelegate Tick;
+
             #endregion
 
             #region Fields
+
             private bool _bCaptureScreen = false;
             private bool _bCancelTimer;
             private bool _bIsReset;
@@ -2825,9 +3090,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             private UserControl _ctParentControl;
             private System.Timers.Timer _aTimer;
             private bool _bInvalidating = false;
+
             #endregion
 
             #region Constructor
+
             public FadeTimer(object sender)
             {
                 _iTickCounter = 0;
@@ -2838,9 +3105,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _aTimer.SynchronizingObject = (ISynchronizeInvoke)sender;
                 _aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             }
+
             #endregion
 
             #region Properties
+
             public cStoreDc ButtonDc
             {
                 get { return _cButtonDc; }
@@ -2903,9 +3172,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 get { return _iTickMaximum; }
                 set { _iTickMaximum = value; }
             }
+
             #endregion
 
             #region Public Methods
+
             public void Dispose()
             {
                 Reset();
@@ -2959,9 +3230,11 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _aTimer.Stop();
                 _aTimer.Enabled = false;
             }
+
             #endregion
 
             #region Event Handlers
+
             private void OnTimedEvent(object source, ElapsedEventArgs e)
             {
                 if (Cancel)
@@ -2977,21 +3250,26 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                         case FadeType.FadeIn:
                             FadeIn();
                             break;
+
                         case FadeType.FadeFast:
                             FadeOut();
                             break;
+
                         case FadeType.FadeOut:
                             FadeOut();
                             break;
+
                         case FadeType.Loop:
                             FadeLoop();
                             break;
                     }
                 }
             }
+
             #endregion
 
             #region private Methods
+
             private void CaptureDc()
             {
                 try
@@ -3073,15 +3351,21 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             {
                 Dispose();
             }
+
             #endregion
         }
+
         #endregion
 
         #region StoreDc
-        /// <summary>DC buffer class</summary>
+
+        /// <summary>
+        /// DC buffer class
+        /// </summary>
         internal class cStoreDc
         {
             #region API
+
             [DllImport("gdi32.dll")]
             private static extern IntPtr CreateDCA([MarshalAs(UnmanagedType.LPStr)]string lpszDriver, [MarshalAs(UnmanagedType.LPStr)]string lpszDevice, [MarshalAs(UnmanagedType.LPStr)]string lpszOutput, int lpInitData);
 
@@ -3107,17 +3391,21 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             [DllImport("gdi32.dll")]
             [return: MarshalAs(UnmanagedType.Bool)]
             private static extern bool DeleteObject(IntPtr hObject);
+
             #endregion
 
             #region Fields
+
             private int _Height = 0;
             private int _Width = 0;
             private IntPtr _Hdc = IntPtr.Zero;
             private IntPtr _Bmp = IntPtr.Zero;
             private IntPtr _BmpOld = IntPtr.Zero;
+
             #endregion
 
             #region Methods
+
             public IntPtr Hdc
             {
                 get { return _Hdc; }
@@ -3205,8 +3493,10 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             {
                 ImageDestroy();
             }
+
             #endregion
         }
+
         #endregion
     }
 }

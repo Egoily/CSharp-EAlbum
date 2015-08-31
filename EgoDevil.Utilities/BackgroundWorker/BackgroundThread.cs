@@ -9,7 +9,7 @@ namespace EgoDevil.Utilities.BkWorker
 
         public System.ComponentModel.BackgroundWorker Bw;
         public RunFunction thisFunction;
-        BackgroundForm frmBackground;
+        private BackgroundForm frmBackground;
 
         public BackgroundThread(RunFunction newFunction)
         {
@@ -19,7 +19,6 @@ namespace EgoDevil.Utilities.BkWorker
             Bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Bw_RunWorkerCompleted);
         }
 
-
         public void Start()
         {
             Bw.RunWorkerAsync();
@@ -28,23 +27,23 @@ namespace EgoDevil.Utilities.BkWorker
         }
 
         public void Start(Size formSize)
-        {           
+        {
             Bw.RunWorkerAsync();
             frmBackground = new BackgroundForm(formSize);
             frmBackground.ShowDialog();
         }
 
-        void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             frmBackground.Dispose();
             //MessageBox.Show("Complete");
         }
 
-        void Bw_DoWork(object sender, DoWorkEventArgs e)
+        private void Bw_DoWork(object sender, DoWorkEventArgs e)
         {
             if (thisFunction != null)
-            {             
-                thisFunction();             
+            {
+                thisFunction();
             }
         }
     }

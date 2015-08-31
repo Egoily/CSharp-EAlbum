@@ -4,9 +4,8 @@ using System.ComponentModel;
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
-    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the
-    /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextHaloWidth"/> of a 
-    /// <see cref="ExtendedPictureBox"/>.
+    /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
+    /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextHaloWidth"/> of a <see cref="ExtendedPictureBox"/>.
     /// </summary>
     public partial class ExtendedPictureBoxTextHaloWidthAnimator : Animations.AnimatorBase
     {
@@ -91,8 +90,8 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ExtendedPictureBox"/> which 
-        /// <see cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextHaloWidth"/> should be animated.
+        /// Gets or sets the <see cref="ExtendedPictureBox"/> which <see
+        /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextHaloWidth"/> should be animated.
         /// </summary>
         [Browsable(true), DefaultValue(null), Category("Behavior")]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -153,10 +152,9 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Calculates an interpolated value between <see cref="StartValue"/> and
-        /// <see cref="EndValue"/> for a given step in %.
-        /// Giving 0 will return the <see cref="StartValue"/>.
-        /// Giving 100 will return the <see cref="EndValue"/>.
+        /// Calculates an interpolated value between <see cref="StartValue"/> and <see
+        /// cref="EndValue"/> for a given step in %. Giving 0 will return the <see
+        /// cref="StartValue"/>. Giving 100 will return the <see cref="EndValue"/>.
         /// </summary>
         /// <param name="step">Animation step in %</param>
         /// <returns>Interpolated value for the given step.</returns>

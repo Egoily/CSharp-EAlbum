@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -24,7 +20,6 @@ namespace EgoDevil.Utilities.UI.ColorLabel
             this.TextAlign = ContentAlignment.MiddleLeft;
         }
 
-   
         protected override void OnClick(EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
@@ -45,14 +40,5 @@ namespace EgoDevil.Utilities.UI.ColorLabel
                 this.ForeColor = Color.White;
             base.OnBackColorChanged(e);
         }
-
-
-
-
-
-
-
-
-
     }
 }

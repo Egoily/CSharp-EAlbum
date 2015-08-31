@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
 
 using ExtendedPictureBoxLib.Animators;
 
 namespace ExtendedPictureBoxLib
 {
     /// <summary>
-    /// Control further extending the <see cref="ExtendedPictureBox"/> by
-    /// adding animation capabilities.
+    /// Control further extending the <see cref="ExtendedPictureBox"/> by adding animation capabilities.
     /// </summary>
-    public  partial class AnimatedPictureBox : ExtendedPictureBoxLib.ExtendedPictureBox
+    public partial class AnimatedPictureBox : ExtendedPictureBoxLib.ExtendedPictureBox
     {
         #region Events
 
@@ -20,10 +16,10 @@ namespace ExtendedPictureBoxLib
         /// Event which gets fired when <see cref="AnimationIntervall"/> has changed.
         /// </summary>
         public event EventHandler AnimationIntervallChanged;
+
         /// <summary>
         /// Event which gets fired when <see cref="AnimationStepSize"/> has changed.
         /// </summary>
-        /// 
         public event EventHandler AnimationStepSizeChanged;
 
         /// <summary>
@@ -48,15 +44,15 @@ namespace ExtendedPictureBoxLib
         private const int DEFAULT_ANIMATION_INTERVALL = 20;
         private const double DEFAULT_ANIMATION_STEP_SIZE = 10;
         private const PictureBoxStateProperties DEFAULT_ANIMATED_PROPERTIES = PictureBoxStateProperties.All;
-      
+
         #endregion
 
-        #region Constructors 
+        #region Constructors
 
         /// <summary>
         /// Creates a new instance.
         /// </summary>
-        public AnimatedPictureBox()         
+        public AnimatedPictureBox()
         {
             InitializeComponent();
 
@@ -66,10 +62,7 @@ namespace ExtendedPictureBoxLib
             _stateAnimator.StepSize = DEFAULT_ANIMATION_STEP_SIZE;
         }
 
-         
         #endregion
-
-
 
         #region Internal interface
 
@@ -97,8 +90,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the step size between updates of the animation
-        /// (in % - 100 will result in one step -> no actual animation).
+        /// Gets or sets the step size between updates of the animation (in % - 100 will result in
+        /// one step -&gt; no actual animation).
         /// </summary>
         [Browsable(true), Category("Behavior"), DefaultValue(DEFAULT_ANIMATION_STEP_SIZE)]
         [Description("Gets or sets the step size between updates of the animation.")]
@@ -136,8 +129,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Sets or gets which properties of given <see cref="PictureBoxState"/>s
-        /// should be animated.
+        /// Sets or gets which properties of given <see cref="PictureBoxState"/> s should be animated.
         /// </summary>
         [Browsable(true), Category("Behavior"), DefaultValue(DEFAULT_ANIMATED_PROPERTIES)]
         [Description("Sets or gets which properties of given PictureBoxStates should be animated.")]

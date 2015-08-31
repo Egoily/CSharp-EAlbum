@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Runtime.InteropServices;
-
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EForm
 {
@@ -21,10 +16,13 @@ namespace EgoDevil.Utilities.UI.EForm
         private const int WM_SYSCOMMAND = 0x112;
         private const int HTCAPTION = 2;
         private const int SC_SIZE = 0xF000;
+
         [DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
+
         [DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
         #endregion
 
         #region (* Private members *)
@@ -66,6 +64,7 @@ namespace EgoDevil.Utilities.UI.EForm
         #endregion
 
         #region EFormHolderButtonClickArgs
+
         public class EFormHolderButtonClickArgs : EventArgs
         {
             /// <summary>
@@ -87,11 +86,13 @@ namespace EgoDevil.Utilities.UI.EForm
                 m_lIndex = lIndex;
             }
         }
+
         #endregion
 
         #region Events / Delegates
 
         public delegate void EFormHolderButtonClickHandler(EFormHolderButtonClickArgs e);
+
         public event EFormHolderButtonClickHandler EFormHolderButtonClick;
 
         #endregion
@@ -105,6 +106,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.m_etbHolder;
             }
         }
+
         public ETitleBar TitleBar
         {
             get
@@ -112,6 +114,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.m_eTitleBar;
             }
         }
+
         public EStatusBar StatusBar
         {
             get
@@ -119,6 +122,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.m_esbStatusBar;
             }
         }
+
         public E3DBorderPrimitive Border
         {
             get
@@ -139,7 +143,6 @@ namespace EgoDevil.Utilities.UI.EForm
                 m_eTitleBar.TitleBarCaption = value;
                 this.Refresh();
             }
-
         }
 
         public new bool MaximizeBox
@@ -151,10 +154,11 @@ namespace EgoDevil.Utilities.UI.EForm
             set
             {
                 base.MaximizeBox = value;
-                m_eTitleBar.MaximizeBox=value;
+                m_eTitleBar.MaximizeBox = value;
                 this.Refresh();
             }
         }
+
         public new bool MinimizeBox
         {
             get
@@ -169,8 +173,6 @@ namespace EgoDevil.Utilities.UI.EForm
             }
         }
 
-
-
         public EFormCtrlButtons.EButtonStyle ButtonStyle
         {
             get
@@ -184,10 +186,6 @@ namespace EgoDevil.Utilities.UI.EForm
             }
         }
 
-
-
-
-
         [DefaultValue(null)]
         public override Color BackColor
         {
@@ -197,7 +195,6 @@ namespace EgoDevil.Utilities.UI.EForm
             }
             set
             {
-
                 if (value != null)
                 {
                     this.m_clrBackground = value;
@@ -229,9 +226,9 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrMenuIconBorderInner = Color.FromArgb(246, 244, 252);
                 }
                 this.Refresh();
-
             }
         }
+
         [DefaultValue(null)]
         public Color MenuIconOuterBorder
         {
@@ -250,7 +247,6 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrMenuIconBorderOuter = Color.FromArgb(154, 174, 213);
                 }
                 this.Refresh();
-
             }
         }
 
@@ -274,8 +270,10 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.Refresh();
             }
         }
+
         [BrowsableAttribute(false)]
         public new Icon Icon { get; set; }
+
         [BrowsableAttribute(false)]
         public new bool ShowIcon { get; set; }
 
@@ -304,20 +302,14 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_MenuIconMix = value;
 
                 this.Refresh();
-
             }
         }
 
         #endregion
 
-
-
-
-
         public EForm()
         {
             InitializeComponent();
-
 
             // set control styles:
             this.SetStyle(
@@ -335,8 +327,8 @@ namespace EgoDevil.Utilities.UI.EForm
             // initialize titlebar buttons:
             m_eTitleBar.CtrlButtons.Add(new EFormCtrlButtons(EFormCtrlButtons.ECtrlType.Close));
             m_eTitleBar.CtrlButtons.Add(new EFormCtrlButtons(EFormCtrlButtons.ECtrlType.Maximize, Color.FromArgb(3, 63, 126), Color.FromArgb(119, 217, 246)));
-            m_eTitleBar.CtrlButtons.Add(new EFormCtrlButtons(EFormCtrlButtons.ECtrlType.Minimize, Color.FromArgb(124, 13, 2), Color.FromArgb(251, 164, 48)));       
-           
+            m_eTitleBar.CtrlButtons.Add(new EFormCtrlButtons(EFormCtrlButtons.ECtrlType.Minimize, Color.FromArgb(124, 13, 2), Color.FromArgb(251, 164, 48)));
+
             // initialize mix:
             m_MenuIconMix.Add(Color.FromArgb(227, 235, 247));
             m_MenuIconMix.Add(Color.FromArgb(221, 234, 251));
@@ -344,23 +336,15 @@ namespace EgoDevil.Utilities.UI.EForm
             m_MenuIconMix.Add(Color.FromArgb(217, 232, 250));
             m_MenuIconMix.Add(Color.FromArgb(223, 236, 252));
 
-
-
             m_etbHolder = new ETitleBarIconHolder(this);
-
-
-
-
-
         }
-
-
 
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             Invalidate();
         }
+
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             base.OnPaintBackground(e);
@@ -375,8 +359,6 @@ namespace EgoDevil.Utilities.UI.EForm
             }
             using (SolidBrush sb = new SolidBrush(m_clrBackground))
             {
-
-
                 e.Graphics.FillRectangle(sb, this.ClientRectangle);
                 if (bShouldReset)
                     e.Graphics.ResetClip();
@@ -386,14 +368,10 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 e.Graphics.DrawImage(m_bmpBackImage, this.ClientRectangle);
             }
-
-
         }
 
         protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
-
-
             if (e.Button == MouseButtons.Left)
                 m_bMouseDown = true;
 
@@ -403,14 +381,13 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 foreach (EFormCtrlButtons ebtn in m_eTitleBar.CtrlButtons)
                 {
-
                     if (m_TitleBarButtonsBox.IsVisible(e.Location))
                     {
                         if (PointInRect(e.Location, new Rectangle(ebtn.ButtonLeft, ebtn.ButtonTop, ebtn.ButtonWidth, ebtn.ButtonHeight)))
                         {
-                            if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Minimize&&MinimizeBox)
+                            if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Minimize && MinimizeBox)
                                 this.WindowState = FormWindowState.Minimized;
-                            else if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Maximize&&MaximizeBox)
+                            else if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Maximize && MaximizeBox)
                             {
                                 if (m_bMaximized)
                                 {
@@ -433,7 +410,6 @@ namespace EgoDevil.Utilities.UI.EForm
                             }
                         }
                     }
-
                 }
             }
             else
@@ -442,9 +418,9 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     if (PointInRect(e.Location, new Rectangle(ebtn.ButtonLeft, ebtn.ButtonTop, ebtn.ButtonWidth, ebtn.ButtonHeight)))
                     {
-                        if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Minimize&&MinimizeBox)
+                        if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Minimize && MinimizeBox)
                             this.WindowState = FormWindowState.Minimized;
-                        else if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Maximize&&MaximizeBox)
+                        else if (ebtn.ButtonType == EFormCtrlButtons.ECtrlType.Maximize && MaximizeBox)
                         {
                             if (m_bMaximized)
                             {
@@ -466,13 +442,13 @@ namespace EgoDevil.Utilities.UI.EForm
                             this.Close();
                         }
                     }
-
-
                 }
             }
+
             #endregion
 
             #region Titlebar icon holder
+
             // mouse over TitleBarIconHolder :
             if (PointInRect(e.Location, m_rcETitleBarIconHolder))
             {
@@ -492,28 +468,26 @@ namespace EgoDevil.Utilities.UI.EForm
                     }
                 }
             }
+
             #endregion
-
-
         }
+
         protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
-
             if (e.Button == MouseButtons.Left)
                 m_bMouseDown = false;
-
         }
+
         protected override void OnResizeBegin(EventArgs e)
         {
-
             this.Invalidate();
             base.OnResizeBegin(e);
         }
+
         protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
         {
-
-
             #region TitleBarIconHolder
+
             // mouse over TitleBarIconHolder ?:
             if (PointInRect(e.Location, m_rcETitleBarIconHolder))
             {
@@ -529,7 +503,6 @@ namespace EgoDevil.Utilities.UI.EForm
                             m_etbHolder.HolderButtons[i].Hot = true;
                             Invalidate(m_rcETitleBarIconHolder);
                         }
-
                     }
                     else
                     {
@@ -540,7 +513,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         }
                     }
                 }
-
             }
             else
             {
@@ -553,18 +525,25 @@ namespace EgoDevil.Utilities.UI.EForm
                     }
                 }
             }
+
             #endregion
 
             #region TitleBar buttons
+
             HitTestTitleBarButtons(e.Location);
+
             #endregion
 
             #region Form moving
+
             HitTestMoveTitleBar(e);
+
             #endregion
 
             #region Sizing
+
             ResizeWindow(e);
+
             #endregion
 
             base.OnMouseMove(e);
@@ -579,7 +558,6 @@ namespace EgoDevil.Utilities.UI.EForm
                 Cursor = Cursors.SizeNWSE;
                 if (m_bMouseDown && bResizing)
                 {
-
                     if (e.Button == MouseButtons.Left)
                     {
                         if (this.Width < this.MinimumSize.Width)
@@ -589,7 +567,6 @@ namespace EgoDevil.Utilities.UI.EForm
 
                         ReleaseCapture();
                         SendMessage(this.Handle, WM_SYSCOMMAND, (IntPtr)(SC_SIZE + 8), IntPtr.Zero);
-
                     }
                 }
             }
@@ -613,6 +590,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 }
             }
         }
+
         private void HitTestTitleBarButtons(Point pos)
         {
             bool bChanged = false;
@@ -629,7 +607,6 @@ namespace EgoDevil.Utilities.UI.EForm
                             {
                                 ebtn.Hovering = true;
                                 bChanged = true;
-
                             }
                         }
                         else
@@ -638,11 +615,9 @@ namespace EgoDevil.Utilities.UI.EForm
                             {
                                 ebtn.Hovering = false;
                                 bChanged = true;
-
                             }
                         }
                     }
-
                 }
                 else
                 {
@@ -658,7 +633,6 @@ namespace EgoDevil.Utilities.UI.EForm
             }
             else
             {
-
                 foreach (EFormCtrlButtons ebtn in m_eTitleBar.CtrlButtons)
                 {
                     if (PointInRect(pos, new Rectangle(ebtn.ButtonLeft, ebtn.ButtonTop, ebtn.ButtonWidth, ebtn.ButtonHeight)))
@@ -667,8 +641,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         {
                             ebtn.Hovering = true;
                             Invalidate(new Rectangle(ebtn.ButtonLeft, ebtn.ButtonTop, ebtn.ButtonWidth, ebtn.ButtonHeight));
-
-
                         }
                     }
                     else
@@ -677,7 +649,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         {
                             ebtn.Hovering = false;
                             Invalidate(new Rectangle(ebtn.ButtonLeft, ebtn.ButtonTop, ebtn.ButtonWidth, ebtn.ButtonHeight));
-
                         }
                     }
                 }
@@ -686,12 +657,10 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 Invalidate(m_rcBox);
             }
-
         }
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
-
             m_rcTitleBarIcon = new Rectangle(7, 5, 40, 40);
             Rectangle rcBorder = new Rectangle(0, 0, this.ClientRectangle.Width - 1, this.ClientRectangle.Height - 1);
 
@@ -709,8 +678,8 @@ namespace EgoDevil.Utilities.UI.EForm
 
             // render holder buttons:
             m_etbHolder.RenderHolderButtons(m_rcIconHolder.X, m_rcIconHolder.Y, e.Graphics);
-
         }
+
         private void DrawButtonsBox(Graphics g)
         {
             int lBoxTop = 0;
@@ -740,18 +709,17 @@ namespace EgoDevil.Utilities.UI.EForm
             m_rcBox = new Rectangle(ClientRectangle.Right - lBorder - lBoxWidth, lBoxTop, lBoxWidth, lBoxHeight);
 
             m_eTitleBar.RenderCtrlButtonsBox(m_rcBox, g, x, y);
-
         }
+
         private void DrawSysIcon(Graphics g)
         {
-
             int lLeft = 6; int lTop = 3;
             int lWidth = 47;
             int lHeight = m_lTitleBarHeight - 6;
             m_rcXMenuIcon = new Rectangle(lLeft, lTop, lWidth, lHeight);
             RenderSysMenuIcon(m_rcXMenuIcon, g);
-
         }
+
         private void DrawStatusBar(Graphics g)
         {
             int lBorderExcess = 7;
@@ -762,6 +730,7 @@ namespace EgoDevil.Utilities.UI.EForm
             m_esbStatusBar.RenderStatusBar(g, m_rcXStatusBar.Left, m_rcXStatusBar.Top, m_rcXStatusBar.Width, m_rcXStatusBar.Height);
             m_rcSizeGrip = m_esbStatusBar.EGripRect;
         }
+
         private void DrawTitleBar(Graphics g)
         {
             int lTitleBarWidth = m_rcBox.Left - m_rcXMenuIcon.Width - 12;
@@ -771,7 +740,6 @@ namespace EgoDevil.Utilities.UI.EForm
             if (m_eTitleBar.TitleBarType == ETitleBar.ETitleBarType.Angular)
             {
                 lTitleBarWidth += 25;
-
             }
             if (m_eTitleBar.TitleBarType == ETitleBar.ETitleBarType.Rounded)
             {
@@ -803,10 +771,8 @@ namespace EgoDevil.Utilities.UI.EForm
         {
             using (GraphicsPath EMenuIconPath = BuildMenuIconShape(ref rcMenuIcon))
             {
-
                 if (m_MenuIconMix == null || m_MenuIconMix.Count != 5)
                 {
-
                     m_MenuIconMix = new List<Color>();
                     m_MenuIconMix.Add(Color.FromArgb(227, 235, 247));
                     m_MenuIconMix.Add(Color.FromArgb(221, 234, 251));
@@ -820,12 +786,11 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     DrawInnerMenuIconBorder(rcMenuIcon, g, m_clrMenuIconBorderInner);
                     g.DrawPath(new Pen(m_clrMenuIconBorderOuter), EMenuIconPath);
-
                 }
-
             }
 
             #region Draw icon
+
             if (m_bmpMenuIcon != null)
             {
                 int lH = m_bmpMenuIcon.Height;
@@ -834,28 +799,22 @@ namespace EgoDevil.Utilities.UI.EForm
                 Rectangle rcImage = new Rectangle((rcMenuIcon.Right - rcMenuIcon.Width / 2) - lW / 2 - 2, (rcMenuIcon.Bottom - rcMenuIcon.Height / 2) - lH / 2, lW, lH);
                 g.DrawImage(m_bmpMenuIcon, rcImage);
             }
+
             #endregion
         }
+
         private void FillMenuIconGradient(GraphicsPath XFillPath, Graphics g, List<Color> mix)
         {
-
-
             using (EAntiAlias xaa = new EAntiAlias(g))
             {
                 using (LinearGradientBrush lgb = new LinearGradientBrush(XFillPath.GetBounds(), mix[0], mix[4], LinearGradientMode.Vertical))
                 {
-
                     lgb.InterpolationColors = EFormHelper.ColorMix(mix, false);
 
                     g.FillPath(lgb, XFillPath);
-
                 }
             }
-
-
-
         }
-
 
         private GraphicsPath BuildMenuIconShape(ref Rectangle rcMenuIcon)
         {
@@ -873,27 +832,26 @@ namespace EgoDevil.Utilities.UI.EForm
                     );
                     EMenuIconPath.AddLine(rcMenuIcon.Right, rcMenuIcon.Bottom, rcMenuIcon.Left + rcMenuIcon.Height / 2, rcMenuIcon.Bottom);
                     break;
+
                 case ETitleBar.ETitleBarType.Angular:
                     EMenuIconPath.AddArc(rcMenuIcon.Left, rcMenuIcon.Top, rcMenuIcon.Height, rcMenuIcon.Height, 90, 180);
                     EMenuIconPath.AddLine(rcMenuIcon.Left + rcMenuIcon.Height / 2, rcMenuIcon.Top, rcMenuIcon.Right + 18, rcMenuIcon.Top);
                     EMenuIconPath.AddLine(rcMenuIcon.Right + 18, rcMenuIcon.Top, rcMenuIcon.Right - 5, rcMenuIcon.Bottom);
                     EMenuIconPath.AddLine(rcMenuIcon.Right - 5, rcMenuIcon.Bottom, rcMenuIcon.Left + rcMenuIcon.Height / 2, rcMenuIcon.Bottom);
                     break;
+
                 case ETitleBar.ETitleBarType.Rectangular:
                     EMenuIconPath.AddArc(rcMenuIcon.Left, rcMenuIcon.Top, rcMenuIcon.Height, rcMenuIcon.Height, 90, 180);
                     EMenuIconPath.AddLine(rcMenuIcon.Left + rcMenuIcon.Height / 2, rcMenuIcon.Top, rcMenuIcon.Right, rcMenuIcon.Top);
                     EMenuIconPath.AddLine(rcMenuIcon.Right, rcMenuIcon.Top, rcMenuIcon.Right, rcMenuIcon.Bottom);
                     EMenuIconPath.AddLine(rcMenuIcon.Right, rcMenuIcon.Bottom, rcMenuIcon.Left + rcMenuIcon.Height / 2, rcMenuIcon.Bottom);
                     break;
-
-
             }
             return EMenuIconPath;
         }
+
         private void DrawInnerMenuIconBorder(Rectangle rcMenuIcon, Graphics g, Color clr)
         {
-
-
             rcMenuIcon.Inflate(-1, -1);
             using (GraphicsPath XMenuIconPath = BuildMenuIconShape(ref rcMenuIcon))
             {
@@ -905,13 +863,12 @@ namespace EgoDevil.Utilities.UI.EForm
                     );
                 }
             }
-
-
         }
+
         /// <summary>
         /// Checks if point is inside specific rectangle.
         /// </summary>
-        /// <param name="p"> Point to check.</param>
+        /// <param name="p">Point to check.</param>
         /// <param name="rc">Rectangle area.</param>
         /// <returns></returns>
         private bool PointInRect(Point p, Rectangle rc)
@@ -921,6 +878,7 @@ namespace EgoDevil.Utilities.UI.EForm
             else
                 return false;
         }
+
         private void DrawBackImage(Graphics gfx, Rectangle rc)
         {
             if (m_bmpBackImage != null)
@@ -935,51 +893,50 @@ namespace EgoDevil.Utilities.UI.EForm
                         rcImage.X = rc.Width / 2 - lW / 2;
                         rcImage.Y = rc.Height - lH - 2;
                         break;
+
                     case ContentAlignment.BottomLeft:
                         rcImage.X = rc.Left + 2;
                         rcImage.Y = rc.Height - lH - 2;
                         break;
+
                     case ContentAlignment.BottomRight:
                         rcImage.X = rc.Right - lW - 2;
                         rcImage.Y = rc.Height - lH - 2;
                         break;
+
                     case ContentAlignment.MiddleCenter:
                         rcImage.X = rc.Width / 2 - lW / 2;
                         rcImage.Y = rc.Height / 2 - lH / 2;
                         break;
+
                     case ContentAlignment.MiddleLeft:
                         rcImage.X = rc.Left + 2;
                         rcImage.Y = rc.Height / 2 - lH / 2;
                         break;
+
                     case ContentAlignment.MiddleRight:
                         rcImage.X = rc.Right - lW - 2;
                         rcImage.Y = rc.Height / 2 - lH / 2;
                         break;
+
                     case ContentAlignment.TopCenter:
                         rcImage.X = rc.Width / 2 - lW / 2;
                         rcImage.Y = rc.Top + 2;
                         break;
+
                     case ContentAlignment.TopLeft:
                         rcImage.X = rc.Left + 2;
                         rcImage.Y = rc.Top + 2;
                         break;
+
                     case ContentAlignment.TopRight:
                         rcImage.X = rc.Right - lW - 2;
                         rcImage.Y = rc.Top + 2;
                         break;
-
                 }
 
                 gfx.DrawImage(m_bmpBackImage, rcImage);
-
             }
-
         }
-
-
-
-
-
-
     }
 }

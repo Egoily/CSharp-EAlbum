@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Drawing.Text;
-
 
 namespace EgoDevil.Utilities.UI.EForm
 {
@@ -18,15 +14,18 @@ namespace EgoDevil.Utilities.UI.EForm
             /// Left aligned image.
             /// </summary>
             Left,
+
             /// <summary>
             /// Middle aligned image.
             /// </summary>
             Center,
+
             /// <summary>
             /// Rigth aligned image.
             /// </summary>
             Right
         }
+
         private Color m_clrStart = Color.FromArgb(118, 151, 202);
         private Color m_clrEnd = Color.FromArgb(169, 203, 248);
         private Color m_clrBarSepLineUp = Color.FromArgb(27, 27, 27);
@@ -36,7 +35,6 @@ namespace EgoDevil.Utilities.UI.EForm
 
         private Color m_clrGlow = Color.FromArgb(80, 80, 80);
 
-
         private EStatusBarBackImageAlign m_eStatusBarImageAlign = EStatusBarBackImageAlign.Left;
 
         private Image m_BarBackground;
@@ -45,6 +43,7 @@ namespace EgoDevil.Utilities.UI.EForm
         private SizeGripElement sgr = new SizeGripElement();
 
         #region (* Properties *)
+
         public List<EBarItem> BarItems
         {
             get
@@ -52,6 +51,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.m_xbItems;
             }
         }
+
         public SizeGripElement SizeGripElem
         {
             get
@@ -67,6 +67,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 return this.rcSizeGrip;
             }
         }
+
         public int BarHeight
         {
             get
@@ -78,6 +79,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_lBarHeight = value;
             }
         }
+
         public Color StatusStartColor
         {
             get
@@ -89,6 +91,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrStart = value;
             }
         }
+
         public Color StatusEndColor
         {
             get
@@ -100,6 +103,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrEnd = value;
             }
         }
+
         public Color UpperSeparatorColor
         {
             get
@@ -111,6 +115,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrBarSepLineUp = value;
             }
         }
+
         public bool EllipticalGlow
         {
             get
@@ -122,6 +127,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_bEllipticalGlow = value;
             }
         }
+
         public Color GlowColor
         {
             get
@@ -133,6 +139,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrGlow = value;
             }
         }
+
         public Color BarBorder
         {
             get
@@ -143,8 +150,8 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 this.m_clrBarBorder = value;
             }
-
         }
+
         public Image BarBackImage
         {
             get
@@ -156,6 +163,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_BarBackground = value;
             }
         }
+
         public EStatusBarBackImageAlign BarImageAlign
         {
             get
@@ -167,8 +175,8 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eStatusBarImageAlign = value;
             }
         }
-        #endregion
 
+        #endregion
 
         public EStatusBar()
         {
@@ -177,6 +185,7 @@ namespace EgoDevil.Utilities.UI.EForm
         public void RenderStatusBar(Graphics g, int x, int y, int lWidth, int lHeight)
         {
             #region Fill status bar
+
             Rectangle rcStatus = new Rectangle(
                 x,
                 y,
@@ -195,12 +204,12 @@ namespace EgoDevil.Utilities.UI.EForm
                     lgb,
                     rcStatus
                 );
-
             }
 
             #endregion
 
             #region Draw separator line
+
             Pen pUp = new Pen(m_clrBarSepLineUp);
             g.DrawLine(
                 pUp,
@@ -209,16 +218,16 @@ namespace EgoDevil.Utilities.UI.EForm
                 rcStatus.Right,
                 rcStatus.Bottom
             );
+
             #endregion
 
-
             DrawStatusBarBackImage(g, rcStatus);
+
             #region Render items
 
             int lLeft = rcStatus.Left;
             foreach (EBarItem xbi in m_xbItems)
             {
-
                 xbi.RenderXBarItem(
                     g,
                     lLeft,
@@ -232,8 +241,8 @@ namespace EgoDevil.Utilities.UI.EForm
 
             DrawStatusGlow(rcStatus, g, m_clrGlow);
 
-
             #region Render size grip
+
             rcSizeGrip = new Rectangle(
                 rcStatus.Right - 22,
                 rcStatus.Bottom - 10,
@@ -266,7 +275,6 @@ namespace EgoDevil.Utilities.UI.EForm
                                 lY
                             );
                         }
-
                     }
                 }
                 else
@@ -279,11 +287,12 @@ namespace EgoDevil.Utilities.UI.EForm
 
                     lX += 4;
                 }
-
             }
+
             #endregion
 
             #region Draw border
+
             using (Pen pBorder = new Pen(m_clrBarBorder))
             {
                 g.DrawRectangle(
@@ -291,10 +300,13 @@ namespace EgoDevil.Utilities.UI.EForm
                   rcStatus
                 );
             }
+
             #endregion
 
             #region Clean-Up
+
             pUp.Dispose();
+
             #endregion
         }
 
@@ -327,7 +339,6 @@ namespace EgoDevil.Utilities.UI.EForm
                         }
                     }
                     g.ResetClip();
-
                 }
                 else
                 {
@@ -336,11 +347,10 @@ namespace EgoDevil.Utilities.UI.EForm
                       lgbGlow,
                       rcGlow
                     );
-
                 }
             }
-
         }
+
         private void DrawStatusBarBackImage(Graphics g, Rectangle rcStatusbar)
         {
             if (m_BarBackground != null)
@@ -360,17 +370,17 @@ namespace EgoDevil.Utilities.UI.EForm
                         rcIcon.X = rcStatusbar.Right - lW;
                         rcIcon.Y = rcStatusbar.Bottom - lH / 2;
                         break;
+
                     case EStatusBarBackImageAlign.Center:
                         rcIcon.X = rcStatusbar.Right / 2 - lW / 2 + rcStatusbar.Height / 2;
                         rcIcon.Y = rcStatusbar.Bottom - lH / 2;
                         break;
+
                     case EStatusBarBackImageAlign.Left:
                         rcIcon.X = rcStatusbar.Left + 5;
                         rcIcon.Y = rcStatusbar.Bottom - lH / 2;
                         break;
-
                 }
-
 
                 // draw image:
                 g.SetClip(rcStatusbar);
@@ -379,18 +389,15 @@ namespace EgoDevil.Utilities.UI.EForm
                    rcIcon
                 );
                 g.ResetClip();
-
             }
         }
 
-
         public class EBarItem
         {
-            private Color m_clrSeparatorOuter = Color.FromArgb(154,174,213);
-            private Color m_clrSeparatorInner = Color.FromArgb(246,244,252);
+            private Color m_clrSeparatorOuter = Color.FromArgb(154, 174, 213);
+            private Color m_clrSeparatorInner = Color.FromArgb(246, 244, 252);
             private Font m_fntItemFont = new Font("Visitor TT2 BRK", 9);
-            private Color m_clrItemFontColor = Color.FromArgb(62,106,170);
-
+            private Color m_clrItemFontColor = Color.FromArgb(62, 106, 170);
 
             private StringAlignment m_saItem = StringAlignment.Near;
 
@@ -399,6 +406,7 @@ namespace EgoDevil.Utilities.UI.EForm
             private string m_sItemText = "";
 
             #region (* Properties *)
+
             public String BarItemText
             {
                 get
@@ -409,8 +417,8 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     this.m_sItemText = value;
                 }
-
             }
+
             public Font BarItemFont
             {
                 get
@@ -422,6 +430,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_fntItemFont = value;
                 }
             }
+
             public StringAlignment ItemTextAlign
             {
                 get
@@ -433,6 +442,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_saItem = value;
                 }
             }
+
             public Color SepInnerColor
             {
                 get
@@ -444,6 +454,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrSeparatorInner = value;
                 }
             }
+
             public Color SepOuterColor
             {
                 get
@@ -455,6 +466,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrSeparatorOuter = value;
                 }
             }
+
             public Color ItemFontColor
             {
                 get
@@ -466,6 +478,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrItemFontColor = value;
                 }
             }
+
             public int ItemWidth
             {
                 get
@@ -476,11 +489,9 @@ namespace EgoDevil.Utilities.UI.EForm
                 {
                     this.m_lWidth = value;
                 }
-
             }
 
             #endregion
-
 
             public EBarItem()
             {
@@ -499,7 +510,6 @@ namespace EgoDevil.Utilities.UI.EForm
 
             public void RenderXBarItem(Graphics g, int lLeft, int lTop)
             {
-
                 Pen pSeparator = new Pen(m_clrSeparatorOuter);
                 Rectangle rcItem = new Rectangle(lLeft, lTop, m_lWidth, m_lHeight);
                 Rectangle rcText = rcItem;
@@ -526,8 +536,6 @@ namespace EgoDevil.Utilities.UI.EForm
                 sf.Dispose();
                 sb.Dispose();
             }
-
-
         }
 
         #region (* SizeGripElement *)
@@ -551,6 +559,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrForeRectStart = value;
                 }
             }
+
             public Color ForeRectEnd
             {
                 get
@@ -562,6 +571,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrForeRectEnd = value;
                 }
             }
+
             public Color BackRect
             {
                 get
@@ -573,9 +583,8 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_clrBackRect = value;
                 }
             }
+
             #endregion
-
-
 
             public void DrawSizeGripElement(Graphics g, int lX, int lY)
             {
@@ -597,11 +606,8 @@ namespace EgoDevil.Utilities.UI.EForm
                 sbForeStart.Dispose();
                 sbBack.Dispose();
             }
-
         }
 
         #endregion
-
-
     }
 }

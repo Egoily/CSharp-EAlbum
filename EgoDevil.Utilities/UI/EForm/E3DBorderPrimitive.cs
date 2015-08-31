@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace EgoDevil.Utilities.UI.EForm
 {
-
     public class E3DBorderPrimitive
     {
         public enum EBorderStyle
@@ -16,27 +11,30 @@ namespace EgoDevil.Utilities.UI.EForm
             /// Simple flat style border.
             /// </summary>
             Flat,
+
             /// <summary>
             /// Advanced 3D border rendering.
             /// </summary>
             E3D,
         }
+
         public enum EBorderType
         {
             /// <summary>
             /// Border is rendered as a rectangular area.
             /// </summary>
             Rectangular,
+
             /// <summary>
             /// Upper corners are rounded. Added: 04/03/09
             /// </summary>
             Rounded,
+
             /// <summary>
             /// Upper corners are inclinated. Added: 06/03/09
             /// </summary>
             Inclinated
         }
-
 
         private EBorderType m_eBorderType = EBorderType.Rectangular;
         private EBorderStyle m_eBorderStyle = EBorderStyle.E3D;
@@ -47,24 +45,22 @@ namespace EgoDevil.Utilities.UI.EForm
         private int m_lInclination = 6;
         private GraphicsPath m_BorderShape = new GraphicsPath();
 
-
         private Color[] m_clrOuterBorder = new Color[]
-        { 
+        {
             Color.FromArgb(59,90 ,130 ),
             Color.FromArgb(177,198,225)
-
         };
 
         private Color[] m_clrInnerBorder = new Color[]
         {
             Color.FromArgb(194,217,247),
             Color.FromArgb(181,207,241),
-            Color.FromArgb(138,166,205),          
-            Color.FromArgb(253,246,253) 
-    
+            Color.FromArgb(138,166,205),
+            Color.FromArgb(253,246,253)
         };
 
         #region (* Properties *)
+
         public EBorderType BorderType
         {
             get
@@ -76,6 +72,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eBorderType = value;
             }
         }
+
         public EBorderStyle BorderStyle
         {
             get
@@ -87,6 +84,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_eBorderStyle = value;
             }
         }
+
         public int Inclination
         {
             get
@@ -101,6 +99,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_lInclination = value;
             }
         }
+
         public int Radius
         {
             get
@@ -113,9 +112,9 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.m_lRadius = 9;
 
                 this.m_lRadius = value;
-
             }
         }
+
         public Color FlatBorder
         {
             get
@@ -127,6 +126,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrFlatBorder = value;
             }
         }
+
         public Color[] OuterBorderColors
         {
             get
@@ -138,6 +138,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrOuterBorder = value;
             }
         }
+
         public Color[] InnerBorderColors
         {
             get
@@ -149,6 +150,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_clrInnerBorder = value;
             }
         }
+
         public int TitleBarHeight
         {
             get
@@ -160,9 +162,8 @@ namespace EgoDevil.Utilities.UI.EForm
                 this.m_lTitleBarHeight = value;
             }
         }
+
         #endregion
-
-
 
         public GraphicsPath FindX3DBorderPrimitive(Rectangle rcBorder)
         {
@@ -171,17 +172,19 @@ namespace EgoDevil.Utilities.UI.EForm
                 case EBorderType.Rounded:
                     m_BorderShape = EFormHelper.RoundRect((RectangleF)rcBorder, m_lRadius, m_lRadius, 0, 0);
                     break;
+
                 case EBorderType.Inclinated:
                     m_BorderShape = CreateInclinatedBorderPath(rcBorder);
                     break;
             }
             return m_BorderShape;
         }
+
         /// <summary>
         /// Main rendering method.
         /// </summary>
-        /// <param name="rcBorder"> Border bounds</param>
-        /// <param name="g"> Graphics object</param>
+        /// <param name="rcBorder">Border bounds</param>
+        /// <param name="g">Graphics object</param>
         public void Render(Rectangle rcBorder, Graphics g)
         {
             GraphicsPath XBorderPath = new GraphicsPath();
@@ -196,14 +199,17 @@ namespace EgoDevil.Utilities.UI.EForm
                                 DrawBorderLine(g, XBorderPath, rcBorder, 0, false);
                             }
                             break;
+
                         case EBorderType.Rounded:
                             DrawBorderLine(g, XBorderPath, rcBorder, m_lRadius, false);
                             break;
+
                         case EBorderType.Inclinated:
                             DrawBorderLine(g, XBorderPath, rcBorder, 0, false);
                             break;
                     }
                     break;
+
                 case EBorderStyle.Flat:
                     switch (m_eBorderType)
                     {
@@ -213,9 +219,11 @@ namespace EgoDevil.Utilities.UI.EForm
                                 DrawBorderLine(g, XBorderPath, rcBorder, 0, true);
                             }
                             break;
+
                         case EBorderType.Rounded:
                             DrawBorderLine(g, XBorderPath, rcBorder, m_lRadius, true);
                             break;
+
                         case EBorderType.Inclinated:
                             DrawBorderLine(g, XBorderPath, rcBorder, 0, false);
                             break;
@@ -223,28 +231,27 @@ namespace EgoDevil.Utilities.UI.EForm
                     break;
             }
         }
+
         /// <summary>
         /// Helper method for rectangle deflating.
         /// </summary>
-        /// <param name="rcBorder"> Rectangle to deflate</param>
+        /// <param name="rcBorder">Rectangle to deflate</param>
         private void DeflateRect(ref Rectangle rcBorder)
         {
             rcBorder.X += 1; rcBorder.Y += 1;
             rcBorder.Width -= 2; rcBorder.Height -= 2;
         }
-        /// <summary>
-        /// Draws inner & outer 3D borders.
-        /// </summary>
-        /// <param name="g"> Graphics object</param>
-        /// <param name="XBorderPath"> Border path</param>
-        /// <param name="rcBorder"> Border bounds</param>
-        /// <param name="lCorner"> Radius of a rounded rectangle</param>
+
+        /// <summary> Draws inner & outer 3D borders. </summary> <param name="g"> Graphics
+        /// object</param> <param name="XBorderPath"> Border path</param> <param name="rcBorder">
+        /// Border bounds</param> <param name="lCorner"> Radius of a rounded rectangle</param>
         /// <param name="bFlat"> Controls border type mode</param>
         private void DrawBorderLine(Graphics g, GraphicsPath XBorderPath, Rectangle rcBorder, int lCorner, bool bFlat)
         {
             int lC = lCorner;
 
             #region Draw outer border
+
             if (bFlat)
             {
                 switch (m_eBorderType)
@@ -252,9 +259,11 @@ namespace EgoDevil.Utilities.UI.EForm
                     case EBorderType.Rectangular:
                         XBorderPath = EFormHelper.RoundRect((RectangleF)rcBorder, lC, lC, lC, lC);
                         break;
+
                     case EBorderType.Rounded:
                         XBorderPath = EFormHelper.RoundRect((RectangleF)rcBorder, lC, lC, 0, 0);
                         break;
+
                     case EBorderType.Inclinated:
                         XBorderPath = CreateInclinatedBorderPath(rcBorder);
                         break;
@@ -273,13 +282,14 @@ namespace EgoDevil.Utilities.UI.EForm
                         case EBorderType.Rectangular:
                             XBorderPath = EFormHelper.RoundRect((RectangleF)rcBorder, lC, lC, lC, lC);
                             break;
+
                         case EBorderType.Rounded:
                             XBorderPath = EFormHelper.RoundRect((RectangleF)rcBorder, lC, lC, 0, 0);
                             break;
+
                         case EBorderType.Inclinated:
                             XBorderPath = CreateInclinatedBorderPath(rcBorder);
                             break;
-
                     }
                     Pen pen = new Pen(m_clrOuterBorder[o]);
                     g.DrawPath(pen, XBorderPath);
@@ -302,10 +312,10 @@ namespace EgoDevil.Utilities.UI.EForm
                     DeflateRect(ref rcBorder);
                 }
             }
+
                 #endregion
-
-
         }
+
         private GraphicsPath CreateInclinatedBorderPath(Rectangle rcBorder)
         {
             GraphicsPath i = new GraphicsPath();
@@ -318,8 +328,5 @@ namespace EgoDevil.Utilities.UI.EForm
 
             return i;
         }
-
-
     }
-
 }

@@ -1,16 +1,15 @@
 using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.Docking
 {
     partial class DockPanel
     {
-        //  This class comes from Jacob Slusser's MdiClientController class:
-        //  http://www.codeproject.com/cs/miscctrl/mdiclientcontroller.asp
+        // This class comes from Jacob Slusser's MdiClientController class:
+        // http: //www.codeproject.com/cs/miscctrl/mdiclientcontroller.asp
         private class MdiClientController : NativeWindow, IComponent, IDisposable
         {
             private bool m_autoScroll = true;
@@ -49,10 +48,9 @@ namespace EgoDevil.Utilities.UI.Docking
                 get { return m_autoScroll; }
                 set
                 {
-                    // By default the MdiClient control scrolls. It can appear though that
-                    // there are no scrollbars by turning them off when the non-client
-                    // area is calculated. I decided to expose this method following
-                    // the .NET vernacular of an AutoScroll property.
+                    // By default the MdiClient control scrolls. It can appear though that there are
+                    // no scrollbars by turning them off when the non-client area is calculated. I
+                    // decided to expose this method following the .NET vernacular of an AutoScroll property.
                     m_autoScroll = value;
                     if (MdiClient != null)
                         UpdateStyles();
@@ -72,20 +70,19 @@ namespace EgoDevil.Utilities.UI.Docking
                     if (MdiClient == null)
                         return;
 
-                    // This property can actually be visible in design-mode,
-                    // but to keep it consistent with the others,
-                    // prevent this from being show at design-time.
+                    // This property can actually be visible in design-mode, but to keep it
+                    // consistent with the others, prevent this from being show at design-time.
                     if (Site != null && Site.DesignMode)
                         return;
 
-                    // There is no BorderStyle property exposed by the MdiClient class,
-                    // but this can be controlled by Win32 functions. A Win32 ExStyle
-                    // of WS_EX_CLIENTEDGE is equivalent to a Fixed3D border and a
-                    // Style of WS_BORDER is equivalent to a FixedSingle border.
+                    // There is no BorderStyle property exposed by the MdiClient class, but this can
+                    // be controlled by Win32 functions. A Win32 ExStyle of WS_EX_CLIENTEDGE is
+                    // equivalent to a Fixed3D border and a Style of WS_BORDER is equivalent to a
+                    // FixedSingle border.
 
-                    // This code is inspired Jason Dori's article:
-                    // "Adding designable borders to user controls".
-                    // http://www.codeproject.com/cs/miscctrl/CsAddingBorders.asp
+                    // This code is inspired Jason Dori's article: "Adding designable borders to
+                    // user controls".
+                    // http: //www.codeproject.com/cs/miscctrl/CsAddingBorders.asp
 
                     // Get styles using Win32 calls
                     int style = NativeMethods.GetWindowLong(MdiClient.Handle, (int)Win32.GetWindowLongIndex.GWL_STYLE);
@@ -130,8 +127,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 get { return m_parentForm; }
                 set
                 {
-                    // If the ParentForm has previously been set,
-                    // unwire events connected to the old parent.
+                    // If the ParentForm has previously been set, unwire events connected to the old parent.
                     if (m_parentForm != null)
                     {
                         m_parentForm.HandleCreated -= new EventHandler(ParentFormHandleCreated);
@@ -143,8 +139,8 @@ namespace EgoDevil.Utilities.UI.Docking
                     if (m_parentForm == null)
                         return;
 
-                    // If the parent form has not been created yet,
-                    // wait to initialize the MDI client until it is.
+                    // If the parent form has not been created yet, wait to initialize the MDI
+                    // client until it is.
                     if (m_parentForm.IsHandleCreated)
                     {
                         InitializeMdiClient();
@@ -167,8 +163,8 @@ namespace EgoDevil.Utilities.UI.Docking
                     if (m_site == null)
                         return;
 
-                    // If the component is dropped onto a form during design-time,
-                    // set the ParentForm property.
+                    // If the component is dropped onto a form during design-time, set the
+                    // ParentForm property.
                     IDesignerHost host = (value.GetService(typeof(IDesignerHost)) as IDesignerHost);
                     if (host != null)
                     {
@@ -259,8 +255,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
             private void MdiClientHandleDestroyed(object sender, EventArgs e)
             {
-                // If the MdiClient handle has been released, drop the reference and
-                // release the handle.
+                // If the MdiClient handle has been released, drop the reference and release the handle.
                 if (m_mdiClient != null)
                 {
                     m_mdiClient.HandleDestroyed -= new EventHandler(MdiClientHandleDestroyed);
@@ -272,8 +267,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
             private void InitializeMdiClient()
             {
-                // If the mdiClient has previously been set, unwire events connected
-                // to the old MDI.
+                // If the mdiClient has previously been set, unwire events connected to the old MDI.
                 if (MdiClient != null)
                 {
                     MdiClient.HandleDestroyed -= new EventHandler(MdiClientHandleDestroyed);
@@ -286,8 +280,8 @@ namespace EgoDevil.Utilities.UI.Docking
                 // Get the MdiClient from the parent form.
                 foreach (Control control in ParentForm.Controls)
                 {
-                    // If the form is an MDI container, it will contain an MdiClient control
-                    // just as it would any other control.
+                    // If the form is an MDI container, it will contain an MdiClient control just as
+                    // it would any other control.
 
                     m_mdiClient = control as MdiClient;
                     if (m_mdiClient == null)
@@ -317,9 +311,9 @@ namespace EgoDevil.Utilities.UI.Docking
 
             private void UpdateStyles()
             {
-                // To show style changes, the non-client area must be repainted. Using the
-                // control's Invalidate method does not affect the non-client area.
-                // Instead use a Win32 call to signal the style has changed.
+                // To show style changes, the non-client area must be repainted. Using the control's
+                // Invalidate method does not affect the non-client area. Instead use a Win32 call
+                // to signal the style has changed.
                 NativeMethods.SetWindowPos(MdiClient.Handle, IntPtr.Zero, 0, 0, 0, 0,
                     Win32.FlagsSetWindowPos.SWP_NOACTIVATE |
                     Win32.FlagsSetWindowPos.SWP_NOMOVE |
@@ -331,6 +325,7 @@ namespace EgoDevil.Utilities.UI.Docking
         }
 
         private MdiClientController m_mdiClientController = null;
+
         private MdiClientController GetMdiClientController()
         {
             if (m_mdiClientController == null)

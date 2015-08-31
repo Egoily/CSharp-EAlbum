@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -10,18 +8,19 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// Controls Panel and XPanderPanel rendering.
     /// </summary>
     /// <example>
-    /// The following code example creates a <see cref="Panel"/> and sets the panel properties for the forms controls collection,
+    /// The following code example creates a <see cref="Panel"/> and sets the panel properties for
+    /// the forms controls collection,
     /// <code>
     /// using System;
     /// using System.Text;
     /// using System.Windows.Forms;
-    ///
+    /// 
     /// namespace BSE.Windows.Test
     /// {
     ///     public class Form2 : Form
     ///     {
     ///         private EgoDevil.Utilities.UI.EPanels.EPanel panel1;
-    ///
+    /// 
     ///         public Form2()
     ///         {
     ///             // Create and initialize a Panel.
@@ -33,12 +32,12 @@ namespace EgoDevil.Utilities.UI.EPanels
     ///             this.panel1.Dock = DockStyle.Fill;
     ///             // Add the panel to the form
     ///             this.Controls.Add(this.panel1);
-    ///
+    /// 
     ///             // Create and initialize a ToolStripProfessionalRenderer.
     ///             ToolStripProfessionalRenderer renderer = new EgoDevil.Utilities.UI.EPanels.Office2007Renderer();
     ///             // Add it to the ToolStripManager.Renderer
     ///             ToolStripManager.Renderer = renderer;
-    ///
+    /// 
     ///             // Get the ProfessionalColorTable colorTable for the current renderer.
     ///             EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable colorTable = renderer.ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
     ///             if (colorTable != null)
@@ -56,16 +55,16 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// }
     /// </code>
     /// </example>
-    /// <copyright>Copyright ?2006-2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright ?2006-2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     public static class PanelSettingsManager
     {
         #region MethodsPublic
+
         /// <summary>
         /// Sets the PanelStyle and PanelColors table in the given control collection.
         /// </summary>
@@ -84,6 +83,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             PanelStyle panelStyle = panelColors.PanelStyle;
             SetPanelProperties(controls, panelStyle, panelColors);
         }
+
         /// <summary>
         /// Sets the PanelStyle and PanelColors table in the given control collection.
         /// </summary>
@@ -100,7 +100,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                     "panelColors"));
             }
 
-			ArrayList panels = FindPanels(true, controls);
+            ArrayList panels = FindPanels(true, controls);
             foreach (BaseEPanel panel in panels)
             {
                 panel.PanelStyle = panelStyle;
@@ -114,6 +114,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 xpanderPanelList.PanelColors = panelColors;
             }
         }
+
         /// <summary>
         /// Sets the PanelStyle in the given control collection.
         /// </summary>
@@ -130,26 +131,33 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Find all controls that derived from BaseEPanel.
         /// </summary>
-        /// <param name="searchAllChildren">A value indicating whether the FindPanels method loops through all controls.</param>
+        /// <param name="searchAllChildren">
+        /// A value indicating whether the FindPanels method loops through all controls.
+        /// </param>
         /// <param name="controlsToLookIn">A collection of child controls.</param>
         /// <returns>A arraylist of derived types.</returns>
         public static ArrayList FindPanels(bool searchAllChildren, Control.ControlCollection controlsToLookIn)
         {
             return FindControls(typeof(BaseEPanel), searchAllChildren, controlsToLookIn, new ArrayList());
         }
+
         /// <summary>
         /// Find all XPanderPanelLists.
         /// </summary>
-        /// <param name="searchAllChildren">A value indicating whether the FindPanels method loops through all controls.</param>
+        /// <param name="searchAllChildren">
+        /// A value indicating whether the FindPanels method loops through all controls.
+        /// </param>
         /// <param name="controlsToLookIn">A collection of child controls.</param>
         /// <returns></returns>
         public static ArrayList FindPanelLists(bool searchAllChildren, Control.ControlCollection controlsToLookIn)
         {
             return FindControls(typeof(XPanderPanelList), searchAllChildren, controlsToLookIn, new ArrayList());
         }
+
         #endregion
 
         #region MethodsPrivate

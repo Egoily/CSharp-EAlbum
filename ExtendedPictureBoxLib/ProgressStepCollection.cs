@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 
 namespace ExtendedPictureBoxLib
 {
@@ -13,7 +12,9 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Creats a new empty instance.
         /// </summary>
-        public ProgressStepCollection() { }
+        public ProgressStepCollection()
+        {
+        }
 
         #endregion
 

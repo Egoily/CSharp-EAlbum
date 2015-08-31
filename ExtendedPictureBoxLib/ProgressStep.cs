@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 
 using ExtendedPictureBoxLib.Design;
@@ -84,13 +83,10 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the description applied to the step.
-        /// The <see cref="AnimatedPicturesProgressBar"/> will replace some
-        /// keywords before showing the description anyhwere.
-        /// The replacements are the following:
-        /// {0} -> Name of the step.
-        /// {1} -> Index of the step.
-        /// {2} -> Total number of steps.
+        /// Gets or sets the description applied to the step. The <see
+        /// cref="AnimatedPicturesProgressBar"/> will replace some keywords before showing the
+        /// description anyhwere. The replacements are the following: {0} -&gt; Name of the step.
+        /// {1} -&gt; Index of the step. {2} -&gt; Total number of steps.
         /// </summary>
         public string Description
         {

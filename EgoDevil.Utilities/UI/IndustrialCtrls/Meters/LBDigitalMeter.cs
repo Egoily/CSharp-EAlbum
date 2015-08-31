@@ -1,13 +1,9 @@
-﻿
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using EgoDevil.Utilities.UI.IndustrialCtrls.Leds;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
+using EgoDevil.Utilities.UI.IndustrialCtrls.Leds;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 {
@@ -17,11 +13,14 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
     public partial class LBDigitalMeter : LBIndustrialCtrlBase
     {
         #region (* Class variables *)
+
         protected int _dpPos = 0;
         protected int _numDigits = 0;
+
         #endregion
 
         #region (* Constructor *)
+
         public LBDigitalMeter()
         {
             InitializeComponent();
@@ -31,9 +30,11 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 
             this.Format = "000";
         }
+
         #endregion
 
         #region (* Properties *)
+
         /// <summary>
         /// Background color
         /// </summary>
@@ -88,6 +89,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         /// Set the sign of the display
         /// </summary>
         private bool _signed = false;
+
         [
             Category("Digital meter"),
             Description("Set the signed value of the meter")
@@ -111,6 +113,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         /// Set the format of the display, without the sign
         /// </summary>
         private string _format = string.Empty;
+
         [
             Category("Digital meter"),
             Description("Format of the display value")
@@ -136,6 +139,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         /// Set the value of the display
         /// </summary>
         private double val = 0.0;
+
         [
             Category("Digital meter"),
             Description("Value to display")
@@ -147,8 +151,8 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
                 this.val = value;
 
                 string str = this.val.ToString(this.Format);
-                str = str.Replace ( ".", string.Empty );
-                str = str.Replace ( ",", string.Empty );
+                str = str.Replace(".", string.Empty);
+                str = str.Replace(",", string.Empty);
 
                 bool sign = false;
                 if (str[0] == '-')
@@ -157,7 +161,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
                     str = str.TrimStart(new char[] { '-' });
                 }
 
-                if ( str.Length > this._numDigits )
+                if (str.Length > this._numDigits)
                 {
                     foreach (LB7SegmentDisplay d in this.Controls)
                         d.Value = (int)'E';
@@ -187,9 +191,11 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 
             get { return this.val; }
         }
+
         #endregion
 
         #region (* Overrided methods *)
+
         /// <summary>
         /// Create the default renderer
         /// </summary>
@@ -198,6 +204,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         {
             return new LBDigitalMeterRenderer();
         }
+
         /// <summary>
         /// Resize of the control
         /// </summary>
@@ -207,9 +214,11 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
             base.OnResize(e);
             this.RepositionControls();
         }
+
         #endregion
 
         #region (* Protected methods *)
+
         /// <summary>
         /// Update the controls of the meter
         /// </summary>
@@ -314,6 +323,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         {
             this.InvokeOnClick(this, e);
         }
+
         #endregion
     }
 }

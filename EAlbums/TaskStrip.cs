@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EAlbums
 {
     public partial class TaskStrip : UserControl
     {
-
         private AlbumView _albumView = new AlbumView();
+
         public AlbumView AssociatedAlbumView
         {
             get { return _albumView; }
@@ -20,8 +16,6 @@ namespace EAlbums
         }
 
         private AlbumImageList _albumImageList = new AlbumImageList();
-
-
 
         public AlbumImageList AssociatedAlbumImageList
         {
@@ -35,13 +29,11 @@ namespace EAlbums
             }
         }
 
-        const string _albumNewName = "新建相册";
+        private const string _albumNewName = "新建相册";
 
-
-        string CurrentAlbumName;
+        private string CurrentAlbumName;
 
         public List<AlbumItem> AlbumList = new List<AlbumItem>();
-
 
         private string CalNewName()
         {
@@ -60,7 +52,6 @@ namespace EAlbums
                 bool flat = false;
                 foreach (ListViewItem item in listViewAlbums.Items)
                 {
-
                     if (item.Text == newName)
                     {
                         flat = true;
@@ -74,7 +65,6 @@ namespace EAlbums
 
                 index++;
             }
-
         }
 
         private void InsertAlbum()
@@ -85,7 +75,6 @@ namespace EAlbums
             listViewAlbums.Items.Add(item);
             item.BeginEdit();
             AlbumList.Add(new AlbumItem(newName));
-
         }
 
         private void DeleteAlbum()
@@ -105,7 +94,6 @@ namespace EAlbums
                     listViewAlbums.SelectedItems[0].Remove();
                 }
             }
-
         }
 
         private void RepositionOptionPanel(Point pos, bool flt)
@@ -133,13 +121,13 @@ namespace EAlbums
             AssociatedAlbumImageList.LoadImages(CurrentAlbumName, _albumView.ImagePaths);
         }
 
-        public void SetCurrentImagePaths(string name,List<string> imagePaths)
+        public void SetCurrentImagePaths(string name, List<string> imagePaths)
         {
-             foreach (AlbumItem item in AlbumList)
+            foreach (AlbumItem item in AlbumList)
             {
                 if (item.Name == name)
                 {
-                    item.ImagePaths=imagePaths;          
+                    item.ImagePaths = imagePaths;
                     break;
                 }
             }
@@ -148,8 +136,6 @@ namespace EAlbums
         private void ImageListForm_Loading(object sender, ImageListForm.LoadingEventArgs e)
         {
             _albumView.LoadThumbs(e.Images);
-
-
         }
 
         public TaskStrip()
@@ -159,7 +145,6 @@ namespace EAlbums
 
         private void TaskStrip_Load(object sender, EventArgs e)
         {
-
         }
 
         private void listViewAlbums_MouseDown(object sender, MouseEventArgs e)
@@ -202,46 +187,40 @@ namespace EAlbums
 
         private void listViewAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listViewAlbums.SelectedItems.Count>0)
+            if (listViewAlbums.SelectedItems.Count > 0)
             {
                 foreach (AlbumItem item in AlbumList)
                 {
                     CurrentAlbumName = listViewAlbums.SelectedItems[0].Text;
                     if (item.Name == CurrentAlbumName)
                     {
-
                         AssociatedAlbumView.ImagePaths = item.ImagePaths;
                         AssociatedAlbumView.LoadThumbs(item.ImagePaths);
                         break;
                     }
                 }
             }
-           
         }
-
-
-
-
     }
 
     public class AlbumItem
     {
         public List<string> ImagePaths = new List<string>();
         public string Name;
+
         public AlbumItem()
         {
-
         }
+
         public AlbumItem(string name)
         {
             Name = name;
-     
         }
-        public AlbumItem(string name,List<string> list)
+
+        public AlbumItem(string name, List<string> list)
         {
             Name = name;
             ImagePaths = list;
-
         }
     }
 }

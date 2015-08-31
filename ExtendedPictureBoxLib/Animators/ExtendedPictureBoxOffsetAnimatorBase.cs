@@ -5,8 +5,8 @@ using System.Drawing;
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
-    /// Base class inheriting <see cref="Animations.AnimatorBase"/> helping to
-    /// animate thevone of the offset properties of an <see cref="ExtendedPictureBox"/>.
+    /// Base class inheriting <see cref="Animations.AnimatorBase"/> helping to animate thevone of
+    /// the offset properties of an <see cref="ExtendedPictureBox"/>.
     /// </summary>
     public partial class ExtendedPictureBoxOffsetAnimatorBase : Animations.AnimatorBase
     {
@@ -87,8 +87,8 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ExtendedPictureBox"/> which 
-        /// <see cref="ExtendedPictureBox"/> should be animated.
+        /// Gets or sets the <see cref="ExtendedPictureBox"/> which <see cref="ExtendedPictureBox"/>
+        /// should be animated.
         /// </summary>
         [Browsable(true), DefaultValue(null), Category("Behavior")]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -112,8 +112,7 @@ namespace ExtendedPictureBoxLib.Animators
         #region Protected interface
 
         /// <summary>
-        /// Unsafe getter and setter for inheriting classes to match
-        /// to the actual property.
+        /// Unsafe getter and setter for inheriting classes to match to the actual property.
         /// </summary>
         protected virtual Point CurrentOffset
         {
@@ -122,8 +121,7 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Gets the default value for <see cref="StartOffset"/> and
-        /// <see cref="EndOffset"/>.
+        /// Gets the default value for <see cref="StartOffset"/> and <see cref="EndOffset"/>.
         /// </summary>
         protected virtual Point DefaultOffset
         {
@@ -131,8 +129,7 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="StartOffset"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="StartOffset"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeStartOffset()
         {
@@ -140,8 +137,7 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="EndOffset"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="EndOffset"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeEndOffset()
         {
@@ -184,10 +180,9 @@ namespace ExtendedPictureBoxLib.Animators
         }
 
         /// <summary>
-        /// Calculates an interpolated value between <see cref="StartValue"/> and
-        /// <see cref="EndValue"/> for a given step in %.
-        /// Giving 0 will return the <see cref="StartValue"/>.
-        /// Giving 100 will return the <see cref="EndValue"/>.
+        /// Calculates an interpolated value between <see cref="StartValue"/> and <see
+        /// cref="EndValue"/> for a given step in %. Giving 0 will return the <see
+        /// cref="StartValue"/>. Giving 100 will return the <see cref="EndValue"/>.
         /// </summary>
         /// <param name="step">Animation step in %</param>
         /// <returns>Interpolated value for the given step.</returns>

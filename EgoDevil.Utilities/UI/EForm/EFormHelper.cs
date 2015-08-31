@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -9,7 +7,6 @@ namespace EgoDevil.Utilities.UI.EForm
 {
     internal class EFormHelper
     {
-
         public static GraphicsPath RoundRect(RectangleF r, float r1, float r2, float r3, float r4)
         {
             float x = r.X, y = r.Y, w = r.Width, h = r.Height;
@@ -24,9 +21,10 @@ namespace EgoDevil.Utilities.UI.EForm
             rr.AddLine(x, y + h - r4, x, y + r1);
             return rr;
         }
+
         public static ColorBlend ColorMix(List<Color> clrMix, bool bTitleBar)
         {
-            if (clrMix.Count != 5) throw new ArgumentException("The number of colors must be equal to 5."+"Now it is "+clrMix.Count.ToString());
+            if (clrMix.Count != 5) throw new ArgumentException("The number of colors must be equal to 5." + "Now it is " + clrMix.Count.ToString());
 
             ColorBlend blend = new ColorBlend();
             int lIdx = 0;
@@ -45,6 +43,5 @@ namespace EgoDevil.Utilities.UI.EForm
 
             return blend;
         }
-
     }
 }

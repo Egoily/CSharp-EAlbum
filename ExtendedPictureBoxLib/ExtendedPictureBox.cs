@@ -5,16 +5,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-
-
 namespace ExtendedPictureBoxLib
 {
-
     #region Eumeration BaseSizeMode
 
     /// <summary>
-    /// Enumeration holding the modes how the 100% zoom size
-    /// is calculated in an <see cref="ExtendedPictureBox"/>.
+    /// Enumeration holding the modes how the 100% zoom size is calculated in an <see cref="ExtendedPictureBox"/>.
     /// </summary>
     public enum BaseSizeMode
     {
@@ -22,12 +18,15 @@ namespace ExtendedPictureBoxLib
         /// Size is calculated so that the image fits into the view given normal orientation.
         /// </summary>
         Normal,
+
         /// <summary>
         /// Size is calculated so that the image always fits into the view no matter of the rotation.
         /// </summary>
         Enhanced,
+
         /// <summary>
-        /// A <see cref="ExtendedPictureBox.Zoom"/> of 100 will show the image in its original size in this mode.
+        /// A <see cref="ExtendedPictureBox.Zoom"/> of 100 will show the image in its original size
+        /// in this mode.
         /// </summary>
         Original
     }
@@ -37,8 +36,8 @@ namespace ExtendedPictureBoxLib
     #region Eumeration ShadowMode
 
     /// <summary>
-    /// Enumeration holding the modes how the shadow position of
-    /// the main image is calculated in an <see cref="ExtendedPictureBox"/>.
+    /// Enumeration holding the modes how the shadow position of the main image is calculated in an
+    /// <see cref="ExtendedPictureBox"/>.
     /// </summary>
     public enum ShadowMode
     {
@@ -46,41 +45,37 @@ namespace ExtendedPictureBoxLib
         /// No shadow.
         /// </summary>
         Off,
+
         /// <summary>
-        /// Shadow offset is calculated from the actual image position
-        /// which includes the <see cref="ExtendedPictureBox.ImageOffset"/>.
-        /// The offset is given in pixels.
+        /// Shadow offset is calculated from the actual image position which includes the <see
+        /// cref="ExtendedPictureBox.ImageOffset"/>. The offset is given in pixels.
         /// </summary>
         OffsetFromImage,
+
         /// <summary>
-        /// Shadow offset is calculated from the actual image position
-        /// which includes the <see cref="ExtendedPictureBox.ImageOffset"/>.
-        /// The offset is given in percent of the image size.
+        /// Shadow offset is calculated from the actual image position which includes the <see
+        /// cref="ExtendedPictureBox.ImageOffset"/>. The offset is given in percent of the image size.
         /// </summary>
         OffsetFromImagePercent,
+
         /// <summary>
-        /// Shadow offset is calculated from the actual image position
-        /// which doesn't include the <see cref="ExtendedPictureBox.ImageOffset"/>.
-        /// The offset is given in pixels.
+        /// Shadow offset is calculated from the actual image position which doesn't include the
+        /// <see cref="ExtendedPictureBox.ImageOffset"/>. The offset is given in pixels.
         /// </summary>
         OffsetFromCenter,
+
         /// <summary>
-        /// Shadow offset is calculated from the actual image position
-        /// which doesn't include the <see cref="ExtendedPictureBox.ImageOffset"/>.
-        /// The offset is given in percent of the image size.
+        /// Shadow offset is calculated from the actual image position which doesn't include the
+        /// <see cref="ExtendedPictureBox.ImageOffset"/>. The offset is given in percent of the
+        /// image size.
         /// </summary>
         OffsetFromCenterPercent
     }
 
     #endregion
 
-
-
     public partial class ExtendedPictureBox : UserControl
     {
-
-
-
         #region (* Events *)
 
         /// <summary>
@@ -253,7 +248,7 @@ namespace ExtendedPictureBoxLib
         /// Creates a new instance.
         /// </summary>
         public ExtendedPictureBox()
-        { 
+        {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint |
@@ -271,13 +266,12 @@ namespace ExtendedPictureBoxLib
 
         #endregion
 
-
         #region (* Public interface *)
 
         /// <summary>
-        /// Gets or sets a complete description of the current visual state of the
-        /// control only missing the two images, the <see cref="ExtraImageAlignment"/>,
-        /// <see cref="BaseSizeMode"/> and <see cref="BorderStyle"/>.
+        /// Gets or sets a complete description of the current visual state of the control only
+        /// missing the two images, the <see cref="ExtraImageAlignment"/>, <see
+        /// cref="BaseSizeMode"/> and <see cref="BorderStyle"/>.
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -426,10 +420,10 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the alpha value which should be applied to the <see cref="Image"/>.
-        /// The alpha value is calcualted on a per pixel basis and pixels already
-        /// having an alpha value less then 255 will be reduced further. The effect is
-        /// that transparent parts of an image will remain transparent.
+        /// Gets or sets the alpha value which should be applied to the <see cref="Image"/>. The
+        /// alpha value is calcualted on a per pixel basis and pixels already having an alpha value
+        /// less then 255 will be reduced further. The effect is that transparent parts of an image
+        /// will remain transparent.
         /// </summary>
         [Browsable(true), Category("Appearance"), DefaultValue(DEFAULT_ALPHA)]
         [Description("Gets or sets the alpha value which should be applied to the image.")]
@@ -470,8 +464,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets the width of the halo of the text.
-        /// 0 or smaller if now halo should be shown.
+        /// Gets or sets the width of the halo of the text. 0 or smaller if now halo should be shown.
         /// </summary>
         [Description("Gets or sets the width of the halo of the text.")]
         [Browsable(true), DefaultValue(DEFAULT_TEXT_HALO_WIDTH), Category("Appearance")]
@@ -727,8 +720,8 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets whether the images will be painted specially when
-        /// <see cref="Control.Enabled"/> is set to false.
+        /// Gets or sets whether the images will be painted specially when <see
+        /// cref="Control.Enabled"/> is set to false.
         /// </summary>
         [Browsable(true), Category("Appearance"), DefaultValue(DEFAULT_ALLOW_DISABLED_PAINTING)]
         [Description("Gets or sets whether the images will be painted specially when disabled.")]
@@ -769,8 +762,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Gets or sets whether a shadow of the main image should be drawn
-        /// and how the offset is calculated.
+        /// Gets or sets whether a shadow of the main image should be drawn and how the offset is calculated.
         /// </summary>
         [Browsable(true), Category("Appearance"), DefaultValue(DEFAULT_SHADOW_MODE)]
         [Description("Gets or sets whether a shadow of the main image should be drawn and how the offset is calculated.")]
@@ -799,8 +791,7 @@ namespace ExtendedPictureBoxLib
         #region (* ShouldSerialize *)
 
         /// <summary>
-        /// Indicates the designer whether <see cref="BackColor2"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="BackColor2"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeBackColor2()
         {
@@ -808,8 +799,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="TextHaloColor"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="TextHaloColor"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeTextHaloColor()
         {
@@ -817,8 +807,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="BorderColor"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="BorderColor"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeBorderColor()
         {
@@ -826,8 +815,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="ShadowOffset"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="ShadowOffset"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeShadowOffset()
         {
@@ -835,8 +823,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="ImageOffset"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="ImageOffset"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeImageOffset()
         {
@@ -844,8 +831,7 @@ namespace ExtendedPictureBoxLib
         }
 
         /// <summary>
-        /// Indicates the designer whether <see cref="TextOffset"/> needs
-        /// to be serialized.
+        /// Indicates the designer whether <see cref="TextOffset"/> needs to be serialized.
         /// </summary>
         protected virtual bool ShouldSerializeTextOffset()
         {
@@ -1159,6 +1145,7 @@ namespace ExtendedPictureBoxLib
                         }
 
                         return new Size(drawnImageWidth, drawnImageHeight);
+
                     case BaseSizeMode.Enhanced:
                         double diag = Math.Sqrt(_image.Height * _image.Height + _image.Width * _image.Width);
 
@@ -1169,8 +1156,10 @@ namespace ExtendedPictureBoxLib
                             f = this.Width / diag;
 
                         return new Size(Convert.ToInt32(_image.Width * f), Convert.ToInt32(_image.Height * f));
+
                     case BaseSizeMode.Original:
                         return _image.Size;
+
                     default:
                         return Size.Empty;
                 }
@@ -1249,7 +1238,6 @@ namespace ExtendedPictureBoxLib
                     }
                     rowPixel += stride;
                 }
-
             }
             finally
             {
@@ -1279,11 +1267,13 @@ namespace ExtendedPictureBoxLib
                 case ContentAlignment.TopRight:
                     y = 2;
                     break;
+
                 case ContentAlignment.MiddleCenter:
                 case ContentAlignment.MiddleLeft:
                 case ContentAlignment.MiddleRight:
                     y = this.Height / 2 - _extraImage.Height / 2;
                     break;
+
                 case ContentAlignment.BottomCenter:
                 case ContentAlignment.BottomLeft:
                 case ContentAlignment.BottomRight:
@@ -1298,11 +1288,13 @@ namespace ExtendedPictureBoxLib
                 case ContentAlignment.TopLeft:
                     x = 2;
                     break;
+
                 case ContentAlignment.BottomCenter:
                 case ContentAlignment.MiddleCenter:
                 case ContentAlignment.TopCenter:
                     x = this.Width / 2 - _extraImage.Width / 2;
                     break;
+
                 case ContentAlignment.BottomRight:
                 case ContentAlignment.MiddleRight:
                 case ContentAlignment.TopRight:
@@ -1392,60 +1384,30 @@ namespace ExtendedPictureBoxLib
             }
         }
 
-        //		private void PaintImage(Graphics graphics)
-        //		{
-        //			if (_image != null && _zoom > 0f)
-        //			{
-        //				Image image = CurrentImage;
-        //					
-        //				if (image != null)
-        //				{
-        //					Matrix m = new Matrix();
-        //					m.RotateAt(_rotationAngle, new PointF(this.Width / 2, this.Height / 2));
-        //					graphics.Transform = m;
-        //
-        //					int imageX = ImageRectangle.Left + _imageOffset.X;
-        //					int imageY = ImageRectangle.Top + _imageOffset.Y;
-        //					
-        //					if (base.Enabled || !_allowDisabledPainting)
-        //					{
-        //						if (_shadowMode != ShadowMode.Off)
-        //						{
-        //							int shadowImageX = imageX;
-        //							int shadowImageY = imageY;
-        //							switch (_shadowMode)
-        //							{
-        //								case ShadowMode.OffsetFromCenter:
-        //									shadowImageX = _shadowOffset.X + ImageRectangle.Left;
-        //									shadowImageY = _shadowOffset.Y + ImageRectangle.Top;
-        //									break;
-        //								case ShadowMode.OffsetFromCenterPercent:
-        //									shadowImageX = _shadowOffset.X * image.Width / 100 + ImageRectangle.Left;
-        //									shadowImageY = _shadowOffset.Y * image.Height / 100 + ImageRectangle.Top;
-        //									break;
-        //								case ShadowMode.OffsetFromImage:
-        //									shadowImageX = _shadowOffset.X + imageX;
-        //									shadowImageY = _shadowOffset.Y + imageY;
-        //									break;
-        //								case ShadowMode.OffsetFromImagePercent:
-        //									shadowImageX = _shadowOffset.X * image.Width / 100 + imageX;
-        //									shadowImageY = _shadowOffset.Y * image.Height / 100 + imageY;
-        //									break;
-        //							}
-        //
-        //							ControlPaint.DrawImageDisabled(graphics, image, shadowImageX, shadowImageY, base.BackColor);
-        //						}
-        //						graphics.DrawImageUnscaled(image, imageX, imageY);
-        //					}
-        //					else
-        //					{
-        //						ControlPaint.DrawImageDisabled(graphics, image, imageX, imageY, base.BackColor);
-        //					}
-        //					
-        //					graphics.Transform = new Matrix();
-        //				}
-        //			}
-        //		}
+        // private void PaintImage(Graphics graphics) { if (_image != null && _zoom > 0f) { Image
+        // image = CurrentImage;
+        // 
+        // if (image != null) { Matrix m = new Matrix(); m.RotateAt(_rotationAngle, new
+        // PointF(this.Width / 2, this.Height / 2)); graphics.Transform = m;
+        // 
+        // int imageX = ImageRectangle.Left + _imageOffset.X; int imageY = ImageRectangle.Top + _imageOffset.Y;
+        // 
+        // if (base.Enabled || !_allowDisabledPainting) { if (_shadowMode != ShadowMode.Off) { int
+        // shadowImageX = imageX; int shadowImageY = imageY; switch (_shadowMode) { case
+        // ShadowMode.OffsetFromCenter: shadowImageX = _shadowOffset.X + ImageRectangle.Left;
+        // shadowImageY = _shadowOffset.Y + ImageRectangle.Top; break; case
+        // ShadowMode.OffsetFromCenterPercent: shadowImageX = _shadowOffset.X * image.Width / 100 +
+        // ImageRectangle.Left; shadowImageY = _shadowOffset.Y * image.Height / 100 +
+        // ImageRectangle.Top; break; case ShadowMode.OffsetFromImage: shadowImageX =
+        // _shadowOffset.X + imageX; shadowImageY = _shadowOffset.Y + imageY; break; case
+        // ShadowMode.OffsetFromImagePercent: shadowImageX = _shadowOffset.X * image.Width / 100 +
+        // imageX; shadowImageY = _shadowOffset.Y * image.Height / 100 + imageY; break; }
+        // 
+        // ControlPaint.DrawImageDisabled(graphics, image, shadowImageX, shadowImageY,
+        // base.BackColor); } graphics.DrawImageUnscaled(image, imageX, imageY); } else {
+        // ControlPaint.DrawImageDisabled(graphics, image, imageX, imageY, base.BackColor); }
+        // 
+        // graphics.Transform = new Matrix(); } } }
 
         private void PaintImage(Graphics graphics)
         {
@@ -1471,14 +1433,17 @@ namespace ExtendedPictureBoxLib
                                     shadowImageX = _shadowOffset.X;
                                     shadowImageY = _shadowOffset.Y;
                                     break;
+
                                 case ShadowMode.OffsetFromCenterPercent:
                                     shadowImageX = _shadowOffset.X * image.Width / 100;
                                     shadowImageY = _shadowOffset.Y * image.Height / 100;
                                     break;
+
                                 case ShadowMode.OffsetFromImage:
                                     shadowImageX = _shadowOffset.X + _imageOffset.X;
                                     shadowImageY = _shadowOffset.Y + _imageOffset.Y;
                                     break;
+
                                 case ShadowMode.OffsetFromImagePercent:
                                     shadowImageX = _shadowOffset.X * image.Width / 100 + _imageOffset.X;
                                     shadowImageY = _shadowOffset.Y * image.Height / 100 + _imageOffset.Y;
@@ -1520,7 +1485,7 @@ namespace ExtendedPictureBoxLib
         //			if (_image != null && _zoom > 0f)
         //			{
         //				Image image = CurrentImage;
-        //					
+        //
         //				if (image != null)
         //				{
         //					Matrix m = new Matrix();
@@ -1530,7 +1495,7 @@ namespace ExtendedPictureBoxLib
         //
         ////					int imageX = ImageRectangle.Left + _imageOffset.X;
         ////					int imageY = ImageRectangle.Top + _imageOffset.Y;
-        //					
+        //
         //					if (base.Enabled || !_allowDisabledPainting)
         //					{
         //						graphics.DrawImageUnscaled(image, ImageRectangle.Left, ImageRectangle.Top);
@@ -1539,7 +1504,7 @@ namespace ExtendedPictureBoxLib
         ////					{
         ////						ControlPaint.DrawImageDisabled(graphics, image, imageX, imageY, base.BackColor);
         ////					}
-        //					
+        //
         //					graphics.Transform = new Matrix();
         //				}
         //			}
@@ -1583,6 +1548,7 @@ namespace ExtendedPictureBoxLib
                     case ContentAlignment.BottomCenter:
                         rotateX = this.Width / 2f;
                         break;
+
                     case ContentAlignment.TopRight:
                     case ContentAlignment.MiddleRight:
                     case ContentAlignment.BottomRight:
@@ -1596,6 +1562,7 @@ namespace ExtendedPictureBoxLib
                     case ContentAlignment.BottomRight:
                         rotateY = this.Height - 1;
                         break;
+
                     case ContentAlignment.MiddleCenter:
                     case ContentAlignment.MiddleLeft:
                     case ContentAlignment.MiddleRight:
@@ -1711,19 +1678,5 @@ namespace ExtendedPictureBoxLib
         }
 
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

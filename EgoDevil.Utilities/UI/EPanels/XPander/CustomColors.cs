@@ -1,37 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
     /// <summary>
-    /// Base class for the custom colors at a panel or xpanderpanel control. 
+    /// Base class for the custom colors at a panel or xpanderpanel control.
     /// </summary>
     /// <remarks>
-    /// If you use the <see cref="ColorScheme.Custom"/> ColorScheme, this is the base class for the custom colors.
+    /// If you use the <see cref="ColorScheme.Custom"/> ColorScheme, this is the base class for the
+    /// custom colors.
     /// </remarks>
-    /// <copyright>Copyright © 2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright © 2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [Description("The colors used in a panel")]
     public class CustomColors
     {
         #region Events
+
         /// <summary>
         /// Occurs when the value of the CustomColors property changes.
         /// </summary>
         [Description("Occurs when the value of the CustomColors property changes.")]
         public event EventHandler<EventArgs> CustomColorsChanged;
+
         #endregion
-        
+
         #region FieldsPrivate
+
         private Color m_borderColor = System.Windows.Forms.ProfessionalColors.GripDark;
         private Color m_captionCloseIcon = SystemColors.ControlText;
         private Color m_captionExpandIcon = SystemColors.ControlText;
@@ -40,10 +41,11 @@ namespace EgoDevil.Utilities.UI.EPanels
         private Color m_captionGradientMiddle = System.Windows.Forms.ProfessionalColors.ToolStripGradientMiddle;
         private Color m_captionText = SystemColors.ControlText;
         private Color m_innerBorderColor = System.Windows.Forms.ProfessionalColors.GripLight;
-        
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets or sets the border color of a Panel or XPanderPanel.
         /// </summary>
@@ -60,6 +62,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the forecolor of a close icon in a Panel or XPanderPanel.
         /// </summary>
@@ -76,6 +79,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the forecolor of an expand icon in a Panel or XPanderPanel.
         /// </summary>
@@ -92,6 +96,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the starting color of the gradient at the caption on a Panel or XPanderPanel.
         /// </summary>
@@ -108,6 +113,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the end color of the gradient at the caption on a Panel or XPanderPanel.
         /// </summary>
@@ -124,6 +130,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the middle color of the gradient at the caption on a Panel or XPanderPanel.
         /// </summary>
@@ -140,6 +147,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the text color at the caption on a Panel or XPanderPanel.
         /// </summary>
@@ -156,6 +164,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the inner border color of a Panel.
         /// </summary>
@@ -172,9 +181,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         #endregion
 
         #region MethodsProtected
+
         /// <summary>
         /// Raises the CustomColors changed event.
         /// </summary>
@@ -187,6 +198,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 this.CustomColorsChanged(sender, e);
             }
         }
+
         #endregion
     }
 }

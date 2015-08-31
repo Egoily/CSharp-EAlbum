@@ -3,54 +3,51 @@ using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data;
 using System.Windows.Forms;
-using System.ComponentModel.Design;
-
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
     #region Class XPanderPanel
-	/// <summary>
-	/// Used to group collections of controls. 
-	/// </summary>
+
+    /// <summary>
+    /// Used to group collections of controls.
+    /// </summary>
     /// <remarks>
     /// XPanderPanel controls represent the expandable and collapsable panels in XPanderPanelList.
-    /// The XpanderPanel is a control that contains other controls.
-    /// You can use a XPanderPanel to group collections of controls such as the XPanderPanelList.
-    /// The order of xpanderpanels in the XPanderPanelList.XPanderPanels collection reflects the order
-    /// of xpanderpanels controls. To change the order of tabs in the control, you must change
-    /// their positions in the collection by removing them and inserting them at new indexes.
-    /// You can change the xpanderpanel's appearance. For example, to make it appear flat,
-    /// set the CaptionStyle property to CaptionStyle.Flat.
-    /// On top of the XPanderPanel there is the captionbar.
-    /// This captionbar may contain an image and text. According to it's properties the panel is closable.
+    /// The XpanderPanel is a control that contains other controls. You can use a XPanderPanel to
+    /// group collections of controls such as the XPanderPanelList. The order of xpanderpanels in
+    /// the XPanderPanelList.XPanderPanels collection reflects the order of xpanderpanels controls.
+    /// To change the order of tabs in the control, you must change their positions in the
+    /// collection by removing them and inserting them at new indexes. You can change the
+    /// xpanderpanel's appearance. For example, to make it appear flat, set the CaptionStyle
+    /// property to CaptionStyle.Flat. On top of the XPanderPanel there is the captionbar. This
+    /// captionbar may contain an image and text. According to it's properties the panel is closable.
     /// </remarks>
-	/// <copyright>Copyright ?2006-2008 Uwe Eichkorn
-    /// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    /// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    /// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
-    /// REMAINS UNCHANGED.
+    /// <copyright>
+    ///     Copyright ?2006-2008 Uwe Eichkorn THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT
+    ///     WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
+    ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
     [Designer(typeof(XPanderPanelDesigner))]
     [DesignTimeVisible(false)]
-	public partial class XPanderPanel : BaseEPanel
-	{
-		#region EventsPublic
+    public partial class XPanderPanel : BaseEPanel
+    {
+        #region EventsPublic
+
         /// <summary>
         /// The CaptionStyleChanged event occurs when CaptionStyle flags have been changed.
         /// </summary>
         [Description("The CaptionStyleChanged event occurs when CaptionStyle flags have been changed.")]
         public event EventHandler<EventArgs> CaptionStyleChanged;
-        #endregion
-		
-		#region Constants
-		#endregion
 
-		#region FieldsPrivate
-		
-		private System.Drawing.Image m_imageChevron;
+        #endregion
+
+
+
+        #region FieldsPrivate
+
+        private System.Drawing.Image m_imageChevron;
         private System.Drawing.Image m_imageChevronUp;
         private System.Drawing.Image m_imageChevronDown;
         private CustomXPanderPanelColors m_customColors;
@@ -58,28 +55,30 @@ namespace EgoDevil.Utilities.UI.EPanels
         private bool m_bIsClosable = true;
         private CaptionStyle m_captionStyle;
 
-		#endregion
+        #endregion
 
-		#region Properties
-		/// <summary>
+        #region Properties
+
+        /// <summary>
         /// Gets or sets a value indicating whether the expand icon in a XPanderPanel is visible.
         /// </summary>
-		[Description("Gets or sets a value indicating whether the expand icon in a XPanderPanel is visible.")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[DefaultValue(false)]
-		[Browsable(false)]
-		[Category("Appearance")]
-		public override bool ShowExpandIcon
-		{
-			get
-			{
-				return base.ShowExpandIcon;
-			}
-			set
-			{
-				base.ShowExpandIcon = value;
-			}
-		}
+        [Description("Gets or sets a value indicating whether the expand icon in a XPanderPanel is visible.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [Category("Appearance")]
+        public override bool ShowExpandIcon
+        {
+            get
+            {
+                return base.ShowExpandIcon;
+            }
+            set
+            {
+                base.ShowExpandIcon = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether the close icon in a XPanderPanel is visible.
         /// </summary>
@@ -99,6 +98,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 base.ShowCloseIcon = value;
             }
         }
+
         /// <summary>
         /// Gets the custom colors which are used for the XPanderPanel.
         /// </summary>
@@ -109,10 +109,11 @@ namespace EgoDevil.Utilities.UI.EPanels
         {
             get { return this.m_customColors; }
         }
+
         /// <summary>
         /// Gets or sets the style of the caption (not for PanelStyle.Aqua).
         /// </summary>
-        [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public CaptionStyle CaptionStyle
         {
@@ -126,6 +127,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets a value indicating whether this XPanderPanel is closable.
         /// </summary>
@@ -144,6 +146,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
+
         /// <summary>
         /// Gets or sets the height and width of the XPanderPanel.
         /// </summary>
@@ -153,25 +156,27 @@ namespace EgoDevil.Utilities.UI.EPanels
             get { return base.Size; }
             set { base.Size = value; }
         }
-		#endregion
 
-		#region MethodsPublic
-		/// <summary>
-		/// Initializes a new instance of the XPanderPanel class.
-		/// </summary>
-		public XPanderPanel()
-		{
-			InitializeComponent();
+        #endregion
+
+        #region MethodsPublic
+
+        /// <summary>
+        /// Initializes a new instance of the XPanderPanel class.
+        /// </summary>
+        public XPanderPanel()
+        {
+            InitializeComponent();
 
             this.BackColor = Color.Transparent;
             this.CaptionStyle = CaptionStyle.Normal;
             this.ForeColor = SystemColors.ControlText;
-			this.Height = this.CaptionHeight;
-			this.ShowBorder = true;
+            this.Height = this.CaptionHeight;
+            this.ShowBorder = true;
             this.m_customColors = new CustomXPanderPanelColors();
             this.m_customColors.CustomColorsChanged += OnCustomColorsChanged;
+        }
 
-		}
         /// <summary>
         /// Gets the rectangle that represents the display area of the XPanderPanel.
         /// </summary>
@@ -203,16 +208,20 @@ namespace EgoDevil.Utilities.UI.EPanels
                 return displayRectangle;
             }
         }
-		#endregion
 
-		#region MethodsProtected
-		/// <summary>
-		/// Paints the background of the control.
-		/// </summary>
-		/// <param name="pevent">A PaintEventArgs that contains information about the control to paint.</param>
-		protected override void OnPaintBackground(PaintEventArgs pevent)
-		{
-			base.OnPaintBackground(pevent);
+        #endregion
+
+        #region MethodsProtected
+
+        /// <summary>
+        /// Paints the background of the control.
+        /// </summary>
+        /// <param name="pevent">
+        /// A PaintEventArgs that contains information about the control to paint.
+        /// </param>
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            base.OnPaintBackground(pevent);
             base.BackColor = Color.Transparent;
             Color backColor = this.PanelColors.XPanderPanelBackColor;
             if ((backColor != Color.Empty) && backColor != Color.Transparent)
@@ -228,18 +237,19 @@ namespace EgoDevil.Utilities.UI.EPanels
                     pevent.Graphics.FillRectangle(backgroundBrush, rectangle);
                 }
             }
-		}
-		/// <summary>
-		/// Raises the Paint event.
-		/// </summary>
-		/// <param name="e">A PaintEventArgs that contains the event data.</param>
-		protected override void OnPaint(PaintEventArgs e)
-		{
+        }
+
+        /// <summary>
+        /// Raises the Paint event.
+        /// </summary>
+        /// <param name="e">A PaintEventArgs that contains the event data.</param>
+        protected override void OnPaint(PaintEventArgs e)
+        {
             if (IsZeroWidthOrHeight(this.CaptionRectangle) == true)
             {
                 return;
             }
-            
+
             using (UseAntiAlias antiAlias = new UseAntiAlias(e.Graphics))
             {
                 Graphics graphics = e.Graphics;
@@ -249,7 +259,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                     bool bShowBorder = this.ShowBorder;
                     Color borderColor = this.PanelColors.BorderColor;
                     Rectangle borderRectangle = this.ClientRectangle;
-                    
+
                     switch (this.PanelStyle)
                     {
                         case PanelStyle.Default:
@@ -261,22 +271,24 @@ namespace EgoDevil.Utilities.UI.EPanels
                     }
                 }
             }
-		}
-		/// <summary>
+        }
+
+        /// <summary>
         /// Raises the PanelExpanding event.
-		/// </summary>
+        /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A XPanderStateChangeEventArgs that contains the event data.</param>
         protected override void OnPanelExpanding(object sender, XPanderStateChangeEventArgs e)
-		{
-			bool bExpand = e.Expand;
-			if (bExpand == true)
-			{
-				this.Expand = bExpand;
+        {
+            bool bExpand = e.Expand;
+            if (bExpand == true)
+            {
+                this.Expand = bExpand;
                 this.Invalidate(false);
-			}
-			base.OnPanelExpanding(sender, e);
-		}
+            }
+            base.OnPanelExpanding(sender, e);
+        }
+
         /// <summary>
         /// Raises the CaptionStyleChanged event.
         /// </summary>
@@ -290,6 +302,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 this.CaptionStyleChanged(sender, e);
             }
         }
+
         /// <summary>
         /// Raises the MouseUp event.
         /// </summary>
@@ -325,10 +338,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
         }
-		/// <summary>
-		/// Raises the VisibleChanged event.
-		/// </summary>
-		/// <param name="e">An EventArgs that contains the event data.</param>
+
+        /// <summary>
+        /// Raises the VisibleChanged event.
+        /// </summary>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected override void OnVisibleChanged(EventArgs e)
         {
             base.OnVisibleChanged(e);
@@ -364,10 +378,10 @@ namespace EgoDevil.Utilities.UI.EPanels
             CalculatePanelHeights();
         }
 
-		#endregion
+        #endregion
 
-		#region MethodsPrivate
-        
+        #region MethodsPrivate
+
         private void DrawCaptionbar(Graphics graphics, bool bExpand, bool bShowBorder, PanelStyle panelStyle)
         {
             Rectangle captionRectangle = this.CaptionRectangle;
@@ -391,7 +405,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 this.m_imageChevronDown = Resources.ChevronDown;
             }
-            
+
             this.m_imageChevron = this.m_imageChevronDown;
             if (bExpand == true)
             {
@@ -611,7 +625,6 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
         }
 
-
         private static void DrawInnerBorders(Graphics graphics, XPanderPanel xpanderPanel)
         {
             if (xpanderPanel.ShowBorder == true)
@@ -665,19 +678,19 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
         }
 
-		private void CalculatePanelHeights()
-		{
-			if (this.Parent == null)
-			{
-				return;
-			}
+        private void CalculatePanelHeights()
+        {
+            if (this.Parent == null)
+            {
+                return;
+            }
 
             int iPanelHeight = this.Parent.Padding.Top;
 
             foreach (Control control in this.Parent.Controls)
             {
-				EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-					control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
+                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
 
                 if ((xpanderPanel != null) && (xpanderPanel.Visible == true))
                 {
@@ -685,12 +698,12 @@ namespace EgoDevil.Utilities.UI.EPanels
                 }
             }
 
-			iPanelHeight += this.Parent.Padding.Bottom;
+            iPanelHeight += this.Parent.Padding.Bottom;
 
             foreach (Control control in this.Parent.Controls)
-			{
-				EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-					control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            {
+                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
+                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
 
                 if (xpanderPanel != null)
                 {
@@ -705,55 +718,58 @@ namespace EgoDevil.Utilities.UI.EPanels
                         xpanderPanel.Height = xpanderPanel.CaptionHeight;
                     }
                 }
-			}
+            }
 
-			int iTop = this.Parent.Padding.Top;
-			foreach (Control control in this.Parent.Controls)
-			{
-				EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-					control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            int iTop = this.Parent.Padding.Top;
+            foreach (Control control in this.Parent.Controls)
+            {
+                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
+                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
 
                 if ((xpanderPanel != null) && (xpanderPanel.Visible == true))
                 {
                     xpanderPanel.Top = iTop;
                     iTop += xpanderPanel.Height;
                 }
-			}
-		}
+            }
+        }
 
-		#endregion
+        #endregion
     }
 
     #endregion
 
     #region Class XPanderPanelDesigner
+
     /// <summary>
     /// Designer class for extending the design mode behavior of a XPanderPanel control
     /// </summary>
-	internal class XPanderPanelDesigner : System.Windows.Forms.Design.ScrollableControlDesigner
-	{
-		#region FieldsPrivate
+    internal class XPanderPanelDesigner : System.Windows.Forms.Design.ScrollableControlDesigner
+    {
+        #region FieldsPrivate
 
-		private Pen m_borderPen = new Pen(Color.FromKnownColor(KnownColor.ControlDarkDark));
+        private Pen m_borderPen = new Pen(Color.FromKnownColor(KnownColor.ControlDarkDark));
         private System.Windows.Forms.Design.Behavior.Adorner m_adorner;
 
-		#endregion
+        #endregion
 
-		#region MethodsPublic
-		/// <summary>
+        #region MethodsPublic
+
+        /// <summary>
         /// Initializes a new instance of the XPanderPanelDesigner class.
-		/// </summary>
-		public XPanderPanelDesigner()
-		{
-			this.m_borderPen.DashStyle = DashStyle.Dash;
-		}
-		/// <summary>
-		/// Initializes the designer with the specified component.
-		/// </summary>
-		/// <param name="component">The IComponent to associate with the designer.</param>
-		public override void Initialize(IComponent component)
-		{
-			base.Initialize(component);
+        /// </summary>
+        public XPanderPanelDesigner()
+        {
+            this.m_borderPen.DashStyle = DashStyle.Dash;
+        }
+
+        /// <summary>
+        /// Initializes the designer with the specified component.
+        /// </summary>
+        /// <param name="component">The IComponent to associate with the designer.</param>
+        public override void Initialize(IComponent component)
+        {
+            base.Initialize(component);
             XPanderPanel xpanderPanel = Control as XPanderPanel;
             if (xpanderPanel != null)
             {
@@ -761,91 +777,99 @@ namespace EgoDevil.Utilities.UI.EPanels
                 BehaviorService.Adorners.Add(this.m_adorner);
                 this.m_adorner.Glyphs.Add(new XPanderPanelCaptionGlyph(BehaviorService, xpanderPanel));
             }
-		}
-		#endregion
+        }
 
-		#region MethodsProtected
+        #endregion
+
+        #region MethodsProtected
+
         /// <summary>
-        /// Releases the unmanaged resources used by the XPanderPanelDesigner,
-        /// and optionally releases the managed resources. 
+        /// Releases the unmanaged resources used by the XPanderPanelDesigner, and optionally
+        /// releases the managed resources.
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources;
-        /// false to release only unmanaged resources.</param>
+        /// <param name="disposing">
+        /// true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
-			try
-			{
-				if (disposing)
-				{
-					if (this.m_borderPen != null)
-					{
-						this.m_borderPen.Dispose();
-					}
-					if (this.m_adorner != null)
-					{
-						if (BehaviorService != null)
-						{
-							BehaviorService.Adorners.Remove(this.m_adorner);
-						}
-					}
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
+            try
+            {
+                if (disposing)
+                {
+                    if (this.m_borderPen != null)
+                    {
+                        this.m_borderPen.Dispose();
+                    }
+                    if (this.m_adorner != null)
+                    {
+                        if (BehaviorService != null)
+                        {
+                            BehaviorService.Adorners.Remove(this.m_adorner);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
         }
-		/// <summary>
-		/// Receives a call when the control that the designer is managing has painted its surface so the designer can
-		/// paint any additional adornments on top of the xpanderpanel.
-		/// </summary>
-		/// <param name="e">A PaintEventArgs the designer can use to draw on the xpanderpanel.</param>
-		protected override void OnPaintAdornments(PaintEventArgs e)
-		{
-			base.OnPaintAdornments(e);
-			e.Graphics.DrawRectangle(
-				this.m_borderPen,
-				0,
-				0,
-				this.Control.Width - 2,
-				this.Control.Height - 2);
-		}
-		/// <summary>
-		/// Allows a designer to change or remove items from the set of properties that it exposes through a <see cref="TypeDescriptor">TypeDescriptor</see>. 
-		/// </summary>
-		/// <param name="properties">The properties for the class of the component.</param>
-		protected override void PostFilterProperties(IDictionary properties)
-		{
-			base.PostFilterProperties(properties);
-			properties.Remove("AccessibilityObject");
-			properties.Remove("AccessibleDefaultActionDescription");
-			properties.Remove("AccessibleDescription");
-			properties.Remove("AccessibleName");
-			properties.Remove("AccessibleRole");
-			properties.Remove("AllowDrop");
+
+        /// <summary>
+        /// Receives a call when the control that the designer is managing has painted its surface
+        /// so the designer can paint any additional adornments on top of the xpanderpanel.
+        /// </summary>
+        /// <param name="e">A PaintEventArgs the designer can use to draw on the xpanderpanel.</param>
+        protected override void OnPaintAdornments(PaintEventArgs e)
+        {
+            base.OnPaintAdornments(e);
+            e.Graphics.DrawRectangle(
+                this.m_borderPen,
+                0,
+                0,
+                this.Control.Width - 2,
+                this.Control.Height - 2);
+        }
+
+        /// <summary>
+        /// Allows a designer to change or remove items from the set of properties that it exposes
+        /// through a <see cref="TypeDescriptor">TypeDescriptor</see>.
+        /// </summary>
+        /// <param name="properties">The properties for the class of the component.</param>
+        protected override void PostFilterProperties(IDictionary properties)
+        {
+            base.PostFilterProperties(properties);
+            properties.Remove("AccessibilityObject");
+            properties.Remove("AccessibleDefaultActionDescription");
+            properties.Remove("AccessibleDescription");
+            properties.Remove("AccessibleName");
+            properties.Remove("AccessibleRole");
+            properties.Remove("AllowDrop");
             properties.Remove("Anchor");
             properties.Remove("AntiAliasing");
-			properties.Remove("AutoScroll");
-			properties.Remove("AutoScrollMargin");
-			properties.Remove("AutoScrollMinSize");
+            properties.Remove("AutoScroll");
+            properties.Remove("AutoScrollMargin");
+            properties.Remove("AutoScrollMinSize");
             properties.Remove("BackColor");
             properties.Remove("BackgroundImage");
-			properties.Remove("BackgroundImageLayout");
-			properties.Remove("CausesValidation");
-			properties.Remove("ContextMenuStrip");
-			properties.Remove("Dock");
-			properties.Remove("GenerateMember");
-			properties.Remove("ImeMode");
+            properties.Remove("BackgroundImageLayout");
+            properties.Remove("CausesValidation");
+            properties.Remove("ContextMenuStrip");
+            properties.Remove("Dock");
+            properties.Remove("GenerateMember");
+            properties.Remove("ImeMode");
             properties.Remove("Location");
-			properties.Remove("MaximumSize");
-			properties.Remove("MinimumSize");
-		}
+            properties.Remove("MaximumSize");
+            properties.Remove("MinimumSize");
+        }
 
-		#endregion
+        #endregion
     }
+
     #endregion
 
     #region Class XPanderPanelCaptionGlyph
+
     /// <summary>
     /// Represents a single user interface (UI) entity managed by an Adorner.
     /// </summary>
@@ -859,6 +883,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the bounds of the Glyph.
         /// </summary>
@@ -876,9 +901,11 @@ namespace EgoDevil.Utilities.UI.EPanels
                 return bounds;
             }
         }
+
         #endregion
 
         #region MethodsPublic
+
         /// <summary>
         /// Initializes a new instance of the CaptionGlyph class.
         /// </summary>
@@ -891,6 +918,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             this.m_behaviorService = behaviorService;
             this.m_xpanderPanel = xpanderPanel;
         }
+
         /// <summary>
         /// Provides hit test logic.
         /// </summary>
@@ -898,13 +926,10 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <returns>A Cursor if the Glyph is associated with p; otherwise, a null reference</returns>
         public override Cursor GetHitTest(Point p)
         {
-            // GetHitTest is called to see if the point is
-            // within this glyph.  This gives us a chance to decide
-            // what cursor to show.  Returning null from here means
-            // the mouse pointer is not currently inside of the glyph.
-            // Returning a valid cursor here indicates the pointer is
-            // inside the glyph, and also enables our Behavior property
-            // as the active behavior.
+            // GetHitTest is called to see if the point is within this glyph. This gives us a chance
+            // to decide what cursor to show. Returning null from here means the mouse pointer is
+            // not currently inside of the glyph. Returning a valid cursor here indicates the
+            // pointer is inside the glyph, and also enables our Behavior property as the active behavior.
             if ((this.m_xpanderPanel != null) && (this.m_xpanderPanel.Expand == false) && (Bounds.Contains(p)))
             {
                 return Cursors.Hand;
@@ -912,6 +937,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 
             return null;
         }
+
         /// <summary>
         /// Provides paint logic.
         /// </summary>
@@ -926,16 +952,20 @@ namespace EgoDevil.Utilities.UI.EPanels
     #endregion
 
     #region Class XPanderPanelCaptionClickBehavior
+
     /// <summary>
     /// Designer behaviour when the user clicks in the glyph on the XPanderPanel caption
     /// </summary>
     internal class XPanderPanelCaptionClickBehavior : System.Windows.Forms.Design.Behavior.Behavior
     {
         #region FieldsPrivate
+
         private XPanderPanel m_xpanderPanel;
+
         #endregion
 
         #region MethodsPublic
+
         /// <summary>
         /// Initializes a new instance of the Behavior class.
         /// </summary>
@@ -944,26 +974,28 @@ namespace EgoDevil.Utilities.UI.EPanels
         {
             this.m_xpanderPanel = xpanderPanel;
         }
+
         /// <summary>
-        /// Called when any mouse-down message enters the adorner window of the BehaviorService. 
+        /// Called when any mouse-down message enters the adorner window of the BehaviorService.
         /// </summary>
         /// <param name="g">A Glyph.</param>
         /// <param name="button">A MouseButtons value indicating which button was clicked.</param>
         /// <param name="mouseLoc">The location at which the click occurred.</param>
-        /// <returns>true if the message was handled; otherwise, false. </returns>
-		public override bool OnMouseDown(System.Windows.Forms.Design.Behavior.Glyph g, MouseButtons button, Point mouseLoc)
-		{
-			if ((this.m_xpanderPanel != null) && (this.m_xpanderPanel.Expand == false))
-			{
-				XPanderPanelList xpanderPanelList = this.m_xpanderPanel.Parent as XPanderPanelList;
-				if (xpanderPanelList != null)
-				{
-					xpanderPanelList.Expand(this.m_xpanderPanel);
-					this.m_xpanderPanel.Invalidate(false);
-				}
-			}
-			return true; // indicating we processed this event.
-		}
+        /// <returns>true if the message was handled; otherwise, false.</returns>
+        public override bool OnMouseDown(System.Windows.Forms.Design.Behavior.Glyph g, MouseButtons button, Point mouseLoc)
+        {
+            if ((this.m_xpanderPanel != null) && (this.m_xpanderPanel.Expand == false))
+            {
+                XPanderPanelList xpanderPanelList = this.m_xpanderPanel.Parent as XPanderPanelList;
+                if (xpanderPanelList != null)
+                {
+                    xpanderPanelList.Expand(this.m_xpanderPanel);
+                    this.m_xpanderPanel.Invalidate(false);
+                }
+            }
+            return true; // indicating we processed this event.
+        }
+
         #endregion
     }
 
