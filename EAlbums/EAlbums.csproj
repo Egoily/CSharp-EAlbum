@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EAlbums</RootNamespace>
     <AssemblyName>EAlbums</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -32,6 +32,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Animations, Version=1.1.0.0, Culture=neutral">
@@ -83,11 +86,13 @@
     <Compile Include="AlbumImageList.Designer.cs">
       <DependentUpon>AlbumImageList.cs</DependentUpon>
     </Compile>
-    <Compile Include="AlbumView.cs">
+    <Compile Include="ImageCircle.cs" />
+    <Compile Include="ImageCircleRevolver.cs" />
+    <Compile Include="ImageViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AlbumView.Designer.cs">
-      <DependentUpon>AlbumView.cs</DependentUpon>
+    <Compile Include="ImageViewer.Designer.cs">
+      <DependentUpon>ImageViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageListForm.cs">
       <SubType>Form</SubType>
@@ -103,12 +108,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThumbElement.cs" />
+    <Compile Include="ThumbnailImage.cs" />
     <EmbeddedResource Include="AlbumImageList.resx">
       <DependentUpon>AlbumImageList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AlbumView.resx">
-      <DependentUpon>AlbumView.cs</DependentUpon>
+    <EmbeddedResource Include="ImageViewer.resx">
+      <DependentUpon>ImageViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageListForm.resx">
@@ -133,6 +140,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,7 +156,7 @@
     <Compile Include="TaskStrip.Designer.cs">
       <DependentUpon>TaskStrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThumbElement.cs" />
+    <Compile Include="ThumbImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EgoDevil.Utilities\EgoDevil.Utilities.csproj">

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.ePanelTask = new EgoDevil.Utilities.UI.EPanels.EPanel();
-            this.albumImageList = new EAlbums.AlbumImageList();
-            this.albumView = new EAlbums.AlbumView();
             this.taskStrip = new EAlbums.TaskStrip();
+            this.albumImageList = new EAlbums.AlbumImageList();
+            this.albumView = new EAlbums.ImageViewer();
             this.ePanelTask.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,6 @@
             this.ePanelTask.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ePanelTask.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ePanelTask.Image = null;
-            this.ePanelTask.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             this.ePanelTask.Location = new System.Drawing.Point(0, 626);
             this.ePanelTask.MinimumSize = new System.Drawing.Size(18, 18);
             this.ePanelTask.Name = "ePanelTask";
@@ -73,6 +72,15 @@
             this.ePanelTask.ToolTipTextExpandIconPanelCollapsed = null;
             this.ePanelTask.ToolTipTextExpandIconPanelExpanded = null;
             // 
+            // taskStrip
+            // 
+            this.taskStrip.AssociatedAlbumImageList = this.albumImageList;
+            this.taskStrip.AssociatedAlbumView = this.albumView;
+            this.taskStrip.Location = new System.Drawing.Point(12, 22);
+            this.taskStrip.Name = "taskStrip";
+            this.taskStrip.Size = new System.Drawing.Size(580, 59);
+            this.taskStrip.TabIndex = 0;
+            // 
             // albumImageList
             // 
             this.albumImageList.AutoScroll = true;
@@ -86,21 +94,14 @@
             // 
             // albumView
             // 
+            this.albumView.Alpha = 0F;
             this.albumView.BackColor = System.Drawing.Color.Black;
+            this.albumView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.albumView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.albumView.Location = new System.Drawing.Point(0, 0);
             this.albumView.Name = "albumView";
             this.albumView.Size = new System.Drawing.Size(904, 626);
             this.albumView.TabIndex = 1;
-            // 
-            // taskStrip
-            // 
-            this.taskStrip.AssociatedAlbumImageList = this.albumImageList;
-            this.taskStrip.AssociatedAlbumView = this.albumView;
-            this.taskStrip.Location = new System.Drawing.Point(12, 22);
-            this.taskStrip.Name = "taskStrip";
-            this.taskStrip.Size = new System.Drawing.Size(580, 59);
-            this.taskStrip.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -112,6 +113,7 @@
             this.Controls.Add(this.ePanelTask);
             this.Name = "MainForm";
             this.Text = "E Albums";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ePanelTask.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -120,7 +122,7 @@
         #endregion
 
         private EgoDevil.Utilities.UI.EPanels.EPanel ePanelTask;
-        private AlbumView albumView;
+        private ImageViewer albumView;
         private TaskStrip taskStrip;
         private AlbumImageList albumImageList;
   

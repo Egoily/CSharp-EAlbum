@@ -1,6 +1,6 @@
 ﻿namespace EAlbums
 {
-    partial class AlbumView
+    partial class ImageViewer
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.apboxShowPicture = new ExtendedPictureBoxLib.AnimatedPictureBox();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // timer
@@ -44,7 +45,7 @@
             this.apboxShowPicture.Alpha = ((byte)(240));
             this.apboxShowPicture.AutoScroll = true;
             this.apboxShowPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.apboxShowPicture.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.apboxShowPicture.BackColor2 = System.Drawing.SystemColors.Control;
             this.apboxShowPicture.BackColorGradientRotationAngle = -90F;
             this.apboxShowPicture.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.apboxShowPicture.BorderStyle = System.Windows.Forms.ButtonBorderStyle.None;
@@ -58,17 +59,23 @@
             this.apboxShowPicture.Click += new System.EventHandler(this.apboxShowPicture_Click);
             this.apboxShowPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.apboxShowPicture_Paint);
             // 
-            // AlbumView
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // ImageViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.apboxShowPicture);
-            this.Name = "AlbumView";
+            this.Name = "ImageViewer";
             this.Size = new System.Drawing.Size(467, 381);
+            this.Load += new System.EventHandler(this.ImageViewer_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumView_Paint);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.AlbumView_MouseMove);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AlbumView_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.AlbumView_MouseMove);
             this.ResumeLayout(false);
 
         }
@@ -77,5 +84,6 @@
 
         private ExtendedPictureBoxLib.AnimatedPictureBox apboxShowPicture;
         private System.Windows.Forms.Timer timer;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

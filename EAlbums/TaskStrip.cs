@@ -7,9 +7,9 @@ namespace EAlbums
 {
     public partial class TaskStrip : UserControl
     {
-        private AlbumView _albumView = new AlbumView();
+        private ImageViewer _albumView = new ImageViewer();
 
-        public AlbumView AssociatedAlbumView
+        public ImageViewer AssociatedAlbumView
         {
             get { return _albumView; }
             set { this._albumView = value; }
