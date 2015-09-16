@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.apboxShowPicture = new ExtendedPictureBoxLib.AnimatedPictureBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
@@ -39,25 +38,6 @@
             this.timer.Enabled = true;
             this.timer.Interval = 30;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // apboxShowPicture
-            // 
-            this.apboxShowPicture.Alpha = ((byte)(240));
-            this.apboxShowPicture.AutoScroll = true;
-            this.apboxShowPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.apboxShowPicture.BackColor2 = System.Drawing.SystemColors.Control;
-            this.apboxShowPicture.BackColorGradientRotationAngle = -90F;
-            this.apboxShowPicture.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.apboxShowPicture.BorderStyle = System.Windows.Forms.ButtonBorderStyle.None;
-            this.apboxShowPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.apboxShowPicture.Location = new System.Drawing.Point(0, 0);
-            this.apboxShowPicture.Name = "apboxShowPicture";
-            this.apboxShowPicture.Size = new System.Drawing.Size(467, 381);
-            this.apboxShowPicture.TabIndex = 0;
-            this.apboxShowPicture.TabStop = false;
-            this.apboxShowPicture.Visible = false;
-            this.apboxShowPicture.Click += new System.EventHandler(this.apboxShowPicture_Click);
-            this.apboxShowPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.apboxShowPicture_Paint);
             // 
             // backgroundWorker
             // 
@@ -68,8 +48,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.apboxShowPicture);
             this.Name = "ImageViewer";
             this.Size = new System.Drawing.Size(467, 381);
             this.Load += new System.EventHandler(this.ImageViewer_Load);
@@ -82,7 +62,6 @@
 
         #endregion
 
-        private ExtendedPictureBoxLib.AnimatedPictureBox apboxShowPicture;
         private System.Windows.Forms.Timer timer;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
     }

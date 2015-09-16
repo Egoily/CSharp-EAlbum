@@ -78,7 +78,7 @@
             this.taskStrip.AssociatedAlbumView = this.albumView;
             this.taskStrip.Location = new System.Drawing.Point(12, 22);
             this.taskStrip.Name = "taskStrip";
-            this.taskStrip.Size = new System.Drawing.Size(580, 59);
+            this.taskStrip.Size = new System.Drawing.Size(457, 59);
             this.taskStrip.TabIndex = 0;
             // 
             // albumImageList
@@ -95,12 +95,14 @@
             // albumView
             // 
             this.albumView.Alpha = 0F;
+            this.albumView.AutoScroll = true;
             this.albumView.BackColor = System.Drawing.Color.Black;
             this.albumView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.albumView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.albumView.Location = new System.Drawing.Point(0, 0);
             this.albumView.Name = "albumView";
             this.albumView.Size = new System.Drawing.Size(904, 626);
+            this.albumView.Pattern = EAlbums.ImageViewer.Patterns.Ready;
             this.albumView.TabIndex = 1;
             // 
             // MainForm
