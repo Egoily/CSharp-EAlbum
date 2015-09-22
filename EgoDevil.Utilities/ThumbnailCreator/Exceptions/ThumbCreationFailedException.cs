@@ -5,7 +5,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator.Exceptions
     /// <summary>
     /// Exception gets thrown when the actual draw of the thumbnail image fails
     /// </summary>
-    public class ThumbCreationFailedException : System.Exception
+    public class ThumbCreationFailedException : Exception
     {
         #region [ Constructors ]
 

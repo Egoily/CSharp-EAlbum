@@ -107,7 +107,7 @@ namespace ExtendedPictureBoxLib.Design
         /// <summary>
         /// Gets or sets the current enumeration value.
         /// </summary>
-        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Enum EnumValue
         {
             get

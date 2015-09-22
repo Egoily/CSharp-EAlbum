@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -21,8 +25,8 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// </remarks>
 
     [Designer(typeof(XPanderPanelListDesigner)),
-    DesignTimeVisibleAttribute(true)]
-    [ToolboxBitmap(typeof(System.Windows.Forms.Panel))]
+    DesignTimeVisible(true)]
+    [ToolboxBitmap(typeof(Panel))]
     public partial class XPanderPanelList : ScrollableControl
     {
         #region Events
@@ -61,10 +65,10 @@ namespace EgoDevil.Utilities.UI.EPanels
         private bool m_bShowCloseIcon;
         private int m_iCaptionHeight;
         private LinearGradientMode m_linearGradientMode;
-        private System.Drawing.Color m_colorGradientBackground;
+        private Color m_colorGradientBackground;
         private CaptionStyle m_captionStyle;
-        private EgoDevil.Utilities.UI.EPanels.PanelStyle m_ePanelStyle;
-        private EgoDevil.Utilities.UI.EPanels.ColorScheme m_eColorScheme;
+        private PanelStyle m_ePanelStyle;
+        private ColorScheme m_eColorScheme;
         private XPanderPanelCollection m_xpanderPanels;
         private PanelColors m_panelColors;
 
@@ -106,9 +110,9 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Specifies the style of the panels in this xpanderpanellist.
         /// </summary>
         [Description("Specifies the style of the xpanderpanels in this xpanderpanellist."),
-        DefaultValue(EgoDevil.Utilities.UI.EPanels.PanelStyle.Default),
+        DefaultValue(PanelStyle.Default),
         Category("Appearance")]
-        public EgoDevil.Utilities.UI.EPanels.PanelStyle PanelStyle
+        public PanelStyle PanelStyle
         {
             get { return this.m_ePanelStyle; }
             set
@@ -134,7 +138,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Specifies the colorscheme of the xpanderpanels in the xpanderpanellist
         /// </summary>
         [Description("The colorscheme of the xpanderpanels in the xpanderpanellist")]
-        [DefaultValue(EgoDevil.Utilities.UI.EPanels.ColorScheme.Professional)]
+        [DefaultValue(ColorScheme.Professional)]
         [Category("Appearance")]
         public ColorScheme ColorScheme
         {
@@ -277,7 +281,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         [Description("Gradientcolor background in this xpanderpanellist"),
         DefaultValue(false),
         Category("Appearance")]
-        public System.Drawing.Color GradientBackground
+        public Color GradientBackground
         {
             get { return this.m_colorGradientBackground; }
             set
@@ -305,7 +309,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 {
                     throw new InvalidOperationException(
                         string.Format(
-                        System.Globalization.CultureInfo.CurrentUICulture,
+                        CultureInfo.CurrentUICulture,
                         Resources.IDS_InvalidOperationExceptionInteger, value, "CaptionHeight", Constants.CaptionMinHeight));
                 }
                 this.m_iCaptionHeight = value;
@@ -366,8 +370,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             if (panel == null)
             {
                 throw new ArgumentNullException("panel",
-                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.IDS_ArgumentException,
                     "panel"));
             }
 
@@ -420,10 +424,10 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Raises the ControlAdded event.
         /// </summary>
         /// <param name="e">A ControlEventArgs that contains the event data.</param>
-        protected override void OnControlAdded(System.Windows.Forms.ControlEventArgs e)
+        protected override void OnControlAdded(ControlEventArgs e)
         {
             base.OnControlAdded(e);
-            EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel = e.Control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            XPanderPanel xpanderPanel = e.Control as XPanderPanel;
             if (xpanderPanel != null)
             {
                 if (xpanderPanel.Expand == true)
@@ -438,8 +442,8 @@ namespace EgoDevil.Utilities.UI.EPanels
                     }
                 }
                 xpanderPanel.Parent = this;
-                xpanderPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+                xpanderPanel.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left)
+                        | AnchorStyles.Right)));
                 xpanderPanel.Left = this.Padding.Left;
                 xpanderPanel.Width = this.ClientRectangle.Width
                     - this.Padding.Left
@@ -469,12 +473,12 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Raises the ControlRemoved event.
         /// </summary>
         /// <param name="e">A ControlEventArgs that contains the event data.</param>
-        protected override void OnControlRemoved(System.Windows.Forms.ControlEventArgs e)
+        protected override void OnControlRemoved(ControlEventArgs e)
         {
             base.OnControlRemoved(e);
 
-            EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                e.Control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            XPanderPanel xpanderPanel =
+                e.Control as XPanderPanel;
 
             if (xpanderPanel != null)
             {
@@ -488,7 +492,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Raises the Resize event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected override void OnResize(System.EventArgs e)
+        protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             int iXPanderPanelCaptionHeight = 0;
@@ -531,7 +535,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         protected virtual void OnPanelStyleChanged(object sender, PanelStyleChangeEventArgs e)
         {
             PanelStyle panelStyle = e.PanelStyle;
-            this.Padding = new System.Windows.Forms.Padding(0);
+            this.Padding = new Padding(0);
 
             foreach (XPanderPanel xpanderPanel in this.XPanderPanels)
             {
@@ -635,7 +639,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 
         private void XPanderPanelExpandClick(object sender, EventArgs e)
         {
-            EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel = sender as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            XPanderPanel xpanderPanel = sender as XPanderPanel;
             if (xpanderPanel != null)
             {
                 this.Expand(xpanderPanel);
@@ -644,7 +648,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 
         private void XPanderPanelCloseClick(object sender, EventArgs e)
         {
-            EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel = sender as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+            XPanderPanel xpanderPanel = sender as XPanderPanel;
             if (xpanderPanel != null)
             {
                 this.Controls.Remove(xpanderPanel);
@@ -698,7 +702,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Extends the design mode behavior of a XPanderPanelList control that supports nested controls.
     /// </summary>
-    internal class XPanderPanelListDesigner : System.Windows.Forms.Design.ParentControlDesigner
+    internal class XPanderPanelListDesigner : ParentControlDesigner
     {
         #region FieldsPrivate
 
@@ -721,7 +725,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes the designer with the specified component.
         /// </summary>
         /// <param name="component">The IComponent to associate with the designer.</param>
-        public override void Initialize(System.ComponentModel.IComponent component)
+        public override void Initialize(IComponent component)
         {
             base.Initialize(component);
             this.m_xpanderPanelList = (XPanderPanelList)this.Control;
@@ -875,7 +879,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes a new instance of the XPanderPanelListDesignerActionList class.
         /// </summary>
         /// <param name="component">A component related to the DesignerActionList.</param>
-        public XPanderPanelListDesignerActionList(System.ComponentModel.IComponent component)
+        public XPanderPanelListDesignerActionList(IComponent component)
             : base(component)
         {
             // Automatically display smart tag panel when design-time component is dropped onto the
@@ -992,8 +996,8 @@ namespace EgoDevil.Utilities.UI.EPanels
         private void SetProperty(string propertyName, object value)
         {
             // Get property
-            System.ComponentModel.PropertyDescriptor property
-                = System.ComponentModel.TypeDescriptor.GetProperties(this.XPanderPanelList)[propertyName];
+            PropertyDescriptor property
+                = TypeDescriptor.GetProperties(this.XPanderPanelList)[propertyName];
             // Set property value
             property.SetValue(this.XPanderPanelList, value);
         }
@@ -1003,7 +1007,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         //the specified object
         private static string GetCategory(object source, string propertyName)
         {
-            System.Reflection.PropertyInfo property = source.GetType().GetProperty(propertyName);
+            PropertyInfo property = source.GetType().GetProperty(propertyName);
             CategoryAttribute attribute = (CategoryAttribute)property.GetCustomAttributes(typeof(CategoryAttribute), false)[0];
             if (attribute == null)
             {
@@ -1025,7 +1029,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Contains a collection of XPanderPanel objects.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
+    [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
     public sealed class XPanderPanelCollection : IList, ICollection, IEnumerable
     {
         #region FieldsPrivate
@@ -1237,7 +1241,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             XPanderPanel xpanderPanel = value as XPanderPanel;
             if (xpanderPanel == null)
             {
-                throw new ArgumentException(string.Format(System.Globalization.CultureInfo.CurrentUICulture,
+                throw new ArgumentException(string.Format(CultureInfo.CurrentUICulture,
                     Resources.IDS_ArgumentException,
                     typeof(XPanderPanel).Name));
             }
@@ -1275,7 +1279,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             if ((value is XPanderPanel) == false)
             {
                 throw new ArgumentException(
-                    string.Format(System.Globalization.CultureInfo.CurrentUICulture,
+                    string.Format(CultureInfo.CurrentUICulture,
                     Resources.IDS_ArgumentException,
                     typeof(XPanderPanel).Name));
             }
@@ -1374,8 +1378,8 @@ namespace EgoDevil.Utilities.UI.EPanels
                  *but this time let it to do the job...
                  */
 
-            EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                (EgoDevil.Utilities.UI.EPanels.XPanderPanel)base.CreateInstance(ItemType);
+            XPanderPanel xpanderPanel =
+                (XPanderPanel)base.CreateInstance(ItemType);
 
             if (this.Context.Instance != null)
             {

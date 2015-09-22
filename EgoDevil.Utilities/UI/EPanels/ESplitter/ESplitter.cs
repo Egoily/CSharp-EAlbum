@@ -12,9 +12,9 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// cref="System.Windows.Forms.Splitter"/> the using of a transparent backcolor.
     /// </remarks>
 
-    [DesignTimeVisibleAttribute(true)]
-    [ToolboxBitmap(typeof(System.Windows.Forms.Splitter))]
-    public partial class ESplitter : System.Windows.Forms.Splitter
+    [DesignTimeVisible(true)]
+    [ToolboxBitmap(typeof(Splitter))]
+    public partial class ESplitter : Splitter
     {
         #region MethodsPublic
 

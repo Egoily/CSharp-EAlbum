@@ -4,12 +4,14 @@ using System.Drawing;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
+using EgoDevil.Utilities.UI.Docking.Win32;
+
 namespace EgoDevil.Utilities.UI.Docking
 {
     public class FloatWindow : Form, INestedPanesContainer, IDockDragSource
     {
         private NestedPaneCollection m_nestedPanes;
-        internal const int WM_CHECKDISPOSE = (int)(Win32.Msgs.WM_USER + 1);
+        internal const int WM_CHECKDISPOSE = (int)(Msgs.WM_USER + 1);
 
         protected internal FloatWindow(DockPanel dockPanel, DockPane pane)
         {
@@ -170,12 +172,12 @@ namespace EgoDevil.Utilities.UI.Docking
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)Win32.Msgs.WM_NCLBUTTONDOWN)
+            if (m.Msg == (int)Msgs.WM_NCLBUTTONDOWN)
             {
                 if (IsDisposed)
                     return;
 
-                uint result = NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
+                uint result = NativeMethods.SendMessage(this.Handle, (int)Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
                 if (result == 2 && DockPanel.AllowEndUserDocking && this.AllowEndUserDocking)	// HITTEST_CAPTION
                 {
                     Activate();
@@ -186,15 +188,15 @@ namespace EgoDevil.Utilities.UI.Docking
 
                 return;
             }
-            else if (m.Msg == (int)Win32.Msgs.WM_NCRBUTTONDOWN)
+            else if (m.Msg == (int)Msgs.WM_NCRBUTTONDOWN)
             {
-                uint result = NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
+                uint result = NativeMethods.SendMessage(this.Handle, (int)Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
                 if (result == 2)	// HITTEST_CAPTION
                 {
                     DockPane theOnlyPane = (VisibleNestedPanes.Count == 1) ? VisibleNestedPanes[0] : null;
                     if (theOnlyPane != null && theOnlyPane.ActiveContent != null)
                     {
-                        theOnlyPane.ShowTabPageContextMenu(this, PointToClient(Control.MousePosition));
+                        theOnlyPane.ShowTabPageContextMenu(this, PointToClient(MousePosition));
                         return;
                     }
                 }
@@ -202,7 +204,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 base.WndProc(ref m);
                 return;
             }
-            else if (m.Msg == (int)Win32.Msgs.WM_CLOSE)
+            else if (m.Msg == (int)Msgs.WM_CLOSE)
             {
                 if (NestedPanes.Count == 0)
                 {
@@ -231,9 +233,9 @@ namespace EgoDevil.Utilities.UI.Docking
 
                 return;
             }
-            else if (m.Msg == (int)Win32.Msgs.WM_NCLBUTTONDBLCLK)
+            else if (m.Msg == (int)Msgs.WM_NCLBUTTONDBLCLK)
             {
-                uint result = NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
+                uint result = NativeMethods.SendMessage(this.Handle, (int)Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
                 if (result != 2)	// HITTEST_CAPTION
                 {
                     base.WndProc(ref m);
@@ -310,9 +312,9 @@ namespace EgoDevil.Utilities.UI.Docking
                 if (!dragSource.CanDockTo(pane))
                     return;
 
-                Point ptMouse = Control.MousePosition;
+                Point ptMouse = MousePosition;
                 uint lParam = Win32Helper.MakeLong(ptMouse.X, ptMouse.Y);
-                if (NativeMethods.SendMessage(Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, lParam) == (uint)Win32.HitTest.HTCAPTION)
+                if (NativeMethods.SendMessage(Handle, (int)Msgs.WM_NCHITTEST, 0, lParam) == (uint)HitTest.HTCAPTION)
                     dockOutline.Show(VisibleNestedPanes[0], -1);
             }
         }

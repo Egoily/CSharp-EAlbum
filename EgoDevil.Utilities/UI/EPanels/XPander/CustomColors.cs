@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -33,14 +34,14 @@ namespace EgoDevil.Utilities.UI.EPanels
 
         #region FieldsPrivate
 
-        private Color m_borderColor = System.Windows.Forms.ProfessionalColors.GripDark;
+        private Color m_borderColor = ProfessionalColors.GripDark;
         private Color m_captionCloseIcon = SystemColors.ControlText;
         private Color m_captionExpandIcon = SystemColors.ControlText;
-        private Color m_captionGradientBegin = System.Windows.Forms.ProfessionalColors.ToolStripGradientBegin;
-        private Color m_captionGradientEnd = System.Windows.Forms.ProfessionalColors.ToolStripGradientEnd;
-        private Color m_captionGradientMiddle = System.Windows.Forms.ProfessionalColors.ToolStripGradientMiddle;
+        private Color m_captionGradientBegin = ProfessionalColors.ToolStripGradientBegin;
+        private Color m_captionGradientEnd = ProfessionalColors.ToolStripGradientEnd;
+        private Color m_captionGradientMiddle = ProfessionalColors.ToolStripGradientMiddle;
         private Color m_captionText = SystemColors.ControlText;
-        private Color m_innerBorderColor = System.Windows.Forms.ProfessionalColors.GripLight;
+        private Color m_innerBorderColor = ProfessionalColors.GripLight;
 
         #endregion
 

@@ -271,10 +271,10 @@ namespace EgoDevil.Utilities.UI.EForm
             }
         }
 
-        [BrowsableAttribute(false)]
+        [Browsable(false)]
         public new Icon Icon { get; set; }
 
-        [BrowsableAttribute(false)]
+        [Browsable(false)]
         public new bool ShowIcon { get; set; }
 
         [DefaultValue(null)]
@@ -370,7 +370,7 @@ namespace EgoDevil.Utilities.UI.EForm
             }
         }
 
-        protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 m_bMouseDown = true;
@@ -472,7 +472,7 @@ namespace EgoDevil.Utilities.UI.EForm
             #endregion
         }
 
-        protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
                 m_bMouseDown = false;
@@ -484,7 +484,7 @@ namespace EgoDevil.Utilities.UI.EForm
             base.OnResizeBegin(e);
         }
 
-        protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
             #region TitleBarIconHolder
 
@@ -659,7 +659,7 @@ namespace EgoDevil.Utilities.UI.EForm
             }
         }
 
-        protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
             m_rcTitleBarIcon = new Rectangle(7, 5, 40, 40);
             Rectangle rcBorder = new Rectangle(0, 0, this.ClientRectangle.Width - 1, this.ClientRectangle.Height - 1);

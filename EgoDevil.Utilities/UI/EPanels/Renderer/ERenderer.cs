@@ -41,7 +41,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initialize a new instance of the ERenderer class.
         /// </summary>
         public ERenderer()
-            : base(new EgoDevil.Utilities.UI.EPanels.ColorTableBlack())
+            : base(new ColorTableBlack())
         {
             this.ColorTable.UseSystemColors = false;
         }
@@ -76,7 +76,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             }
             else
             {
-                ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+                ProfessionalColorTable colorTable = ColorTable as ProfessionalColorTable;
                 if ((colorTable != null) && (e.Item.Enabled == true))
                 {
                     if (e.Item.Owner is MenuStrip)
@@ -320,7 +320,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                 return;
             }
             Graphics graphics = e.Graphics;
-            ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+            ProfessionalColorTable colorTable = ColorTable as ProfessionalColorTable;
             if (colorTable != null)
             {
                 using (UseAntiAlias useAntiAlias = new UseAntiAlias(graphics))
@@ -361,7 +361,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         {
             if (ColorTable.UseSystemColors == false)
             {
-                ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+                ProfessionalColorTable colorTable = ColorTable as ProfessionalColorTable;
                 if (colorTable != null)
                 {
                     if ((e.ToolStrip is MenuStrip))// && (e.Item.Selected == false) && e.Item.Pressed == false)

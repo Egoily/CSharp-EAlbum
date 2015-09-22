@@ -16,7 +16,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
     ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
-    [ToolboxBitmap(typeof(System.Windows.Forms.ProgressBar))]
+    [ToolboxBitmap(typeof(ProgressBar))]
     public partial class EProgressBar : Control
     {
         #region Events

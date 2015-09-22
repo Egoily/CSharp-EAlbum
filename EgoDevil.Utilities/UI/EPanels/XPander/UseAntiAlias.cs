@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -27,8 +28,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             if (graphics == null)
             {
                 throw new ArgumentNullException("graphics",
-                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.IDS_ArgumentException,
                     "graphics"));
             }
 

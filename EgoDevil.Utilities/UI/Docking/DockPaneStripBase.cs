@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
+using EgoDevil.Utilities.UI.Docking.Win32;
+
 namespace EgoDevil.Utilities.UI.Docking
 {
     public abstract class DockPaneStripBase : Control
@@ -170,7 +172,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
         protected int HitTest()
         {
-            return HitTest(PointToClient(Control.MousePosition));
+            return HitTest(PointToClient(MousePosition));
         }
 
         protected internal abstract int HitTest(Point point);
@@ -222,7 +224,7 @@ namespace EgoDevil.Utilities.UI.Docking
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
+            if (m.Msg == (int)Msgs.WM_LBUTTONDBLCLK)
             {
                 base.WndProc(ref m);
 

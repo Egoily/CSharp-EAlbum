@@ -339,7 +339,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the value for the <see cref="ExtendedPictureBox.BackColor"/> property.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public Color BackColor
         {
             get { return _backColor; }
@@ -349,7 +349,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the value for the <see cref="ExtendedPictureBox.BackColor2"/> property.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public Color BackColor2
         {
             get { return _backColor2; }
@@ -359,7 +359,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the value for the <see cref="System.Windows.Forms.Control.ForeColor"/> property.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public Color ForeColor
         {
             get { return _foreColor; }
@@ -369,7 +369,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the value for the <see cref="ExtendedPictureBox.TextHaloColor"/> property.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public Color TextHaloColor
         {
             get { return _textHaloColor; }

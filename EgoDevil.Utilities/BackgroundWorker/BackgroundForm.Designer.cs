@@ -1,11 +1,16 @@
-﻿namespace EgoDevil.Utilities.BkWorker
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+using EgoDevil.Utilities.UI.ActivityBar;
+
+namespace EgoDevil.Utilities.BkWorker
 {
     partial class BackgroundForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -87,8 +92,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private EgoDevil.Utilities.UI.ActivityBar.ActivityBar activityBar1;
-        private System.Windows.Forms.Panel panel1;
+        private Label label1;
+        private ActivityBar activityBar1;
+        private Panel panel1;
     }
 }

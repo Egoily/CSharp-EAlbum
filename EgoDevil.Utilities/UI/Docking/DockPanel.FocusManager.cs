@@ -5,6 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using EgoDevil.Utilities.UI.Docking.Win32;
+
 namespace EgoDevil.Utilities.UI.Docking
 {
     internal interface IContentFocusManager
@@ -56,7 +58,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 private IntPtr m_hHook = IntPtr.Zero;
 
                 private NativeMethods.HookProc m_filterFunc = null;
-                private Win32.HookType m_hookType;
+                private HookType m_hookType;
 
                 // Event delegate
                 public delegate void HookEventHandler(object sender, HookEventArgs e);
@@ -70,7 +72,7 @@ namespace EgoDevil.Utilities.UI.Docking
                         HookInvoked(this, e);
                 }
 
-                public LocalWindowsHook(Win32.HookType hook)
+                public LocalWindowsHook(HookType hook)
                 {
                     m_hookType = hook;
                     m_filterFunc = new NativeMethods.HookProc(this.CoreHookProc);
@@ -136,7 +138,7 @@ namespace EgoDevil.Utilities.UI.Docking
             public FocusManagerImpl(DockPanel dockPanel)
             {
                 m_dockPanel = dockPanel;
-                m_localWindowsHook = new LocalWindowsHook(Win32.HookType.WH_CALLWNDPROCRET);
+                m_localWindowsHook = new LocalWindowsHook(HookType.WH_CALLWNDPROCRET);
                 m_hookEventHandler = new LocalWindowsHook.HookEventHandler(HookEventHandler);
                 m_localWindowsHook.HookInvoked += m_hookEventHandler;
                 m_localWindowsHook.Install();
@@ -291,7 +293,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
             private static bool ContentContains(IDockContent content, IntPtr hWnd)
             {
-                Control control = Control.FromChildHandle(hWnd);
+                Control control = FromChildHandle(hWnd);
                 for (Control parent = control; parent != null; parent = parent.Parent)
                     if (parent == content.DockHandler.Form)
                         return true;
@@ -333,22 +335,22 @@ namespace EgoDevil.Utilities.UI.Docking
             // Windows hook event handler
             private void HookEventHandler(object sender, HookEventArgs e)
             {
-                Win32.Msgs msg = (Win32.Msgs)Marshal.ReadInt32(e.lParam, IntPtr.Size * 3);
+                Msgs msg = (Msgs)Marshal.ReadInt32(e.lParam, IntPtr.Size * 3);
 
-                if (msg == Win32.Msgs.WM_KILLFOCUS)
+                if (msg == Msgs.WM_KILLFOCUS)
                 {
                     IntPtr wParam = Marshal.ReadIntPtr(e.lParam, IntPtr.Size * 2);
                     DockPane pane = GetPaneFromHandle(wParam);
                     if (pane == null)
                         RefreshActiveWindow();
                 }
-                else if (msg == Win32.Msgs.WM_SETFOCUS)
+                else if (msg == Msgs.WM_SETFOCUS)
                     RefreshActiveWindow();
             }
 
             private DockPane GetPaneFromHandle(IntPtr hWnd)
             {
-                Control control = Control.FromChildHandle(hWnd);
+                Control control = FromChildHandle(hWnd);
 
                 IDockContent content = null;
                 DockPane pane = null;

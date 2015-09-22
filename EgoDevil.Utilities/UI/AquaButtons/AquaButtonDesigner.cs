@@ -3,10 +3,11 @@
 // Remove a few properties that our button doesn't support (yet).
 
 using System.Collections;
+using System.Windows.Forms.Design;
 
 namespace EgoDevil.Utilities.UI.AquaButtons
 {
-    public class AquaButtonDesigner : System.Windows.Forms.Design.ControlDesigner
+    public class AquaButtonDesigner : ControlDesigner
     {
         public AquaButtonDesigner()
         {

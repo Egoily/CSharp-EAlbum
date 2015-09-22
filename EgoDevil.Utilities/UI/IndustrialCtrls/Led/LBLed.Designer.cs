@@ -6,6 +6,12 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 {
 	public partial class LBLed
@@ -13,7 +19,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -36,19 +42,19 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.tmrBlink = new System.Windows.Forms.Timer(this.components);
+			this.components = new Container();
+			this.tmrBlink = new Timer(this.components);
 			this.SuspendLayout();
 			// 
 			// tmrBlink
 			// 
 			this.tmrBlink.Interval = 500;
-			this.tmrBlink.Tick += new System.EventHandler(this.OnBlink);
+			this.tmrBlink.Tick += new EventHandler(this.OnBlink);
 			// 
 			// LBLed
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new SizeF(6F, 13F);
+			this.AutoScaleMode = AutoScaleMode.Font;
 			this.Name = "LBLed";
 			this.ResumeLayout(false);
 		}

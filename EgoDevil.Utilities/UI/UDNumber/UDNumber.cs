@@ -13,7 +13,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
         private int _minimum;
         private int _increment;
 
-        [CategoryAttribute("Data"), DescriptionAttribute("Current value")]
+        [Category("Data"), Description("Current value")]
         public int Value
         {
             get
@@ -28,7 +28,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-        [CategoryAttribute("Data"), DescriptionAttribute("Maximum value")]
+        [Category("Data"), Description("Maximum value")]
         public int Maximum
         {
             get
@@ -43,7 +43,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-        [CategoryAttribute("Data"), DescriptionAttribute("Minimum value ")]
+        [Category("Data"), Description("Minimum value ")]
         public int Minimum
         {
             get
@@ -58,7 +58,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-        [CategoryAttribute("Data"), DescriptionAttribute("Increment")]
+        [Category("Data"), Description("Increment")]
         public int Increment
         {
             get
@@ -91,7 +91,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
             }
         }
 
-        [CategoryAttribute("Data"), DescriptionAttribute("The enable of changed event")]
+        [Category("Data"), Description("The enable of changed event")]
         public bool IsFocused
         {
             get;
@@ -153,7 +153,7 @@ namespace EgoDevil.Utilities.UI.UDNumber
             {
                 this.Value = Int32.Parse(txtNumber.Text);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 this.Value = 0;
                 Debug.Write(ex.Message);

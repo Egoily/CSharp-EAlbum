@@ -1,11 +1,15 @@
-﻿namespace EgoDevil.Utilities.UI.ActivityBar
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace EgoDevil.Utilities.UI.ActivityBar
 {
     partial class ActivityBar
     {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -32,10 +36,10 @@
             // 
             // ActivityBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new SizeF(6F, 12F);
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.Name = "ActivityBar";
-            this.Size = new System.Drawing.Size(150, 16);
+            this.Size = new Size(150, 16);
             this.ResumeLayout(false);
 
         }

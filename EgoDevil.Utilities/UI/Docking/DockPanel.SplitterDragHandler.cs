@@ -90,7 +90,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
             protected override void OnDragging()
             {
-                Outline.Show(GetSplitterOutlineBounds(Control.MousePosition));
+                Outline.Show(GetSplitterOutlineBounds(MousePosition));
             }
 
             protected override void OnEndDrag(bool abort)
@@ -100,7 +100,7 @@ namespace EgoDevil.Utilities.UI.Docking
                 Outline.Close();
 
                 if (!abort)
-                    DragSource.MoveSplitter(GetMovingOffset(Control.MousePosition));
+                    DragSource.MoveSplitter(GetMovingOffset(MousePosition));
 
                 DragSource.EndDrag();
                 DockPanel.ResumeLayout(true, true);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Windows.Forms;
 
 namespace EAlbums
 {
+
     public partial class ImageViewer : UserControl
     {
         public int CircleCount = 3;
@@ -15,42 +17,58 @@ namespace EAlbums
 
         public int Interval = 100;
 
-        private readonly ImageCircleRevolver imageCircleRevolver = null;
+        private readonly IImageCircleRevolver imageCircleRevolver = null;
+
+        private Image currentDisplayImage;
+
+        private string currentDisplayImageFullPath = string.Empty;
+
+        private Point currentLocation;
+
+        private Rectangle desRect;
+
+        //this is the coordinate of the center of the image displayed on the control in reference to 
+        //the coordinate system of the original image
+        private Point displayCenter;
+        //the scale by which the current image is zoomed
+        double scale = 1;
+
+
+        private Rectangle srcRect;
 
         public ImageViewer()
         {
+
             InitializeComponent();
 
             this.SetStyle(
               ControlStyles.UserPaint |
               ControlStyles.AllPaintingInWmPaint |
               ControlStyles.DoubleBuffer, true);
+            this.MouseWheel += ImageViewer_MouseWheel;
 
             timer.Enabled = false;
-            Pattern = Patterns.Pending;
+            Pattern = ViewPatterns.Pending;
 
             BackgroundColor = Color.FromArgb(255, 0, 0, 0);
             imageCircleRevolver = new ImageCircleRevolver()
             {
                 BackgroundColor = BackgroundColor,
-                CircleCount = CircleCount,
+                CircleCapacity = CircleCount,
                 Interval = Interval,
                 OrginalCenter = new Point(Width / 2, Height / 2 - CircleCount * Interval / 2),
             };
         }
 
-        public enum Patterns
-        {
-            Pending = 0,
-            Loading = 1,
-            Ready = 2,
-            Browse = 3,
-        }
         public float Alpha { get; set; }
 
         public Color BackgroundColor { get; set; }
 
-        public Patterns Pattern { get; set; }
+        /// <summary>
+        /// gets or sets how the mouse behaves on the image control display area
+        /// </summary>
+        public PreviewMode ImagePreviewMode { get; set; }
+        public ViewPatterns Pattern { get; set; }
         public void Loading()
         {
             this.backgroundWorker.RunWorkerAsync();
@@ -81,7 +99,86 @@ namespace EAlbums
             imageCircleRevolver.Load(filePaths);
         }
 
-        private static RectangleF GetImageZoomRect(Size srcSize, Size desSize)
+
+        /// <summary>
+        /// this method rotated the image 
+        /// </summary>
+        /// <param name="clockWise">specifies if its clockwise or the other</param>
+        public void RotateImage(bool clockWise)
+        {
+            if (currentDisplayImage != null)
+            {
+                currentDisplayImage.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                ZoomImage(ZoomMode.FitPage);
+            }
+        }
+
+        public void ZoomImage()
+        {
+            ZoomImage(ZoomMode.FitPage);
+        }
+
+        /// <summary>
+        /// this method draws the image with the image mode specified
+        /// </summary>
+        /// <param name="zoomMode">describes how the original image will appear in the control</param>
+        public void ZoomImage(ZoomMode zoomMode)
+        {
+            var amount = 1d;
+            Point center = new Point(this.Width / 2, this.Height / 2);
+            int width = currentDisplayImage.Width;
+            int height = currentDisplayImage.Height;
+            switch (zoomMode)
+            {
+                case ZoomMode.ActualSize:
+                    amount = 1;
+                    break;
+                case ZoomMode.FitHeight:
+                    amount = (double)this.Height / height;
+                    break;
+                case ZoomMode.FitPage:
+                    amount = (double)this.Height / height;
+                    if ((double)this.Width / width < amount)
+                        amount = (double)this.Width / width;
+                    break;
+                case ZoomMode.FitWidth:
+                    amount = (double)this.Width / width;
+                    break;
+                default:
+                    throw new Exception("Invalid zoom request!!");
+            }
+            ZoomImage(amount, center);
+        }
+
+        /// <summary>
+        /// this is an overload that retains the center of the image and zooms the image with the value specified
+        /// </summary>
+        /// <param name="amount">the value by how much the image will be zoomed</param>
+        public void ZoomImage(double amount)
+        {
+            int width = this.Width;
+            int height = this.Height;
+            ZoomImage(amount, new Point(width / 2, height / 2));
+        }
+
+        /// <summary>
+        /// this method draws the image with the zoom amount as well as the center of the image specified
+        /// </summary>
+        /// <param name="amount">the value by how much the image will be zoomed</param>
+        /// <param name="center">the center coordinate of the image in reference to the original coordinate system</param>
+        public void ZoomImage(double amount, Point center)
+        {
+            srcRect = new Rectangle(0, 0, currentDisplayImage.Width, currentDisplayImage.Height);
+            desRect = new Rectangle(
+                          center.X - (int)(currentDisplayImage.Width * amount / 2),
+                          center.Y - (int)(currentDisplayImage.Height * amount / 2),
+                          (int)((double)currentDisplayImage.Width * amount),
+                          (int)((double)currentDisplayImage.Height * amount));
+
+            Refresh();
+        }
+
+        private static Rectangle GetImageZoomRect(Size srcSize, Size desSize)
         {
             int width;
             int height;
@@ -110,116 +207,220 @@ namespace EAlbums
                     width = srcSize.Width * height / srcSize.Height;
                 }
             }
-            return new RectangleF(x: (desSize.Width - width) / 2, y: (desSize.Height - height) / 2, width: width, height: height);
+            return new Rectangle(x: (desSize.Width - width) / 2, y: (desSize.Height - height) / 2, width: width, height: height);
         }
 
-        private void AlbumView_MouseDown(object sender, MouseEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            switch (Pattern)
-            {
-                case Patterns.Pending:
-                    break;
-
-                case Patterns.Loading:
-                    break;
-
-                case Patterns.Ready:
-                    if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-                    {
-                        if (imageCircleRevolver.SelectedObject != null)
-                        {
-                            SetTimerEnabled(false);
-                            Pattern = Patterns.Browse;
-                            Invalidate();
-                        }
-                    }
-                    break;
-
-                case Patterns.Browse:
-                    if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-                    {
-                        SetTimerEnabled(true);
-                        Pattern = Patterns.Ready;
-                        Invalidate();
-                    }
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void AlbumView_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (Pattern == Patterns.Ready)
-            {
-                imageCircleRevolver.SetRevolveType(RevolveTypes.Fixed);
-                var x0 = Width / 2;
-                var y0 = Height / 2;
-
-                imageCircleRevolver.SetAlphaAccel((((float)(e.X - x0)) * 3.0f) / ((float)x0));
-
-                if ((e.Button & MouseButtons.Right) == MouseButtons.Right)
-                {
-                    imageCircleRevolver.SetPerspective(12 - (((float)(-e.Y + y0)) * 10.0f) / ((float)y0));
-                }
-                else if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-                {
-                    imageCircleRevolver.SetRevolveType(RevolveTypes.Transformable);
-                }
-
-                var isHover = imageCircleRevolver.SelectHoverItem(e.Location);
-                if (isHover)
-                {
-                    imageCircleRevolver.SetRevolveType(RevolveTypes.None);
-                }
-            }
-        }
-
-        private void AlbumView_Paint(object sender, PaintEventArgs e)
-        {
-            PaintAlbumView(e.Graphics);
-        }
-
-        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            Pattern = Patterns.Loading;
+            Pattern = ViewPatterns.Loading;
             LoadThumbs();
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Pattern = Patterns.Ready;
+            Pattern = ViewPatterns.Ready;
+        }
+
+        private void ImageViewer_DoubleClick(object sender, EventArgs e)
+        {
+            switch (Pattern)
+            {
+                case ViewPatterns.Pending:
+                    break;
+                case ViewPatterns.Loading:
+                    break;
+                case ViewPatterns.Ready:
+                    break;
+                case ViewPatterns.Browse:
+                    SetTimerEnabled(true);
+                    Pattern = ViewPatterns.Ready;
+                    Invalidate();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void ImageViewer_Load(object sender, EventArgs e)
         {
         }
 
+        private void ImageViewer_MouseDown(object sender, MouseEventArgs e)
+        {
+            switch (Pattern)
+            {
+                case ViewPatterns.Pending:
+                    break;
+
+                case ViewPatterns.Loading:
+                    break;
+
+                case ViewPatterns.Ready:
+                    if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                    {
+                        if (imageCircleRevolver.SelectedObject != null)
+                        {
+                            SetTimerEnabled(false);
+
+                            if (!string.IsNullOrEmpty(imageCircleRevolver.SelectedObject.FullPath)
+                                && currentDisplayImageFullPath != imageCircleRevolver.SelectedObject.FullPath)
+                            {
+                                currentDisplayImageFullPath = imageCircleRevolver.SelectedObject.FullPath;
+                                currentDisplayImage = Image.FromFile(imageCircleRevolver.SelectedObject.FullPath);
+                            }
+
+                            ZoomImage(ZoomMode.FitPage);
+                            Pattern = ViewPatterns.Browse;
+                            Invalidate();
+                        }
+                    }
+                    break;
+
+                case ViewPatterns.Browse:
+                    if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                    {
+                        //    SetTimerEnabled(true);
+                        //    Pattern = ViewPatterns.Ready;
+                        //    Invalidate();
+                    }
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ImageViewer_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            switch (Pattern)
+            {
+                case ViewPatterns.Pending:
+                    break;
+
+                case ViewPatterns.Loading:
+                    break;
+
+                case ViewPatterns.Ready:
+                    {
+                        imageCircleRevolver.SetRevolveType(RevolveTypes.Fixed);
+                        var x0 = Width / 2;
+                        var y0 = Height / 2;
+
+                        imageCircleRevolver.SetAlphaAccel((((float)(e.X - x0)) * 3.0f) / ((float)x0));
+
+                        if ((e.Button & MouseButtons.Right) == MouseButtons.Right)
+                        {
+                            imageCircleRevolver.SetPerspective(12 - (((float)(-e.Y + y0)) * 10.0f) / ((float)y0));
+                        }
+                        else if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                        {
+                            imageCircleRevolver.SetRevolveType(RevolveTypes.Transformable);
+                        }
+
+                        var isHover = imageCircleRevolver.SelectHoverItem(e.Location);
+                        if (isHover)
+                        {
+                            imageCircleRevolver.SetRevolveType(RevolveTypes.None);
+                        }
+                    }
+                    break;
+
+                case ViewPatterns.Browse:
+                    this.currentLocation = e.Location;
+                    //this.displayCenter = new Point(e.X - desRect.X, e.Y - desRect.Y);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ImageViewer_MouseWheel(object sender, MouseEventArgs e)
+        {
+            switch (Pattern)
+            {
+                case ViewPatterns.Pending:
+                    break;
+
+                case ViewPatterns.Loading:
+                    break;
+
+                case ViewPatterns.Ready:
+
+                    break;
+
+                case ViewPatterns.Browse:
+                    if (e.Delta > 0)
+                    {
+                        this.scale = this.scale + 0.1;
+                        if (this.scale > 10)
+                        {
+                            this.scale = 10;
+                        }
+                    }
+                    else
+                    {
+                        this.scale = this.scale - 0.1;
+                        if (this.scale < 0.1)
+                        {
+                            this.scale = 0.1;
+                        }
+                    }
+                    //ZoomImage(this.scale, this.displayCenter);
+                    ZoomImage(this.scale);
+
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ImageViewer_Paint(object sender, PaintEventArgs e)
+        {
+            PaintAlbumView(e.Graphics);
+        }
         private void PaintAlbumView(Graphics g)
         {
             //draw background
             g.FillRectangle(new SolidBrush(BackgroundColor), 0, 0, Width, Height);
             switch (Pattern)
             {
-                case Patterns.Pending:
+                case ViewPatterns.Pending:
                     PaintPendingPattern(g);
                     break;
 
-                case Patterns.Loading:
+                case ViewPatterns.Loading:
                     PaintLoadingPattern(g);
                     break;
 
-                case Patterns.Ready:
+                case ViewPatterns.Ready:
                     PaintReadyPattern(g);
                     break;
 
-                case Patterns.Browse:
-                    PaintShowingPattern(g);
+                case ViewPatterns.Browse:
+                    PaintBrowsePattern(g);
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void PaintBrowsePattern(Graphics g)
+        {
+            if (imageCircleRevolver.SelectedObject != null)
+            {
+                var units = GraphicsUnit.Pixel;
+
+                g.DrawImage(currentDisplayImage, desRect, srcRect, units);
+
+                imageCircleRevolver.ClearHover();
+                FontFamily fontFamily = new FontFamily("Arial");
+                Font font = new Font(fontFamily, 36, FontStyle.Regular, GraphicsUnit.Pixel);
+                g.DrawString(imageCircleRevolver.SelectedObject.Name, font, Brushes.Red, new PointF(0, 0));
+
             }
         }
 
@@ -238,29 +439,9 @@ namespace EAlbums
             imageCircleRevolver.SetOrginalCenter(new Point(Width / 2, Height / 2 - CircleCount * Interval / 2));
             imageCircleRevolver.DrawImages(g);
         }
-
-        private void PaintShowingPattern(Graphics g)
-        {
-            if (imageCircleRevolver.SelectedObject != null)
-            {
-                using (var image = Image.FromFile(imageCircleRevolver.SelectedObject.FullPath))
-                {
-                    var units = GraphicsUnit.Pixel;
-                    var desRect = GetImageZoomRect(image.Size, this.Size);
-                    var srcRect = new RectangleF(0, 0, image.Width, image.Height);
-
-                    g.DrawImage(image, desRect, srcRect, units);
-
-                    imageCircleRevolver.ClearHover();
-                    FontFamily fontFamily = new FontFamily("Arial");
-                    Font font = new Font(fontFamily, 36, FontStyle.Regular, GraphicsUnit.Pixel);
-                    g.DrawString(imageCircleRevolver.SelectedObject.Name, font, Brushes.Red, new PointF(0, 0));
-                }
-            }
-        }
         private void RefreshImages()
         {
-            if (Pattern == Patterns.Ready)
+            if (Pattern == ViewPatterns.Ready)
             {
                 imageCircleRevolver.SetAlpha();
                 imageCircleRevolver.Refresh();
@@ -283,7 +464,7 @@ namespace EAlbums
             return timer.Enabled;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             RefreshImages();
         }

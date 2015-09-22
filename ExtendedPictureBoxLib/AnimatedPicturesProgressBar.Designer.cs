@@ -1,11 +1,15 @@
-﻿namespace ExtendedPictureBoxLib
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace ExtendedPictureBoxLib
 {
     partial class AnimatedPicturesProgressBar
     {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -32,10 +36,10 @@
             // 
             // AnimatedPicturesProgressBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new SizeF(6F, 12F);
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.Name = "AnimatedPicturesProgressBar";
-            this.Size = new System.Drawing.Size(341, 27);
+            this.Size = new Size(341, 27);
             this.ResumeLayout(false);
 
         }

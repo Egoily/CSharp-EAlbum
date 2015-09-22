@@ -6,6 +6,7 @@
 
 using System.ComponentModel;
 using System.Drawing;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters

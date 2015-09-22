@@ -6,6 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 
 {
@@ -14,7 +19,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -41,10 +46,10 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 			// 
 			// LB7SegmentDisplay
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new SizeF(6F, 13F);
+			this.AutoScaleMode = AutoScaleMode.Font;
 			this.Name = "LB7SegmentDisplay";
-			this.Size = new System.Drawing.Size(44, 65);
+			this.Size = new Size(44, 65);
 			this.ResumeLayout(false);
 		}
 	}

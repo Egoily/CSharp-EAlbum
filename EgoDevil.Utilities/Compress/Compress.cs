@@ -473,7 +473,7 @@ namespace EgoDevil.Utilities.Compress
                 i++;
             }
 
-            line = System.Text.Encoding.Default.GetString(buffer, 0, i - 1);
+            line = Encoding.Default.GetString(buffer, 0, i - 1);
 
             return line;
         }

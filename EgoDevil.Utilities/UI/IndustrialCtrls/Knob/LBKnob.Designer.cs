@@ -6,6 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Knobs
 {
 	partial class LBKnob
@@ -13,7 +18,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Knobs
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -40,13 +45,13 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Knobs
 			// 
 			// LBKnob
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new SizeF(6F, 13F);
+			this.AutoScaleMode = AutoScaleMode.Font;
 			this.Name = "LBKnob";
-			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
-			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+			this.MouseDown += new MouseEventHandler(this.OnMouseDown);
+			this.MouseMove += new MouseEventHandler(this.OnMouseMove);
+			this.MouseUp += new MouseEventHandler(this.OnMouseUp);
+			this.KeyDown += new KeyEventHandler(this.OnKeyDown);
 			this.ResumeLayout(false);
 		}
 	}

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
@@ -85,7 +86,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
                 throw new NullReferenceException("Associated control is not valid");
 
             RectangleF _rc = new RectangleF(0, 0, ctrl.Width, ctrl.Height);
-            Gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Gr.SmoothingMode = SmoothingMode.AntiAlias;
 
             this.DrawBackground(Gr, _rc);
             this.DrawOffSegments(Gr, _rc);

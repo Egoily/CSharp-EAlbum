@@ -1,11 +1,15 @@
-﻿namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 {
     partial class LBDigitalMeter
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Liberare le risorse in uso.
@@ -32,10 +36,10 @@
             // 
             // LBDigitalMeter
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new SizeF(6F, 12F);
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.Name = "LBDigitalMeter";
-            this.Size = new System.Drawing.Size(131, 33);
+            this.Size = new Size(131, 33);
             this.ResumeLayout(false);
 
         }

@@ -44,7 +44,7 @@ namespace EAlbums
             this.Images = list;
         }
 
-        private void ImageListForm_Load(object sender, EventArgs e)
+        private void ImageListFormLoad(object sender, EventArgs e)
         {
             dataGridView.Rows.Clear();
             foreach (string fileName in Images)
@@ -54,7 +54,7 @@ namespace EAlbums
                 {
                     dataGridView.Rows.Add((new Bitmap(fileName)).GetThumbnailImage(40, 40, null, IntPtr.Zero), safeFileName, fileName);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     continue;
                 }
@@ -62,7 +62,7 @@ namespace EAlbums
             dataGridView.Refresh();
         }
 
-        private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DataGridViewRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             //======================================================
             //标识行号
@@ -86,7 +86,7 @@ namespace EAlbums
             }
         }
 
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        private void OpenFileDialogFileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
             foreach (string fileName in ofd.FileNames)
@@ -96,7 +96,7 @@ namespace EAlbums
                 {
                     dataGridView.Rows.Add((new Bitmap(fileName)).GetThumbnailImage(40, 40, null, IntPtr.Zero), safeFileName, fileName);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     continue;
                 }
@@ -112,7 +112,7 @@ namespace EAlbums
             OnLoading(new LoadingEventArgs(Images));
         }
 
-        private void btnInsertImage_Click(object sender, EventArgs e)
+        private void BtnInsertImageClick(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
         }

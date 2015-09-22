@@ -46,9 +46,9 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Utils
                 ialpha = 1.0F + ialpha;  // 0 = transparent fg; 1 = opaque fg
             }
 
-            r = (byte)(LBColorManager.BlendColour(r, bg, ialpha));
-            g = (byte)(LBColorManager.BlendColour(g, bg, ialpha));
-            b = (byte)(LBColorManager.BlendColour(b, bg, ialpha));
+            r = (byte)(BlendColour(r, bg, ialpha));
+            g = (byte)(BlendColour(g, bg, ialpha));
+            b = (byte)(BlendColour(b, bg, ialpha));
 
             return Color.FromArgb(a, r, g, b);
         }

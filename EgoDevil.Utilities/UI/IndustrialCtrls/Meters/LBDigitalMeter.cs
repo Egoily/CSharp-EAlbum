@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Leds;
 
@@ -319,7 +320,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DisplayClicked(object sender, System.EventArgs e)
+        private void DisplayClicked(object sender, EventArgs e)
         {
             this.InvokeOnClick(this, e);
         }

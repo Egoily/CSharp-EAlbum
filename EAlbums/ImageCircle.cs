@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using EgoDevil.Utilities.ThumbnailCreator;
 
 namespace EAlbums
 {
-    public enum RevolveTypes
-    {
-        None = 0,
-        Fixed = 1,
-        Transformable = 2,
-    }
-    public class ImageCircle
-    {
 
-        private int maxImageCount = 10;
-
+    public class ImageCircle : IImageCircle
+    {
         public ImageCircle()
         {
+            MaxCapacity = 10;
             AlphaAccel = 0.0f;
             Images = new List<ThumbElement>();
         }
 
         public ImageCircle(Point circleCenter)
         {
+            MaxCapacity = 10;
             AlphaAccel = 0.0f;
             Images = new List<ThumbElement>();
             CircleCenter = circleCenter;
@@ -47,16 +40,15 @@ namespace EAlbums
         public Color HoverColor { get; set; }
 
         public List<ThumbElement> Images { get; set; }
-        public int MaxImageCount
-        {
-            get { return maxImageCount; }
-            set { maxImageCount = value; }
-        }
+
+        [DefaultValue(10)]
+        public int MaxCapacity { get; set; }
 
         public float Perspective { get; set; }
         public Point Radius { get; set; }
         public RevolveTypes RevolveType { get; set; }
         public ThumbElement SelectedObject { get; set; }
+
         public void Clear()
         {
             if (Images != null)
@@ -79,14 +71,15 @@ namespace EAlbums
             Clear();
             var count = filePaths.Count;
 
-            if (count > MaxImageCount)
+            if (count > MaxCapacity)
             {
-                count = MaxImageCount;
+                count = MaxCapacity;
             }
             for (var i = 0; i < count; i++)
             {
                 var filePath = filePaths[i];
                 var thumbnailCreation = new ThumbnailCreation();
+
                 var bitmap = thumbnailCreation.CreateThumbnailImage(filePath);
 
                 var angle = (double)((i * 360.0f) / count);
@@ -114,12 +107,12 @@ namespace EAlbums
         }
         public void Refresh()
         {
-            System.Threading.Tasks.Parallel.ForEach(Images, obj =>
+            Parallel.ForEach(Images, obj =>
             {
                 obj.ThumbImage.Alpha = Alpha;
-                obj.ThumbImage.Radius = new Point(Radius.X, (int)(Radius.Y / Perspective));
+                obj.ThumbImage.Radius = new Size(Radius.X, (int)(Radius.Y / Perspective));
                 obj.ThumbImage.CircleCenter = CircleCenter;
-                obj.ThumbImage.Refresh();
+                obj.ThumbImage.ReLocate();
             });
 
             Images.Sort((p1, p2) => p2.ThumbImage.DistanceFromScreen.CompareTo(p1.ThumbImage.DistanceFromScreen));
@@ -129,7 +122,7 @@ namespace EAlbums
         public bool SelectHoverItem(Point location)
         {
             SelectedObject = null;
-            System.Threading.Tasks.Parallel.ForEach(Images.Where(obj => obj.ThumbImage.CheckIsHover(location)), obj =>
+            Parallel.ForEach(Images.Where(obj => obj.ThumbImage.CheckIsHover(location)), obj =>
             {
                 SelectedObject = obj;
             });

@@ -2,13 +2,15 @@
 using System.ComponentModel;
 using System.Drawing;
 
+using Animations;
+
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
     /// Base class inheriting <see cref="Animations.AnimatorBase"/> helping to animate thevone of
     /// the offset properties of an <see cref="ExtendedPictureBox"/>.
     /// </summary>
-    public partial class ExtendedPictureBoxOffsetAnimatorBase : Animations.AnimatorBase
+    public partial class ExtendedPictureBoxOffsetAnimatorBase : AnimatorBase
     {
         #region Fields
 

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+
 using EgoDevil.Utilities.ThumbnailCreator.Exceptions;
 
 namespace EgoDevil.Utilities.ThumbnailCreator
@@ -61,7 +62,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator
                 if (value > 0)
                     m_MaxLength = value;
                 else
-                    throw new System.ArgumentOutOfRangeException("MaxImageLength", value, "The MaxImageLength value must be greater then zero");
+                    throw new ArgumentOutOfRangeException("MaxImageLength", value, "The MaxImageLength value must be greater then zero");
             }
         }
 
@@ -88,7 +89,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator
                 if ((value >= 0) && (value <= 100))
                     m_Quality = value;
                 else
-                    throw new System.ArgumentOutOfRangeException("Quality", value, "The Quality value must be greater then or equal to zero, and less then or equal to 100");
+                    throw new ArgumentOutOfRangeException("Quality", value, "The Quality value must be greater then or equal to zero, and less then or equal to 100");
             }
         }
 

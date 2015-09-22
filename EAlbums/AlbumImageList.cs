@@ -33,7 +33,7 @@ namespace EAlbums
             }
         }
 
-        private string CurrentAlbumName;
+        private string currentAlbumName;
 
         private void AddImages(string[] paths)
         {
@@ -44,7 +44,7 @@ namespace EAlbums
                 {
                     dataGridView.Rows.Add((new Bitmap(fileName)).GetThumbnailImage(40, 40, null, IntPtr.Zero), safeFileName, fileName);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     continue;
                 }
@@ -54,7 +54,7 @@ namespace EAlbums
 
         public void LoadImages(string name, List<string> imagePaths)
         {
-            CurrentAlbumName = name;
+            currentAlbumName = name;
             dataGridView.Rows.Clear();
             AddImages(imagePaths.ToArray());
         }
@@ -64,11 +64,11 @@ namespace EAlbums
             InitializeComponent();
         }
 
-        private void AlbumImageList_Load(object sender, EventArgs e)
+        private void AlbumImageListLoad(object sender, EventArgs e)
         {
         }
 
-        private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DataGridViewRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             //======================================================
             //标识行号
@@ -92,14 +92,14 @@ namespace EAlbums
             }
         }
 
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        private void OpenFileDialogFileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
 
             AddImages(ofd.FileNames);
         }
 
-        private void toolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ToolStripItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == tsbInsertImage)
             {
@@ -112,12 +112,12 @@ namespace EAlbums
                         imagePaths.Add(dataGridView[2, i].Value.ToString());
                     }
 
-                    OnImagesLoaded(new ImagesLoadedEventArgs(CurrentAlbumName, imagePaths));
+                    OnImagesLoaded(new ImagesLoadedEventArgs(currentAlbumName, imagePaths));
                 }
             }
         }
 
-        private void ePanelAlbumImageList_CloseClick(object sender, EventArgs e)
+        private void EPanelAlbumImageListCloseClick(object sender, EventArgs e)
         {
             this.Visible = false;
         }

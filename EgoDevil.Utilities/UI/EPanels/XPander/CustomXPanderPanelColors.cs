@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -18,17 +19,17 @@ namespace EgoDevil.Utilities.UI.EPanels
         #region FieldsPrivate
 
         private Color m_backColor = SystemColors.Control;
-        private Color m_flatCaptionGradientBegin = System.Windows.Forms.ProfessionalColors.ToolStripGradientMiddle;
-        private Color m_flatCaptionGradientEnd = System.Windows.Forms.ProfessionalColors.ToolStripGradientBegin;
-        private Color m_captionPressedGradientBegin = System.Windows.Forms.ProfessionalColors.ButtonPressedGradientBegin;
-        private Color m_captionPressedGradientEnd = System.Windows.Forms.ProfessionalColors.ButtonPressedGradientEnd;
-        private Color m_captionPressedGradientMiddle = System.Windows.Forms.ProfessionalColors.ButtonPressedGradientMiddle;
-        private Color m_captionCheckedGradientBegin = System.Windows.Forms.ProfessionalColors.ButtonCheckedGradientBegin;
-        private Color m_captionCheckedGradientEnd = System.Windows.Forms.ProfessionalColors.ButtonCheckedGradientEnd;
-        private Color m_captionCheckedGradientMiddle = System.Windows.Forms.ProfessionalColors.ButtonCheckedGradientMiddle;
-        private Color m_captionSelectedGradientBegin = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientBegin;
-        private Color m_captionSelectedGradientEnd = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientEnd;
-        private Color m_captionSelectedGradientMiddle = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientMiddle;
+        private Color m_flatCaptionGradientBegin = ProfessionalColors.ToolStripGradientMiddle;
+        private Color m_flatCaptionGradientEnd = ProfessionalColors.ToolStripGradientBegin;
+        private Color m_captionPressedGradientBegin = ProfessionalColors.ButtonPressedGradientBegin;
+        private Color m_captionPressedGradientEnd = ProfessionalColors.ButtonPressedGradientEnd;
+        private Color m_captionPressedGradientMiddle = ProfessionalColors.ButtonPressedGradientMiddle;
+        private Color m_captionCheckedGradientBegin = ProfessionalColors.ButtonCheckedGradientBegin;
+        private Color m_captionCheckedGradientEnd = ProfessionalColors.ButtonCheckedGradientEnd;
+        private Color m_captionCheckedGradientMiddle = ProfessionalColors.ButtonCheckedGradientMiddle;
+        private Color m_captionSelectedGradientBegin = ProfessionalColors.ButtonSelectedGradientBegin;
+        private Color m_captionSelectedGradientEnd = ProfessionalColors.ButtonSelectedGradientEnd;
+        private Color m_captionSelectedGradientMiddle = ProfessionalColors.ButtonSelectedGradientMiddle;
         private Color m_captionSelectedText = SystemColors.ControlText;
 
         #endregion

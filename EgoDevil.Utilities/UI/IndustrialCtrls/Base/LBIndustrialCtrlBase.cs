@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
@@ -81,7 +82,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         /// Font change event
         /// </summary>
         /// <param name="e"></param>
-        [System.ComponentModel.EditorBrowsableAttribute()]
+        [EditorBrowsable()]
         protected override void OnFontChanged(EventArgs e)
         {
             // Calculate dimensions
@@ -92,7 +93,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         /// SizeChanged event
         /// </summary>
         /// <param name="e"></param>
-        [System.ComponentModel.EditorBrowsableAttribute()]
+        [EditorBrowsable()]
         protected override void OnSizeChanged(EventArgs e)
         {
             // Default
@@ -120,12 +121,12 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
         /// Paint event
         /// </summary>
         /// <param name="e"></param>
-        [System.ComponentModel.EditorBrowsableAttribute()]
+        [EditorBrowsable()]
         protected override void OnPaint(PaintEventArgs e)
         {
             // Rectangle of the control
             RectangleF _rc = new RectangleF(0, 0, this.Width, this.Height);
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Call the default renderer if the user rendere is null
             if (this.Renderer == null)

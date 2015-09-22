@@ -6,7 +6,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Provide Office 2007 black theme colors
     /// </summary>
-    public class ColorTableBlack : EgoDevil.Utilities.UI.EPanels.EColorTable
+    public class ColorTableBlack : EColorTable
     {
         #region FieldsPrivate
 
@@ -39,7 +39,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes a color dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable)
+        protected override void InitColors(Dictionary<KnownColors, Color> rgbTable)
         {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.ButtonPressedBorder] = Color.FromArgb(145, 153, 164);

@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+
 using Animations;
+
 using ExtendedPictureBoxLib.Animators;
 
 namespace ExtendedPictureBoxLib

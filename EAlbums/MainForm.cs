@@ -1,6 +1,5 @@
-﻿using System.Windows.Forms;
-
-using EgoDevil.Utilities.BkWorker;
+﻿using System;
+using System.Windows.Forms;
 
 namespace EAlbums
 {
@@ -11,7 +10,7 @@ namespace EAlbums
             InitializeComponent();
         }
 
-        private void albumImageList_ImagesLoaded(object sender, AlbumImageList.ImagesLoadedEventArgs e)
+        private void AlbumImageListImagesLoaded(object sender, AlbumImageList.ImagesLoadedEventArgs e)
         {
             this.albumView.ImagePaths = e.ImagePaths;
             this.albumView.LoadThumbs(e.ImagePaths);
@@ -19,7 +18,7 @@ namespace EAlbums
             this.taskStrip.SetCurrentImagePaths(e.Name, e.ImagePaths);
         }
 
-        private void MainForm_Load(object sender, System.EventArgs e)
+        private void MainFormLoad(object sender, EventArgs e)
         {
             this.Visible = true;
             this.albumView.Loading();

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 
+using Animations;
+
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
     /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
     /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.RotationAngle"/> of a <see cref="ExtendedPictureBox"/>.
     /// </summary>
-    public partial class ExtendedPictureBoxRotationAngleAnimator : Animations.AnimatorBase
+    public partial class ExtendedPictureBoxRotationAngleAnimator : AnimatorBase
     {
         #region Fields
 

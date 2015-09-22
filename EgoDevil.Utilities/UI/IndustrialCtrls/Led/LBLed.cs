@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
@@ -70,8 +71,8 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds
 
             this.Size = new Size(20, 20);
             this.ledColor = Color.Red;
-            this.state = LBLed.LedState.Off;
-            this.style = LBLed.LedStyle.Circular;
+            this.state = LedState.Off;
+            this.style = LedStyle.Circular;
             this.blinkIsOn = false;
             this.ledSize = new SizeF(10F, 10F);
             this.labelPosition = LedLabelPosition.Top;

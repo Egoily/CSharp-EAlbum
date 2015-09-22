@@ -1,11 +1,13 @@
-﻿namespace ExtendedPictureBoxLib.Animators
+﻿using System.ComponentModel;
+
+namespace ExtendedPictureBoxLib.Animators
 {
     partial class ExtendedPictureBoxTextHaloWidthAnimator
     {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            components = new Container();
         }
 
         #endregion

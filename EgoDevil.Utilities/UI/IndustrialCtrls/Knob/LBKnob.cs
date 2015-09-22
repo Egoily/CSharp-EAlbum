@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Knobs
@@ -288,7 +289,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Knobs
             return blResult;
         }
 
-        [System.ComponentModel.EditorBrowsableAttribute()]
+        [EditorBrowsable()]
         protected override void OnClick(EventArgs e)
         {
             this.Focus();

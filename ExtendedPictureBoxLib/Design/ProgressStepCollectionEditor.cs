@@ -1,12 +1,13 @@
 using System;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 
 namespace ExtendedPictureBoxLib.Design
 {
     /// <summary>
     /// Controls the design time collection editor for a <see cref="ProgressStepCollection"/>.
     /// </summary>
-    public partial class ProgressStepCollectionEditor : System.ComponentModel.Design.CollectionEditor
+    public partial class ProgressStepCollectionEditor : CollectionEditor
     {
         #region Fields
 

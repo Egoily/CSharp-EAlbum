@@ -3,13 +3,15 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
+using Animations;
+
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
     /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
     /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.BackColor2"/> of a <see cref="ExtendedPictureBox"/>.
     /// </summary>
-    public partial class ExtendedPictureBoxBackColor2Animator : Animations.ControlBackColorAnimator
+    public partial class ExtendedPictureBoxBackColor2Animator : ControlBackColorAnimator
     {
         #region (* Fields *)
 

@@ -1,11 +1,14 @@
-﻿namespace EgoDevil.Utilities.UI.MessageForm
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace EgoDevil.Utilities.UI.MessageForm
 {
     partial class MsgForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -92,9 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label labelMsg;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label labelTime;
+        private Timer timer1;
+        private Label labelMsg;
+        private PictureBox pictureBox;
+        private Label labelTime;
     }
 }

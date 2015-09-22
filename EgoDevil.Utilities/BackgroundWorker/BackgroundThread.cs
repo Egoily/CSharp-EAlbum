@@ -7,7 +7,7 @@ namespace EgoDevil.Utilities.BkWorker
     {
         public delegate void RunFunction();
 
-        public System.ComponentModel.BackgroundWorker Bw;
+        public BackgroundWorker Bw;
         public RunFunction thisFunction;
         private BackgroundForm frmBackground;
 

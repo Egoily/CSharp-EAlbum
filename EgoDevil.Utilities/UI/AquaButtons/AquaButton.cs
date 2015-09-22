@@ -4,13 +4,15 @@ using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.AquaButtons
 {
     [Description("Aqua Button Control")]
-    [Designer(typeof(EgoDevil.Utilities.UI.AquaButtons.AquaButtonDesigner))]
-    public class AquaButton : System.Windows.Forms.Button
+    [Designer(typeof(AquaButtonDesigner))]
+    public class AquaButton : Button
     {
         #region Class Constants
 
@@ -113,8 +115,8 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         {
             get
             {
-                return new Size(AquaButton.ButtonDefaultWidth,
-                    AquaButton.ButtonHeight);
+                return new Size(ButtonDefaultWidth,
+                    ButtonHeight);
             }
         }
 
@@ -252,9 +254,9 @@ namespace EgoDevil.Utilities.UI.AquaButtons
 
         protected virtual void LoadImages()
         {
-            System.Reflection.Assembly assembly = GetType().Assembly;
+            Assembly assembly = GetType().Assembly;
 
-            System.IO.Stream streamSmall = assembly.GetManifestResourceStream(@"EgoDevil.Utilities.UI.AquaButtons.left.png");
+            Stream streamSmall = assembly.GetManifestResourceStream(@"EgoDevil.Utilities.UI.AquaButtons.left.png");
             imgLeft = new Bitmap(streamSmall);
             streamSmall = assembly.GetManifestResourceStream(@"EgoDevil.Utilities.UI.AquaButtons.right.png");
             imgRight = new Bitmap(streamSmall);
@@ -303,10 +305,10 @@ namespace EgoDevil.Utilities.UI.AquaButtons
             if (Focused && Pulse && !this.DesignModeDetected())
             {
                 timer = new Timer();
-                timer.Interval = AquaButton.PulseInterval;
+                timer.Interval = PulseInterval;
                 timer.Tick += new EventHandler(TimerOnTick);
-                gamma = AquaButton.PulseGammaMax;
-                gammaShift = -AquaButton.PulseGammaShift;
+                gamma = PulseGammaMax;
+                gammaShift = -PulseGammaShift;
                 timer.Start();
             }
         }
@@ -371,7 +373,7 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         {
             RectangleF layoutRect =
                 new RectangleF(0, 0, this.Width,
-                    this.Height - AquaButton.ButtonShadowOffset);
+                    this.Height - ButtonShadowOffset);
 
             int LabelShadowOffset = 1;
 
@@ -395,13 +397,13 @@ namespace EgoDevil.Utilities.UI.AquaButtons
         protected virtual void TimerOnTick(object obj, EventArgs e)
         {
             // set the new gamma level
-            if ((gamma - AquaButton.PulseGammaMin < AquaButton.PulseGammaReductionThreshold) ||
-                (AquaButton.PulseGammaMax - gamma < AquaButton.PulseGammaReductionThreshold))
-                gamma += gammaShift * AquaButton.PulseGammaShiftReduction;
+            if ((gamma - PulseGammaMin < PulseGammaReductionThreshold) ||
+                (PulseGammaMax - gamma < PulseGammaReductionThreshold))
+                gamma += gammaShift * PulseGammaShiftReduction;
             else
                 gamma += gammaShift;
 
-            if (gamma <= AquaButton.PulseGammaMin || gamma >= AquaButton.PulseGammaMax)
+            if (gamma <= PulseGammaMin || gamma >= PulseGammaMax)
                 gammaShift = -gammaShift;
 
             iaDefault.SetGamma(gamma, ColorAdjustType.Bitmap);

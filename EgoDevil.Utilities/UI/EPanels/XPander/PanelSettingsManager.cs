@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
@@ -75,8 +77,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             if (panelColors == null)
             {
                 throw new ArgumentNullException("panelColors",
-                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.IDS_ArgumentException,
                     "panelColors"));
             }
 
@@ -95,8 +97,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             if (panelColors == null)
             {
                 throw new ArgumentNullException("panelColors",
-                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    string.Format(CultureInfo.InvariantCulture,
+                    Resources.IDS_ArgumentException,
                     "panelColors"));
             }
 
@@ -204,7 +206,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             return (((((exception is NullReferenceException) ||
                 (exception is StackOverflowException)) ||
                 ((exception is OutOfMemoryException) ||
-                (exception is System.Threading.ThreadAbortException))) ||
+                (exception is ThreadAbortException))) ||
                 ((exception is ExecutionEngineException) ||
                 (exception is IndexOutOfRangeException))) ||
                 (exception is AccessViolationException));

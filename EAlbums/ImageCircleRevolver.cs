@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EAlbums
 {
-    public class ImageCircleRevolver
+    public class ImageCircleRevolver : IImageCircleRevolver
     {
         public List<ImageCircle> Circles { get; set; }
-        public int CircleCount { get; set; }
+        public int CircleCapacity { get; set; }
 
         public int Interval { get; set; }
 
@@ -28,7 +26,7 @@ namespace EAlbums
         public void Load(List<string> filePaths)
         {
 
-            for (var i = 0; i < CircleCount; i++)
+            for (var i = 0; i < CircleCapacity; i++)
             {
                 var center = new Point(OrginalCenter.X, OrginalCenter.Y + i * Interval);
                 var circle = new ImageCircle()
@@ -40,13 +38,13 @@ namespace EAlbums
                     CircleCenter = center,
                     Radius = new Point(400, 100),
                     FixedAlphaAccel = 0.1f,
-                    MaxImageCount = 20,
+                    MaxCapacity = 20,
                     RevolveType = RevolveTypes.Fixed,
                 };
                 Circles.Add(circle);
 
                 var paths = new List<string>();
-                for (int j = i * circle.MaxImageCount; j < (i + 1) * circle.MaxImageCount; j++)
+                for (int j = i * circle.MaxCapacity; j < (i + 1) * circle.MaxCapacity; j++)
                 {
                     if (j >= filePaths.Count)
                         break;
@@ -61,7 +59,7 @@ namespace EAlbums
 
         public void SetAlpha()
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.SetAlpha();
             });
@@ -69,21 +67,21 @@ namespace EAlbums
 
         public void SetAlphaAccel(float alphaAccel)
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.AlphaAccel = alphaAccel;
             });
         }
         public void SetPerspective(float perspective)
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.Perspective = perspective;
             });
         }
         public void Refresh()
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.Refresh();
             });
@@ -91,7 +89,7 @@ namespace EAlbums
 
         public void ClearHover()
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.ClearHover();
             });
@@ -101,14 +99,14 @@ namespace EAlbums
         {
             foreach (var obj in Circles)
             {
-                obj.DrawImages(g);
+                obj.DrawImages(g);            
             }
         }
 
         public bool SelectHoverItem(Point location)
         {
             SelectedObject = null;
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.SelectHoverItem(location);
             });
@@ -119,7 +117,7 @@ namespace EAlbums
 
         public void SetRevolveType(RevolveTypes revolveType)
         {
-            System.Threading.Tasks.Parallel.ForEach(Circles, obj =>
+            Parallel.ForEach(Circles, obj =>
             {
                 obj.RevolveType = revolveType;
             });
@@ -130,7 +128,7 @@ namespace EAlbums
             this.OrginalCenter = orginalCenter;
             if (Circles.Any())
             {
-                for (var i = 0; i < CircleCount; i++)
+                for (var i = 0; i < CircleCapacity; i++)
                 {
                     var center = new Point(OrginalCenter.X, OrginalCenter.Y + i * Interval);
                     Circles[i].CircleCenter = center;

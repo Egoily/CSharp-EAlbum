@@ -166,7 +166,7 @@ namespace EgoDevil.Utilities.UI.Docking
             {
                 Rectangle rectLimit = DockPanel.DockArea;
                 Point location;
-                if ((Control.ModifierKeys & Keys.Shift) == 0)
+                if ((ModifierKeys & Keys.Shift) == 0)
                     location = Location;
                 else
                     location = DockPanel.DockArea.Location;
@@ -176,7 +176,7 @@ namespace EgoDevil.Utilities.UI.Docking
                     rectLimit.X += MeasurePane.MinSize;
                     rectLimit.Width -= 2 * MeasurePane.MinSize;
                     rectLimit.Y = location.Y;
-                    if ((Control.ModifierKeys & Keys.Shift) == 0)
+                    if ((ModifierKeys & Keys.Shift) == 0)
                         rectLimit.Height = Height;
                 }
                 else
@@ -184,7 +184,7 @@ namespace EgoDevil.Utilities.UI.Docking
                     rectLimit.Y += MeasurePane.MinSize;
                     rectLimit.Height -= 2 * MeasurePane.MinSize;
                     rectLimit.X = location.X;
-                    if ((Control.ModifierKeys & Keys.Shift) == 0)
+                    if ((ModifierKeys & Keys.Shift) == 0)
                         rectLimit.Width = Width;
                 }
 
@@ -194,7 +194,7 @@ namespace EgoDevil.Utilities.UI.Docking
 
         void ISplitterDragSource.MoveSplitter(int offset)
         {
-            if ((Control.ModifierKeys & Keys.Shift) != 0)
+            if ((ModifierKeys & Keys.Shift) != 0)
                 SendToBack();
 
             Rectangle rectDockArea = DockPanel.DockArea;

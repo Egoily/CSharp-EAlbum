@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
@@ -15,7 +17,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     ///     IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. IT CAN BE
     ///     DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER REMAINS UNCHANGED.
     /// </copyright>
-    [DesignTimeVisibleAttribute(false)]
+    [DesignTimeVisible(false)]
     public class BaseEPanel : ScrollableControl, IPanel
     {
         #region Constants
@@ -105,7 +107,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         private bool m_bShowBorder;
         private bool m_bExpand;
         private Size m_imageSize;
-        private EgoDevil.Utilities.UI.EPanels.ColorScheme m_eColorScheme;
+        private ColorScheme m_eColorScheme;
         private PanelColors m_panelColors;
         private PanelStyle m_ePanelStyle;
         private Image m_image;
@@ -117,7 +119,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         private string m_strToolTipTextCloseIcon;
         private bool m_bShowExpandIcon;
         private bool m_bShowCloseIcon;
-        private System.Windows.Forms.ToolTip m_toolTip;
+        private ToolTip m_toolTip;
 
         #endregion
 
@@ -143,7 +145,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         [Description("Style of the panel")]
         [DefaultValue(0)]
         [Category("Appearance")]
-        public virtual EgoDevil.Utilities.UI.EPanels.PanelStyle PanelStyle
+        public virtual PanelStyle PanelStyle
         {
             get { return this.m_ePanelStyle; }
             set
@@ -178,10 +180,10 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Gets or sets the color schema which is used for the panel.
         /// </summary>
         [Description("ColorScheme of the Panel")]
-        [DefaultValue(EgoDevil.Utilities.UI.EPanels.ColorScheme.Professional)]
+        [DefaultValue(ColorScheme.Professional)]
         [Browsable(true)]
         [Category("Appearance")]
-        public virtual EgoDevil.Utilities.UI.EPanels.ColorScheme ColorScheme
+        public virtual ColorScheme ColorScheme
         {
             get { return this.m_eColorScheme; }
             set
@@ -209,8 +211,8 @@ namespace EgoDevil.Utilities.UI.EPanels
                 {
                     throw new InvalidOperationException(
                         string.Format(
-                        System.Globalization.CultureInfo.CurrentUICulture,
-                        global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_InvalidOperationExceptionInteger, value, "CaptionHeight", Constants.CaptionMinHeight));
+                        CultureInfo.CurrentUICulture,
+                        Resources.IDS_InvalidOperationExceptionInteger, value, "CaptionHeight", Constants.CaptionMinHeight));
                 }
                 this.m_iCaptionHeight = value;
                 OnCaptionHeightChanged(this, EventArgs.Empty);
@@ -457,8 +459,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     "panelColors"));
             }
             this.m_panelColors = panelColors;
@@ -487,7 +489,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             this.m_panelColors = new PanelColors(this);
             this.m_imageSize = new Size(16, 16);
             this.m_imageRectangle = Rectangle.Empty;
-            this.m_toolTip = new System.Windows.Forms.ToolTip();
+            this.m_toolTip = new ToolTip();
         }
 
         /// <summary>
@@ -872,8 +874,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     typeof(Graphics).Name));
             }
 
@@ -910,16 +912,16 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     typeof(Graphics).Name));
             }
             if (imgPanelIcon == null)
             {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     typeof(Image).Name));
             }
 
@@ -933,13 +935,13 @@ namespace EgoDevil.Utilities.UI.EPanels
                 imgPanelIcon.Width,
                 imgPanelIcon.Height - 1);
 
-            using (System.Drawing.Imaging.ImageAttributes imageAttribute = new System.Drawing.Imaging.ImageAttributes())
+            using (ImageAttributes imageAttribute = new ImageAttributes())
             {
                 imageAttribute.SetColorKey(Color.Magenta, Color.Magenta);
-                System.Drawing.Imaging.ColorMap colorMap = new System.Drawing.Imaging.ColorMap();
+                ColorMap colorMap = new ColorMap();
                 colorMap.OldColor = Color.FromArgb(0, 60, 166);
                 colorMap.NewColor = foreColorImage;
-                imageAttribute.SetRemapTable(new System.Drawing.Imaging.ColorMap[] { colorMap });
+                imageAttribute.SetRemapTable(new ColorMap[] { colorMap });
 
                 graphics.DrawImage(imgPanelIcon, rectangleIcon, 0, 0, iconWidth, iconHeight, GraphicsUnit.Pixel, imageAttribute);
             }
@@ -959,8 +961,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 throw new ArgumentNullException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     typeof(Graphics).Name));
             }
             if (image != null)
@@ -1357,8 +1359,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    global::EgoDevil.Utilities.UI.EPanels.Resources.IDS_ArgumentException,
+                    CultureInfo.CurrentUICulture,
+                    Resources.IDS_ArgumentException,
                     typeof(Graphics).Name));
             }
             if (IsZeroWidthOrHeight(bounds))

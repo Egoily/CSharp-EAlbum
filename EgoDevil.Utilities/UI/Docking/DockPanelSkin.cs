@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 
 namespace EgoDevil.Utilities.UI.Docking
 {
@@ -305,7 +306,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is DockPanelSkin)
             {
@@ -325,7 +326,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is DockPanelGradient)
             {
@@ -345,7 +346,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is AutoHideStripSkin)
             {
@@ -365,7 +366,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is DockPaneStripSkin)
             {
@@ -385,7 +386,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is DockPaneStripGradient)
             {
@@ -405,7 +406,7 @@ namespace EgoDevil.Utilities.UI.Docking
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(String) && value is TabGradient)
             {

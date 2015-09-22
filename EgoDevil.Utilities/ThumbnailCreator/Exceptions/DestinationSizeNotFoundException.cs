@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EgoDevil.Utilities.ThumbnailCreator.Exceptions
 {
@@ -10,7 +8,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator.Exceptions
     /// of the image that is about to be produced. This destination size depends on the ScalingOption
     /// and may depend on the original image.
     /// </summary>
-    public class DestinationSizeNotFoundException : System.Exception
+    public class DestinationSizeNotFoundException : Exception
     {
 
         internal DestinationSizeNotFoundException()

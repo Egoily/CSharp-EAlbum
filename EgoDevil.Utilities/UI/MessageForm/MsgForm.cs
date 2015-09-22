@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.MessageForm
 {
-    public partial class MsgForm : EgoDevil.Utilities.UI.EForm.EForm
+    public partial class MsgForm : EForm.EForm
     {
         private bool display = true; //定义窗体是显示(true)还是消失(false)
         private int S_width = 0; //定义屏幕宽度
@@ -111,7 +111,7 @@ namespace EgoDevil.Utilities.UI.MessageForm
             if (this.Opacity <= 1)
             {
                 //指定窗体显示在右下角
-                this.Location = new System.Drawing.Point(S_width - this.Width, S_height - Convert.ToInt32(this.Height * this.Opacity));
+                this.Location = new Point(S_width - this.Width, S_height - Convert.ToInt32(this.Height * this.Opacity));
             }
         }
 

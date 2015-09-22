@@ -1,11 +1,18 @@
-﻿namespace ExtendedPictureBoxLib
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+using ExtendedPictureBoxLib.Animators;
+
+namespace ExtendedPictureBoxLib
 {
     partial class AnimatedPictureBox
     {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -32,44 +39,44 @@
             // 
             // AnimatedPictureBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new SizeF(6F, 12F);
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.Name = "AnimatedPictureBox";
-            this.Size = new System.Drawing.Size(94, 78);
+            this.Size = new Size(94, 78);
             this.ResumeLayout(false);
 
-            this.components = new System.ComponentModel.Container();
-            this._stateAnimator = new ExtendedPictureBoxLib.Animators.ExtendedPictureBoxStateAnimator(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this._stateAnimator)).BeginInit();
+            this.components = new Container();
+            this._stateAnimator = new ExtendedPictureBoxStateAnimator(this.components);
+            ((ISupportInitialize)(this._stateAnimator)).BeginInit();
             // 
             // _stateAnimator
             // 
-            this._stateAnimator.EndState = new ExtendedPictureBoxLib.PictureBoxState(
-                ((System.Byte)(255)), 0F, 100F, 0F, 0F, 
-                System.Drawing.SystemColors.Control,
-                System.Drawing.SystemColors.Control, 
-                System.Drawing.SystemColors.ControlText,
-                System.Drawing.SystemColors.ControlText,
+            this._stateAnimator.EndState = new PictureBoxState(
+                ((Byte)(255)), 0F, 100F, 0F, 0F, 
+                SystemColors.Control,
+                SystemColors.Control, 
+                SystemColors.ControlText,
+                SystemColors.ControlText,
                 0, 0F, 100F,
-                System.Drawing.Point.Empty,
-                System.Drawing.Point.Empty,
-                System.Drawing.Point.Empty);
+                Point.Empty,
+                Point.Empty,
+                Point.Empty);
             this._stateAnimator.ExtendedPictureBox = this;
-            this._stateAnimator.StartState = new ExtendedPictureBoxLib.PictureBoxState(
-                ((System.Byte)(255)), 0F, 100F, 0F, 0F,
-                System.Drawing.SystemColors.Control,
-                System.Drawing.SystemColors.Control,
-                System.Drawing.SystemColors.ControlText,
-                System.Drawing.SystemColors.ControlText,
+            this._stateAnimator.StartState = new PictureBoxState(
+                ((Byte)(255)), 0F, 100F, 0F, 0F,
+                SystemColors.Control,
+                SystemColors.Control,
+                SystemColors.ControlText,
+                SystemColors.ControlText,
                 0, 0F, 500F,
-                System.Drawing.Point.Empty,
-                System.Drawing.Point.Empty,
-                System.Drawing.Point.Empty);
-            this._stateAnimator.IntervallChanged += new System.EventHandler(this.OnAnimationIntervallChanged);
-            this._stateAnimator.AnimationStopped += new System.EventHandler(this.OnAnimationStopped);
-            this._stateAnimator.StepSizeChanged += new System.EventHandler(this.OnAnimationStepSizeChanged);
-            this._stateAnimator.AnimationStarted += new System.EventHandler(this.OnAnimationStarted);
-            this._stateAnimator.AnimationFinished += new System.EventHandler(this.OnAnimationFinished);
+                Point.Empty,
+                Point.Empty,
+                Point.Empty);
+            this._stateAnimator.IntervallChanged += new EventHandler(this.OnAnimationIntervallChanged);
+            this._stateAnimator.AnimationStopped += new EventHandler(this.OnAnimationStopped);
+            this._stateAnimator.StepSizeChanged += new EventHandler(this.OnAnimationStepSizeChanged);
+            this._stateAnimator.AnimationStarted += new EventHandler(this.OnAnimationStarted);
+            this._stateAnimator.AnimationFinished += new EventHandler(this.OnAnimationFinished);
            
 
 
@@ -77,6 +84,6 @@
 
         #endregion
 
-        private ExtendedPictureBoxLib.Animators.ExtendedPictureBoxStateAnimator _stateAnimator;
+        private ExtendedPictureBoxStateAnimator _stateAnimator;
     }
 }

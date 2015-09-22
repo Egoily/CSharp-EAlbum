@@ -10,7 +10,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// Represents a Windows progress bar control contained in a StatusStrip.
     /// </summary>
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip | ToolStripItemDesignerAvailability.StatusStrip)]
-    [ToolboxBitmap(typeof(System.Windows.Forms.ProgressBar))]
+    [ToolboxBitmap(typeof(ProgressBar))]
     public class EToolStripProgressBar : ToolStripControlHost
     {
         #region Properties
@@ -227,7 +227,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 
         private static Control CreateControlInstance()
         {
-            EgoDevil.Utilities.UI.EPanels.EProgressBar eProgressBar = new EgoDevil.Utilities.UI.EPanels.EProgressBar();
+            EProgressBar eProgressBar = new EProgressBar();
             eProgressBar.Size = new Size(100, 15);
 
             return eProgressBar;

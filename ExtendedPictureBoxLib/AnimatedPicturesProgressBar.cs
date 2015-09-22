@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Design;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 using ExtendedPictureBoxLib.Design;
@@ -12,7 +16,7 @@ namespace ExtendedPictureBoxLib
     /// cref="AnimatedPictureBox"/> foreach step and adding control to one after another animation
     /// of them. Thus is can be used to indicate the progress in a long process of separated steps.
     /// </summary>
-    public partial class AnimatedPicturesProgressBar : System.Windows.Forms.UserControl, ISupportInitialize
+    public partial class AnimatedPicturesProgressBar : UserControl, ISupportInitialize
     {
         #region (* Events *)
 
@@ -330,7 +334,7 @@ namespace ExtendedPictureBoxLib
         [Browsable(true), Category("Data")]
         [Description("Gets a collection where steps can be added/edited or removed.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [Editor(typeof(ProgressStepCollectionEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ProgressStepCollectionEditor), typeof(UITypeEditor))]
         public ProgressStepCollection Steps
         {
             get { return _steps; }
@@ -561,7 +565,7 @@ namespace ExtendedPictureBoxLib
             {
                 while ((inProgressAnimatedPictureBox != null && inProgressAnimatedPictureBox.IsAnimationRunning) || (finishingAnimatedPictureBox != null && finishingAnimatedPictureBox.IsAnimationRunning))
                 {
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                     Application.DoEvents();
                 }
             }
@@ -622,10 +626,10 @@ namespace ExtendedPictureBoxLib
 
         private Image GetImageResource(string name)
         {
-            System.Reflection.Assembly assembly = this.GetType().Assembly;
+            Assembly assembly = this.GetType().Assembly;
 
             name = "ExtendedPictureBoxLib.Resources." + name + ".png";
-            System.IO.Stream stream = assembly.GetManifestResourceStream(name);
+            Stream stream = assembly.GetManifestResourceStream(name);
             return Image.FromStream(stream);
         }
 
@@ -924,7 +928,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationIntervallChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationIntervallChanged(System.EventArgs eventArgs)
+        protected virtual void OnAnimationIntervallChanged(EventArgs eventArgs)
         {
             if (AnimationIntervallChanged != null)
                 AnimationIntervallChanged(this, eventArgs);
@@ -934,7 +938,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationStepSizeChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationStepSizeChanged(System.EventArgs eventArgs)
+        protected virtual void OnAnimationStepSizeChanged(EventArgs eventArgs)
         {
             if (AnimationStepSizeChanged != null)
                 AnimationStepSizeChanged(this, eventArgs);

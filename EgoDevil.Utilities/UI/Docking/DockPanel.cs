@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 // To simplify the process of finding the toolbox bitmap resource: #1 Create an internal class
 // called "resfinder" outside of the root namespace. #2 Use "resfinder" in the toolbox bitmap
@@ -20,7 +21,7 @@ namespace EgoDevil.Utilities.UI.Docking
     public delegate IDockContent DeserializeDockContent(string persistString);
 
     [LocalizedDescription("DockPanel_Description")]
-    [Designer(typeof(System.Windows.Forms.Design.ControlDesigner))]
+    [Designer(typeof(ControlDesigner))]
     [ToolboxBitmap(typeof(resfinder), "EgoDevil.Utilities.UI.Docking.DockPanel.bmp")]
     [DefaultProperty("DocumentStyle")]
     [DefaultEvent("ActiveContentChanged")]

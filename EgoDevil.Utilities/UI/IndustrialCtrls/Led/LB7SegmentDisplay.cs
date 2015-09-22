@@ -5,6 +5,7 @@
  *-------------------------------------------------------------------------*/
 
 using System.ComponentModel;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Leds

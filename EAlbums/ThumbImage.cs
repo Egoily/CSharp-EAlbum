@@ -1,46 +1,55 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Design;
-using System.IO;
-using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace EAlbums
 {
     [Serializable]
-    public class ThumbImage
+    public class ThumbImage : IThumbImage
     {
-
-        private const double PiFact = Math.PI / 180.0f;//Circle angle   
+        public Size BitmapSize = new Size(64, 64);
+        public int MaxThumbSize = 64;
+        public int PixelSize = 4;
+        private const double PiFact = Math.PI / 180.0f;//Circle angle
         private double actualAngle;
 
+        private Rectangle fullRect;
+        private Rectangle mainRect;
+        private Rectangle shadowRect;
         private Bitmap thumbOriginalBitmap;
 
 
-        public Size BitmapSize = new Size(64, 64);
+        public ThumbImage(Bitmap bitmap)
+        {
+            Alpha = 0;
+            CircleCenter = new Point(0, 0);
+            ThumbOriginalBitmap = bitmap;
+        }
 
-        public int MaxThumbSize = 64;
+        public ThumbImage(Bitmap bitmap, Point circleCenter, double angle)
+        {
+            Alpha = 0;
+            CircleCenter = circleCenter;
+            this.OriginalAngle = angle;
+            ThumbOriginalBitmap = bitmap;
+        }
 
-        public int PixelSize = 4;
-
-
-        public double DistanceFromScreen { get; set; }
-        public Point CircleCenter { get; set; }
-        public Point Radius { get; set; }
         public float Alpha { get; set; }
 
+        public Color BackgroundColor { get; set; }
+
+        public Point CircleCenter { get; set; }
+
+        public double DistanceFromScreen { get; set; }
+        public Color HoverColor { get; set; }
 
         public bool IsHover { get; set; }
 
-        public Color HoverColor { get; set; }
-        public Color BackgroundColor { get; set; }
+
         public double OriginalAngle { get; set; }
 
-        private Rectangle mainRect;
-
-        private Rectangle shadowRect;
-
-        public Bitmap ThumbMainBitmap { get; set; }
-        public Bitmap ThumbShadowBitmap { get; set; }
+        public Size Radius { get; set; }
+        public Bitmap ThumbFullBitmap { get; set; }
 
         public Bitmap ThumbOriginalBitmap
         {
@@ -61,36 +70,69 @@ namespace EAlbums
                     nWidth = thumbOriginalBitmap.Width * MaxThumbSize / thumbOriginalBitmap.Height;
                 }
                 BitmapSize = new Size(nWidth, nHeight);
-                ThumbMainBitmap = new Bitmap(nWidth, nHeight);
-                Graphics g = Graphics.FromImage(ThumbMainBitmap);
-                g.DrawImage(thumbOriginalBitmap, 0, 0, nWidth, nHeight);
-
-                DrawShadow();
-
+                ThumbFullBitmap = new Bitmap(BitmapSize.Width, BitmapSize.Height * 2);
+                DrawFullBitmap();
             }
         }
 
 
-        public ThumbImage(Bitmap bitmap)
+        public bool CheckIsHover(Point currectPoint)
         {
-            Alpha = 0;
-            CircleCenter = new Point(0, 0);
-            ThumbOriginalBitmap = bitmap;
+            IsHover = mainRect.Contains(currectPoint);
+            return IsHover;
         }
 
-        public ThumbImage(Bitmap bitmap, Point circleCenter, double angle)
-        {
-            Alpha = 0;
-            CircleCenter = circleCenter;
-            this.OriginalAngle = angle;
-            ThumbOriginalBitmap = bitmap;
-
-        }
         public void DrawImage(Graphics g)
         {
-            g.DrawImage(ThumbMainBitmap, mainRect);
-            g.DrawImage(ThumbShadowBitmap, shadowRect);
+            DrawImageFullBitmap(g);
+            DrawHoverBitmap(g);
 
+        }
+        public void ReLocate()
+        {
+            // angle and distance from screen
+            actualAngle = (OriginalAngle + Alpha) * PiFact;
+
+            DistanceFromScreen = 10 + 10 * Math.Cos(actualAngle);
+
+            // rectangles
+            var x = CircleCenter.X + (int)(Radius.Width * Math.Sin(actualAngle));
+            var y = CircleCenter.Y - (int)(Radius.Height * Math.Cos(actualAngle));
+
+            var dSize = (float)(80 - 20 * Math.Cos(actualAngle));
+
+            dSize = dSize / 100;
+
+            mainRect.X = (int)(x - (BitmapSize.Width * dSize) / 2);
+            mainRect.Y = (int)(y - (BitmapSize.Height * dSize));
+            mainRect.Width = (int)(BitmapSize.Width * dSize);
+            mainRect.Height = (int)(BitmapSize.Height * dSize);
+
+            shadowRect.X = (int)(x - (BitmapSize.Width * dSize) / 2);
+            shadowRect.Y = (int)y;
+            shadowRect.Width = (int)(BitmapSize.Width * dSize);
+            shadowRect.Height = (int)(BitmapSize.Height * dSize);
+
+            var left = mainRect.X < shadowRect.X ? mainRect.X : shadowRect.X;
+            var top = mainRect.Y < shadowRect.Y ? mainRect.Y : shadowRect.Y;
+            var right = mainRect.Right > shadowRect.Right ? mainRect.Right : shadowRect.Right;
+            var bottom = mainRect.Bottom > shadowRect.Bottom ? mainRect.Bottom : shadowRect.Bottom;
+            fullRect = new Rectangle(left, top, right - left, bottom - top);
+        }
+
+        private void DrawFullBitmap()
+        {
+            using (Graphics g = Graphics.FromImage(ThumbFullBitmap))
+            {
+                g.DrawImage(thumbOriginalBitmap, 0, 0, BitmapSize.Width, BitmapSize.Height);
+                //draw shadow
+                g.DrawImage(DrawShadowBitmap(thumbOriginalBitmap), 0, BitmapSize.Height, BitmapSize.Width, BitmapSize.Height);
+            }
+
+        }
+
+        private void DrawHoverBitmap(Graphics g)
+        {
             if (IsHover)
             {
                 var pen = new Pen(HoverColor);
@@ -107,54 +149,21 @@ namespace EAlbums
             }
         }
 
-        public bool CheckIsHover(Point currectPoint)
+        private void DrawImageFullBitmap(Graphics g)
         {
-            IsHover = mainRect.Contains(currectPoint);
-            return IsHover;
+            g.DrawImage(ThumbFullBitmap, fullRect);
         }
-
-        public void Refresh()
+        private unsafe Bitmap DrawShadowBitmap(Bitmap bitmap)
         {
-
-            // angle and distance from screen
-            actualAngle = (OriginalAngle + Alpha) * PiFact;
-
-            DistanceFromScreen = 10 + 10 * Math.Cos(actualAngle);
-
-            // rectangles
-            var x = CircleCenter.X + (int)(Radius.X * Math.Sin(actualAngle));
-            var y = CircleCenter.Y - (int)(Radius.Y * Math.Cos(actualAngle));
-
-            var dSize = (float)(80 - 20 * Math.Cos(actualAngle));
-
-            dSize = dSize / 100;
-
-            mainRect.X = (int)(x - (BitmapSize.Width * dSize) / 2);
-            mainRect.Y = (int)(y - (BitmapSize.Height * dSize));
-            mainRect.Width = (int)(BitmapSize.Width * dSize);
-            mainRect.Height = (int)(BitmapSize.Height * dSize);
-
-            shadowRect.X = (int)(x - (BitmapSize.Width * dSize) / 2);
-            shadowRect.Y = (int)y;
-            shadowRect.Width = (int)(BitmapSize.Width * dSize);
-            shadowRect.Height = (int)(BitmapSize.Height * dSize);
-
-
-        }
-
-
-        private unsafe void DrawShadow()
-        {
-            ThumbShadowBitmap = new Bitmap(ThumbMainBitmap);
-            ThumbShadowBitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            System.Drawing.Imaging.BitmapData bmd = ThumbShadowBitmap.LockBits(
-                new Rectangle(0, 0, ThumbShadowBitmap.Width, ThumbShadowBitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, ThumbShadowBitmap.PixelFormat);
+            bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            BitmapData bmd = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             byte* row = (byte*)bmd.Scan0;
 
             for (var y = 0; y < bmd.Height; y++)
             {
-                byte trasp = (byte)(100 * ((ThumbShadowBitmap.Height - y)) / ThumbShadowBitmap.Height);
+                byte trasp = (byte)(100 * ((bitmap.Height - y)) / bitmap.Height);
 
                 int xx = 3;
 
@@ -164,11 +173,10 @@ namespace EAlbums
 
                     xx += PixelSize;
                 }
-
                 row += bmd.Stride;
             }
-
-            ThumbShadowBitmap.UnlockBits(bmd);
+            bitmap.UnlockBits(bmd);
+            return bitmap;
         }
     }
 }

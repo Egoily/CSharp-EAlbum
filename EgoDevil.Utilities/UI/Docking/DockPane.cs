@@ -1,9 +1,12 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Security.Permissions;
 using System.Windows.Forms;
+
+using EgoDevil.Utilities.UI.Docking.Win32;
 
 namespace EgoDevil.Utilities.UI.Docking
 {
@@ -709,7 +712,7 @@ namespace EgoDevil.Utilities.UI.Docking
             if (!dragSource.CanDockTo(this))
                 return;
 
-            Point ptMouse = Control.MousePosition;
+            Point ptMouse = MousePosition;
 
             HitTestResult hitTestResult = GetHitTest(ptMouse);
             if (hitTestResult.HitArea == HitTestArea.Caption)
@@ -939,7 +942,7 @@ namespace EgoDevil.Utilities.UI.Docking
         private void ResumeRefreshStateChange()
         {
             m_countRefreshStateChange--;
-            System.Diagnostics.Debug.Assert(m_countRefreshStateChange >= 0);
+            Debug.Assert(m_countRefreshStateChange >= 0);
             DockPanel.ResumeLayout(true, true);
         }
 
@@ -1196,7 +1199,7 @@ namespace EgoDevil.Utilities.UI.Docking
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)Win32.Msgs.WM_MOUSEACTIVATE)
+            if (m.Msg == (int)Msgs.WM_MOUSEACTIVATE)
                 Activate();
 
             base.WndProc(ref m);

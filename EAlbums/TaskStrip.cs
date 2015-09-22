@@ -7,31 +7,31 @@ namespace EAlbums
 {
     public partial class TaskStrip : UserControl
     {
-        private ImageViewer _albumView = new ImageViewer();
+        private ImageViewer albumView = new ImageViewer();
 
         public ImageViewer AssociatedAlbumView
         {
-            get { return _albumView; }
-            set { this._albumView = value; }
+            get { return albumView; }
+            set { this.albumView = value; }
         }
 
-        private AlbumImageList _albumImageList = new AlbumImageList();
+        private AlbumImageList albumImageList = new AlbumImageList();
 
         public AlbumImageList AssociatedAlbumImageList
         {
             get
             {
-                return _albumImageList;
+                return albumImageList;
             }
             set
             {
-                _albumImageList = value;
+                albumImageList = value;
             }
         }
 
-        private const string _albumNewName = "新建相册";
+        private const string AlbumNewName = "新建相册";
 
-        private string CurrentAlbumName;
+        private string currentAlbumName;
 
         public List<AlbumItem> AlbumList = new List<AlbumItem>();
 
@@ -43,11 +43,11 @@ namespace EAlbums
                 string newName;
                 if (index == 1)
                 {
-                    newName = _albumNewName;
+                    newName = AlbumNewName;
                 }
                 else
                 {
-                    newName = _albumNewName + "(" + index.ToString() + ")";
+                    newName = AlbumNewName + "(" + index.ToString() + ")";
                 }
                 bool flat = false;
                 foreach (ListViewItem item in listViewAlbums.Items)
@@ -118,7 +118,7 @@ namespace EAlbums
             //frm.ShowDialog();
 
             AssociatedAlbumImageList.Visible = true;
-            AssociatedAlbumImageList.LoadImages(CurrentAlbumName, _albumView.ImagePaths);
+            AssociatedAlbumImageList.LoadImages(currentAlbumName, albumView.ImagePaths);
         }
 
         public void SetCurrentImagePaths(string name, List<string> imagePaths)
@@ -133,9 +133,9 @@ namespace EAlbums
             }
         }
 
-        private void ImageListForm_Loading(object sender, ImageListForm.LoadingEventArgs e)
+        private void ImageListFormLoading(object sender, ImageListForm.LoadingEventArgs e)
         {
-            _albumView.LoadThumbs(e.Images);
+            albumView.LoadThumbs(e.Images);
         }
 
         public TaskStrip()
@@ -143,11 +143,11 @@ namespace EAlbums
             InitializeComponent();
         }
 
-        private void TaskStrip_Load(object sender, EventArgs e)
+        private void TaskStripLoad(object sender, EventArgs e)
         {
         }
 
-        private void listViewAlbums_MouseDown(object sender, MouseEventArgs e)
+        private void ListViewAlbumsMouseDown(object sender, MouseEventArgs e)
         {
             ListView lv = sender as ListView;
 
@@ -165,34 +165,34 @@ namespace EAlbums
             }
         }
 
-        private void apbtnDefaultAlbum_Click(object sender, EventArgs e)
+        private void ApbtnDefaultAlbumClick(object sender, EventArgs e)
         {
             ShowAlbumImageList();
         }
 
-        private void btnInsertAlbum_Click(object sender, EventArgs e)
+        private void BtnInsertAlbumClick(object sender, EventArgs e)
         {
             InsertAlbum();
         }
 
-        private void btnDeleteAlbum_Click(object sender, EventArgs e)
+        private void BtnDeleteAlbumClick(object sender, EventArgs e)
         {
             DeleteAlbum();
         }
 
-        private void btnLookup_Click(object sender, EventArgs e)
+        private void BtnLookupClick(object sender, EventArgs e)
         {
             ShowAlbumImageList();
         }
 
-        private void listViewAlbums_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListViewAlbumsSelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewAlbums.SelectedItems.Count > 0)
             {
                 foreach (AlbumItem item in AlbumList)
                 {
-                    CurrentAlbumName = listViewAlbums.SelectedItems[0].Text;
-                    if (item.Name == CurrentAlbumName)
+                    currentAlbumName = listViewAlbums.SelectedItems[0].Text;
+                    if (item.Name == currentAlbumName)
                     {
                         AssociatedAlbumView.ImagePaths = item.ImagePaths;
                         AssociatedAlbumView.LoadThumbs(item.ImagePaths);

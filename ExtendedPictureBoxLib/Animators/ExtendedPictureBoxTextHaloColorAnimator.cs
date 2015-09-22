@@ -3,13 +3,15 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
+using Animations;
+
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
     /// Class inheriting <see cref="Animations.AnimatorBase"/> to animate the <see
     /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.TextHaloColor"/> of a <see cref="ExtendedPictureBox"/>.
     /// </summary>
-    public partial class ExtendedPictureBoxTextHaloColorAnimator : Animations.ControlBackColorAnimator
+    public partial class ExtendedPictureBoxTextHaloColorAnimator : ControlBackColorAnimator
     {
         #region Fields
 

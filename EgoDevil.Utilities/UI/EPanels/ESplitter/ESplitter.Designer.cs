@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace EgoDevil.Utilities.UI.EPanels
 {
 	partial class ESplitter
@@ -5,7 +7,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 
 		/// <summary> 
 		/// Clean up any resources being used.

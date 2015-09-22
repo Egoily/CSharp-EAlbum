@@ -32,7 +32,7 @@ namespace ExtendedPictureBoxLib
     /// cref="StartState"/> and an <see cref="EndState"/>. It animtes itself between those two
     /// states when the mouse moves over or leaves the control.
     /// </summary>
-    public partial class AnimatedPictureButton : ExtendedPictureBoxLib.AnimatedPictureBox
+    public partial class AnimatedPictureButton : AnimatedPictureBox
     {
         #region (* Events *)
 
@@ -317,7 +317,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="StartStateChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnStartStateChanged(System.EventArgs eventArgs)
+        protected virtual void OnStartStateChanged(EventArgs eventArgs)
         {
             if (StartStateChanged != null)
                 StartStateChanged(this, eventArgs);
@@ -327,7 +327,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="EndStateChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnEndStateChanged(System.EventArgs eventArgs)
+        protected virtual void OnEndStateChanged(EventArgs eventArgs)
         {
             if (EndStateChanged != null)
                 EndStateChanged(this, eventArgs);
@@ -337,7 +337,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="PushedStateChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnPushedStateChanged(System.EventArgs eventArgs)
+        protected virtual void OnPushedStateChanged(EventArgs eventArgs)
         {
             if (PushedStateChanged != null)
                 PushedStateChanged(this, eventArgs);
@@ -347,7 +347,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="PushedPropertiesChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnPushedPropertiesChanged(System.EventArgs eventArgs)
+        protected virtual void OnPushedPropertiesChanged(EventArgs eventArgs)
         {
             if (PushedPropertiesChanged != null)
                 PushedPropertiesChanged(this, eventArgs);
@@ -357,7 +357,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="ButtonStateChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnButtonStateChanged(System.EventArgs eventArgs)
+        protected virtual void OnButtonStateChanged(EventArgs eventArgs)
         {
             if (ButtonStateChanged != null)
                 ButtonStateChanged(this, eventArgs);

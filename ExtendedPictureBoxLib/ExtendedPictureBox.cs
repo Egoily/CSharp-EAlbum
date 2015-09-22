@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+
+using ExtendedPictureBoxLib.Design;
 
 namespace ExtendedPictureBoxLib
 {
@@ -318,7 +321,7 @@ namespace ExtendedPictureBoxLib
         /// </summary>
         [Browsable(true), Category("Appearance")]
         [Description("Gets or sets the second color to draw the background gradient.")]
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public virtual Color BackColor2
         {
             get { return _backColor2; }
@@ -488,7 +491,7 @@ namespace ExtendedPictureBoxLib
         /// </summary>
         [Description("Gets or sets the width of the color of the halo of the text.")]
         [Browsable(true), Category("Appearance")]
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public virtual Color TextHaloColor
         {
             get { return _textHaloColor; }
@@ -597,7 +600,7 @@ namespace ExtendedPictureBoxLib
         /// </summary>
         [Browsable(true), Category("Appearance")]
         [Description("Gets or sets the color of the surrounding border.")]
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public Color BorderColor
         {
             get { return _borderColor; }
@@ -1612,7 +1615,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the first background color.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public override Color BackColor
         {
             get { return base.BackColor; }
@@ -1622,7 +1625,7 @@ namespace ExtendedPictureBoxLib
         /// <summary>
         /// Gets or sets the color of the text.
         /// </summary>
-        [Editor(typeof(Design.ColorEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(ColorEditorEx), typeof(UITypeEditor))]
         public override Color ForeColor
         {
             get { return base.ForeColor; }

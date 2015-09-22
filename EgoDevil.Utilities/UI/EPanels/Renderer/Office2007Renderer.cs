@@ -44,7 +44,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initialize a new instance of the Office2007Renderer class.
         /// </summary>
         public Office2007Renderer()
-            : base(new EgoDevil.Utilities.UI.EPanels.Office2007BlueColorTable())
+            : base(new Office2007BlueColorTable())
         {
             this.ColorTable.UseSystemColors = false;
         }
@@ -72,7 +72,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         {
             if (ColorTable.UseSystemColors == false)
             {
-                ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+                ProfessionalColorTable colorTable = ColorTable as ProfessionalColorTable;
                 if (colorTable != null)
                 {
                     if ((e.Item.Owner.GetType() == typeof(MenuStrip)) && (e.Item.Selected == false) && e.Item.Pressed == false)
@@ -102,7 +102,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         {
             if (ColorTable.UseSystemColors == false)
             {
-                ProfessionalColorTable colorTable = ColorTable as EgoDevil.Utilities.UI.EPanels.ProfessionalColorTable;
+                ProfessionalColorTable colorTable = ColorTable as ProfessionalColorTable;
                 if (colorTable != null)
                 {
                     if ((e.ToolStrip is MenuStrip) && (e.Item.Selected == false) && e.Item.Pressed == false)

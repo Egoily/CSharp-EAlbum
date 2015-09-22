@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 
+using Animations;
+
 namespace ExtendedPictureBoxLib.Animators
 {
     /// <summary>
@@ -7,18 +9,18 @@ namespace ExtendedPictureBoxLib.Animators
     /// cref="ExtendedPictureBoxLib.ExtendedPictureBox.State"/> of a <see
     /// cref="ExtendedPictureBox"/>. It can be altered by setting which parts of the state should be animated.
     /// </summary>
-    public partial class ExtendedPictureBoxStateAnimator : Animations.DummyAnimator
+    public partial class ExtendedPictureBoxStateAnimator : DummyAnimator
     {
         #region Fields
 
         private ExtendedPictureBoxAlphaAnimator _alphaAnimator;
-        private Animations.ControlBackColorAnimator _backColorAnimator;
+        private ControlBackColorAnimator _backColorAnimator;
         private ExtendedPictureBoxBackColor2Animator _backColor2Animator;
         private ExtendedPictureBoxBackColorGradientRotationAngleAnimator _backColorGradientRotationAngleAnimator;
         private ExtendedPictureBoxRotationAngleAnimator _rotationAngleAnimator;
         private ExtendedPictureBoxExtraImageRotationAngleAnimator _extraImageRotationAngleAnimator;
         private ExtendedPictureBoxZoomAnimator _zoomAnimator;
-        private Animations.ControlForeColorAnimator _foreColorAnimator;
+        private ControlForeColorAnimator _foreColorAnimator;
         private ExtendedPictureBoxTextHaloColorAnimator _textHaloColorAnimator;
         private ExtendedPictureBoxTextRotationAngleAnimator _textRotationAngleAnimator;
         private ExtendedPictureBoxTextHaloWidthAnimator _textHaloWidthAnimator;
@@ -53,13 +55,13 @@ namespace ExtendedPictureBoxLib.Animators
         {
             components = new Container();
             _alphaAnimator = new ExtendedPictureBoxAlphaAnimator(components);
-            _backColorAnimator = new Animations.ControlBackColorAnimator(components);
+            _backColorAnimator = new ControlBackColorAnimator(components);
             _backColor2Animator = new ExtendedPictureBoxBackColor2Animator(components);
             _backColorGradientRotationAngleAnimator = new ExtendedPictureBoxBackColorGradientRotationAngleAnimator(components);
             _rotationAngleAnimator = new ExtendedPictureBoxRotationAngleAnimator(components);
             _extraImageRotationAngleAnimator = new ExtendedPictureBoxExtraImageRotationAngleAnimator(components);
             _zoomAnimator = new ExtendedPictureBoxZoomAnimator(components);
-            _foreColorAnimator = new Animations.ControlForeColorAnimator(components);
+            _foreColorAnimator = new ControlForeColorAnimator(components);
             _textHaloColorAnimator = new ExtendedPictureBoxTextHaloColorAnimator(components);
             _textRotationAngleAnimator = new ExtendedPictureBoxTextRotationAngleAnimator(components);
             _textHaloWidthAnimator = new ExtendedPictureBoxTextHaloWidthAnimator(components);

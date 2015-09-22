@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+
 using EgoDevil.Utilities.UI.IndustrialCtrls.Base;
 using EgoDevil.Utilities.UI.IndustrialCtrls.Utils;
 

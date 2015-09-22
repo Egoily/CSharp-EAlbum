@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
+using System.Windows.Forms.Design.Behavior;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -47,11 +49,11 @@ namespace EgoDevil.Utilities.UI.EPanels
 
         #region FieldsPrivate
 
-        private System.Drawing.Image m_imageChevron;
-        private System.Drawing.Image m_imageChevronUp;
-        private System.Drawing.Image m_imageChevronDown;
+        private Image m_imageChevron;
+        private Image m_imageChevronUp;
+        private Image m_imageChevronDown;
         private CustomXPanderPanelColors m_customColors;
-        private System.Drawing.Image m_imageClosePanel;
+        private Image m_imageClosePanel;
         private bool m_bIsClosable = true;
         private CaptionStyle m_captionStyle;
 
@@ -358,8 +360,8 @@ namespace EgoDevil.Utilities.UI.EPanels
                     this.Expand = false;
                     foreach (Control control in this.Parent.Controls)
                     {
-                        EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                            control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+                        XPanderPanel xpanderPanel =
+                            control as XPanderPanel;
 
                         if (xpanderPanel != null)
                         {
@@ -521,7 +523,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                         XPanderPanelList xpanderPanelList = xpanderPanel.Parent as XPanderPanelList;
                         if ((xpanderPanelList != null) && (xpanderPanelList.Dock == DockStyle.Fill))
                         {
-                            EgoDevil.Utilities.UI.EPanels.EPanel panel = xpanderPanelList.Parent as EgoDevil.Utilities.UI.EPanels.EPanel;
+                            EPanel panel = xpanderPanelList.Parent as EPanel;
                             XPanderPanel parentXPanderPanel = xpanderPanelList.Parent as XPanderPanel;
                             if (((panel != null) && (panel.Padding == new Padding(0))) ||
                                 ((parentXPanderPanel != null) && (parentXPanderPanel.Padding == new Padding(0))))
@@ -635,7 +637,7 @@ namespace EgoDevil.Utilities.UI.EPanels
                     XPanderPanelList xpanderPanelList = xpanderPanel.Parent as XPanderPanelList;
                     if ((xpanderPanelList != null) && (xpanderPanelList.Dock == DockStyle.Fill))
                     {
-                        EgoDevil.Utilities.UI.EPanels.EPanel panel = xpanderPanelList.Parent as EgoDevil.Utilities.UI.EPanels.EPanel;
+                        EPanel panel = xpanderPanelList.Parent as EPanel;
                         XPanderPanel parentXPanderPanel = xpanderPanelList.Parent as XPanderPanel;
                         if (((panel != null) && (panel.Padding == new Padding(0))) ||
                             ((parentXPanderPanel != null) && (parentXPanderPanel.Padding == new Padding(0))))
@@ -689,8 +691,8 @@ namespace EgoDevil.Utilities.UI.EPanels
 
             foreach (Control control in this.Parent.Controls)
             {
-                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+                XPanderPanel xpanderPanel =
+                    control as XPanderPanel;
 
                 if ((xpanderPanel != null) && (xpanderPanel.Visible == true))
                 {
@@ -702,8 +704,8 @@ namespace EgoDevil.Utilities.UI.EPanels
 
             foreach (Control control in this.Parent.Controls)
             {
-                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+                XPanderPanel xpanderPanel =
+                    control as XPanderPanel;
 
                 if (xpanderPanel != null)
                 {
@@ -723,8 +725,8 @@ namespace EgoDevil.Utilities.UI.EPanels
             int iTop = this.Parent.Padding.Top;
             foreach (Control control in this.Parent.Controls)
             {
-                EgoDevil.Utilities.UI.EPanels.XPanderPanel xpanderPanel =
-                    control as EgoDevil.Utilities.UI.EPanels.XPanderPanel;
+                XPanderPanel xpanderPanel =
+                    control as XPanderPanel;
 
                 if ((xpanderPanel != null) && (xpanderPanel.Visible == true))
                 {
@@ -744,12 +746,12 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Designer class for extending the design mode behavior of a XPanderPanel control
     /// </summary>
-    internal class XPanderPanelDesigner : System.Windows.Forms.Design.ScrollableControlDesigner
+    internal class XPanderPanelDesigner : ScrollableControlDesigner
     {
         #region FieldsPrivate
 
         private Pen m_borderPen = new Pen(Color.FromKnownColor(KnownColor.ControlDarkDark));
-        private System.Windows.Forms.Design.Behavior.Adorner m_adorner;
+        private Adorner m_adorner;
 
         #endregion
 
@@ -773,7 +775,7 @@ namespace EgoDevil.Utilities.UI.EPanels
             XPanderPanel xpanderPanel = Control as XPanderPanel;
             if (xpanderPanel != null)
             {
-                this.m_adorner = new System.Windows.Forms.Design.Behavior.Adorner();
+                this.m_adorner = new Adorner();
                 BehaviorService.Adorners.Add(this.m_adorner);
                 this.m_adorner.Glyphs.Add(new XPanderPanelCaptionGlyph(BehaviorService, xpanderPanel));
             }
@@ -873,12 +875,12 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Represents a single user interface (UI) entity managed by an Adorner.
     /// </summary>
-    internal class XPanderPanelCaptionGlyph : System.Windows.Forms.Design.Behavior.Glyph
+    internal class XPanderPanelCaptionGlyph : Glyph
     {
         #region FieldsPrivate
 
         private XPanderPanel m_xpanderPanel;
-        private System.Windows.Forms.Design.Behavior.BehaviorService m_behaviorService;
+        private BehaviorService m_behaviorService;
 
         #endregion
 
@@ -911,7 +913,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// </summary>
         /// <param name="behaviorService"></param>
         /// <param name="xpanderPanel"></param>
-        public XPanderPanelCaptionGlyph(System.Windows.Forms.Design.Behavior.BehaviorService behaviorService, XPanderPanel xpanderPanel)
+        public XPanderPanelCaptionGlyph(BehaviorService behaviorService, XPanderPanel xpanderPanel)
             :
             base(new XPanderPanelCaptionClickBehavior(xpanderPanel))
         {
@@ -956,7 +958,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Designer behaviour when the user clicks in the glyph on the XPanderPanel caption
     /// </summary>
-    internal class XPanderPanelCaptionClickBehavior : System.Windows.Forms.Design.Behavior.Behavior
+    internal class XPanderPanelCaptionClickBehavior : Behavior
     {
         #region FieldsPrivate
 
@@ -982,7 +984,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <param name="button">A MouseButtons value indicating which button was clicked.</param>
         /// <param name="mouseLoc">The location at which the click occurred.</param>
         /// <returns>true if the message was handled; otherwise, false.</returns>
-        public override bool OnMouseDown(System.Windows.Forms.Design.Behavior.Glyph g, MouseButtons button, Point mouseLoc)
+        public override bool OnMouseDown(Glyph g, MouseButtons button, Point mouseLoc)
         {
             if ((this.m_xpanderPanel != null) && (this.m_xpanderPanel.Expand == false))
             {

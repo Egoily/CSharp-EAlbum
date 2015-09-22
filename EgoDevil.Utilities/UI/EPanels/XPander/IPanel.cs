@@ -14,12 +14,12 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <summary>
         /// Gets or sets the style of the panel.
         /// </summary>
-        EgoDevil.Utilities.UI.EPanels.PanelStyle PanelStyle { get; set; }
+        PanelStyle PanelStyle { get; set; }
 
         /// <summary>
         /// Gets or sets the color schema which is used for the panel.
         /// </summary>
-        EgoDevil.Utilities.UI.EPanels.ColorScheme ColorScheme { get; set; }
+        ColorScheme ColorScheme { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the control shows a border

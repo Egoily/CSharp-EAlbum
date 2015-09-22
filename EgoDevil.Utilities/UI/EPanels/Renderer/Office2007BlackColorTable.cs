@@ -6,7 +6,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Provides colors used for Microsoft Office 2007 black display elements.
     /// </summary>
-    public class Office2007BlackColorTable : EgoDevil.Utilities.UI.EPanels.OfficeColorTable
+    public class Office2007BlackColorTable : OfficeColorTable
     {
         #region FieldsPrivate
 
@@ -39,7 +39,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes a color dictionary with defined colors.
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable)
+        protected override void InitColors(Dictionary<KnownColors, Color> rgbTable)
         {
             rgbTable[KnownColors.ButtonPressedBorder] = Color.FromArgb(255, 189, 105);
             rgbTable[KnownColors.ButtonPressedGradientBegin] = Color.FromArgb(248, 181, 106);

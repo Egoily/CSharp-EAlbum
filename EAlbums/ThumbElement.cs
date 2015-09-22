@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Design;
-using System.Linq;
-using System.Text;
-
-namespace EAlbums
+﻿namespace EAlbums
 {
    public class ThumbElement
    {

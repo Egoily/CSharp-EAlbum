@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -17,11 +18,11 @@ namespace EgoDevil.Utilities.UI.EPanels
     {
         #region FieldsPrivate
 
-        private Color m_captionSelectedGradientBegin = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientBegin;
-        private Color m_captionSelectedGradientEnd = System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientEnd;
+        private Color m_captionSelectedGradientBegin = ProfessionalColors.ButtonSelectedGradientBegin;
+        private Color m_captionSelectedGradientEnd = ProfessionalColors.ButtonSelectedGradientEnd;
         private Color m_collapsedCaptionText = SystemColors.ControlText;
-        private Color m_contentGradientBegin = System.Windows.Forms.ProfessionalColors.ToolStripContentPanelGradientBegin;
-        private Color m_contentGradientEnd = System.Windows.Forms.ProfessionalColors.ToolStripContentPanelGradientEnd;
+        private Color m_contentGradientBegin = ProfessionalColors.ToolStripContentPanelGradientBegin;
+        private Color m_contentGradientEnd = ProfessionalColors.ToolStripContentPanelGradientEnd;
 
         #endregion
 

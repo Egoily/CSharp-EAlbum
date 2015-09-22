@@ -6,6 +6,10 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+
+using System.ComponentModel;
+using System.Windows.Forms;
+
 namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 {
 	public partial class LBAnalogMeter
@@ -13,7 +17,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+		private IContainer components = null;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -39,7 +43,7 @@ namespace EgoDevil.Utilities.UI.IndustrialCtrls.Meters
 			// 
 			// UserControl1
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = AutoScaleMode.Font;
 			this.Name = "LBAnalogMeter";
 		}
 	}

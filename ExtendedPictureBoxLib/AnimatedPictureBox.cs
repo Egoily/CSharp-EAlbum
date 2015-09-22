@@ -8,7 +8,7 @@ namespace ExtendedPictureBoxLib
     /// <summary>
     /// Control further extending the <see cref="ExtendedPictureBox"/> by adding animation capabilities.
     /// </summary>
-    public partial class AnimatedPictureBox : ExtendedPictureBoxLib.ExtendedPictureBox
+    public partial class AnimatedPictureBox : ExtendedPictureBox
     {
         #region Events
 
@@ -143,27 +143,27 @@ namespace ExtendedPictureBoxLib
 
         #region Privates
 
-        private void OnAnimationStarted(object sender, System.EventArgs e)
+        private void OnAnimationStarted(object sender, EventArgs e)
         {
             OnAnimationStarted(e);
         }
 
-        private void OnAnimationFinished(object sender, System.EventArgs e)
+        private void OnAnimationFinished(object sender, EventArgs e)
         {
             OnAnimationFinished(e);
         }
 
-        private void OnAnimationStopped(object sender, System.EventArgs e)
+        private void OnAnimationStopped(object sender, EventArgs e)
         {
             OnAnimationStopped(e);
         }
 
-        private void OnAnimationIntervallChanged(object sender, System.EventArgs e)
+        private void OnAnimationIntervallChanged(object sender, EventArgs e)
         {
             OnAnimationIntervallChanged(e);
         }
 
-        private void OnAnimationStepSizeChanged(object sender, System.EventArgs e)
+        private void OnAnimationStepSizeChanged(object sender, EventArgs e)
         {
             OnAnimationStepSizeChanged(e);
         }
@@ -196,7 +196,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationIntervallChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationIntervallChanged(System.EventArgs eventArgs)
+        protected virtual void OnAnimationIntervallChanged(EventArgs eventArgs)
         {
             if (AnimationIntervallChanged != null)
                 AnimationIntervallChanged(this, eventArgs);
@@ -206,7 +206,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationStepSizeChanged"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationStepSizeChanged(System.EventArgs eventArgs)
+        protected virtual void OnAnimationStepSizeChanged(EventArgs eventArgs)
         {
             if (AnimationStepSizeChanged != null)
                 AnimationStepSizeChanged(this, eventArgs);
@@ -216,7 +216,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationStarted"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationStarted(System.EventArgs eventArgs)
+        protected virtual void OnAnimationStarted(EventArgs eventArgs)
         {
             if (AnimationStarted != null)
                 AnimationStarted(this, eventArgs);
@@ -226,7 +226,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationStopped"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationStopped(System.EventArgs eventArgs)
+        protected virtual void OnAnimationStopped(EventArgs eventArgs)
         {
             if (AnimationStopped != null)
                 AnimationStopped(this, eventArgs);
@@ -236,7 +236,7 @@ namespace ExtendedPictureBoxLib
         /// Raises the <see cref="AnimationFinished"/> event.
         /// </summary>
         /// <param name="eventArgs">Event arguments.</param>
-        protected virtual void OnAnimationFinished(System.EventArgs eventArgs)
+        protected virtual void OnAnimationFinished(EventArgs eventArgs)
         {
             if (AnimationFinished != null)
                 AnimationFinished(this, eventArgs);

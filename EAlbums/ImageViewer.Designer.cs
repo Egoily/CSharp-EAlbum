@@ -1,11 +1,16 @@
-﻿namespace EAlbums
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace EAlbums
 {
     partial class ImageViewer
     {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -37,32 +42,34 @@
             // 
             this.timer.Enabled = true;
             this.timer.Interval = 30;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Tick += new System.EventHandler(this.TimerTick);
             // 
             // backgroundWorker
             // 
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
             // ImageViewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AllowDrop = true;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
+            this.DoubleBuffered = true;
             this.Name = "ImageViewer";
             this.Size = new System.Drawing.Size(467, 381);
             this.Load += new System.EventHandler(this.ImageViewer_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AlbumView_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AlbumView_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.AlbumView_MouseMove);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ImageViewer_Paint);
+            this.DoubleClick += new System.EventHandler(this.ImageViewer_DoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ImageViewer_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ImageViewer_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer timer;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private Timer timer;
+        private BackgroundWorker backgroundWorker;
     }
 }

@@ -1,15 +1,21 @@
 ﻿
 #region Directives
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Timers;
 using System.Windows.Forms;
+
+using Timer = System.Timers.Timer;
+
 #endregion
 
 namespace EgoDevil.Utilities.FaceRender
@@ -61,7 +67,7 @@ namespace EgoDevil.Utilities.FaceRender
     #endregion
 
     #region FaceRender
-    [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public class FaceRender : ToolStripRenderer, IDisposable
     {
         #region Base Class
@@ -1189,7 +1195,7 @@ namespace EgoDevil.Utilities.FaceRender
                             e.TextColor = ButtonForeColor;
                     }
                 }
-                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 base.OnRenderItemText(e);
             }
             else
@@ -1566,7 +1572,7 @@ namespace EgoDevil.Utilities.FaceRender
             bounds.X--;
 
             // border path
-            using (GraphicsMode mode = new GraphicsMode(g, System.Drawing.Drawing2D.SmoothingMode.AntiAlias))
+            using (GraphicsMode mode = new GraphicsMode(g, SmoothingMode.AntiAlias))
             {
                 using (GraphicsPath boxPath = createRoundRectanglePath(g, bounds.X, bounds.Y, bounds.Width, bounds.Height, 1f))
                 {
@@ -2510,7 +2516,7 @@ namespace EgoDevil.Utilities.FaceRender
         #endregion
 
         #region ComboBoxExtender
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         internal class ComboBoxExtender : NativeWindow
         {
             #region Structs
@@ -2778,7 +2784,7 @@ namespace EgoDevil.Utilities.FaceRender
         #endregion
 
         #region ToolStripExtender
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         internal class ToolStripExtender : NativeWindow, IDisposable
         {
             #region API
@@ -3156,7 +3162,7 @@ namespace EgoDevil.Utilities.FaceRender
         #endregion
 
         #region ToolTip
-        [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         internal class ToolTip : NativeWindow
         {
             #region Constants
@@ -3716,7 +3722,7 @@ namespace EgoDevil.Utilities.FaceRender
 
                     sF.Alignment = StringAlignment.Near;
                     sF.LineAlignment = StringAlignment.Center;
-                    sF.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+                    sF.HotkeyPrefix = HotkeyPrefix.None;
                     sF.FormatFlags = StringFormatFlags.NoWrap;
 
                     if (TextRightToLeft)
@@ -3816,7 +3822,7 @@ namespace EgoDevil.Utilities.FaceRender
     #endregion
 
     #region Fade Timer
-    [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     internal class FadeTimer : IDisposable
     {
         #region Structs
@@ -3872,7 +3878,7 @@ namespace EgoDevil.Utilities.FaceRender
         internal ToolStripItem _toolItem;
         internal cStoreDc _buttonDc = new cStoreDc();
         internal ToolStrip _parentClass;
-        internal System.Timers.Timer _aTimer;
+        internal Timer _aTimer;
         internal bool _invalidating = false;
         #endregion
 
@@ -3883,7 +3889,7 @@ namespace EgoDevil.Utilities.FaceRender
             _tickMaximum = 10;
             _parentClass = (ToolStrip)sender;
             _toolItem = item;
-            _aTimer = new System.Timers.Timer();
+            _aTimer = new Timer();
             _aTimer.Interval = 50;
             _aTimer.SynchronizingObject = (ISynchronizeInvoke)sender;
             _aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
@@ -4081,7 +4087,7 @@ namespace EgoDevil.Utilities.FaceRender
     #endregion
 
     #region StoreDc
-    [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     internal class cStoreDc
     {
         [DllImport("gdi32.dll")]

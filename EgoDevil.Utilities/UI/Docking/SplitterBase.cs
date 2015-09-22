@@ -1,6 +1,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+using EgoDevil.Utilities.UI.Docking.Win32;
+
 namespace EgoDevil.Utilities.UI.Docking
 {
     internal class SplitterBase : Control
@@ -58,7 +60,7 @@ namespace EgoDevil.Utilities.UI.Docking
         protected override void WndProc(ref Message m)
         {
             // eat the WM_MOUSEACTIVATE message
-            if (m.Msg == (int)Win32.Msgs.WM_MOUSEACTIVATE)
+            if (m.Msg == (int)Msgs.WM_MOUSEACTIVATE)
                 return;
 
             base.WndProc(ref m);

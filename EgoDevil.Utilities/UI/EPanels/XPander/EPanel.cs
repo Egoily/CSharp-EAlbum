@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace EgoDevil.Utilities.UI.EPanels
 {
@@ -20,9 +22,9 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// </remarks>
 
     [Designer(typeof(PanelDesigner)),
-    DesignTimeVisibleAttribute(true)]
+    DesignTimeVisible(true)]
     [DefaultEvent("CloseClick")]
-    [ToolboxBitmap(typeof(System.Windows.Forms.Panel))]
+    [ToolboxBitmap(typeof(Panel))]
     public partial class EPanel : BaseEPanel
     {
         #region FieldsPrivate
@@ -35,7 +37,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         private Image m_imageClosePanel;
         private CustomPanelColors m_customColors;
         private Image m_imgHoverBackground;
-        private System.Windows.Forms.Splitter m_associatedSplitter;
+        private Splitter m_associatedSplitter;
 
         #endregion
 
@@ -48,7 +50,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <value>The associated <see cref="Splitter"/></value>
         [Description("The associated Splitter.")]
         [Category("Behavior")]
-        public virtual System.Windows.Forms.Splitter AssociatedSplitter
+        public virtual Splitter AssociatedSplitter
         {
             get { return this.m_associatedSplitter; }
             set { this.m_associatedSplitter = value; }
@@ -385,7 +387,7 @@ namespace EgoDevil.Utilities.UI.EPanels
 
                     switch (panelStyle)
                     {
-                        case EgoDevil.Utilities.UI.EPanels.PanelStyle.Default:
+                        case PanelStyle.Default:
                         case PanelStyle.Office2007:
                             DrawStyleDefault(graphics,
                                 captionRectangle,
@@ -616,7 +618,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// <param name="e">An <see cref="System.EventArgs"/> that contains the event data.</param>
         protected override void OnVisibleChanged(EventArgs e)
         {
-            System.Windows.Forms.Splitter associatedSplitter = this.AssociatedSplitter;
+            Splitter associatedSplitter = this.AssociatedSplitter;
             if (associatedSplitter != null)
             {
                 associatedSplitter.Visible = this.Visible;
@@ -774,7 +776,7 @@ namespace EgoDevil.Utilities.UI.EPanels
     /// <summary>
     /// Extends the design mode behavior of a EPanel control that supports nested controls.
     /// </summary>
-    internal class PanelDesigner : System.Windows.Forms.Design.ParentControlDesigner
+    internal class PanelDesigner : ParentControlDesigner
     {
         #region MethodsPublic
 
@@ -789,7 +791,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes the designer with the specified component.
         /// </summary>
         /// <param name="component"></param>
-        public override void Initialize(System.ComponentModel.IComponent component)
+        public override void Initialize(IComponent component)
         {
             base.Initialize(component);
         }
@@ -913,7 +915,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         /// Initializes a new instance of the PanelDesignerActionList class.
         /// </summary>
         /// <param name="component">A component related to the DesignerActionList.</param>
-        public PanelDesignerActionList(System.ComponentModel.IComponent component)
+        public PanelDesignerActionList(IComponent component)
             : base(component)
         {
             // Automatically display smart tag panel when design-time component is dropped onto the
@@ -1027,8 +1029,8 @@ namespace EgoDevil.Utilities.UI.EPanels
         private void SetProperty(string propertyName, object value)
         {
             // Get property
-            System.ComponentModel.PropertyDescriptor property
-                = System.ComponentModel.TypeDescriptor.GetProperties(this.EPanel)[propertyName];
+            PropertyDescriptor property
+                = TypeDescriptor.GetProperties(this.EPanel)[propertyName];
             // Set property value
             property.SetValue(this.EPanel, value);
         }
@@ -1038,7 +1040,7 @@ namespace EgoDevil.Utilities.UI.EPanels
         //the specified object
         private static string GetCategory(object source, string propertyName)
         {
-            System.Reflection.PropertyInfo property = source.GetType().GetProperty(propertyName);
+            PropertyInfo property = source.GetType().GetProperty(propertyName);
             CategoryAttribute attribute = (CategoryAttribute)property.GetCustomAttributes(typeof(CategoryAttribute), false)[0];
             if (attribute == null) return null;
             return attribute.Category;

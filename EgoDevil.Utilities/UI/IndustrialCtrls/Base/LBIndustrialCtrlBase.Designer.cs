@@ -1,11 +1,14 @@
-﻿namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace EgoDevil.Utilities.UI.IndustrialCtrls.Base
 {
     partial class LBIndustrialCtrlBase
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary> 
         /// Liberare le risorse in uso.
@@ -33,8 +36,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            components = new Container();
+            this.AutoScaleMode = AutoScaleMode.Font;
         }
 
         #endregion

@@ -7,8 +7,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+
+using Timer = System.Timers.Timer;
 
 #endregion
 
@@ -433,7 +436,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         /// </summary>
         [Browsable(false), Category("Style"),
         Description("Get/Set button corner radius"),
-        DesignOnlyAttribute(true)]
+        DesignOnly(true)]
         public uint CornerRadius
         {
             get { return _iCornerRadius; }
@@ -577,7 +580,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
         /// Get/Set button shadow depth [Menu style only]
         /// </summary>
         [Browsable(false),
-        DesignOnlyAttribute(true)]
+        DesignOnly(true)]
         public int ShadowDepth
         {
             get { return _iShadowDepth; }
@@ -771,7 +774,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 {
                     if (this.FocusOnClick)
                     {
-                        MouseButtons mb = Control.MouseButtons;
+                        MouseButtons mb = MouseButtons;
                         if (mb != MouseButtons.Left)
                             _eButtonState = ButtonSelectedState.Focused;
                     }
@@ -784,7 +787,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             }
             else
             {
-                MouseButtons mb = Control.MouseButtons;
+                MouseButtons mb = MouseButtons;
                 if (mb != MouseButtons.Left)
                     _eButtonState = ButtonSelectedState.Focused;
                 Repaint();
@@ -2836,7 +2839,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 tick++;
                 safe++;
                 Application.DoEvents();
-                System.Threading.Thread.CurrentThread.Join(1);
+                Thread.CurrentThread.Join(1);
             } while (safe < 100);
         }
 
@@ -3088,7 +3091,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
             private FadeType _eFadeType;
             private cStoreDc _cButtonDc;
             private UserControl _ctParentControl;
-            private System.Timers.Timer _aTimer;
+            private Timer _aTimer;
             private bool _bInvalidating = false;
 
             #endregion
@@ -3100,7 +3103,7 @@ namespace EgoDevil.Utilities.UI.MediaButtons
                 _iTickCounter = 0;
                 _iTickMaximum = 10;
                 _ctParentControl = (UserControl)sender;
-                _aTimer = new System.Timers.Timer();
+                _aTimer = new Timer();
                 _iTickRate = _aTimer.Interval;
                 _aTimer.SynchronizingObject = (ISynchronizeInvoke)sender;
                 _aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);

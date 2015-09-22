@@ -1,11 +1,14 @@
-﻿namespace EAlbums
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace EAlbums
 {
     partial class ImageListForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -69,7 +72,7 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(816, 315);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView_RowPostPaint);
+            this.dataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DataGridViewRowPostPaint);
             // 
             // ImageThumb
             // 
@@ -97,12 +100,12 @@
             this.btnInsertImage.TabIndex = 1;
             this.btnInsertImage.Text = "添加";
             this.btnInsertImage.UseVisualStyleBackColor = true;
-            this.btnInsertImage.Click += new System.EventHandler(this.btnInsertImage_Click);
+            this.btnInsertImage.Click += new System.EventHandler(this.BtnInsertImageClick);
             // 
             // openFileDialog
             // 
             this.openFileDialog.Multiselect = true;
-            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialogFileOk);
             // 
             // ImageListForm
             // 
@@ -113,7 +116,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "ImageListForm";
             this.Text = "ImageListForm";
-            this.Load += new System.EventHandler(this.ImageListForm_Load);
+            this.Load += new System.EventHandler(this.ImageListFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -121,11 +124,11 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewImageColumn ImageThumb;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ImageName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Target;
-        private System.Windows.Forms.Button btnInsertImage;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private DataGridView dataGridView;
+        private DataGridViewImageColumn ImageThumb;
+        private DataGridViewTextBoxColumn ImageName;
+        private DataGridViewTextBoxColumn Target;
+        private Button btnInsertImage;
+        private OpenFileDialog openFileDialog;
     }
 }

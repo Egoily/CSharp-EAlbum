@@ -30,7 +30,7 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.FlatAppearance.BorderSize = 0;
                     this.FlatStyle = FlatStyle.Flat;
 
-                    this.Paint += new System.Windows.Forms.PaintEventHandler(OnPaintButton);
+                    this.Paint += new PaintEventHandler(OnPaintButton);
                 }
 
                 private void OnPaintButton(object sender, PaintEventArgs e)
@@ -166,7 +166,7 @@ namespace EgoDevil.Utilities.UI.EForm
 
                     SetupButtons();
 
-                    this.Paint += new System.Windows.Forms.PaintEventHandler(OnPaintBorder);
+                    this.Paint += new PaintEventHandler(OnPaintBorder);
                 }
 
                 //place the buttons on the window.
@@ -181,11 +181,11 @@ namespace EgoDevil.Utilities.UI.EForm
                     this.buttons = new ColorRadioButton[colors.Length];
                     if (extended)
                     {
-                        this.ClientSize = new System.Drawing.Size(166, 130);
+                        this.ClientSize = new Size(166, 130);
                     }
                     else
                     {
-                        this.ClientSize = new System.Drawing.Size(86, 110);
+                        this.ClientSize = new Size(86, 110);
                     }
 
                     for (int i = 0; i < colors.Length; i++)
@@ -206,7 +206,7 @@ namespace EgoDevil.Utilities.UI.EForm
                         x += 20;
                     }
                     moreColorsBtn = new Button();
-                    moreColorsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+                    moreColorsBtn.FlatStyle = FlatStyle.Popup;
                     moreColorsBtn.Text = "More Colors...";
                     moreColorsBtn.Location = new Point(3, y + 20);
                     moreColorsBtn.ClientSize = new Size(extended ? 160 : 80, 24);
@@ -300,12 +300,12 @@ namespace EgoDevil.Utilities.UI.EForm
             {
                 this.SuspendLayout();
                 // ColorCombo
-                this.Appearance = System.Windows.Forms.Appearance.Button;
+                this.Appearance = Appearance.Button;
                 this.AutoSize = false;
                 this.Size = new Size(103, 23);
                 this.Text = "";
-                this.Paint += new System.Windows.Forms.PaintEventHandler(this.ColorCombo_Paint);
-                this.Click += new System.EventHandler(this.ColorCombo_Click);
+                this.Paint += new PaintEventHandler(this.ColorCombo_Paint);
+                this.Click += new EventHandler(this.ColorCombo_Click);
 
                 timer.Tick += new EventHandler(OnCheckStatus);
                 timer.Interval = 30;
@@ -336,7 +336,7 @@ namespace EgoDevil.Utilities.UI.EForm
                 //calculate its position in screen coordinates
                 Rectangle rect = Bounds;
                 rect = this.Parent.RectangleToScreen(rect);
-                Point pt = new System.Drawing.Point(rect.Left, rect.Bottom);
+                Point pt = new Point(rect.Left, rect.Bottom);
 
                 //tell it that we want the ColorChanged event
                 popupWnd.ColorChanged += new ColorChangedHandler(OnColorChanged);
@@ -485,7 +485,7 @@ namespace EgoDevil.Utilities.UI.EForm
     #region (* EventArgs and delegate *)
 
     //define the color changed event argument
-    public class ColorChangeArgs : System.EventArgs
+    public class ColorChangeArgs : EventArgs
     {
         public ColorChangeArgs(Color color)
         {
