@@ -63,6 +63,7 @@ namespace EAlbums
             this.DoubleClick += new System.EventHandler(this.ImageViewer_DoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ImageViewer_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ImageViewer_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ImageViewer_MouseUp);
             this.ResumeLayout(false);
 
         }

@@ -245,6 +245,9 @@ namespace EAlbums
         {
         }
 
+        private Point tempMouseDownPoint;
+
+        private bool isFirstShown = false;
         private void ImageViewer_MouseDown(object sender, MouseEventArgs e)
         {
             switch (Pattern)
@@ -260,6 +263,7 @@ namespace EAlbums
                     {
                         if (imageCircleRevolver.SelectedObject != null)
                         {
+                            isFirstShown = true;
                             SetTimerEnabled(false);
 
                             if (!string.IsNullOrEmpty(imageCircleRevolver.SelectedObject.FullPath)
@@ -268,10 +272,9 @@ namespace EAlbums
                                 currentDisplayImageFullPath = imageCircleRevolver.SelectedObject.FullPath;
                                 currentDisplayImage = Image.FromFile(imageCircleRevolver.SelectedObject.FullPath);
                             }
+                            ZoomImage();
 
-                            ZoomImage(ZoomMode.FitPage);
                             Pattern = ViewPatterns.Browse;
-                            Invalidate();
                         }
                     }
                     break;
@@ -279,10 +282,35 @@ namespace EAlbums
                 case ViewPatterns.Browse:
                     if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
                     {
-                        //    SetTimerEnabled(true);
-                        //    Pattern = ViewPatterns.Ready;
-                        //    Invalidate();
+                        tempMouseDownPoint = e.Location;
                     }
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        private void ImageViewer_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (Pattern)
+            {
+                case ViewPatterns.Pending:
+                    break;
+
+                case ViewPatterns.Loading:
+                    break;
+
+                case ViewPatterns.Ready:
+
+                    break;
+
+                case ViewPatterns.Browse:
+                    if (this.Cursor != Cursors.Default)
+                    {
+                        this.Cursor = Cursors.Default;
+                    }
+                    Refresh();
+
                     break;
 
                 default:
@@ -328,7 +356,24 @@ namespace EAlbums
 
                 case ViewPatterns.Browse:
                     this.currentLocation = e.Location;
-                    //this.displayCenter = new Point(e.X - desRect.X, e.Y - desRect.Y);
+
+                    if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                    {
+                        this.Cursor = Cursors.Hand;
+                        if (isFirstShown)
+                        {
+                            isFirstShown = false;
+                        }
+                        else
+                        {
+                            desRect.Offset(new Point(e.X - tempMouseDownPoint.X, e.Y - tempMouseDownPoint.Y));
+                            tempMouseDownPoint = e.Location;
+                            Refresh();
+
+                        }
+
+                    }
+
                     break;
 
                 default:
@@ -468,5 +513,7 @@ namespace EAlbums
         {
             RefreshImages();
         }
+
+
     }
 }
