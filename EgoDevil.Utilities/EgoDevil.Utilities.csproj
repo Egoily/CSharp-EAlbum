@@ -222,9 +222,7 @@
     <Compile Include="UI\Docking\DockPanel.AutoHideWindow.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Docking\DockPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="UI\Docking\DockPanel.cs" />
     <Compile Include="UI\Docking\DockPanel.DockDragHandler.cs">
       <SubType>Component</SubType>
     </Compile>

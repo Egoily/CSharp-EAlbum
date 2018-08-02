@@ -42,7 +42,10 @@ namespace EAlbums
                 string safeFileName = Path.GetFileNameWithoutExtension(fileName);
                 try
                 {
-                    dataGridView.Rows.Add((new Bitmap(fileName)).GetThumbnailImage(40, 40, null, IntPtr.Zero), safeFileName, fileName);
+                    var bitmap = new Bitmap(fileName);
+                    var thumbnailImage = bitmap.GetThumbnailImage(40, 40, null, IntPtr.Zero);
+                    bitmap.Dispose();
+                    dataGridView.Rows.Add(thumbnailImage, safeFileName, fileName);
                 }
                 catch (Exception ex)
                 {
@@ -121,5 +124,7 @@ namespace EAlbums
         {
             this.Visible = false;
         }
+
+
     }
 }

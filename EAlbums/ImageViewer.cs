@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EgoDevil.Utilities.BkWorker;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -15,7 +16,7 @@ namespace EAlbums
 
         public List<string> ImagePaths = new List<string>();
 
-        public int Interval = 100;
+        public int CircleVerInterval = 200;
 
         private readonly IImageCircleRevolver imageCircleRevolver = null;
 
@@ -55,8 +56,8 @@ namespace EAlbums
             {
                 BackgroundColor = BackgroundColor,
                 CircleCapacity = CircleCount,
-                Interval = Interval,
-                OrginalCenter = new Point(Width / 2, Height / 2 - CircleCount * Interval / 2),
+                CircleVerInterval = CircleVerInterval,
+                OrginalCenter = new Point(Width / 2, Height / 2),
             };
         }
 
@@ -74,7 +75,7 @@ namespace EAlbums
             this.backgroundWorker.RunWorkerAsync();
 
             SetTimerEnabled(true);
-            //BackgroundThread bt = new BackgroundThread(LoadThumbs);
+            //var bt = new BackgroundThread(LoadThumbs);
             //bt.Start();
         }
 
@@ -334,7 +335,7 @@ namespace EAlbums
                         imageCircleRevolver.SetRevolveType(RevolveTypes.Fixed);
                         var x0 = Width / 2;
                         var y0 = Height / 2;
-
+                        //设置加速步长
                         imageCircleRevolver.SetAlphaAccel((((float)(e.X - x0)) * 3.0f) / ((float)x0));
 
                         if ((e.Button & MouseButtons.Right) == MouseButtons.Right)
@@ -481,14 +482,14 @@ namespace EAlbums
         }
         private void PaintReadyPattern(Graphics g)
         {
-            imageCircleRevolver.SetOrginalCenter(new Point(Width / 2, Height / 2 - CircleCount * Interval / 2));
+            imageCircleRevolver.SetOrginalCenter(new Point(Width / 2, Height / 2 ));
             imageCircleRevolver.DrawImages(g);
         }
         private void RefreshImages()
         {
             if (Pattern == ViewPatterns.Ready)
             {
-                imageCircleRevolver.SetAlpha();
+                imageCircleRevolver.SetAngleOffset();
                 imageCircleRevolver.Refresh();
                 Invalidate();
             }

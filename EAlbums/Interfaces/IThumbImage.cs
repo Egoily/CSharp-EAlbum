@@ -4,7 +4,7 @@ namespace EAlbums
 {
     public interface IThumbImage
     {
-        float Alpha { get; set; }
+        float AngleOffset { get; set; }
         Color BackgroundColor { get; set; }
         Point CircleCenter { get; set; }
         double DistanceFromScreen { get; set; }

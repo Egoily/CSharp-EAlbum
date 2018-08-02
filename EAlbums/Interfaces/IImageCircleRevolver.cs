@@ -7,7 +7,7 @@ namespace EAlbums
     {
         List<ImageCircle> Circles { get; set; }
         int CircleCapacity { get; set; }
-        int Interval { get; set; }
+        int CircleVerInterval { get; set; }
         Point OrginalCenter { get; set; }
         float Alpha { get; set; }
         Color BackgroundColor { get; set; }
@@ -15,7 +15,7 @@ namespace EAlbums
 
         void Load(List<string> filePaths);
 
-        void SetAlpha();
+        void SetAngleOffset();
 
         void SetAlphaAccel(float alphaAccel);
 

@@ -7,10 +7,8 @@ namespace EAlbums
     [Serializable]
     public class ThumbImage : IThumbImage
     {
-        public Size BitmapSize = new Size(64, 64);
-        public int MaxThumbSize = 64;
-        public int PixelSize = 4;
         private const double PiFact = Math.PI / 180.0f;//Circle angle
+
         private double actualAngle;
 
         private Rectangle fullRect;
@@ -18,23 +16,26 @@ namespace EAlbums
         private Rectangle shadowRect;
         private Bitmap thumbOriginalBitmap;
 
+        public Size BitmapSize = new Size(64, 64);
+        public int MaxThumbSize = 200;
+        public int PixelSize = 4;
 
         public ThumbImage(Bitmap bitmap)
         {
-            Alpha = 0;
+            AngleOffset = 0;
             CircleCenter = new Point(0, 0);
             ThumbOriginalBitmap = bitmap;
         }
 
         public ThumbImage(Bitmap bitmap, Point circleCenter, double angle)
         {
-            Alpha = 0;
+            AngleOffset = 0;
             CircleCenter = circleCenter;
             this.OriginalAngle = angle;
             ThumbOriginalBitmap = bitmap;
         }
 
-        public float Alpha { get; set; }
+        public float AngleOffset { get; set; }
 
         public Color BackgroundColor { get; set; }
 
@@ -91,7 +92,7 @@ namespace EAlbums
         public void ReLocate()
         {
             // angle and distance from screen
-            actualAngle = (OriginalAngle + Alpha) * PiFact;
+            actualAngle = (OriginalAngle + AngleOffset) * PiFact;
 
             DistanceFromScreen = 10 + 10 * Math.Cos(actualAngle);
 

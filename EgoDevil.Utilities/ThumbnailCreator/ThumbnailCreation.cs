@@ -215,7 +215,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator
             if (File.Exists(SourceFile))
             {
                 using (Bitmap bmpSource = new Bitmap(SourceFile))
-                    imgThumbnail = CreateThumbnailImage(bmpSource);
+                    imgThumbnail = CreateThumbnailImage(bmpSource, Option, DestinationSize);
             }
             return imgThumbnail;
         }
@@ -381,7 +381,7 @@ namespace EgoDevil.Utilities.ThumbnailCreator
             if (Source.Width >= Source.Height)
             {
                 iWidth = m_MaxLength;
-                iHeight = int.Parse(decimal.Round((decimal)iWidth * dcRectangle, 0).ToString());
+                iHeight = int.Parse(decimal.Round((decimal)iWidth / dcRectangle, 0).ToString());
             }
             else
             {

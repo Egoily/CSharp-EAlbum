@@ -5,7 +5,8 @@ namespace EAlbums
 {
     public interface IImageCircle
     {
-        float Alpha { get; set; }
+        int Index { get; set; }
+        float AngleOffset { get; set; }
         float AlphaAccel { get; set; }
         Color BackgroundColor { get; set; }
         Point CircleCenter { get; set; }
@@ -30,6 +31,6 @@ namespace EAlbums
 
         bool SelectHoverItem(Point location);
 
-        void SetAlpha();
+        void SetAngleOffset();
     }
 }

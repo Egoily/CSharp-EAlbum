@@ -59,7 +59,7 @@
   <ItemGroup>
     <Reference Include="Animations, Version=1.1.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtendedPictureBoxLib\Animations.dll</HintPath>
+      <HintPath>..\ShareDll\Animations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

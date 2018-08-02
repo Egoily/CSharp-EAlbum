@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using EgoDevil.Utilities.ThumbnailCreator;
+using System.Diagnostics;
 
 namespace EAlbums
 {
@@ -27,7 +28,8 @@ namespace EAlbums
             CircleCenter = circleCenter;
         }
 
-        public float Alpha { get; set; }
+        public int Index { get; set; }
+        public float AngleOffset { get; set; }
 
         public float AlphaAccel { get; set; }
 
@@ -75,18 +77,22 @@ namespace EAlbums
             {
                 count = MaxCapacity;
             }
+            var thumbnailCreation = new ThumbnailCreation() { MaxImageLength = 400 };
             for (var i = 0; i < count; i++)
             {
                 var filePath = filePaths[i];
-                var thumbnailCreation = new ThumbnailCreation();
+
 
                 var bitmap = thumbnailCreation.CreateThumbnailImage(filePath);
+
+                Debug.WriteLine($"({bitmap.Width},{bitmap.Height})");
 
                 var angle = (double)((i * 360.0f) / count);
                 var thumbImage = new ThumbImage(new Bitmap(bitmap), CircleCenter, angle)
                 {
                     HoverColor = HoverColor
                 };
+                bitmap.Dispose();
                 var thumbElement = new ThumbElement()
                 {
                     FullPath = filePath,
@@ -109,8 +115,8 @@ namespace EAlbums
         {
             Parallel.ForEach(Images, obj =>
             {
-                obj.ThumbImage.Alpha = Alpha;
-                obj.ThumbImage.Radius = new Size(Radius.X, (int)(Radius.Y / Perspective));
+                obj.ThumbImage.AngleOffset = AngleOffset;
+                obj.ThumbImage.Radius = new Size(Radius.X, (int)(Radius.Y / (Perspective == 0 ? 1 : Perspective)));
                 obj.ThumbImage.CircleCenter = CircleCenter;
                 obj.ThumbImage.ReLocate();
             });
@@ -130,18 +136,18 @@ namespace EAlbums
 
         }
 
-        public void SetAlpha()
+        public void SetAngleOffset()
         {
-            Alpha += GetAlphaAccel();
+            AngleOffset += GetAlphaAccel();
 
-            if (Alpha > 360)
+            if (AngleOffset > 360)
             {
-                Alpha -= 360;
+                AngleOffset -= 360;
             }
 
-            if (Alpha < 0)
+            if (AngleOffset < 0)
             {
-                Alpha += 360;
+                AngleOffset += 360;
             }
         }
 
